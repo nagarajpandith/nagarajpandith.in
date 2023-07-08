@@ -7,6 +7,11 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        primary: '#E508C1',
+        secondary: '#20DBFE',
+        accent: '#704d99',
+      },
       keyframes: {
         'slow-glow': {
           '0%': { opacity: 0 },

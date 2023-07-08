@@ -42,12 +42,15 @@ const Navbar = () => {
   ];
 
   return (
-    <nav className="sticky top-0 z-10 bg-slate-900 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10 border-b border-gray-800">
+    <nav className="sticky top-0 z-10 bg-slate-900 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10">
       <div className="max-w-5xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <span className="flex gap-3 items-center lg:text-xl text-md text-white font-semibold">
+          <Link
+            href={'/'}
+            className="flex gap-3 items-center text-white font-semibold"
+          >
             <div className="relative w-30 h-30">
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg filter blur-lg opacity-70 animate-slow-glow"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-lg filter blur-lg opacity-70 animate-slow-glow"></div>
               <Image
                 src="/static/png/logo.png"
                 alt="Logo - NP"
@@ -56,8 +59,7 @@ const Navbar = () => {
                 className="relative z-10"
               />
             </div>
-            Nagaraj Pandith
-          </span>
+          </Link>
 
           <div className="flex items-center space-x-4 lg:hidden">
             <button
@@ -75,7 +77,7 @@ const Navbar = () => {
                 href={link.href}
                 className={`${
                   isActiveLink(link.href)
-                    ? 'underline underline-offset-4 text-white'
+                    ? 'underline decoration-primary underline-offset-4 text-white'
                     : 'text-gray-500 hover:underline underline-offset-4 hover:text-gray-400'
                 }`}
               >
@@ -96,7 +98,7 @@ const Navbar = () => {
               href={link.href}
               className={`${
                 isActiveLink(link.href)
-                  ? 'underline underline-offset-4 text-white'
+                  ? 'underline decoration-primary underline-offset-4 text-white'
                   : 'text-gray-500 hover:underline underline-offset-4 hover:text-gray-400'
               }`}
             >
@@ -105,6 +107,7 @@ const Navbar = () => {
           ))}
         </div>
       </div>
+      <div className="bg-gradient-to-r from-slate-900 via-gray-800 to-slate-900 h-[2px]"></div>
     </nav>
   );
 };

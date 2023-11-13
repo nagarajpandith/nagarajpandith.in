@@ -1,27 +1,7 @@
-'use client';
-
-import { motion } from 'framer-motion';
-
 export const WavingHand = () => {
   return (
-    <motion.div
-      style={{
-        marginBottom: '-20px',
-        marginRight: '-45px',
-        paddingBottom: '20px',
-        paddingRight: '45px',
-        display: 'inline-block',
-      }}
-      animate={{ rotate: 20 }}
-      transition={{
-        repeat: Infinity,
-        repeatType: 'reverse',
-        duration: 0.2,
-        ease: 'easeInOut',
-        type: 'tween',
-      }}
-    >
+    <div className="inline-block mb-[-20px] mr-[-45px] pb-[-20px] pr-[-45px] transform transition-transform rotate-20 animate-waving-hand">
       👋
-    </motion.div>
+    </div>
   );
 };

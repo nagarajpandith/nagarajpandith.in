@@ -3,10 +3,11 @@ import Footer from '@/components/footer';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
+import { PageTransition } from '@/components/pagetransition';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export const metadata: Metadata = {
+const metadata: Metadata = {
   title: 'Nagaraj Pandith - Portfolio',
   description: 'Personal Website of Nagaraj Pandith',
   icons: {
@@ -16,6 +17,8 @@ export const metadata: Metadata = {
   },
 };
 
+export { metadata };
+
 export default function RootLayout({
   children,
 }: {
@@ -23,9 +26,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} bg-slate-900`}>
+      <body className={`${inter.className} bg-gray-900 mx-auto`}>
         <Navbar />
-        <main>{children}</main>
+        <main
+          className={`flex flex-col mx-auto max-w-6xl justify-center px-4 pt-5`}
+        >
+          <PageTransition>{children}</PageTransition>
+        </main>
         <Footer />
       </body>
     </html>

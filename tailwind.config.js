@@ -18,11 +18,20 @@ module.exports = {
           '50%': { opacity: 0.8 },
           '100%': { opacity: 0 },
         },
+        'waving-hand': {
+          '0%, 100%': {
+            transform: 'rotate(0deg)',
+          },
+          '50%': {
+            transform: 'rotate(20deg)',
+          },
+        },
       },
       animation: {
         'slow-glow': 'slow-glow 3s infinite',
+        'waving-hand': 'waving-hand 0.5s ease-in-out infinite alternate',
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-animated')],
 };

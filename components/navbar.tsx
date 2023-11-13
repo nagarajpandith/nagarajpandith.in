@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
 import { useState } from 'react';
 import { IoMdClose } from 'react-icons/io';
+import { navLinks } from './constants/data';
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -14,33 +15,6 @@ const Navbar = () => {
   const isActiveLink = (href: string) => {
     return pathname === href;
   };
-
-  const navlinks = [
-    {
-      name: 'Home',
-      href: '/',
-    },
-    {
-      name: 'About',
-      href: '/about',
-    },
-    {
-      name: 'Work',
-      href: '/work',
-    },
-    {
-      name: 'Blog',
-      href: '/blog',
-    },
-    {
-      name: 'Guestbook',
-      href: '/guestbook',
-    },
-    {
-      name: 'Contact',
-      href: '/contact',
-    },
-  ];
 
   return (
     <nav className="sticky top-0 z-10 bg-gray-900 bg-clip-padding backdrop-filter backdrop-blur-lg bg-opacity-10">
@@ -76,14 +50,14 @@ const Navbar = () => {
           </div>
 
           <div className="space-x-4 text-gray-500 lg:flex hidden">
-            {navlinks.map((link, index) => (
+            {navLinks.map((link, index) => (
               <Link
                 key={index}
                 href={link.href}
                 className={`${
                   isActiveLink(link.href)
                     ? 'underline decoration-primary underline-offset-4 text-white'
-                    : 'text-gray-500 hover:underline underline-offset-4 hover:text-gray-400'
+                    : 'text-gray-400 hover:underline underline-offset-4 hover:text-gray-300'
                 } animate-fade-up`}
               >
                 {link.name}
@@ -97,7 +71,7 @@ const Navbar = () => {
             isOpen ? 'flex flex-col absolute' : 'hidden'
           }`}
         >
-          {navlinks.map((link, index) => (
+          {navLinks.map((link, index) => (
             <Link
               key={index}
               href={link.href}

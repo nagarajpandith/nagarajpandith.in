@@ -3,9 +3,9 @@ import { footerLinks } from './constants/data';
 
 const Footer = () => {
   return (
-    <footer className="animate-fade-up bg-gray-900 shadow-2xl dark:shadow-white">
+    <footer className="animate-fade-up bg-gray-900 shadow-xl shadow-white">
       <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 h-[2px]"></div>
-      
+
       <div className="max-w-5xl mx-auto px-4 py-6">
         <div className="xl:grid xl:grid-cols-4 xl:gap-2">
           <div className="grid grid-cols-2 gap-8 xl:col-span-2">

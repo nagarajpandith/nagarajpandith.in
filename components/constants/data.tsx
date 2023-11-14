@@ -213,11 +213,37 @@ export const achievements = [
     img: '/static/png/portrait.png',
   },
   {
-    title:
-      'Loading...',
+    title: 'Loading...',
     description:
       'Twitter went crazy last month when Musk and Dorsey mocked the idea of Web3. Few called it the future of the internet and few called it to be bogus. But do you know what exactly is Web 3.0 and how does it work? In this article, you’ll be introduced to the new dimension of the internet and how to get started in this field from a developer’s point of view.',
     date: '04-02-2022',
     img: '/static/png/portrait.png',
+  },
+];
+
+export const volunteering = [
+  {
+    title: 'Incridea Tech Team',
+    date: '04-02-2022',
+    img: '/static/png/portrait.png',
+    description: 'We did this and that here',
+  },
+  {
+    title: 'Incridea Tech Team',
+    date: '04-02-2022',
+    img: '/static/png/portrait.png',
+    description: 'We did this and that here',
+  },
+  {
+    title: 'Incridea Tech Team',
+    date: '04-02-2022',
+    img: '/static/png/portrait.png',
+    description: 'We did this and that here',
+  },
+  {
+    title: 'Incridea Tech Team',
+    date: '04-02-2022',
+    img: '/static/png/portrait.png',
+    description: 'We did this and that here',
   },
 ];

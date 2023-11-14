@@ -1,6 +1,7 @@
 import AboutInfo from '@/components/aboutInfo';
 import Achievements from '@/components/achievements';
 import Skills from '@/components/skills';
+import Volunteering from '@/components/volunteering';
 
 const About = () => {
   return (
@@ -8,6 +9,7 @@ const About = () => {
       <AboutInfo />
       <Achievements />
       <Skills />
+      <Volunteering />
     </div>
   );
 };

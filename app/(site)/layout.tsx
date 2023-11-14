@@ -3,7 +3,7 @@ import Footer from '@/components/footer';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { PageTransition } from '@/components/pagetransition';
+import { PageTransition } from '@/components/pageTransition';
 
 const inter = Inter({ subsets: ['latin'] });
 

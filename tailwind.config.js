@@ -26,10 +26,15 @@ module.exports = {
             transform: 'rotate(20deg)',
           },
         },
+        'background': {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+        },
       },
       animation: {
         'slow-glow': 'slow-glow 3s infinite',
         'waving-hand': 'waving-hand 0.5s ease-in-out infinite alternate',
+        'background': 'background ease infinite',
       },
     },
   },

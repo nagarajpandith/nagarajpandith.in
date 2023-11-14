@@ -29,7 +29,7 @@ const Hero = () => {
             className="hover:animate-wiggle bg-primary w-fit lg:text-xl text-sm text-white px-5 py-2 rounded-full mt-5 hover:opacity-80 transition duration-300 ease-in-out group"
           >
             Know more about me{' '}
-            <HiChevronDoubleRight className="inline transform trangray-x-0 transition-transform group-hover:trangray-x-1" />
+            <HiChevronDoubleRight className="inline transform translate-x-0 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
       </div>
@@ -41,7 +41,7 @@ const Hero = () => {
           width={300}
           height={300}
           sizes="(100vw, 100vh)"
-          className="rounded-xl brightness-125 hover:grayscale transition duration-300 ease-in-out"
+          className="rounded-xl brightness-125 hover:grayscale transition duration-300 ease-in-out hover:rotate-6 rotate-0"
         />
       </div>
     </section>

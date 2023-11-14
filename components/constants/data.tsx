@@ -96,21 +96,22 @@ export const footerLinks = {
 export const projects = [
   {
     name: 'JabWeMeet',
-    description: 'Multilingual Live Video conferencing built at 36hr National Hackathon.',
-    href: 'https://github.com/nagarajpandith/portfolio',
-    img: '/static/png/projects/1-1.png',
+    description:
+      'Multilingual Live Video conferencing built at 36hr National Hackathon.',
+    href: 'https://github.com/swasthikshetty10/hackoverflow',
+    img: '/static/png/projects/1.png',
   },
   {
     name: "Incridea'23",
-    description: 'Event Management & Paperless system for College Fest',
-    href: 'https://github.com/nagarajpandith/portfolio',
-    img: '/static/png/projects/2-1.png',
+    description: 'Event Management & Paperless system for NMAMIT\'s College Fest',
+    href: 'https://github.com/incridea-23/incridea-client',
+    img: '/static/png/projects/2.png',
   },
   {
     name: 'Live-stream Studio Booking',
     description:
       'Full-Stack Django app to book Live stream studio and manage bookings.',
-    href: 'https://github.com/nagarajpandith/portfolio',
-    img: '/static/png/projects/3-1.png',
+    href: 'https://github.com/nagarajpandith/live-stream-studio-booking',
+    img: '/static/png/projects/3.png',
   },
 ];

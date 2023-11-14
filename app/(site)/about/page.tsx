@@ -1,5 +1,11 @@
+import AboutInfo from '@/components/aboutInfo';
+
 const About = () => {
-  return <div>About</div>;
+  return (
+    <div className="my-10">
+      <AboutInfo />
+    </div>
+  );
 };
 
 export default About;

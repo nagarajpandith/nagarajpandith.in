@@ -35,7 +35,7 @@ const BlogCard = ({
       <div className="flex flex-1 flex-col justify-between">
         <div className="p-4 sm:p-6">
           <a>
-            <h3 className="font-bold text-secondary">{title}</h3>
+            <h3 className="font-bold text-secondary line-clamp-1">{title}</h3>
           </a>
 
           <div className="py-2 w-fit flex items-center justify-between gap-4 text-xs font-bold uppercase text-white">

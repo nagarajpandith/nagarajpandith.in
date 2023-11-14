@@ -118,15 +118,24 @@ export const blogList = [
   {
     title: 'Starting Web Development the right way in 2021',
     description:
-      'In the past few years, Web Development has become a hot topic among developers and numerous coders are eventually getting into it. This resulted in enormous amount of online resources, roadmaps, video guides and a...',
+      'In the past few years, Web Development has become a hot topic among developers and numerous coders are eventually getting into it. This resulted in enormous amount of online resources, roadmaps, video guides and a lot more which are hard to digest all at once. Moreover, the technology present yesterday is getting obselete today, which makes it hard to stick to a Tech stack while getting started. So, In this article you’ll get',
     date: '04-02-2022',
     img: '/static/png/portrait.png',
   },
   {
-    title: '“Has Anyone Seen Web3?” — The Complete Roadmap and Resources to Become a Web3 Developer in 2022',
+    title:
+      '“Has Anyone Seen Web3?” — The Complete Roadmap and Resources to Become a Web3 Developer in 2022',
     description:
-      'Twitter went crazy last month when Musk and Dorsey mocked the idea of Web3. Few called it the future of the internet and few called it to be bogus. But do you know what exactly is Web 3.0 and...',
+      'Twitter went crazy last month when Musk and Dorsey mocked the idea of Web3. Few called it the future of the internet and few called it to be bogus. But do you know what exactly is Web 3.0 and how does it work? In this article, you’ll be introduced to the new dimension of the internet and how to get started in this field from a developer’s point of view.',
     date: '04-02-2022',
     img: '/static/png/portrait.png',
   },
+];
+
+export const messages = [
+  'Just heard about your freelance services. What do you offer?',
+  'I have a small project that needs a professional touch. You available?',
+  'Thinking about revamping my website. Any suggestions?',
+  "I'm impressed by your portfolio. How can we collaborate?",
+  'Looking for a skilled web developer. Are you the one I need?',
 ];

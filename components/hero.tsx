@@ -17,7 +17,7 @@ const Hero = () => {
           </div>
         </h1>
         <span className="text-gray-300 mt-5 lg:text-xl text-sm px-5">
-          A 20 year old{' '}
+          A  {new Date().getFullYear() - 2002 - (new Date().getMonth() < 11 ? 1 : 0)} year old{' '}
           <span className="text-secondary">Full Stack Developer</span> from
           India. <br />I get my dopamine by crafting innovative solutions and
           interesting side projects.

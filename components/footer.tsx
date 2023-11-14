@@ -56,10 +56,7 @@ const Footer = () => {
             </h3>
             <div className="mt-4 text-gray-400">
               Sign my{' '}
-              <Link
-                href={'/guestbook'}
-                className="hover:underline hover:text-white"
-              >
+              <Link href={'/guestbook'} className="hover:underline text-white">
                 Guestbook
               </Link>{' '}
               and let me know what you think.

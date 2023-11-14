@@ -40,21 +40,21 @@ const AboutInfo = () => {
             applications using modern tools and frameworks. I&apos;m pursuing
             Final year of B.E. in Computer Science & Engineering from{' '}
             <a
-              className="underline underline-offset-2"
+              className="underline underline-offset-2 hover:text-white"
               href="https://nmamit.nitte.edu.in/"
             >
               N.M.A.M.I.T.
             </a>{' '}
             Ocassionally, I also write tech articles on{' '}
             <a
-              className="underline underline-offset-2"
+              className="underline underline-offset-2 hover:text-white"
               href="https://medium.com/@nagarajpandith"
             >
               Medium
             </a>{' '}
             and sometimes create videos on my{' '}
             <a
-              className="underline underline-offset-2"
+              className="underline underline-offset-2 hover:text-white"
               href="https://www.youtube.com/c/TheMaterrwelonn"
             >
               YouTube channel.

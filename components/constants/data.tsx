@@ -139,3 +139,69 @@ export const messages = [
   "I'm impressed by your portfolio. How can we collaborate?",
   'Looking for a skilled web developer. Are you the one I need?',
 ];
+
+export const skills = [
+  {
+    name: 'Python',
+    icon: 'python',
+  },
+  {
+    name: 'Typescript',
+    icon: 'typescript',
+  },
+  {
+    name: 'React',
+    icon: 'react',
+  },
+  {
+    name: 'Next js',
+    icon: 'next-js',
+  },
+  {
+    name: 'Tailwind CSS',
+    icon: 'tailwind',
+  },
+  {
+    name: 'Django',
+    icon: 'django',
+  },
+  {
+    name: 'Git',
+    icon: 'git',
+  },
+];
+
+export const achievements = [
+  {
+    title:
+      '“Has Anyone Seen Web3?” — The Complete Roadmap and Resources to Become a Web3 Developer in 2022',
+    description:
+      'Twitter went crazy last month when Musk and Dorsey mocked the idea of Web3. Few called it the future of the internet and few called it to be bogus. But do you know what exactly is Web 3.0 and how does it work? In this article, you’ll be introduced to the new dimension of the internet and how to get started in this field from a developer’s point of view.',
+    date: '04-02-2022',
+    img: '/static/png/portrait.png',
+  },
+  {
+    title:
+      '“Has Anyone Seen Web3?” — The Complete Roadmap and Resources to Become a Web3 Developer in 2022',
+    description:
+      'Twitter went crazy last month when Musk and Dorsey mocked the idea of Web3. Few called it the future of the internet and few called it to be bogus. But do you know what exactly is Web 3.0 and how does it work? In this article, you’ll be introduced to the new dimension of the internet and how to get started in this field from a developer’s point of view.',
+    date: '04-02-2022',
+    img: '/static/png/portrait.png',
+  },
+  {
+    title:
+      '“Has Anyone Seen Web3?” — The Complete Roadmap and Resources to Become a Web3 Developer in 2022',
+    description:
+      'Twitter went crazy last month when Musk and Dorsey mocked the idea of Web3. Few called it the future of the internet and few called it to be bogus. But do you know what exactly is Web 3.0 and how does it work? In this article, you’ll be introduced to the new dimension of the internet and how to get started in this field from a developer’s point of view.',
+    date: '04-02-2022',
+    img: '/static/png/portrait.png',
+  },
+  {
+    title:
+      '“Has Anyone Seen Web3?” — The Complete Roadmap and Resources to Become a Web3 Developer in 2022',
+    description:
+      'Twitter went crazy last month when Musk and Dorsey mocked the idea of Web3. Few called it the future of the internet and few called it to be bogus. But do you know what exactly is Web 3.0 and how does it work? In this article, you’ll be introduced to the new dimension of the internet and how to get started in this field from a developer’s point of view.',
+    date: '04-02-2022',
+    img: '/static/png/portrait.png',
+  },
+];

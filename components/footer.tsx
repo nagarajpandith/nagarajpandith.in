@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import { footerLinks } from './constants/data';
+import { IoLogoRss } from 'react-icons/io5';
+import { FaSitemap } from 'react-icons/fa';
 
 const Footer = () => {
   return (
@@ -60,6 +62,16 @@ const Footer = () => {
                 Guestbook
               </Link>{' '}
               and let me know what you think.
+            </div>
+            <div className="flex gap-5 mt-5">
+              <a className="border rounded-full py-1 px-2 flex gap-2 items-center text-gray-400 hover:text-white cursor-pointer">
+                <IoLogoRss />
+                RSS
+              </a>
+              <a className="border rounded-full py-1 px-2 flex gap-2 items-center text-gray-400 hover:text-white cursor-pointer">
+                <FaSitemap />
+                Sitemap
+              </a>
             </div>
           </div>
         </div>

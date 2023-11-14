@@ -27,8 +27,8 @@ const Page = async ({
   const { content } = await getPageContent(params.slug);
 
   return (
-    <section className="py-24">
-      <div className="container py-4 prose lg:prose-xl">{content}</div>
+    <section className="py-24 w-full flex justify-center flex-col">
+      <div className="mx-auto py-4 prose prose-invert">{content}</div>
     </section>
   );
 };

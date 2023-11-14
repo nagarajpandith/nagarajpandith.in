@@ -7,11 +7,13 @@ const BlogCard = ({
   desc,
   date,
   image,
+  slug
 }: {
   title: string;
   desc: string;
   date: string;
   image: string;
+  slug: string
 }) => {
   const dateObj = new Date(date);
   const year = dateObj.getFullYear();
@@ -49,7 +51,7 @@ const BlogCard = ({
 
         <div className="flex items-center justify-end pb-5 pr-5">
           <Link
-            href="/blog"
+            href={`/blog/${slug}`}
             className="bg-primary w-fit text-sm text-white px-5 py-2 rounded-full mt-5 hover:opacity-80 transition duration-300 ease-in-out group"
           >
             Read

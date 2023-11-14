@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import BlogCard from './blogCard';
+import BlogCard from './BlogCard';
 import { blogList } from './constants/data';
 import { HiChevronDoubleRight } from 'react-icons/hi';
 

@@ -1,9 +1,9 @@
-import Navbar from '@/components/navbar';
-import Footer from '@/components/footer';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import { PageTransition } from '@/components/pageTransition';
+import { PageTransition } from '@/components/PageTransition';
 
 const inter = Inter({ subsets: ['latin'] });
 

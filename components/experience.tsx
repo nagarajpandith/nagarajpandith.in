@@ -1,5 +1,5 @@
 import { experiences } from './constants/data';
-import BulletPoint from './bulletPoint';
+import BulletPoint from './BulletPoint';
 
 const Experience = () => {
   return (

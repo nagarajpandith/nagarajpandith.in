@@ -1,9 +1,9 @@
-import AboutInfo from '@/components/aboutInfo';
-import Achievements from '@/components/achievements';
-import Education from '@/components/education';
-import Experience from '@/components/experience';
-import Skills from '@/components/skills';
-import Volunteering from '@/components/volunteering';
+import AboutInfo from '@/components/AboutInfo';
+import Achievements from '@/components/Achievements';
+import Education from '@/components/Education';
+import Experience from '@/components/Experience';
+import Skills from '@/components/Skills';
+import Volunteering from '@/components/Volunteering';
 
 const About = () => {
   return (

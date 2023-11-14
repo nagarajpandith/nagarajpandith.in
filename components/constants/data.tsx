@@ -247,3 +247,37 @@ export const volunteering = [
     description: 'We did this and that here',
   },
 ];
+
+export const experiences = [
+  {
+    name: 'Incridea Tech Team',
+    dateRange: '04-02-2022',
+    description: 'We did this and that here',
+    href: '#',
+    img: '/static/png/portrait.png',
+  },
+  {
+    name: 'Incridea Tech Team',
+    dateRange: '04-02-2022',
+    description: 'We did this and that here',
+    href: '#',
+    img: '/static/png/portrait.png',
+  },
+];
+
+export const education = [
+  {
+    name: 'Incridea Tech Team',
+    dateRange: '04-02-2022',
+    description: 'We did this and that here',
+    href: '#',
+    img: '/static/png/portrait.png',
+  },
+  {
+    name: 'Incridea Tech Team',
+    dateRange: '04-02-2022',
+    description: 'We did this and that here',
+    href: '#',
+    img: '/static/png/portrait.png',
+  },
+];

@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 const AboutInfo = () => {
   return (
@@ -12,7 +12,7 @@ const AboutInfo = () => {
           width={300}
           height={300}
           alt="about image"
-          className="rounded-xl mt-5"
+          className="rounded-xl mt-5 hover:grayscale transition duration-300 ease-in-out hover:rotate-6 rotate-0"
           priority
         />
         <div>

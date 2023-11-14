@@ -99,19 +99,34 @@ export const projects = [
     description:
       'Multilingual Live Video conferencing built at 36hr National Hackathon.',
     href: 'https://github.com/swasthikshetty10/hackoverflow',
-    img: '/static/png/projects/1.png',
   },
   {
     name: "Incridea'23",
-    description: 'Event Management & Paperless system for NMAMIT\'s College Fest',
+    description:
+      "Event Management & Paperless system for NMAMIT's College Fest",
     href: 'https://github.com/incridea-23/incridea-client',
-    img: '/static/png/projects/2.png',
   },
   {
     name: 'Live-stream Studio Booking',
     description:
       'Full-Stack Django app to book Live stream studio and manage bookings.',
     href: 'https://github.com/nagarajpandith/live-stream-studio-booking',
-    img: '/static/png/projects/3.png',
+  },
+];
+
+export const blogList = [
+  {
+    title: 'Starting Web Development the right way in 2021',
+    description:
+      'In the past few years, Web Development has become a hot topic among developers and numerous coders are eventually getting into it. This resulted in enormous amount of online resources, roadmaps, video guides and a...',
+    date: '04-02-2022',
+    img: '/static/png/portrait.png',
+  },
+  {
+    title: '“Has Anyone Seen Web3?” — The Complete Roadmap and Resources to Become a Web3 Developer in 2022',
+    description:
+      'Twitter went crazy last month when Musk and Dorsey mocked the idea of Web3. Few called it the future of the internet and few called it to be bogus. But do you know what exactly is Web 3.0 and...',
+    date: '04-02-2022',
+    img: '/static/png/portrait.png',
   },
 ];

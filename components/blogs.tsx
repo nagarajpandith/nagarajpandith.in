@@ -1,21 +1,25 @@
 import Link from 'next/link';
 import BlogCard from './blogCard';
-import { blogList } from './constants/data';
 import { HiChevronDoubleRight } from 'react-icons/hi';
+import { getAllPostsMeta } from '@/lib/mdx';
 
-const Blogs = () => {
+export default async function Blogs() {
+  const posts = await getAllPostsMeta();
   return (
     <div className="my-20 bg-gray-800 rounded-xl p-5 flex gap-5 flex-col">
       <h1 className="text-white text-xl md:text-2xl font-bold text-center">
         Things I&apos;ve written
       </h1>
-      {blogList.map((blog, i) => (
+      {posts
+      .slice(0, 2)
+      .map((post, i) => (
         <BlogCard
           key={i}
-          title={blog.title}
-          desc={blog.description}
-          date={blog.date}
-          image={blog.img}
+          title={post.title}
+          desc={post.desc}
+          date={post.publishedDate}
+          image={post.coverImage}
+          slug={post.slug}
         />
       ))}
       <div className="flex items-center justify-center">
@@ -29,6 +33,4 @@ const Blogs = () => {
       </div>
     </div>
   );
-};
-
-export default Blogs;
+}

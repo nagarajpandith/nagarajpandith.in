@@ -1,5 +1,5 @@
 import { volunteering } from './constants/data';
-import VolunteerCard from './VolunteerCard';
+import VolunteerCard from './volunteerCard';
 
 const Volunteering = () => {
   return (

@@ -1,5 +1,5 @@
 import { mainProjectList } from '@/components/constants/data';
-import WideProjectCard from '@/components/WideProjectCard';
+import WideProjectCard from '@/components/wideProjectCard';
 
 const Work = () => {
   return (

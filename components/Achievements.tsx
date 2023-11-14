@@ -1,5 +1,5 @@
 import { achievements } from './constants/data';
-import AchievementCard from './AchievementCard';
+import AchievementCard from './achievementCard';
 
 const Achievements = () => {
   return (

@@ -1,7 +1,7 @@
-import Blogs from '@/components/Blogs';
-import Freelance from '@/components/Freelance';
-import Hero from '@/components/Hero';
-import Projects from '@/components/Projects';
+import Blogs from '@/components/blogs';
+import Freelance from '@/components/freelance';
+import Hero from '@/components/hero';
+import Projects from '@/components/projects';
 
 export default function Home() {
   return (

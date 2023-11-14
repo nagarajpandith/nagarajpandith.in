@@ -1,5 +1,5 @@
 import { education } from './constants/data';
-import BulletPoint from './BulletPoint';
+import BulletPoint from './bulletPoint';
 
 const Education = () => {
   return (

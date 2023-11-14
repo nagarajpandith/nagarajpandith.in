@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { HiChevronDoubleRight } from 'react-icons/hi';
-import { WavingHand } from './Waving';
+import { WavingHand } from './waving';
 
 const Hero = () => {
   return (

@@ -281,3 +281,48 @@ export const education = [
     img: '/static/png/portrait.png',
   },
 ];
+
+export const mainProjectList = [
+  {
+    title: 'JabWeMeet',
+    img: '/static/png/portrait.png',
+    description:
+      'Built a multilingual video conferencing web app with real-time audio translation with spoken out audio and caption display. Generates meeting minutes in preferred language and allows users to access meeting transcriptions anytime.',
+    link: 'https://jabwemeet.vercel.app/',
+    github: 'swasthikshetty10/hackoverflow',
+    tags: [
+      'Next.js',
+      'Typescript',
+      'TailwindCSS',
+      'Pusher',
+      'Livekit',
+      'tRPC',
+      'MySQL',
+    ],
+  },
+  {
+    title: "Incridea'23",
+    img: '/static/png/portrait.png',
+    description:
+      "Developed full-stack typesafe website & paperless system for Incridea'23. Collaborated with the Tech team to create 7 intuitive dashboard panels & Event registration system. Implemented secure JWT user auth & verification system.",
+    link: 'http://incridea.in/',
+    github: 'incridea-23/incridea-client',
+    tags: [
+      'Next.js',
+      'Typescript',
+      'TailwindCSS',
+      'GraphQL',
+      'Framer Motion',
+      'Prisma',
+    ],
+  },
+  {
+    title: 'Live-stream Studio Booking',
+    img: '/static/png/portrait.png',
+    description:
+      'Built a responsive full-stack booking system with automated notifications and admin hierarchies, deployed on Amazon EC2. Enables flexible filtering options, data export capabilities, and effectively prevents duplicate bookings.',
+    link: 'https://livestream.konkanischolarship.com/',
+    github: 'nagarajpandith/live-stream-studio-booking',
+    tags: ['Django', 'Bootstrap', 'SQLite', 'AWS EC2'],
+  },
+];

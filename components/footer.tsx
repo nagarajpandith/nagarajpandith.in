@@ -5,7 +5,7 @@ import { FaSitemap } from 'react-icons/fa';
 
 const Footer = () => {
   return (
-    <footer className="animate-fade-up bg-gray-900 shadow-xl shadow-white">
+    <footer className="animate-fade-up bg-gray-900">
       <div className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 h-[2px]"></div>
 
       <div className="max-w-5xl mx-auto px-4 py-6">

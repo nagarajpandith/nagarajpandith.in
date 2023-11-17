@@ -1,4 +1,7 @@
+import Clipboard from '@/components/clipboard';
 import { getPostBySlug } from '@/lib/mdx';
+import { FaFacebook } from 'react-icons/fa6';
+import { IoIosLink } from 'react-icons/io';
 
 const getPageContent = async (slug: string) => {
   const { meta, content, readingTime } = await getPostBySlug(slug);
@@ -27,19 +30,46 @@ const Page = async ({
   const { content, readingTime } = await getPageContent(params.slug);
 
   return (
-    <section className="py-24 w-full flex justify-center flex-col">
+    <section className="py-5 md:py-10 w-full flex justify-center flex-col">
       <div className="mx-auto py-4 prose prose-invert">
-        <div className='flex justify-between'>
+        <div className="flex justify-between">
           <a className="text-sm text-gray-300 mb-5 block no-underline">
             {readingTime.text} | {readingTime.words} words
           </a>
-          <div className='flex gap-2'>
-
+          <div className="flex gap-3 lg:gap-5">
+            <a
+              target="_blank"
+              href={`https://twitter.com/intent/tweet?url=https://nagarajpandith.in/blog/${params.slug}`}
+            >
+              <TwitterSvg />
+            </a>
+            <a
+              target="_blank"
+              href={`https://www.facebook.com/sharer/sharer.php?u=https://nagarajpandith.in/blog/${params.slug}`}
+            >
+              <FaFacebook className="w-5 h-5 hover:animate-wiggle hover:text-white" />
+            </a>
+            <Clipboard text={`https://nagarajpandith.in/blog/${params.slug}`} />
           </div>
         </div>
         {content}
       </div>
     </section>
+  );
+};
+
+const TwitterSvg = () => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      fill="currentColor"
+      className="bi bi-twitter-x w-5 h-5 hover:animate-wiggle hover:text-white"
+      viewBox="0 0 16 16"
+    >
+      <path d="M12.6.75h2.454l-5.36 6.142L16 15.25h-4.937l-3.867-5.07-4.425 5.07H.316l5.733-6.57L0 .75h5.063l3.495 4.633L12.601.75Zm-.86 13.028h1.36L4.323 2.145H2.865l8.875 11.633Z" />
+    </svg>
   );
 };
 

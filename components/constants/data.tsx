@@ -30,7 +30,7 @@ export const navLinks = [
   },
   {
     name: 'Resume',
-    href: '/static/pdf/resume.pdf',
+    href: '/static/pdf/Resume.pdf',
   },
 ];
 
@@ -42,7 +42,7 @@ export const footerLinks = {
     { name: 'Blog', href: '/blog' },
   ],
   secondary: [
-    { name: 'Resume', href: '/static/pdf/resume.pdf' },
+    { name: 'Resume', href: '/static/pdf/Resume.pdf' },
     { name: 'Guestbook', href: '/guestbook' },
     { name: 'Tools', href: '/tools' },
     { name: 'Recommendations', href: '/binge' },

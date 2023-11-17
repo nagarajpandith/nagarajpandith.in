@@ -29,8 +29,8 @@ const BlogCard = ({
           alt="Blog Image"
           src={image}
           className="aspect-square h-full w-full object-cover rounded-xl"
-          width={100}
-          height={100}
+          width={300}
+          height={300}
         />
       </div>
 

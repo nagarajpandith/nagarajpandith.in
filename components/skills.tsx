@@ -29,7 +29,7 @@ const Skills = () => {
         <a
           rel="noreferrer"
           target="_blank"
-          href="/static/pdf/resume.pdf"
+          href="/static/pdf/Resume.pdf"
           className="bg-primary w-fit text-sm text-white px-5 py-2 rounded-full hover:opacity-80 transition duration-300 ease-in-out group"
         >
           See more

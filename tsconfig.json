@@ -20,7 +20,7 @@
       }
     ],
     "paths": {
-      "@/*": ["./*", "./node_modules/*"]
+      "@/*": ["./*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/(site)/blog/[slug]/page.mdx"],

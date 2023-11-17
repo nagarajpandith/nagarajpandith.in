@@ -32,6 +32,7 @@ const Navbar = () => {
                 width={30}
                 height={30}
                 className="relative z-10 animate-jump"
+                priority
               />
             </div>
           </Link>

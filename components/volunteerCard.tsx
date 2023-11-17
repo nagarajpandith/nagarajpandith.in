@@ -10,7 +10,7 @@ const VolunteerCard = ({
   desc: string;
 }) => {
   return (
-    <div className="overflow-hidden rounded-lg shadow transition hover:shadow-lg mt-5">
+    <div className="overflow-hidden rounded-lg shadow transition hover:shadow-lg mt-5 sm:break-inside-avoid">
       <Image
         alt="Image"
         src={img}
@@ -27,7 +27,7 @@ const VolunteerCard = ({
             className="block mt-2 bg-primary w-fit text-sm text-white px-5 py-2 rounded-full hover:opacity-80 transition duration-300 ease-in-out group"
             href="https://www.linkedin.com/in/nagaraj-pandith/"
           >
-            Read More
+            See More
           </a>
         )}
       </div>

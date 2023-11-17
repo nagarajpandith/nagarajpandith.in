@@ -287,7 +287,7 @@ export const education = [
 export const mainProjectList = [
   {
     title: 'JabWeMeet',
-    img: '/static/png/portrait.png',
+    img: '/static/png/jab-we-meet.png',
     description:
       'Built a multilingual video conferencing web app with real-time audio translation with spoken out audio and caption display. Generates meeting minutes in preferred language and allows users to access meeting transcriptions anytime.',
     link: 'https://jabwemeet.vercel.app/',
@@ -304,7 +304,7 @@ export const mainProjectList = [
   },
   {
     title: "Incridea'23",
-    img: '/static/png/portrait.png',
+    img: '/static/png/incridea.png',
     description:
       "Developed full-stack typesafe website & paperless system for Incridea'23. Collaborated with the Tech team to create 7 intuitive dashboard panels & Event registration system. Implemented secure JWT user auth & verification system.",
     link: 'http://incridea.in/',
@@ -320,11 +320,72 @@ export const mainProjectList = [
   },
   {
     title: 'Live-stream Studio Booking',
-    img: '/static/png/portrait.png',
+    img: '/static/png/live-stream.png',
     description:
       'Built a responsive full-stack booking system with automated notifications and admin hierarchies, deployed on Amazon EC2. Enables flexible filtering options, data export capabilities, and effectively prevents duplicate bookings.',
     link: 'https://livestream.konkanischolarship.com/',
     github: 'nagarajpandith/live-stream-studio-booking',
     tags: ['Django', 'Bootstrap', 'SQLite', 'AWS EC2'],
   },
+  {
+    title: 'Finite Loop Club - Website',
+    img: '/static/png/flc.png',
+    description:
+      'Community website with Beautiful UI, Integrated Payment gateway, Custom public user profiles, Digital Certificates & ID Cards, Admin Panel and more',
+    link: 'https://finiteloop.co.in/',
+    github: 'Finite-Loop-Club-NMAMIT/flc-website',
+    tags: [
+      'Next.js',
+      'tRPC',
+      'Typescript',
+      'React-Query',
+      'zod',
+      'Razorpay',
+      'Planetscale',
+    ],
+  },
+  {
+    title: 'Portfolio Website',
+    img: '/static/png/portfolio.png',
+    description:
+      'My Personal Website, Blog and Guestbook. Built with Next 14, Typescript, Vercel Postgres, MDX and more!',
+    link: 'https://nagarajpandith.in',
+    github: 'nagarajpandith/portfolio',
+    tags: ['Next.js', 'Typescript', 'MDX', 'Prisma', 'TailwindCSS'],
+  },
+  {
+    title: 'Aido',
+    img: '/static/png/aido.png',
+    description:
+      '3D multilingual chatbot with interactive gestures, contextual conversations, persistent chat history, and personalized medical and mental health support.',
+    link: 'https://aido-clone.vercel.app/',
+    github: 'nagarajpandith/aido',
+    tags: [
+      'Next.js',
+      'tRPC',
+      'Typescript',
+      'Google PaLM2',
+      'Cloud Run',
+      'Cloud SQL',
+      'Deepgram STT',
+      'ElevenLabs TTS',
+    ],
+  },
+  {
+    title: 'CAS',
+    img: '/static/png/cas.jpeg',
+    description: 'Canteen Automation System (CAS) - DBMS Academic Mini Project',
+    link: 'https://cas.up.railway.app/',
+    github: 'nagarajpandith/cas',
+    tags: ['Django', 'TailwindCSS', 'PostgreSQL'],
+  },
+  // {
+  //   title: 'Campus-Compass',
+  //   img: '/static/png/portrait.png',
+  //   description:
+  //     'An Android App for Indoor Navigation in College Blocks using 360-Degree Images',
+  //   link: 'https://github.com/nagarajpandith/campus-compass/releases/download/v1.0.0/Campus.Compass.v1.0.0.apk',
+  //   github: 'nagarajpandith/campus-compass',
+  //   tags: ['Java', 'Android Studio', 'Google VR SDK'],
+  // },
 ];

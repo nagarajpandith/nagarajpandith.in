@@ -156,111 +156,131 @@ export const skills = [
 export const achievements = [
   {
     title:
-      '“Has Anyone Seen Web3?” — The Complete Roadmap and Resources to Become a Web3 Developer in 2022',
-    description:
-      'Twitter went crazy last month when Musk and Dorsey mocked the idea of Web3. Few called it the future of the internet and few called it to be bogus. But do you know what exactly is Web 3.0 and how does it work? In this article, you’ll be introduced to the new dimension of the internet and how to get started in this field from a developer’s point of view.',
-    date: '04-02-2022',
-    img: '/static/png/portrait.png',
+      'Winner at the 3-day long National-level hackathon ’Hackoverflow 1.0’ held at Pillai HOC, Mumbai.',
+    date: '18-03-2023',
+    img: '/static/png/hackoverflow.jpeg',
+    href: 'https://www.linkedin.com/feed/update/urn:li:activity:7043941054076637184/',
   },
   {
     title:
-      '“Has Anyone Seen Web3?” — The Complete Roadmap and Resources to Become a Web3 Developer in 2022',
-    description:
-      'Twitter went crazy last month when Musk and Dorsey mocked the idea of Web3. Few called it the future of the internet and few called it to be bogus. But do you know what exactly is Web 3.0 and how does it work? In this article, you’ll be introduced to the new dimension of the internet and how to get started in this field from a developer’s point of view.',
-    date: '04-02-2022',
-    img: '/static/png/portrait.png',
+      'Track prize winner in the AI track at the 24 hr long National-level hackathon ’Hackverse 4.0’ held at NITK.',
+    date: '16-04-2023',
+    img: '/static/png/hackverse.jpeg',
+    href: 'https://www.linkedin.com/feed/update/urn:li:activity:7060835169556955136/',
   },
   {
     title:
-      '“Has Anyone Seen Web3?” — The Complete Roadmap and Resources to Become a Web3 Developer in 2022',
-    description:
-      'Twitter went crazy last month when Musk and Dorsey mocked the idea of Web3. Few called it the future of the internet and few called it to be bogus. But do you know what exactly is Web 3.0 and how does it work? In this article, you’ll be introduced to the new dimension of the internet and how to get started in this field from a developer’s point of view.',
-    date: '04-02-2022',
-    img: '/static/png/portrait.png',
+      'Special Prize Winner for ’Most Innovative Approach’ at ’NivHack’ held at Niveus Solutions, Mangalore',
+    date: '27-08-2023',
+    img: '/static/png/niveus.jpeg',
+    href: 'https://www.linkedin.com/feed/update/urn:li:activity:7102829803791163392/',
   },
   {
     title:
-      '“Has Anyone Seen Web3?” — The Complete Roadmap and Resources to Become a Web3 Developer in 2022',
-    description:
-      'Twitter went crazy last month when Musk and Dorsey mocked the idea of Web3. Few called it the future of the internet and few called it to be bogus. But do you know what exactly is Web 3.0 and how does it work? In this article, you’ll be introduced to the new dimension of the internet and how to get started in this field from a developer’s point of view.',
-    date: '04-02-2022',
-    img: '/static/png/portrait.png',
+      'Winner of ’Web Ally’, 6 hr long website designing contest at the annual fest ’Tiara’ at SJEC, Mangalore.',
+    date: '23-03-2023',
+    img: '/static/png/tiara.jpeg',
+    href: 'https://www.linkedin.com/feed/update/urn:li:activity:7049752134799536128/',
   },
   {
-    title:
-      '“Has Anyone Seen Web3?” — The Complete Roadmap and Resources to Become a Web3 Developer in 2022',
-    description:
-      'Twitter went crazy last month when Musk and Dorsey mocked the idea of Web3. Few called it the future of the internet and few called it to be bogus. But do you know what exactly is Web 3.0 and how does it work? In this article, you’ll be introduced to the new dimension of the internet and how to get started in this field from a developer’s point of view.',
+    title: `Winner of 'Webbed' and Runner-up in 'Web Piracy' during College fest Incridea-2022`,
     date: '04-02-2022',
-    img: '/static/png/portrait.png',
+    img: '/static/png/incridea.jpeg',
+    href: 'https://incridea.in/',
   },
   {
     title: 'Loading...',
-    description:
-      'Twitter went crazy last month when Musk and Dorsey mocked the idea of Web3. Few called it the future of the internet and few called it to be bogus. But do you know what exactly is Web 3.0 and how does it work? In this article, you’ll be introduced to the new dimension of the internet and how to get started in this field from a developer’s point of view.',
-    date: '04-02-2022',
-    img: '/static/png/portrait.png',
+    date: 'Soon?',
+    img: '/static/png/question.jpg',
+    href: '#',
   },
 ];
 
 export const volunteering = [
   {
-    title: 'Incridea Tech Team',
-    date: '04-02-2022',
-    img: '/static/png/portrait.png',
-    description: 'We did this and that here',
+    title: "Incridea'23 - Frontend Lead",
+    img: '/static/png/incridea-tech-team.jpeg',
+    description:
+      'Worked with the Tech team for Incridea 2023, the annual fest of NMAMIT, to develop 7+ dashboards for monitoring and managing the events in real-time, an event registration system and visually appealing landing pages.',
   },
   {
-    title: 'Incridea Tech Team',
-    date: '04-02-2022',
-    img: '/static/png/portrait.png',
-    description: 'We did this and that here',
+    title: 'Git & GitHub workshop',
+    img: '/static/png/git-github.jpg',
+    description:
+      'Attended by 65+ students at NMAMIT, empowering them with version control skills.',
   },
   {
-    title: 'Incridea Tech Team',
-    date: '04-02-2022',
-    img: '/static/png/portrait.png',
-    description: 'We did this and that here',
+    title: 'Hacktoberfest workshop',
+    img: '/static/png/hacktoberfest.jpg',
+    description:
+      'Guide to Open Source contributions & Hacktoberfest Attended by 70+ students, fostering community collaboration.',
   },
   {
-    title: 'Incridea Tech Team',
-    date: '04-02-2022',
-    img: '/static/png/portrait.png',
-    description: 'We did this and that here',
+    title: 'Hackfest S01',
+    img: '/static/png/hackfest-image.jpeg',
+    description:
+      'Led the core team in hosting month-long online hackathon with 20+ teams as Vice President of the coding club.',
+  },
+  {
+    title: 'Skill Lab Training',
+    img: '/static/png/skill-lab.jpeg',
+    description:
+      'Played key role as a member of Skill Lab training, imparting Web development and Git & GitHub to freshers.',
+  },
+  {
+    title: 'A lot more..',
+    img: '/static/png/other.jpeg',
+    description:
+      'College has provided me with a lot of opportunities to volunteer, right from working in core teams of clubs to conducting one on one sessions to organizing events.',
   },
 ];
 
 export const experiences = [
   {
-    name: 'Incridea Tech Team',
-    dateRange: '04-02-2022',
-    description: 'We did this and that here',
-    href: '#',
-    img: '/static/png/portrait.png',
+    role: 'Software Engineering Intern',
+    name: 'Forent Co., Ltd.',
+    dateRange: 'Nov 2022 - Jan 2023',
+    description: `• Worked on migrating ExCamp project from HTML/Bootstrap to Next.js with Typescript & Sass.
+    • Involved in designing, building & optimizing pages, with performance and user experience in mind.
+    • Followed Agile software development using Jira for project management and Git for version control.`,
+    href: 'https://forent.co.jp/',
+    link: '/static/pdf/Forent_Letter.pdf',
+    img: '/static/png/forent.webp',
   },
   {
-    name: 'Incridea Tech Team',
-    dateRange: '04-02-2022',
-    description: 'We did this and that here',
-    href: '#',
-    img: '/static/png/portrait.png',
+    role: 'Software Development Intern',
+    name: 'Inspirante Technologies Pvt. Ltd.',
+    dateRange: 'Nov 2021 - May 2022',
+    description: `• Revamped the Finite Loop Club website using Next.js, Prisma, tRPC, TypeScript, & MySQL. 
+    • Developed a featurerich community platform with customizable user profiles, digital certificates, and admin panel.
+    • Contributed to the development of Edu-tech web portal [LMS] as part of a collaborative team.`,
+    href: 'https://inspirantech.in/',
+    link: '/static/pdf/Inspirante_Letter.pdf',
+    img: '/static/png/inspirante.jpeg',
   },
 ];
 
 export const education = [
   {
-    name: 'Incridea Tech Team',
-    dateRange: '04-02-2022',
-    description: 'We did this and that here',
-    href: '#',
-    img: '/static/png/portrait.png',
+    name: 'N.M.A.M.I.T.',
+    role: 'B.E., Computer Science & Engineering',
+    dateRange: '2020-2024',
+    description: 'CGPA: 8.95/10.00',
+    href: 'https://nmamit.nitte.edu.in/',
   },
   {
-    name: 'Incridea Tech Team',
-    dateRange: '04-02-2022',
-    description: 'We did this and that here',
-    href: '#',
-    img: '/static/png/portrait.png',
+    name: 'Poorna Prajna PU College',
+    role: 'Pre-University Education - PCMCs',
+    dateRange: '2018-2020',
+    description: 'Aggregate: 94.0%',
+    href: 'https://poornaprajnapuc.com/',
+  },
+  {
+    name: 'Indrali English Medium School',
+    role: 'School Education',
+    dateRange: '2006-2018',
+    description: 'Aggregate: 98.56%',
+    href: 'https://www.justdial.com/Udupi/Indrali-English-Medium-High-School-Near-Railway-Bridge-Kunjibettu/0820PX820-X820-120227170748-B7Q1_BZDET',
   },
 ];
 

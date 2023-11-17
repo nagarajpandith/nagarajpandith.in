@@ -7,16 +7,18 @@ const Volunteering = () => {
       <h1 className="lg:mt-5 mt-0 text-primary lg:text-3xl text-xl font-bold text-center md:text-left">
         Volunteering & Extra Curricular
       </h1>
-      <div className="my-5 flex flex-wrap gap-5 justify-center md:justify-start">
-        {volunteering.map((volunteer, i) => (
-          <VolunteerCard
-            key={i}
-            img={volunteer.img}
-            date={volunteer.date}
-            title={volunteer.title}
-            desc={volunteer.description}
-          />
-        ))}
+
+      <div className="mx-auto max-w-screen-xl mt-5">
+        <div className="sm:columns-2 sm:gap-6 lg:columns-3 lg:gap-8">
+          {volunteering.map((volunteer, i) => (
+            <VolunteerCard
+              key={i}
+              img={volunteer.img}
+              title={volunteer.title}
+              desc={volunteer.description}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

@@ -11,10 +11,10 @@ const Achievements = () => {
         {achievements.map((achievement, i) => (
           <AchievementCard
             key={i}
+            href={achievement.href}
             img={achievement.img}
             date={achievement.date}
             title={achievement.title}
-            desc={achievement.description}
           />
         ))}
       </div>

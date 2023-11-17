@@ -11,11 +11,13 @@ const Experience = () => {
         {experiences.map((experience, i) => (
           <BulletPoint
             key={i}
+            role={experience.role}
             name={experience.name}
             dateRange={experience.dateRange}
             desc={experience.description}
             img={experience.img}
             href={experience.href}
+            link={experience.link}
           />
         ))}
       </ol>

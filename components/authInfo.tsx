@@ -19,7 +19,7 @@ const AuthInfo = () => {
               height={40}
               className="rounded-full"
             />
-            Hello {data?.user?.name}!
+            Posting as {data?.user?.name}
           </div>
           <button className="flex gap-2" onClick={() => signOut()}>
             {' '}

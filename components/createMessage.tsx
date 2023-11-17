@@ -1,37 +1,40 @@
-import { authOptions } from '@/lib/auth';
-import prisma from '@/lib/prisma';
-import { getServerSession } from 'next-auth';
-import { revalidatePath } from 'next/cache';
+'use client';
 
-export default async function CreateMessage() {
-  async function create(formData: FormData) {
-    'use server';
-    const user = await getServerSession(authOptions);
-    await prisma.guestBook
-      .create({
-        data: {
-          message: formData.get('message') as string,
-          user: {
-            connect: {
-              email: user?.user?.email!,
-            },
-          },
-        },
-      })
-      .then(() => {
-        revalidatePath('/guestbook');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+import { createMessage } from '@/app/actions';
+import { useRef } from 'react';
+import { useFormStatus } from 'react-dom';
+
+export default function CreateMessage() {
+  function SubmitButton() {
+    const { pending } = useFormStatus();
+    return (
+      <button
+        className="bg-primary hover:bg-primary/80 text-white font-bold py-2 px-4 rounded-xl"
+        disabled={pending}
+        type="submit"
+      >
+        {pending ? 'Posting...' : 'Post'}
+      </button>
+    );
   }
 
+  async function create(formData: FormData) {
+    if (!formData.get('message')) return;
+    await createMessage(formData);
+    ref.current?.reset();
+  }
+
+  const ref = useRef<HTMLFormElement>(null);
+
   return (
-    <div>
-      CreateMessage
-      <form action={create}>
-        <input type="text" name="message" />
-        <button type="submit">Send</button>
+    <div className='my-5'>
+      <form className="flex gap-2" action={create} ref={ref}>
+        <input
+          className="w-full bg-gray-800 rounded-xl focus:outline-none p-2"
+          type="text"
+          name="message"
+        />
+        <SubmitButton />
       </form>
     </div>
   );

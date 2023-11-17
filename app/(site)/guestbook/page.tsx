@@ -1,5 +1,4 @@
 import AuthInfo from '@/components/authInfo';
-import CreateMessage from '@/components/createMessage';
 import Messages from '@/components/guestBook';
 
 const Guestbook = () => {
@@ -10,7 +9,6 @@ const Guestbook = () => {
       </h1>
       <AuthInfo />
       <Messages />
-      <CreateMessage />
     </div>
   );
 };

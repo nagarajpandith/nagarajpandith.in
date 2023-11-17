@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from 'nextjs13-progress';
 import BlogCard from './blogCard';
 import { HiChevronDoubleRight } from 'react-icons/hi';
 import { getAllPostsMeta } from '@/lib/mdx';
@@ -10,16 +10,15 @@ export default async function Blogs() {
       <h1 className="text-white text-xl md:text-2xl font-bold text-center">
         Things I&apos;ve written
       </h1>
-      {posts
-      .slice(0, 2)
-      .map((post, i) => (
+      {posts.slice(0, 2).map((post, i) => (
         <BlogCard
           key={i}
-          title={post.title}
-          desc={post.desc}
-          date={post.publishedDate}
-          image={post.coverImage}
-          slug={post.slug}
+          title={post.meta.title}
+          desc={post.meta.desc}
+          date={post.meta.publishedDate}
+          image={post.meta.coverImage}
+          slug={post.meta.slug}
+          readingTime={post.readingTime}
         />
       ))}
       <div className="flex items-center justify-center">

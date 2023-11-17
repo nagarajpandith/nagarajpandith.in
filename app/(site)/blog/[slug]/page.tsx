@@ -1,8 +1,8 @@
 import { getPostBySlug } from '@/lib/mdx';
 
 const getPageContent = async (slug: string) => {
-  const { meta, content } = await getPostBySlug(slug);
-  return { meta, content };
+  const { meta, content, readingTime } = await getPostBySlug(slug);
+  return { meta, content, readingTime };
 };
 
 export async function generateMetadata({
@@ -24,11 +24,21 @@ const Page = async ({
     slug: string;
   };
 }) => {
-  const { content } = await getPageContent(params.slug);
+  const { content, readingTime } = await getPageContent(params.slug);
 
   return (
     <section className="py-24 w-full flex justify-center flex-col">
-      <div className="mx-auto py-4 prose prose-invert">{content}</div>
+      <div className="mx-auto py-4 prose prose-invert">
+        <div className='flex justify-between'>
+          <a className="text-sm text-gray-300 mb-5 block no-underline">
+            {readingTime.text} | {readingTime.words} words
+          </a>
+          <div className='flex gap-2'>
+
+          </div>
+        </div>
+        {content}
+      </div>
     </section>
   );
 };

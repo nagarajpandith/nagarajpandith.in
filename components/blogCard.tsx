@@ -1,19 +1,22 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from 'nextjs13-progress';
 import { HiChevronDoubleRight } from 'react-icons/hi';
+import { ReadTimeResults } from 'reading-time';
 
 const BlogCard = ({
   title,
   desc,
   date,
   image,
-  slug
+  slug,
+  readingTime,
 }: {
   title: string;
   desc: string;
   date: string;
   image: string;
-  slug: string
+  slug: string;
+  readingTime: ReadTimeResults;
 }) => {
   const dateObj = new Date(date);
   const year = dateObj.getFullYear();
@@ -24,14 +27,8 @@ const BlogCard = ({
 
   return (
     <div className="flex flex-col md:flex-row bg-gray-700 transition shadow-xl rounded-xl hover:animate-background hover:bg-gradient-to-r from-gray-700 via-gray-500 to-gray-700 p-0.5 hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s]">
-      <div className="sm:basis-56">
-        <Image
-          alt="Blog Image"
-          src={image}
-          className="aspect-square h-full w-full object-cover rounded-xl"
-          width={300}
-          height={300}
-        />
+      <div>
+        <Image alt="Blog Image" src={image} width={300} height={300} />
       </div>
 
       <div className="flex flex-1 flex-col justify-between">
@@ -47,6 +44,12 @@ const BlogCard = ({
           </div>
 
           <p className="line-clamp-3 text-sm/relaxed text-gray-300">{desc}</p>
+
+          <div className="mt-3 text-gray-300 text-xs">
+            <span>
+              {readingTime.text} | {readingTime.words} words
+            </span>
+          </div>
         </div>
 
         <div className="flex items-center justify-end pb-5 pr-5">

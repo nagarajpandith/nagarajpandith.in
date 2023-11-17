@@ -9,11 +9,12 @@ export default async function Blog() {
       {posts.map((post, i) => (
         <BlogCard
           key={i}
-          title={post.title}
-          desc={post.desc}
-          date={post.publishedDate}
-          image={post.coverImage}
-          slug={post.slug}
+          title={post.meta.title}
+          desc={post.meta.desc}
+          date={post.meta.publishedDate}
+          image={post.meta.coverImage}
+          slug={post.meta.slug}
+          readingTime={post.readingTime}
         />
       ))}
     </div>

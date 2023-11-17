@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { PageTransition } from '@/components/pageTransition';
+import { Next13NProgress } from 'nextjs13-progress';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,6 +28,7 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-gray-900 mx-auto`}>
+        <Next13NProgress color="#E508C1" height={2} />
         <Navbar />
         <main
           className={`flex flex-col mx-auto max-w-6xl justify-center px-4 pt-5`}

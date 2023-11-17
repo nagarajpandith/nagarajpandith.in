@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from 'nextjs13-progress';
 import { HiChevronDoubleRight } from 'react-icons/hi';
 import { WavingHand } from './waving';
 

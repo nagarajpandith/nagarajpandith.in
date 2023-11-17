@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import { Link } from 'nextjs13-progress';
 import { footerLinks } from './constants/data';
 import { IoLogoRss } from 'react-icons/io5';
 import { FaSitemap } from 'react-icons/fa';
@@ -21,12 +21,9 @@ const Footer = () => {
                     <Link
                       key={item.name}
                       href={item.href}
-                      passHref
-                      legacyBehavior
+                      className="block text-base no-underline cursor-pointer hover:text-gray-300 text-gray-400 hover:underline"
                     >
-                      <span className="block text-base no-underline cursor-pointer hover:text-gray-300 text-gray-400 hover:underline">
-                        {item.name}
-                      </span>
+                      {item.name}
                     </Link>
                   ))}
                 </div>
@@ -40,12 +37,9 @@ const Footer = () => {
                     <Link
                       key={item.name}
                       href={item.href}
-                      passHref
-                      legacyBehavior
+                      className="block text-base no-underline cursor-pointer hover:text-gray-300 text-gray-400 hover:underline"
                     >
-                      <span className="block text-base no-underline cursor-pointer hover:text-gray-300 text-gray-400 hover:underline">
-                        {item.name}
-                      </span>
+                      {item.name}
                     </Link>
                   ))}
                 </div>

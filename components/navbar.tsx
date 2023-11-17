@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
-import Link from 'next/link';
+import {Link} from 'nextjs13-progress';
 import { HiOutlineMenuAlt3 } from 'react-icons/hi';
 import { useState } from 'react';
 import { IoMdClose } from 'react-icons/io';

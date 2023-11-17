@@ -1,6 +1,6 @@
 import { projects } from './constants/data';
 import { BsLink45Deg } from 'react-icons/bs';
-import Link from 'next/link';
+import { Link } from 'nextjs13-progress';
 import { HiChevronDoubleRight } from 'react-icons/hi';
 import Image from 'next/image';
 

@@ -16,7 +16,14 @@ export async function generateMetadata({
   };
 }) {
   const { meta, readingTime } = await getPageContent(params.slug);
-  const ogUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${meta.title}&readingTime=${readingTime.text}&cover=${meta.coverImage}&date=${meta.publishedDate}`;
+  const ogUrl = `${
+    process.env.NEXT_PUBLIC_BASE_URL
+  }/api/og?title=${encodeURIComponent(
+    meta.title
+  )}&readingTime=${encodeURIComponent(readingTime.text)}&cover=${
+    meta.coverImage
+  }&date=${encodeURIComponent(meta.publishedDate)}`;
+
   return {
     title: meta.title,
     openGraph: {

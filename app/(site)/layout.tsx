@@ -22,6 +22,21 @@ const metadata: Metadata = {
     shortcut: '/favicon/favicon-16x16.png',
     apple: '/favicon/apple-touch-icon.png',
   },
+  openGraph: {
+    title: 'Nagaraj Pandith - Portfolio',
+    description: 'Personal Website & Blog of Nagaraj Pandith',
+    url: 'https://nagarajpandith.in',
+    siteName: 'Nagaraj Pandith - Portfolio',
+    images: [
+      {
+        url: 'https://nagarajpandith.in/static/png/portfolio.png',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'en-US',
+    type: 'website',
+  }
 };
 
 export { metadata };

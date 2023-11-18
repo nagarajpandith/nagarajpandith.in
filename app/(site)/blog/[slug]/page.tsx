@@ -1,7 +1,7 @@
+// @ts-nocheck
 import Clipboard from '@/components/clipboard';
 import { getPostBySlug } from '@/lib/mdx';
 import { FaFacebook } from 'react-icons/fa6';
-import { IoIosLink } from 'react-icons/io';
 
 const getPageContent = async (slug: string) => {
   const { meta, content, readingTime } = await getPostBySlug(slug);
@@ -15,9 +15,30 @@ export async function generateMetadata({
     slug: string;
   };
 }) {
-  const { meta } = await getPageContent(params.slug);
-  // @ts-ignore
-  return { title: meta.title };
+  const { meta, readingTime } = await getPageContent(params.slug);
+  const ogUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/api/og?title=${meta.title}&readingTime=${readingTime.text}&cover=${meta.coverImage}&date=${meta.publishedDate}`;
+  return {
+    title: meta.title,
+    openGraph: {
+      title: meta.title,
+      description: meta.desc,
+      url: `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${params.slug}`,
+      images: [
+        {
+          url: ogUrl,
+          width: 1200,
+          height: 630,
+          alt: meta.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: meta.title,
+      description: meta.desc,
+      images: [ogUrl.toString()],
+    },
+  };
 }
 
 const Page = async ({
@@ -39,17 +60,19 @@ const Page = async ({
           <div className="flex gap-3 lg:gap-5">
             <a
               target="_blank"
-              href={`https://twitter.com/intent/tweet?url=https://nagarajpandith.in/blog/${params.slug}`}
+              href={`https://twitter.com/intent/tweet?url=${process.env.NEXT_PUBLIC_BASE_URL}/blog/${params.slug}`}
             >
               <TwitterSvg />
             </a>
             <a
               target="_blank"
-              href={`https://www.facebook.com/sharer/sharer.php?u=https://nagarajpandith.in/blog/${params.slug}`}
+              href={`https://www.facebook.com/sharer/sharer.php?u=${process.env.NEXT_PUBLIC_BASE_URL}/blog/${params.slug}`}
             >
               <FaFacebook className="w-5 h-5 hover:animate-wiggle hover:text-white" />
             </a>
-            <Clipboard text={`https://nagarajpandith.in/blog/${params.slug}`} />
+            <Clipboard
+              text={`${process.env.NEXT_PUBLIC_BASE_URL}/blog/${params.slug}`}
+            />
           </div>
         </div>
         {content}

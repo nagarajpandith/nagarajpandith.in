@@ -1,6 +1,6 @@
 import React from 'react';
 import { IoMdMail } from 'react-icons/io';
-import { messages } from './constants/data';
+import { messages } from '@/data/index';
 
 const Freelance = () => {
   return (

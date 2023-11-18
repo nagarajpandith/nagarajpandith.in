@@ -1,4 +1,4 @@
-import { education } from './constants/data';
+import { education } from '@/data/index';
 import BulletPoint from './bulletPoint';
 
 const Education = () => {

@@ -1,5 +1,5 @@
 import { Link } from 'nextjs13-progress';
-import { footerLinks } from './constants/data';
+import { footerLinks } from '@/data/index';
 import { IoLogoRss } from 'react-icons/io5';
 import { FaSitemap } from 'react-icons/fa';
 

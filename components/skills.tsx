@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { Link } from 'nextjs13-progress';
 import { HiChevronDoubleRight } from 'react-icons/hi';
-import { skills } from './constants/data';
+import { skills } from '@/data/index';
 
 const Skills = () => {
   return (

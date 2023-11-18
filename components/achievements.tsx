@@ -1,4 +1,4 @@
-import { achievements } from './constants/data';
+import { achievements } from '@/data/index';
 import AchievementCard from './achievementCard';
 
 const Achievements = () => {

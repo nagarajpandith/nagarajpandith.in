@@ -1,4 +1,4 @@
-import { experiences } from './constants/data';
+import { experiences } from '@/data/index';
 import BulletPoint from './bulletPoint';
 
 const Experience = () => {

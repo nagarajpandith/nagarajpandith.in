@@ -1,4 +1,4 @@
-import { volunteering } from './constants/data';
+import { volunteering } from '@/data/index';
 import VolunteerCard from './volunteerCard';
 
 const Volunteering = () => {

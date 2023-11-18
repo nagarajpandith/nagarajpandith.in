@@ -1,4 +1,4 @@
-import { projects } from './constants/data';
+import { projects } from '@/data/index';
 import { BsLink45Deg } from 'react-icons/bs';
 import { Link } from 'nextjs13-progress';
 import { HiChevronDoubleRight } from 'react-icons/hi';

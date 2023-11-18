@@ -1,4 +1,4 @@
-import { mainProjectList } from '@/components/constants/data';
+import { mainProjectList } from '@/data/index';
 import WideProjectCard from '@/components/wideProjectCard';
 import { HiChevronDoubleRight } from 'react-icons/hi';
 

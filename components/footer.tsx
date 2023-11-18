@@ -58,11 +58,18 @@ const Footer = () => {
               and let me know what you think.
             </div>
             <div className="flex gap-5 mt-5">
-              <a className="border rounded-full py-1 px-2 flex gap-2 items-center text-gray-400 hover:text-white cursor-pointer">
+              <a
+                target="_blank"
+                href="/feed.xml"
+                className="border rounded-full py-1 px-2 flex gap-2 items-center text-gray-400 hover:text-white cursor-pointer"
+              >
                 <IoLogoRss />
                 RSS
               </a>
-              <a href="/sitemap.xml" className="border rounded-full py-1 px-2 flex gap-2 items-center text-gray-400 hover:text-white cursor-pointer">
+              <a
+                href="/sitemap.xml"
+                className="border rounded-full py-1 px-2 flex gap-2 items-center text-gray-400 hover:text-white cursor-pointer"
+              >
                 <FaSitemap />
                 Sitemap
               </a>

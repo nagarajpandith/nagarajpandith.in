@@ -21,6 +21,7 @@
     "react-dom": "18.2.0",
     "react-icons": "^4.11.0",
     "reading-time": "^1.5.0",
+    "rss": "^1.2.2",
     "tailwindcss-animated": "^1.0.1"
   },
   "devDependencies": {
@@ -28,6 +29,7 @@
     "@types/node": "20.9.0",
     "@types/react": "18.2.37",
     "@types/react-dom": "18.2.15",
+    "@types/rss": "^0.0.32",
     "autoprefixer": "10.4.16",
     "eslint": "8.53.0",
     "eslint-config-next": "14.0.2",

@@ -26,10 +26,14 @@ export async function generateMetadata({
 
   return {
     title: meta.title,
+    description: meta.desc,
+    alternates: {
+      canonical: `/blog/${params.slug}`,
+    },
     openGraph: {
       title: meta.title,
       description: meta.desc,
-      url: `${process.env.NEXT_PUBLIC_BASE_URL}/blog/${params.slug}`,
+      url: `/blog/${params.slug}`,
       images: [
         {
           url: ogUrl,
@@ -42,6 +46,7 @@ export async function generateMetadata({
     twitter: {
       card: 'summary_large_image',
       title: meta.title,
+      creator: '@hashclan102',
       description: meta.desc,
       images: [ogUrl.toString()],
     },

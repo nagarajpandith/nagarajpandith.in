@@ -9,7 +9,13 @@ import { Next13NProgress } from 'nextjs13-progress';
 const inter = Inter({ subsets: ['latin'] });
 
 const metadata: Metadata = {
-  title: 'Nagaraj Pandith - Portfolio',
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_BASE_URL || 'https://nagarajpandith.in'
+  ),
+  title: {
+    default: 'Nagaraj Pandith - Portfolio',
+    template: '%s | Nagaraj Pandith',
+  },
   description: 'Personal Website of Nagaraj Pandith',
   icons: {
     icon: '/favicon/favicon.ico',

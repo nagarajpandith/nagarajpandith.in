@@ -23,7 +23,7 @@ const BulletPoint = ({
     .filter(Boolean);
 
   return (
-    <li className="mb-6 sm:mb-0">
+    <li className="md:mb-6 mb-0">
       {img && (
         <div className="flex items-center">
           <div className="z-10 flex items-center justify-center">
@@ -62,7 +62,7 @@ const BulletPoint = ({
         <ul
           className={`${
             desc.includes('•') ? 'list-disc' : ''
-          } list-inside font-normal text-gray-400 text-sm md:text-md`}
+          } list-inside font-normal text-gray-400 text-sm md:text-md mt-3`}
         >
           {bulletPoints.map((point, index) => (
             <li key={index}>{point}</li>

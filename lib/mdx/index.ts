@@ -10,6 +10,7 @@ interface Meta {
   desc: string;
   publishedDate: string;
   coverImage: string;
+  tags: string;
   slug: string;
 }
 
@@ -30,7 +31,7 @@ export const getPostBySlug = async (slug: string) => {
   });
 
   return {
-    meta: { ...frontmatter, slug: realSlug },
+    meta: { ...frontmatter, slug: realSlug } as Meta,
     content,
     readingTime: readingTime(fileContent),
   };

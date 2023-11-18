@@ -19,11 +19,14 @@ const BlogSearch = ({ posts }: { posts: Post[] }) => {
         .filter(
           (post) =>
             post.meta.title.toLowerCase().includes(query.toLowerCase()) ||
-            post.meta.desc.toLowerCase().includes(query.toLowerCase())
+            post.meta.tags
+              .split(',')
+              .some((tag) => tag.toLowerCase().includes(query.toLowerCase()))
         )
         .map((post, i) => (
           <BlogCard
             key={i}
+            tags={post.meta.tags.split(',')}
             title={post.meta.title}
             desc={post.meta.desc}
             date={post.meta.publishedDate}

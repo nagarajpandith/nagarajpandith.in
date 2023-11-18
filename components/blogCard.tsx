@@ -9,6 +9,7 @@ const BlogCard = ({
   image,
   slug,
   readingTime,
+  tags,
 }: {
   title: string;
   desc: string;
@@ -16,6 +17,7 @@ const BlogCard = ({
   image: string;
   slug: string;
   readingTime: ReadTimeResults;
+  tags: string[];
 }) => {
   const dateObj = new Date(date);
   const year = dateObj.getFullYear();
@@ -43,10 +45,20 @@ const BlogCard = ({
           <Link href={`/blog/${slug}`}>
             <h3 className="font-bold text-secondary line-clamp-1">{title}</h3>
           </Link>
-          <div className="py-2 w-fit flex items-center justify-between gap-4 text-xs font-bold uppercase text-white">
-            <span>
+          <div className="py-2 w-full flex flex-col md:flex-row items-center gap-4 text-xs font-bold text-white">
+            <span className="w-20 md:w-24 uppercase md:text-left text-center">
               {month} {day}, {year}
             </span>
+            <div className="flex gap-1 overflow-x-auto w-full">
+              {tags.slice(0, 4).map((tag, i) => (
+                <span
+                  key={i}
+                  className="block text-xs md:text-sm text-gray-300 bg-gray-600 px-2 py-1 rounded-xl"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
           </div>
 
           <Link href={`/blog/${slug}`}>

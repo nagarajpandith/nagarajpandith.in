@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 import Clipboard from '@/components/clipboard';
 import { getPostBySlug } from '@/lib/mdx';
 import { FaFacebook } from 'react-icons/fa6';
@@ -60,12 +60,16 @@ const Page = async ({
     slug: string;
   };
 }) => {
-  const { content, readingTime } = await getPageContent(params.slug);
+  const { content, readingTime, meta } = await getPageContent(params.slug);
 
   return (
     <section className="py-5 md:py-10 w-full flex justify-center flex-col">
       <div className="mx-auto py-4 prose prose-invert">
-        <div className="flex justify-between">
+        <div className="w-fit text-right text-sm md:text-md">
+          Nagaraj Pandith • {meta.publishedDate}
+        </div>
+
+        <div className="mt-3 flex justify-between">
           <a className="text-sm text-gray-300 mb-5 block no-underline">
             {readingTime.text} | {readingTime.words} words
           </a>

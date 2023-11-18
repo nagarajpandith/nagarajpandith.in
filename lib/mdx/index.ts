@@ -12,6 +12,7 @@ interface Meta {
   coverImage: string;
   tags: string;
   slug: string;
+  nextSlug: string;
 }
 
 export interface Post {

@@ -13,6 +13,7 @@ export default async function Blogs() {
       {posts.slice(0, 2).map((post, i) => (
         <BlogCard
           key={i}
+          tags={post.meta.tags.split(',')}
           title={post.meta.title}
           desc={post.meta.desc}
           date={post.meta.publishedDate}

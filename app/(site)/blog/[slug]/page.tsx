@@ -1,7 +1,8 @@
-
 import Clipboard from '@/components/clipboard';
 import { getPostBySlug } from '@/lib/mdx';
+import { Link } from 'nextjs13-progress';
 import { FaFacebook } from 'react-icons/fa6';
+import { FaArrowRight, FaArrowLeft } from 'react-icons/fa6';
 
 const getPageContent = async (slug: string) => {
   const { meta, content, readingTime } = await getPostBySlug(slug);
@@ -92,6 +93,23 @@ const Page = async ({
           </div>
         </div>
         {content}
+        <div className="flex justify-between">
+          <Link
+            href={`/blog`}
+            className="border border-gray-300 rounded-xl w-fit p-2 md:p-5 flex items-center gap-2 hover:border-gray-400 text-gray-300 mb-5 no-underline"
+          >
+            <FaArrowLeft />
+            Back to Blog
+          </Link>
+
+          <Link
+            href={`/blog/${meta.nextSlug}`}
+            className="border border-gray-300 rounded-xl w-fit p-2 md:p-5 flex items-center gap-2 hover:border-gray-400 text-gray-300 mb-5 no-underline"
+          >
+            Read Next
+            <FaArrowRight />
+          </Link>
+        </div>
       </div>
     </section>
   );

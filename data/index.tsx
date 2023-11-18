@@ -349,7 +349,7 @@ export const mainProjectList = [
   },
   {
     title: 'Portfolio Website',
-    img: '/static/png/portfolio.png',
+    img: '/static/png/portfolio-img.png',
     description:
       'My Personal Website, Blog and Guestbook. Built with Next 14, Typescript, Vercel Postgres, MDX and more!',
     link: 'https://nagarajpandith.in',
@@ -376,7 +376,7 @@ export const mainProjectList = [
   },
   {
     title: 'CAS',
-    img: '/static/png/cas.jpeg',
+    img: '/static/png/cas.png',
     description: 'Canteen Automation System (CAS) - DBMS Academic Mini Project',
     link: 'https://cas.up.railway.app/',
     github: 'nagarajpandith/cas',

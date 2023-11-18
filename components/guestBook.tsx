@@ -19,7 +19,7 @@ export default async function Messages() {
   return (
     <div className="h-screen overflow-scroll flex gap-5 flex-col">
       {posts.map((post, i) => (
-        <div key={i} className="p-3 md:p-5 bg-gray-800 rounded-xl">
+        <div key={i} className="animate-fade-up p-3 md:p-5 bg-gray-800 rounded-xl">
           <div className="md:flex md:flex-row items-center gap-2 text-gray-300">
             {post.user.image && (
               <Image

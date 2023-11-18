@@ -13,7 +13,7 @@ interface Meta {
   slug: string;
 }
 
-interface Post {
+export interface Post {
   meta: Meta;
   readingTime: ReadTimeResults;
 }

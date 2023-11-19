@@ -18,7 +18,7 @@ export async function generateMetadata({
   };
 }) {
   const { meta, readingTime } = await getPageContent(params.slug);
-  if (meta) {
+  if (meta && readingTime) {
     const ogUrl = `${
       process.env.NEXT_PUBLIC_BASE_URL
     }/api/og?title=${encodeURIComponent(
@@ -71,7 +71,7 @@ const Page = async ({
 }) => {
   const { content, readingTime, meta } = await getPageContent(params.slug);
 
-  if (!content || !meta) {
+  if (!content || !meta || !readingTime) {
     return <Error />;
   }
 

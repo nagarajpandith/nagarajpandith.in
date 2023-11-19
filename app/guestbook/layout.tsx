@@ -1,6 +1,6 @@
 import { authOptions } from '@/lib/auth';
 import { getServerSession } from 'next-auth';
-import SessionProvider from '@/app/context/SessionProvider';
+import SessionProvider from '@/context/SessionProvider';
 
 export default async function Layout({
   children,

@@ -40,7 +40,7 @@ export const getPostBySlug = async (slug: string) => {
     return {
       meta: undefined,
       content: '',
-      readingTime: readingTime(fileContent),
+      readingTime: undefined,
     };
   }
 };
@@ -54,7 +54,7 @@ export const getAllPostsMeta = async () => {
     const { meta, readingTime } = await getPostBySlug(file);
     posts.push({
       meta: { ...(meta as Meta) },
-      readingTime,
+      readingTime: readingTime as ReadTimeResults,
     });
   }
 

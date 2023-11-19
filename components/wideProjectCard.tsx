@@ -8,6 +8,7 @@ const WideProjectCard = ({
   image,
   link,
   source,
+  i,
 }: {
   title: string;
   desc: string;
@@ -15,9 +16,14 @@ const WideProjectCard = ({
   image: string;
   link: string;
   source: string;
+  i: number;
 }) => {
   return (
-    <div className="flex flex-col md:flex-row items-center">
+    <div
+      className={`flex flex-col md:flex-row items-center ${
+        i % 2 === 0 ? 'md:flex-row-reverse' : ''
+      }`}
+    >
       <div className="w-full md:w-1/2 animate-fade-up">
         <Image
           alt="Blog Image"

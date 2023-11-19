@@ -10,6 +10,7 @@ const Work = () => {
         {mainProjectList.map((project, i) => (
           <div key={i}>
             <WideProjectCard
+              i={i}
               title={project.title}
               desc={project.description}
               image={project.img}

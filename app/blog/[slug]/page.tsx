@@ -1,4 +1,5 @@
 import Clipboard from '@/components/clipboard';
+import Error from '@/components/error';
 import { getPostBySlug } from '@/lib/mdx';
 import { Link } from 'nextjs13-progress';
 import { FaFacebook } from 'react-icons/fa6';
@@ -17,41 +18,48 @@ export async function generateMetadata({
   };
 }) {
   const { meta, readingTime } = await getPageContent(params.slug);
-  const ogUrl = `${
-    process.env.NEXT_PUBLIC_BASE_URL
-  }/api/og?title=${encodeURIComponent(
-    meta.title
-  )}&readingTime=${encodeURIComponent(readingTime.text)}&cover=${
-    meta.coverImage
-  }&date=${encodeURIComponent(meta.publishedDate)}`;
+  if (meta) {
+    const ogUrl = `${
+      process.env.NEXT_PUBLIC_BASE_URL
+    }/api/og?title=${encodeURIComponent(
+      meta.title
+    )}&readingTime=${encodeURIComponent(readingTime.text)}&cover=${
+      meta.coverImage
+    }&date=${encodeURIComponent(meta.publishedDate)}`;
 
-  return {
-    title: meta.title,
-    description: meta.desc,
-    alternates: {
-      canonical: `/blog/${params.slug}`,
-    },
-    openGraph: {
+    return {
       title: meta.title,
       description: meta.desc,
-      url: `/blog/${params.slug}`,
-      images: [
-        {
-          url: ogUrl,
-          width: 1200,
-          height: 630,
-          alt: meta.title,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title: meta.title,
-      creator: '@hashclan102',
-      description: meta.desc,
-      images: [ogUrl.toString()],
-    },
-  };
+      alternates: {
+        canonical: `/blog/${params.slug}`,
+      },
+      openGraph: {
+        title: meta.title,
+        description: meta.desc,
+        url: `/blog/${params.slug}`,
+        images: [
+          {
+            url: ogUrl,
+            width: 1200,
+            height: 630,
+            alt: meta.title,
+          },
+        ],
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title: meta.title,
+        creator: '@hashclan102',
+        description: meta.desc,
+        images: [ogUrl.toString()],
+      },
+    };
+  } else {
+    return {
+      title: 'Not found',
+      description: 'Page Not found',
+    };
+  }
 }
 
 const Page = async ({
@@ -62,6 +70,10 @@ const Page = async ({
   };
 }) => {
   const { content, readingTime, meta } = await getPageContent(params.slug);
+
+  if (!content || !meta) {
+    return <Error />;
+  }
 
   return (
     <section className="py-5 md:py-10 w-full flex justify-center flex-col">

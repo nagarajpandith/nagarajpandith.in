@@ -49,7 +49,7 @@ const BlogCard = ({
             <span className="w-20 md:w-24 uppercase md:text-left text-center">
               {month} {day}, {year}
             </span>
-            <div className="flex gap-1 overflow-x-auto w-full">
+            <div className="flex gap-1 no-scrollbar overflow-x-auto w-full">
               {tags.slice(0, 4).map((tag, i) => (
                 <span
                   key={i}

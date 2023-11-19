@@ -23,19 +23,26 @@ export interface Post {
 export const getPostBySlug = async (slug: string) => {
   const realSlug = slug.replace(/\.mdx$/, '');
   const filePath = path.join(rootDirectory, `${realSlug}.mdx`);
+  let fileContent = '';
+  try {
+    fileContent = fs.readFileSync(filePath, { encoding: 'utf8' });
+    const { frontmatter, content } = await compileMDX({
+      source: fileContent,
+      options: { parseFrontmatter: true },
+    });
 
-  const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' });
-
-  const { frontmatter, content } = await compileMDX({
-    source: fileContent,
-    options: { parseFrontmatter: true },
-  });
-
-  return {
-    meta: { ...frontmatter, slug: realSlug } as Meta,
-    content,
-    readingTime: readingTime(fileContent),
-  };
+    return {
+      meta: { ...frontmatter, slug: realSlug } as Meta,
+      content,
+      readingTime: readingTime(fileContent),
+    };
+  } catch (error) {
+    return {
+      meta: undefined,
+      content: '',
+      readingTime: readingTime(fileContent),
+    };
+  }
 };
 
 export const getAllPostsMeta = async () => {

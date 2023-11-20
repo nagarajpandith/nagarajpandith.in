@@ -392,3 +392,46 @@ export const mainProjectList = [
   //   tags: ['Java', 'Android Studio', 'Google VR SDK'],
   // },
 ];
+
+export const tools = [
+  {
+    name: 'Notion',
+    desc: 'The most important thing that has kept my life together since 3 years',
+    url: 'https://www.notion.so/',
+  },
+  {
+    name: 'Excalidraw',
+    desc: 'Super handy tool I use to jot down my ideas all the time',
+    url: 'https://excalidraw.com/',
+  },
+  {
+    name: 'VS Code',
+    desc: 'The best one out there! I use it all the time.',
+    url: 'https://code.visualstudio.com/',
+  },
+  {
+    name: "SynthWave'84",
+    desc: 'A Synthwave-inspired colour theme by Robb Owen',
+    url: 'https://marketplace.visualstudio.com/items?itemName=RobbOwen.synthwave-vscode',
+  },
+  {
+    name: 'Figma',
+    desc: "The tool for all things I'd like to design",
+    url: 'https://www.figma.com/',
+  },
+  {
+    name: 'Prettier',
+    desc: 'An opinionated code formatter.',
+    url: 'https://prettier.io/',
+  },
+  {
+    name: 'Blackhole',
+    desc: 'Open source music app with Spotify charts & YouTube music',
+    url: 'https://sangwan5688.github.io/',
+  },
+  {
+    name: 'YouTube',
+    desc: 'The source of 90% of my Knowledge',
+    url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+  },
+];

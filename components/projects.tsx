@@ -19,6 +19,13 @@ const Projects = () => {
             >
               <div className="bg-gray-700 flex justify-center items-center flex-col gap-4 pb-5 rounded-xl">
                 <div className="px-5 mt-5">
+                  <Image
+                    src={project.img}
+                    alt="Project Image"
+                    width={300}
+                    height={300}
+                    className='-mb-3'
+                  />
                   <h1 className="mb-1 text-secondary text-md md:text-lg font-semibold">
                     {project.name}
                   </h1>
@@ -30,7 +37,7 @@ const Projects = () => {
                 <a
                   href={project.href}
                   target="_blank"
-                  className="flex bg-white p-1 px-2 items-center text-xs md:text-sm rounded-3xl gap-1 hover:opacity-80 transition duration-300 ease-in-out"
+                  className="flex bg-white py-2 px-3 items-center text-xs md:text-sm rounded-3xl gap-1 hover:opacity-80 transition duration-300 ease-in-out"
                 >
                   <BsLink45Deg /> Check it out
                 </a>

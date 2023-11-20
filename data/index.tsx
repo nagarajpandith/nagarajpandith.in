@@ -102,18 +102,21 @@ export const projects = [
     description:
       'Multilingual Live Video conferencing built at 36hr National Hackathon.',
     href: 'https://github.com/swasthikshetty10/hackoverflow',
+    img: '/static/png/jab-we-meet.png',
   },
   {
     name: "Incridea'23",
     description:
       "Event Management & Paperless system for NMAMIT's College Fest",
     href: 'https://github.com/incridea-23/incridea-client',
+    img: '/static/png/incridea.png',
   },
   {
     name: 'Live-stream Studio Booking',
     description:
       'Full-Stack Django app to book Live stream studio and manage bookings.',
     href: 'https://github.com/nagarajpandith/live-stream-studio-booking',
+    img: '/static/png/live-stream.png',
   },
 ];
 

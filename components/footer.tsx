@@ -42,6 +42,13 @@ const Footer = () => {
                       {item.name}
                     </Link>
                   ))}
+                  <a
+                    target="_blank"
+                    className="block text-base no-underline cursor-pointer hover:text-gray-300 text-gray-400 hover:underline"
+                    href="https://hashclan.notion.site/Movies-Web-Series-0a5c96b29139407b84eae8fc30922aa7?pvs=4"
+                  >
+                    Recommendations
+                  </a>
                 </div>
               </div>
             </div>

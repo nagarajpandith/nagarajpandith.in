@@ -39,7 +39,6 @@ export const footerLinks = {
     { name: 'Resume', href: '/static/pdf/Resume.pdf' },
     { name: 'Guestbook', href: '/guestbook' },
     { name: 'Tools', href: '/tools' },
-    { name: 'Recommendations', href: '/binge' },
   ],
   social: [
     {
@@ -102,7 +101,7 @@ export const projects = [
     description:
       'Multilingual Live Video conferencing built at 36hr National Hackathon.',
     href: 'https://github.com/swasthikshetty10/hackoverflow',
-    img: '/static/png/jab-we-meet.png',
+    img:'/static/png/jab-we-meet.png'
   },
   {
     name: "Incridea'23",

@@ -1,6 +1,6 @@
 # nagarajpandith.in
 
-<img src="https://github.com/nagarajpandith/portfolio/assets/83623339/dfd79128-75e7-45b2-8aae-b11763f7e166" width="50px"/>
+<img src="https://github.com/nagarajpandith/portfolio/assets/83623339/aa49a416-48a8-475c-bf50-ad222ebd6088" width="50px"/>
 
 **Personal Website - Portfolio, Blog, Guestbook & more!**
 
@@ -34,7 +34,7 @@
 
 Follows all web standards, a **100** score on all Lighthouse metrics!
 
-<img src="https://github.com/nagarajpandith/portfolio/assets/83623339/755cf950-22ec-463d-a0b9-b739806fe105" width="500px"/>
+<img src="https://github.com/nagarajpandith/portfolio/assets/83623339/62349bb4-5823-41ad-a931-6232162ef931" width="500px"/>
 
 ## ⚙️ Local Setup
 1. Clone the repo

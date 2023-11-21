@@ -18,16 +18,16 @@ const AboutInfo = () => {
         <div>
           <div className="flex flex-col">
             <div className="flex flex-col md:flex-row items-center gap-0 md:gap-2">
-              <a className="text-2xl text-secondary font-semibold">
+              <h1 className="text-2xl text-secondary font-semibold">
                 Nagaraj Pandith
-              </a>
-              <a className="font-thin text-gray-300">IPA /naːɡaraːdʒ paɳɖit̪/</a>
+              </h1>
+              <p className="font-thin text-gray-300">IPA /naːɡaraːdʒ paɳɖit̪/</p>
             </div>
-            <a className="font-thin text-sm text-gray-300 text-center md:text-left">
+            <p className="font-thin text-sm text-gray-300 text-center md:text-left">
               also known as{' '}
               <span className="underline underline-offset-2">hashclan</span> on
               the internet.
-            </a>
+            </p>
           </div>
 
           <p className="text-gray-300 text-sm md:text-lg mt-3">

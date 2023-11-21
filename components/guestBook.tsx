@@ -30,8 +30,8 @@ export default async function Messages() {
                 className="rounded-full"
               />
             )}
-            <a className="text-sm md:text-md">{post.user.name}</a>
-            <a className="hidden md:block">•</a>
+            <p className="text-sm md:text-md">{post.user.name}</p>
+            <p className="hidden md:block">•</p>
             <div className="font-thin text-gray-300 text-sm md:text-md">
               {new Date(post.createdAt).toLocaleString('en-US', {
                 year: 'numeric',

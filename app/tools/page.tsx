@@ -32,7 +32,7 @@ const Toolbox = () => {
               key={tool.name}
               className="flex flex-col p-3 bg-gray-800 hover:bg-gray-700 rounded-xl"
             >
-              <h4 className="text-gray-300 mt-2 text-xl font-semibold">
+              <h1 className="text-gray-300 mt-2 text-xl font-semibold">
                 <a
                   className={
                     tool.url
@@ -43,7 +43,7 @@ const Toolbox = () => {
                 >
                   {tool.name}
                 </a>
-              </h4>
+              </h1>
               <p className="text-gray-300 mt-2 text-sm">{tool.desc}</p>
             </div>
           ))}

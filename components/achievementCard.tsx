@@ -25,9 +25,8 @@ const AchievementCard = ({
         <div className="p-4 sm:p-6">
           <time className="block text-xs text-white/90">{date}</time>
 
-          <a>
-            <h1 className="mt-0.5 text-md text-white">{title}</h1>
-          </a>
+          <h1 className="mt-0.5 text-md text-white">{title}</h1>
+
           {/* 
           <p className="mt-2 line-clamp-3 text-sm/relaxed text-white/95">
             {desc}

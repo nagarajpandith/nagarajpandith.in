@@ -8,9 +8,10 @@
 
 - [✨ Features](#features)
 - [🛠️ Built with](#built-with)
+- [⚙️ Local Setup](#local-setup)
+- [🚀 Building](#building-and-running-for-production)
 - [🎨 Color Reference](#color-reference)
 - [📃 License](#license)
-- [🚀 Building](#building-and-running-for-production)
 - [👨🏼‍💻 Author Info](#author-info)
 
 ## Features
@@ -36,7 +37,7 @@ Follows all web standards, a **100** score on all Lighthouse metrics!
 
 <img src="https://github.com/nagarajpandith/portfolio/assets/83623339/62349bb4-5823-41ad-a931-6232162ef931" width="500px"/>
 
-## ⚙️ Local Setup
+## Local Setup
 1. Clone the repo
 
    ```sh

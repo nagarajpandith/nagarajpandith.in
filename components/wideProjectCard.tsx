@@ -36,9 +36,9 @@ const WideProjectCard = ({
       <div className="w-full md:w-1/2 h-fit bg-gray-700 transition shadow-xl rounded-xl hover:animate-background hover:bg-gradient-to-r from-gray-700 via-gray-500 to-gray-700 p-0.5 hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s]">
         <div className="flex flex-1 flex-col justify-between">
           <div className="p-4 sm:p-6">
-            <h3 className="font-bold text-md lg:text-lg text-secondary line-clamp-1">
+            <h1 className="font-bold text-md lg:text-lg text-secondary line-clamp-1">
               {title}
-            </h3>
+            </h1>
 
             <div className="py-2 w-fit flex flex-wrap items-center justify-start gap-1 text-xs font-bold text-white">
               {tags.map((tag, i) => (

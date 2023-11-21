@@ -29,7 +29,7 @@ const Projects = () => {
                   <h1 className="mb-1 text-secondary text-md md:text-lg font-semibold">
                     {project.name}
                   </h1>
-                  <p className="text-gray-400 text-xs md:text-sm">
+                  <p className="text-white text-xs md:text-sm">
                     {project.description}
                   </p>
                 </div>

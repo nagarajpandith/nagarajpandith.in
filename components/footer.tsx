@@ -16,12 +16,11 @@ const Footer = () => {
                 <h1 className="text-sm font-semibold tracking-wider uppercase text-white">
                   Main Links
                 </h1>
-                <div role="list" className="mt-4 space-y-4">
+                <div className="mt-4 space-y-4">
                   {footerLinks.primary.map((item) => (
                     <Link
                       key={item.name}
                       href={item.href}
-                      role='listitem'
                       className="block text-base no-underline cursor-pointer hover:text-gray-300 text-gray-400 hover:underline"
                     >
                       {item.name}
@@ -33,7 +32,7 @@ const Footer = () => {
                 <h1 className="text-sm font-semibold tracking-wider uppercase text-white">
                   Others
                 </h1>
-                <div role="list" className="mt-4 space-y-4">
+                <div className="mt-4 space-y-4">
                   {footerLinks.secondary.map((item) => (
                     <Link
                       key={item.name}
@@ -55,9 +54,9 @@ const Footer = () => {
             </div>
           </div>
           <div className="shadow-2xl col-span-2 mt-8 xl:mt-0 text-center bg-gray-800 flex justify-center items-center p-5 flex-col rounded-xl">
-            <h3 className="tracking-wider text-white text-lg">
+            <h1 className="tracking-wider text-white text-lg">
               Hi! Thanks for visiting my site.
-            </h3>
+            </h1>
             <div className="mt-4 text-gray-400">
               Sign my{' '}
               <Link href={'/guestbook'} className="underline text-secondary underline-offset-4">

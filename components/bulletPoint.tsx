@@ -38,7 +38,7 @@ const BulletPoint = ({
         </div>
       )}
       <div className="mt-3 sm:pe-8">
-        <h3 className="text-lg font-semibold text-white">
+        <h1 className="text-lg font-semibold text-white">
           {role && (
             <a
               href={link ? link : href}
@@ -55,7 +55,7 @@ const BulletPoint = ({
           >
             {name}
           </a>
-        </h3>
+        </h1>
         <time className="block my-1 text-sm font-normal leading-none text-gray-500">
           {dateRange}
         </time>

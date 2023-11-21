@@ -20,7 +20,7 @@ const VolunteerCard = ({
       />
 
       <div className="bg-gray-800 p-4 sm:p-6">
-        <h3 className="mt-0.5 text-md text-white">{title}</h3>
+        <h1 className="mt-0.5 text-md text-white">{title}</h1>
         <p className="text-sm/relaxed text-gray-500">{desc}</p>
         {title.includes('more') && (
           <a

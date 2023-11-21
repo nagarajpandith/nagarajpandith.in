@@ -13,14 +13,15 @@ const Footer = () => {
           <div className="grid grid-cols-2 gap-8 xl:col-span-2">
             <div className="md:grid md:grid-cols-2 md:gap-8">
               <div>
-                <h3 className="text-sm font-semibold tracking-wider uppercase text-white">
+                <h1 className="text-sm font-semibold tracking-wider uppercase text-white">
                   Main Links
-                </h3>
+                </h1>
                 <div role="list" className="mt-4 space-y-4">
                   {footerLinks.primary.map((item) => (
                     <Link
                       key={item.name}
                       href={item.href}
+                      role='listitem'
                       className="block text-base no-underline cursor-pointer hover:text-gray-300 text-gray-400 hover:underline"
                     >
                       {item.name}
@@ -29,9 +30,9 @@ const Footer = () => {
                 </div>
               </div>
               <div className="mt-12 md:mt-0">
-                <h3 className="text-sm font-semibold tracking-wider uppercase text-white">
+                <h1 className="text-sm font-semibold tracking-wider uppercase text-white">
                   Others
-                </h3>
+                </h1>
                 <div role="list" className="mt-4 space-y-4">
                   {footerLinks.secondary.map((item) => (
                     <Link
@@ -54,12 +55,12 @@ const Footer = () => {
             </div>
           </div>
           <div className="shadow-2xl col-span-2 mt-8 xl:mt-0 text-center bg-gray-800 flex justify-center items-center p-5 flex-col rounded-xl">
-            <h3 className="tracking-wider text-white">
+            <h3 className="tracking-wider text-white text-lg">
               Hi! Thanks for visiting my site.
             </h3>
             <div className="mt-4 text-gray-400">
               Sign my{' '}
-              <Link href={'/guestbook'} className="hover:underline text-white">
+              <Link href={'/guestbook'} className="underline text-secondary underline-offset-4">
                 Guestbook
               </Link>{' '}
               and let me know what you think.

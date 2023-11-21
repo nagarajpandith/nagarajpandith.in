@@ -6,22 +6,35 @@
 
 ## Table of Contents
 
+- [✨ Features](#features)
 - [🛠️ Built with](#built-with)
-- [📄 Pages & API Routes](#pages-and-api-routes)
 - [🎨 Color Reference](#color-reference)
 - [📃 License](#license)
 - [🚀 Building](#building-and-running-for-production)
 - [👨🏼‍💻 Author Info](#author-info)
 
+## Features
+- Simple, Minimal & Fast Rendering with Server Components
+- SEO Optimised along with dynamic sitemap, valid robots.txt and OpenGraph tags
+- GuestBook with Server Actions & Vercel Postgres
+- MDX Powered blog pages
+- Dynamic OG Image Generation for Blogs
+- Dynamic RSS Feed generator
+
 ## Built with
-- [Next.js]() - 
+- [Next 14 (App Router)](https://nextjs.org/)
+- [Typescript](https://www.typescriptlang.org/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres)
+- [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote)
+- [Prisma ORM](https://www.prisma.io/)
+- [next-auth](https://authjs.dev/)
+- [tailwindcss-animated](https://www.tailwindcss-animated.com/)
+- [rss](https://github.com/dylang/node-rss)
 
 Follows all web standards, a **100** score on all Lighthouse metrics!
 
 <img src="https://github.com/nagarajpandith/portfolio/assets/83623339/755cf950-22ec-463d-a0b9-b739806fe105" width="500px"/>
-
-## Pages and API Routes
-- [/]()
 
 ## ⚙️ Local Setup
 1. Clone the repo
@@ -71,6 +84,7 @@ Follows all web standards, a **100** score on all Lighthouse metrics!
 Apache License 2.0
 
 Copyright (c) [2023] [Nagaraj Pandith]
+
 Refer [License file](https://github.com/nagarajpandith/portfolio/blob/main/LICENSE) for more info
 
 ## Author Info

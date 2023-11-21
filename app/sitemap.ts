@@ -45,12 +45,6 @@ export default async function sitemap() {
       changeFrequency: 'yearly',
       priority: 0.5,
     },
-    {
-      url: `${baseUrl}/binge`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
     ...postUrls,
   ];
 }

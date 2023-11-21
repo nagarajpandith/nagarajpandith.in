@@ -25,12 +25,12 @@ const Navbar = () => {
             className="flex gap-3 items-center text-white font-semibold"
           >
             <div className="relative w-30 h-30">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary to-secondary rounded-lg filter blur-lg opacity-70 animate-slow-glow"></div>
+              <div className="absolute inset-0 bg-gray-800 rounded-lg filter blur-lg animate-slow-glow"></div>
               <Image
                 src="/static/png/logo.png"
                 alt="Logo - NP"
-                width={30}
-                height={30}
+                width={40}
+                height={40}
                 className="relative z-10 animate-jump"
                 priority
               />

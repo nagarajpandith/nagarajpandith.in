@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { PageTransition } from '@/components/pageTransition';
-import { Next13NProgress } from 'nextjs13-progress';
+import Providers from './providers';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -36,7 +36,7 @@ const metadata: Metadata = {
     ],
     locale: 'en-US',
     type: 'website',
-  }
+  },
 };
 
 export { metadata };
@@ -49,12 +49,13 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} bg-gray-900 mx-auto`}>
-        <Next13NProgress color="#E508C1" height={2} />
         <Navbar />
         <main
           className={`flex flex-col mx-auto max-w-6xl justify-center px-4 pt-5`}
         >
-          <PageTransition>{children}</PageTransition>
+          <PageTransition>
+            <Providers>{children}</Providers>
+          </PageTransition>
         </main>
         <Footer />
       </body>

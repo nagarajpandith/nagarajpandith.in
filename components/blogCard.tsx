@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Link } from 'nextjs13-progress';
+import Link from 'next/link';
 import { ReadTimeResults } from 'reading-time';
 
 const BlogCard = ({

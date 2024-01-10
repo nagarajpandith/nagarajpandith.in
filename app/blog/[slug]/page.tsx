@@ -1,7 +1,7 @@
 import Clipboard from '@/components/clipboard';
 import Error from '@/components/error';
 import { getPostBySlug } from '@/lib/mdx';
-import { Link } from 'nextjs13-progress';
+import Link from 'next/link';
 import { FaFacebook } from 'react-icons/fa6';
 import { FaArrowRight, FaArrowLeft } from 'react-icons/fa6';
 

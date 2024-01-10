@@ -15,7 +15,7 @@
     "next": "14.0.4",
     "next-auth": "^4.24.5",
     "next-mdx-remote": "^4.4.1",
-    "nextjs13-progress": "^1.2.5",
+    "next13-progressbar": "^1.1.3",
     "prisma": "^5.8.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",

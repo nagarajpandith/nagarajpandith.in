@@ -1,4 +1,4 @@
-import { Link } from 'nextjs13-progress';
+import Link from 'next/link';
 import { footerLinks } from '@/data/index';
 import { IoLogoRss } from 'react-icons/io5';
 import { FaSitemap } from 'react-icons/fa';
@@ -59,7 +59,10 @@ const Footer = () => {
             </h1>
             <div className="mt-4 text-gray-400">
               Sign my{' '}
-              <Link href={'/guestbook'} className="underline text-secondary underline-offset-4">
+              <Link
+                href={'/guestbook'}
+                className="underline text-secondary underline-offset-4"
+              >
                 Guestbook
               </Link>{' '}
               and let me know what you think.

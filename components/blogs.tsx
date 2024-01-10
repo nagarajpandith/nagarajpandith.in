@@ -1,4 +1,4 @@
-import { Link } from 'nextjs13-progress';
+import Link from 'next/link';
 import BlogCard from './blogCard';
 import { HiChevronDoubleRight } from 'react-icons/hi';
 import { getAllPostsMeta } from '@/lib/mdx';

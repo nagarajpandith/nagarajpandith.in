@@ -1,6 +1,6 @@
 import { projects } from '@/data/index';
 import { BsLink45Deg } from 'react-icons/bs';
-import { Link } from 'nextjs13-progress';
+import Link from 'next/link';
 import { HiChevronDoubleRight } from 'react-icons/hi';
 import Image from 'next/image';
 
@@ -24,7 +24,7 @@ const Projects = () => {
                     alt="Project Image"
                     width={300}
                     height={300}
-                    className='-mb-3'
+                    className="-mb-3"
                   />
                   <h1 className="mb-1 text-secondary text-md md:text-lg font-semibold">
                     {project.name}

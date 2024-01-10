@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Link } from 'nextjs13-progress';
+import Link from 'next/link';
 import { HiChevronDoubleRight } from 'react-icons/hi';
 import { skills } from '@/data/index';
 

@@ -270,7 +270,7 @@ export const education = [
     name: 'N.M.A.M.I.T.',
     role: 'B.E., Computer Science & Engineering',
     dateRange: '2020-2024',
-    description: 'CGPA: 8.95/10.00',
+    description: 'CGPA: 9.13/10.00',
     href: 'https://nmamit.nitte.edu.in/',
   },
   {

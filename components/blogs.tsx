@@ -24,7 +24,7 @@ export default async function Blogs() {
       ))}
       <div className="flex items-center justify-center">
         <Link
-          href="/work"
+          href="/blog"
           className="bg-primary w-fit text-sm text-white px-5 py-2 rounded-full mt-5 hover:opacity-80 transition duration-300 ease-in-out group"
         >
           Checkout more blogs

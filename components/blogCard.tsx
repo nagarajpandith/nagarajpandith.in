@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { FaBookOpen, FaPencilAlt } from 'react-icons/fa';
+import { IoEyeSharp } from 'react-icons/io5';
 import { ReadTimeResults } from 'reading-time';
+import { GetPageView } from './getpageview';
 
 const BlogCard = ({
   title,
@@ -65,8 +68,17 @@ const BlogCard = ({
             <p className="line-clamp-3 text-sm/relaxed text-gray-300">{desc}</p>
           </Link>
 
-          <div className="mt-3 text-gray-300 text-xs">
-            {readingTime.text} | {readingTime.words} words
+          <div className="mt-3 text-gray-300 text-xs flex gap-2 items-center">
+            <GetPageView slug={slug} />|{' '}
+            <span className="inline-flex items-center gap-1">
+              <FaBookOpen />
+              {readingTime.text}
+            </span>{' '}
+            |{' '}
+            <span className="inline-flex items-center gap-1">
+              <FaPencilAlt />
+              {readingTime.words} words
+            </span>
           </div>
         </div>
       </div>

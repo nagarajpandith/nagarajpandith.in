@@ -8,6 +8,7 @@ import { ReportView } from '@/components/pageviews';
 import { FaPencilAlt } from 'react-icons/fa';
 import { IoEyeSharp } from 'react-icons/io5';
 import redis from '@/lib/redis';
+import SlotCounter from 'react-slot-counter';
 
 const getPageContent = async (slug: string) => {
   const { meta, content, readingTime } = await getPostBySlug(slug);
@@ -95,7 +96,16 @@ const Page = async ({
           <a className="text-sm text-gray-300 mb-5 no-underline flex items-center gap-2">
             <span className="inline-flex items-center gap-1">
               <IoEyeSharp />
-              {views} views
+              <SlotCounter
+                value={views}
+                duration={2}
+                animateOnVisible={{
+                  triggerOnce: true,
+                  rootMargin: '0px 0px -100px 0px',
+                }}
+                startValue={0}
+              />
+              views
             </span>{' '}
             |{' '}
             <span className="inline-flex items-center gap-1">

@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { FaBookOpen, FaPencilAlt } from 'react-icons/fa';
 import { IoEyeSharp } from 'react-icons/io5';
 import { ReadTimeResults } from 'reading-time';
+import SlotCounter from 'react-slot-counter';
 
 const BlogCard = ({
   title,
@@ -72,7 +73,16 @@ const BlogCard = ({
           <div className="mt-3 text-gray-300 text-xs flex gap-2 items-center">
             <span className="inline-flex items-center gap-1">
               <IoEyeSharp />
-              {views} views
+              <SlotCounter
+                value={views}
+                duration={2}
+                animateOnVisible={{
+                  triggerOnce: true,
+                  rootMargin: '0px 0px -100px 0px',
+                }}
+                startValue={0}
+              />
+              views
             </span>
             |{' '}
             <span className="inline-flex items-center gap-1">

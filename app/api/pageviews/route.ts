@@ -3,6 +3,13 @@ import redis from '../../../lib/redis';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest): Promise<NextResponse> {
+  if (!redis) {
+    return NextResponse.json(
+      { error: 'Redis connection failed' },
+      { status: 500 }
+    );
+  }
+  
   if (req.headers.get('Content-Type') !== 'application/json') {
     return new NextResponse('must be json', { status: 400 });
   }

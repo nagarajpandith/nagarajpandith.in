@@ -2,9 +2,22 @@ import Link from 'next/link';
 import BlogCard from './blogCard';
 import { HiChevronDoubleRight } from 'react-icons/hi';
 import { getAllPostsMeta } from '@/lib/mdx';
+import redis from '@/lib/redis';
 
 export default async function Blogs() {
   const posts = await getAllPostsMeta();
+
+  const keys = posts
+    .slice(0, 2)
+    .map((post) => ['pageviews', 'blogs', post.meta.slug].join(':'));
+
+  const viewCounts = await redis.mget<number[]>(...keys);
+
+  const views = viewCounts.reduce((acc, viewCount, index) => {
+    acc[posts[index].meta.slug] = viewCount ?? 0;
+    return acc;
+  }, {} as Record<string, number>);
+
   return (
     <div className="my-20 bg-gray-800 rounded-xl p-5 flex gap-5 flex-col">
       <h1 className="text-white text-xl md:text-2xl font-bold text-center">
@@ -20,6 +33,7 @@ export default async function Blogs() {
           image={post.meta.coverImage}
           slug={post.meta.slug}
           readingTime={post.readingTime}
+          views={views[post.meta.slug]}
         />
       ))}
       <div className="flex items-center justify-center">

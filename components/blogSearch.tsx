@@ -4,7 +4,13 @@ import { Post } from '@/lib/mdx';
 import BlogCard from './blogCard';
 import { useState } from 'react';
 
-const BlogSearch = ({ posts }: { posts: Post[] }) => {
+const BlogSearch = ({
+  posts,
+  views,
+}: {
+  posts: Post[];
+  views: Record<string, number>;
+}) => {
   const [query, setQuery] = useState('');
   return (
     <>
@@ -33,6 +39,7 @@ const BlogSearch = ({ posts }: { posts: Post[] }) => {
             image={post.meta.coverImage}
             slug={post.meta.slug}
             readingTime={post.readingTime}
+            views={views[post.meta.slug]}
           />
         ))}
     </>

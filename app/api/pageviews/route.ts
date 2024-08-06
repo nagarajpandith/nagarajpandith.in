@@ -39,19 +39,3 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   await redis.incr(['pageviews', 'blogs', slug].join(':'));
   return new NextResponse(null, { status: 202 });
 }
-
-export async function GET(req: NextRequest): Promise<NextResponse> {
-  if (req.headers.get('Content-Type') !== 'application/json') {
-    return new NextResponse('must be json', { status: 400 });
-  }
-  const slug = req.nextUrl.searchParams.get('slug');
-
-  if (!slug) {
-    return new NextResponse('Slug not found', { status: 400 });
-  }
-
-  const views =
-    (await redis.get<number>(['pageviews', 'blogs', slug].join(':'))) ?? 0;
-
-  return new NextResponse(JSON.stringify({ views }), { status: 200 });
-}

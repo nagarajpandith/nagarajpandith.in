@@ -1,14 +1,13 @@
 import Clipboard from '@/components/clipboard';
 import Error from '@/components/error';
 import { getPostBySlug } from '@/lib/mdx';
-import redis from '@/lib/redis';
 import Link from 'next/link';
 import { FaFacebook } from 'react-icons/fa6';
 import { FaArrowRight, FaArrowLeft, FaBookOpen } from 'react-icons/fa6';
 import { ReportView } from '@/components/pageviews';
-import { IoEyeSharp } from 'react-icons/io5';
 import { FaPencilAlt } from 'react-icons/fa';
-import { GetPageView } from '@/components/getpageview';
+import { IoEyeSharp } from 'react-icons/io5';
+import redis from '@/lib/redis';
 
 const getPageContent = async (slug: string) => {
   const { meta, content, readingTime } = await getPostBySlug(slug);
@@ -80,6 +79,10 @@ const Page = async ({
     return <Error />;
   }
 
+  const views =
+    (await redis.get<number>(['pageviews', 'blogs', params.slug].join(':'))) ??
+    0;
+
   return (
     <section className="py-5 md:py-10 w-full flex justify-center flex-col">
       <ReportView slug={params.slug} />
@@ -90,7 +93,11 @@ const Page = async ({
 
         <div className="mt-3 flex justify-between">
           <a className="text-sm text-gray-300 mb-5 no-underline flex items-center gap-2">
-            <GetPageView slug={params.slug} /> |{' '}
+            <span className="inline-flex items-center gap-1">
+              <IoEyeSharp />
+              {views} views
+            </span>{' '}
+            |{' '}
             <span className="inline-flex items-center gap-1">
               <FaBookOpen />
               {readingTime.text}

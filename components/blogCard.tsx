@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { FaBookOpen, FaPencilAlt } from 'react-icons/fa';
 import { IoEyeSharp } from 'react-icons/io5';
 import { ReadTimeResults } from 'reading-time';
-import { GetPageView } from './getpageview';
 
 const BlogCard = ({
   title,
@@ -13,6 +12,7 @@ const BlogCard = ({
   slug,
   readingTime,
   tags,
+  views,
 }: {
   title: string;
   desc: string;
@@ -21,6 +21,7 @@ const BlogCard = ({
   slug: string;
   readingTime: ReadTimeResults;
   tags: string[];
+  views: number;
 }) => {
   const dateObj = new Date(date);
   const year = dateObj.getFullYear();
@@ -69,7 +70,11 @@ const BlogCard = ({
           </Link>
 
           <div className="mt-3 text-gray-300 text-xs flex gap-2 items-center">
-            <GetPageView slug={slug} />|{' '}
+            <span className="inline-flex items-center gap-1">
+              <IoEyeSharp />
+              {views} views
+            </span>
+            |{' '}
             <span className="inline-flex items-center gap-1">
               <FaBookOpen />
               {readingTime.text}

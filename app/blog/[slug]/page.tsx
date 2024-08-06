@@ -9,6 +9,7 @@ import { FaPencilAlt } from 'react-icons/fa';
 import { IoEyeSharp } from 'react-icons/io5';
 import redis from '@/lib/redis';
 import SlotCounter from 'react-slot-counter';
+import CommentSection from '@/components/commentSection';
 
 const getPageContent = async (slug: string) => {
   const { meta, content, readingTime } = await getPostBySlug(slug);
@@ -137,6 +138,7 @@ const Page = async ({
           </div>
         </div>
         {content}
+        <CommentSection />
         <div className="flex justify-between">
           <Link
             href={`/blog`}

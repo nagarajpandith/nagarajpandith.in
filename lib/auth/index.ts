@@ -19,4 +19,13 @@ export const authOptions: NextAuthOptions = {
   ],
 
   adapter: PrismaAdapter(prisma) as Adapter,
+
+  callbacks: {
+    async session({ session, token }) {
+      if (session && session.user && token.sub) {
+        session.user.sub = token.sub;
+      }
+      return session;
+    },
+  },
 };

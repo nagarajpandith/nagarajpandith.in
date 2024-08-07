@@ -8,6 +8,9 @@ const CommentSection = () => {
   const { text, setText, comments, onSubmit, onDelete } = useComment();
   return (
     <>
+      <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white border-t border-gray-700 pt-5">
+        Discussion {comments?.length ? `(${comments.length})` : ''}
+      </h2>
       <SessionProvider>
         <CommentBox onSubmit={onSubmit} text={text} setText={setText} />
         <CommentList comments={comments} onDelete={onDelete} />

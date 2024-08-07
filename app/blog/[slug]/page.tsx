@@ -139,7 +139,7 @@ const Page = async ({
         </div>
         {content}
         <CommentSection />
-        <div className="flex justify-between">
+        <div className="flex justify-between mt-5">
           <Link
             href={`/blog`}
             className="border border-gray-300 rounded-xl w-fit p-2 md:p-5 flex items-center gap-2 hover:border-gray-400 text-gray-300 mb-5 no-underline"

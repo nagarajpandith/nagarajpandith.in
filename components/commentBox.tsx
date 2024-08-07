@@ -25,13 +25,6 @@ export default function CommentBox({
     return (
       <>
         <div className="mt-5 flex md:flex-row items-center gap-2 text-center">
-          <Image
-            src={session.user?.image!}
-            alt="Profile image"
-            width={25}
-            height={25}
-            className="rounded-full"
-          />
           <a className="text-sm no-underline">
             Posting as{' '}
             <span className="font-semibold">{session?.user?.name}</span>
@@ -64,13 +57,13 @@ export default function CommentBox({
               <IoSendSharp />
             </button>
           </form>
-          <div className="flex items-center justify-between my-1">
+          <div className="flex md:flex-row flex-col items-center justify-center md:justify-between my-1">
             <div className="text-right text-sm text-gray-400">
               {text.length}/{CHARACTER_LIMIT}
             </div>
-            {text.length === CHARACTER_LIMIT && (
+            {text.length >= CHARACTER_LIMIT && (
               <div className="text-red-500 text-sm">
-                Character limit reached!
+                Hold up, Shakespeare! Character limit reached.
               </div>
             )}
           </div>
@@ -80,7 +73,9 @@ export default function CommentBox({
   }
   return (
     <>
-      <div className="mt-3 mb-3">Hello! Please sign in to comment.</div>
+      <div className="mt-3 mb-3">
+        Hello! Please <b>Sign in</b> to comment.
+      </div>
       <button
         className="mb-3 bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded"
         onClick={() => signIn('google')}

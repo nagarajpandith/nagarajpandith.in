@@ -91,7 +91,9 @@ const Comment = ({
               width={24}
               height={24}
             />
-            {comment.user.name}
+            <span className="md:max-w-[300px] max-w-[100px] whitespace-nowrap text-ellipsis overflow-hidden">
+              {comment.user.name}
+            </span>
           </p>
           <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400">
             {distanceToNow(comment.created_at)}

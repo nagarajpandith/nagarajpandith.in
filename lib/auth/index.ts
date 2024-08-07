@@ -1,8 +1,8 @@
 import { NextAuthOptions } from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
-import { PrismaAdapter } from '@auth/prisma-adapter';
+import { UpstashRedisAdapter } from '@auth/upstash-redis-adapter';
+import redis from '../redis';
 import type { Adapter } from 'next-auth/adapters';
-import prisma from '@/lib/prisma';
 
 export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -18,7 +18,7 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
 
-  adapter: PrismaAdapter(prisma) as Adapter,
+  adapter: UpstashRedisAdapter(redis) as Adapter,
 
   callbacks: {
     async session({ session, token }) {

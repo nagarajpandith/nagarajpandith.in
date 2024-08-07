@@ -89,12 +89,19 @@ const Page = async ({
     <section className="py-5 md:py-10 w-full flex justify-center flex-col">
       <ReportView slug={params.slug} />
       <div className="mx-auto py-4 prose prose-invert">
-        <div className="w-fit text-right text-sm md:text-md">
-          Nagaraj Pandith • {meta.publishedDate}
+        <div className="flex justify-between items-center">
+          <div className="w-fit text-right text-xs md:text-md">
+            Nagaraj Pandith • {meta.publishedDate}
+          </div>
+          <div className="md:hidden block text-xs">
+            <Clipboard
+              text={`${process.env.NEXT_PUBLIC_BASE_URL}/blog/${params.slug}`}
+            />
+          </div>
         </div>
 
-        <div className="mt-3 flex justify-between">
-          <a className="text-sm text-gray-300 mb-5 no-underline flex items-center gap-2">
+        <div className="mt-3 flex md:justify-between md:flex-row flex-col justify-center">
+          <a className="text-xs md:text-sm text-gray-300 mb-5 no-underline flex items-center gap-2">
             <span className="inline-flex items-center gap-1">
               <IoEyeSharp />
               <SlotCounter
@@ -119,7 +126,7 @@ const Page = async ({
               {readingTime.words} words
             </span>
           </a>
-          <div className="flex gap-3 lg:gap-5">
+          <div className="gap-3 lg:gap-5 md:flex hidden">
             <a
               target="_blank"
               href={`https://twitter.com/intent/tweet?url=${process.env.NEXT_PUBLIC_BASE_URL}/blog/${params.slug}`}

@@ -25,6 +25,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
     await redis.lrem(referer, 0, JSON.stringify(comment));
+    return NextResponse.json({ message: 'Comment deleted' }, { status: 200 });
   } catch (error) {
     return NextResponse.json(
       { error: 'Unexpected error occurred.' },

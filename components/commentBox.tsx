@@ -27,7 +27,9 @@ export default function CommentBox({
         <div className="mt-5 flex md:flex-row items-center gap-2 text-center">
           <a className="text-sm no-underline">
             Posting as{' '}
-            <span className="font-semibold">{session?.user?.name}</span>
+            <span className="font-semibold truncate">
+              {session?.user?.name}
+            </span>
           </a>
           <button
             className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-1 px-2 rounded"
@@ -57,12 +59,16 @@ export default function CommentBox({
               <IoSendSharp />
             </button>
           </form>
-          <div className="flex md:flex-row flex-col items-center justify-center md:justify-between my-1">
-            <div className="text-right text-sm text-gray-400">
+          <div className="flex flex-col items-start md:flex-row justify-between my-1">
+            <div
+              className={`text-right text-sm text-gray-400 ${
+                text.length >= CHARACTER_LIMIT && 'text-red-500'
+              }`}
+            >
               {text.length}/{CHARACTER_LIMIT}
             </div>
             {text.length >= CHARACTER_LIMIT && (
-              <div className="text-red-500 text-sm">
+              <div className="text-red-500 text-sm md:block hidden">
                 Hold up, Shakespeare! Character limit reached.
               </div>
             )}

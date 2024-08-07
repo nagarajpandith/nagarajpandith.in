@@ -23,7 +23,9 @@ const AuthInfo = () => {
             />
             <a className="text-sm md:text-md lg:text-lg">
               Posting as{' '}
-              <span className="font-semibold">{data?.user?.name}</span>
+              <span className="font-semibold md:max-w-[300px] max-w-[100px] whitespace-nowrap text-ellipsis overflow-hidden">
+                {data?.user?.name}
+              </span>
             </a>
             <button
               className="bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded"
@@ -36,7 +38,7 @@ const AuthInfo = () => {
         </>
       ) : (
         <>
-          <div className='mt-3 mb-3'>Hello Guest! Please log in.</div>
+          <div className="mt-3 mb-3">Hello Guest! Please log in.</div>
           <button
             className="mb-3 bg-gray-800 hover:bg-gray-700 text-white py-2 px-4 rounded"
             onClick={() => signIn('google')}

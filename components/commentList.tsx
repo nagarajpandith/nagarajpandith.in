@@ -36,6 +36,13 @@ const CommentList = ({ comments, onDelete }: CommentListProps) => {
   const user = session?.user;
   return (
     <div className="flex flex-col items-center justify-start w-full">
+      {comments?.length === 0 && (
+        <div className="shadow-2xl col-span-2 mt-4 text-center bg-gray-800 flex justify-center items-center p-5 flex-col rounded-xl w-full">
+          <h1 className="md:text-md text-xs font-thin">
+            No comments yet. Be the first to comment.
+          </h1>
+        </div>
+      )}
       {comments &&
         comments.map((comment, i) => {
           const isAuthor = user && user.sub === comment.user.sub;

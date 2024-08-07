@@ -58,7 +58,7 @@ const BlogCard = ({
               {tags.slice(0, 4).map((tag, i) => (
                 <span
                   key={i}
-                  className="block text-xs md:text-sm text-gray-300 bg-gray-600 px-2 py-1 rounded-xl"
+                  className="block text-xs md:text-sm text-gray-300 bg-gray-600 px-2 py-1 rounded-xl max-w-fit whitespace-nowrap"
                 >
                   {tag}
                 </span>
@@ -82,7 +82,7 @@ const BlogCard = ({
                 }}
                 startValue={0}
               />
-              views
+              <span className="hidden md:inline">views</span>
             </span>
             |{' '}
             <span className="inline-flex items-center gap-1">

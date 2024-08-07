@@ -22,6 +22,11 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           <Link
             href={'/'}
+            onClick={() => {
+              if (isOpen) {
+                setIsOpen(!isOpen);
+              }
+            }}
             className="flex gap-3 items-center text-white font-semibold"
           >
             <div className="relative w-30 h-30">
@@ -77,6 +82,9 @@ const Navbar = () => {
             <Link
               key={index}
               href={link.href}
+              onClick={() => {
+                if (isOpen) setIsOpen(false);
+              }}
               className={`${
                 isActiveLink(link.href)
                   ? 'underline decoration-primary underline-offset-4 text-white'

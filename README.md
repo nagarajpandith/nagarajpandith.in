@@ -17,8 +17,8 @@
 ## Features
 - Simple, Minimal & Fast Rendering with Server Components
 - SEO Optimised along with dynamic sitemap, valid robots.txt and OpenGraph tags
-- GuestBook with Server Actions & Vercel Postgres
-- MDX Powered blog pages
+- GuestBook with Upstash's Managed Redis
+- MDX Powered blog pages with viewcounter & functional Comments section
 - Dynamic OG Image Generation for Blogs
 - Dynamic RSS Feed generator
 
@@ -26,9 +26,8 @@
 - [Next 14 (App Router)](https://nextjs.org/)
 - [Typescript](https://www.typescriptlang.org/)
 - [TailwindCSS](https://tailwindcss.com/)
-- [Vercel Postgres](https://vercel.com/docs/storage/vercel-postgres)
+- [Upstash Redis](https://upstash.com/)
 - [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote)
-- [Prisma ORM](https://www.prisma.io/)
 - [next-auth](https://authjs.dev/)
 - [tailwindcss-animated](https://www.tailwindcss-animated.com/)
 - [rss](https://github.com/dylang/node-rss)

@@ -101,7 +101,7 @@ export const projects = [
     description:
       'Multilingual Live Video conferencing built at 36hr National Hackathon.',
     href: 'https://github.com/swasthikshetty10/hackoverflow',
-    img:'/static/png/jab-we-meet.png'
+    img: '/static/png/jab-we-meet.png',
   },
   {
     name: "Incridea'23",
@@ -242,6 +242,16 @@ export const volunteering = [
 
 export const experiences = [
   {
+    role: 'Software Engineer - I',
+    name: 'Wipfli India LLP',
+    dateRange: 'June 2024 - Present',
+    description: `• Microsoft Dynamics 365, Dataverse
+    • Power Platform, Javascript`,
+    href: 'https://www.wipfli.com/',
+    // link: '/static/pdf/Forent_Letter.pdf',
+    img: '/static/png/wipfli.jpeg',
+  },
+  {
     role: 'Software Engineering Intern',
     name: 'Forent Co., Ltd.',
     dateRange: 'Nov 2022 - Jan 2023',
@@ -256,7 +266,7 @@ export const experiences = [
     role: 'Software Development Intern',
     name: 'Inspirante Technologies Pvt. Ltd.',
     dateRange: 'Nov 2021 - May 2022',
-    description: `• Revamped the Finite Loop Club website using Next.js, Prisma, tRPC, TypeScript, & MySQL. 
+    description: `• Revamped the Finite Loop Club website using Next.js, Prisma, tRPC, TypeScript, & MySQL.
     • Developed a featurerich community platform with customizable user profiles, digital certificates, and admin panel.
     • Contributed to the development of Edu-tech web portal [LMS] as part of a collaborative team.`,
     href: 'https://inspirantech.in/',

@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import TypeWriting from './typeWriting';
 
 const AboutInfo = () => {
   return (
@@ -30,6 +31,10 @@ const AboutInfo = () => {
             </p>
           </div>
 
+          <div className="text-gray-300 text-sm md:text-lg mt-5">
+            I do everything 'Digital'. I <TypeWriting />
+          </div>
+
           <p className="text-gray-300 text-sm md:text-lg mt-3">
             Hi there! I&apos;m Nagaraj Pandith.{' '}
             {new Date().getFullYear() -
@@ -37,7 +42,8 @@ const AboutInfo = () => {
               (new Date().getMonth() < 11 ? 1 : 0)}{' '}
             year old self-driven Full Stack Web developer from Karnataka, India.
             I&apos;m proficient in building responsive and scalable web
-            applications using modern tools and frameworks. I&apos;m working full-time as a Software Engineer at{' '}
+            applications using modern tools and frameworks. I&apos;m working
+            full-time as a Software Engineer at{' '}
             <a
               className="underline underline-offset-2 hover:text-white"
               href="https://www.wipfli.com/about-wipfli/locations/india/in-bengaluru-main-office"

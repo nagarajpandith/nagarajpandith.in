@@ -16,9 +16,9 @@ export async function GET(request: Request) {
     const title =
       rawTitle?.length! > 50 ? rawTitle?.slice(0, 50) + '...' : rawTitle;
 
-    const fontData = await fetch(
-      new URL('../../../public/fonts/Inter-Bold.ttf', import.meta.url)
-    ).then((res) => res.arrayBuffer());
+    // const fontData = await fetch(
+    //   new URL('../../../public/fonts/Inter-Bold.ttf', import.meta.url)
+    // ).then((res) => res.arrayBuffer());
 
     const imageData = await fetch(
       new URL('../../../public/static/png/logo.png', import.meta.url)
@@ -38,7 +38,7 @@ export async function GET(request: Request) {
     return new ImageResponse(
       (
         <div
-          style={{ fontFamily: 'Inter' }}
+          // style={{ fontFamily: 'Inter' }}
           tw="relative bg-black border border-[#20DBFE] flex flex-col w-full h-full items-center justify-between"
         >
           <img
@@ -60,7 +60,9 @@ export async function GET(request: Request) {
             />
           </div>
           <h2 tw="mb-20 flex flex-col font-bold tracking-tight text-gray-900 text-left">
-            <span style={{ fontFamily: 'Inter' }} tw="text-white text-4xl">
+            <span 
+            // style={{ fontFamily: 'Inter' }} 
+            tw="text-white text-4xl">
               {title}
             </span>
             {date && readingTime && (
@@ -74,13 +76,13 @@ export async function GET(request: Request) {
       {
         width: 1200,
         height: 630,
-        fonts: [
-          {
-            name: 'Inter',
-            data: fontData,
-            style: 'normal',
-          },
-        ],
+        // fonts: [
+        //   {
+        //     name: 'Inter',
+        //     data: fontData,
+        //     style: 'normal',
+        //   },
+        // ],
       }
     );
   } catch (error) {

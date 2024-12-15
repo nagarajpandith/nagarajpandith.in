@@ -33,7 +33,7 @@ const BlogCard = ({
 
   return (
     <div className="flex flex-col md:flex-row bg-gray-700 transition shadow-xl rounded-xl hover:animate-background hover:bg-gradient-to-r from-gray-700 via-gray-500 to-gray-700 p-0.5 hover:bg-[length:400%_400%] hover:shadow-sm hover:[animation-duration:_4s]">
-      <div>
+      <div className="flex-shrink-0">
         <Link href={`/blog/${slug}`}>
           <Image
             alt="Blog Image"
@@ -45,7 +45,7 @@ const BlogCard = ({
         </Link>
       </div>
 
-      <div className="flex flex-1 flex-col justify-between">
+      <div className="flex flex-1 flex-col justify-between overflow-hidden">
         <div className="p-4 sm:p-6">
           <Link href={`/blog/${slug}`}>
             <h1 className="font-bold text-secondary line-clamp-1">{title}</h1>

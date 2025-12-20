@@ -1,0 +1,84 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+---
+
+<header class="sticky top-0 z-50 backdrop-blur-md border-b" style="background-color: rgba(0, 0, 0, 0.8); border-color: rgba(255, 255, 255, 0.1);">
+  <nav class="container mx-auto px-4 py-4 flex items-center justify-between max-w-6xl">
+    <!-- Logo / Name -->
+    <a href="/" class="heading-handwritten no-underline hover:opacity-80 transition-opacity" style="font-size: 1.5rem;">
+      nagaraj pandith
+    </a>
+    
+    <!-- Desktop Navigation -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="/about" class="link">about</a>
+      <a href="/work" class="link">work</a>
+      <a href="/blog" class="link">blog</a>
+      <a href="/notes" class="link">notes</a>
+      <a href="/tools" class="link">tools</a>
+      <a href="/recommendations" class="link">recs</a>
+      <a href="/freelance" class="btn-primary text-sm">hire me</a>
+      <ThemeToggle />
+    </div>
+    
+    <!-- Mobile Menu Button -->
+    <div class="flex items-center gap-4 md:hidden">
+      <ThemeToggle />
+      <button 
+        id="mobile-menu-button"
+        class="focus:outline-none"
+        aria-label="Toggle menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+  
+  <!-- Mobile Navigation -->
+  <div 
+    id="mobile-menu" 
+    class="hidden md:hidden border-t"
+    style="border-color: rgba(255, 255, 255, 0.1); background-color: #000000;"
+  >
+    <div class="container mx-auto px-4 py-4 flex flex-col gap-4">
+      <a href="/about" class="link py-2">about</a>
+      <a href="/work" class="link py-2">work</a>
+      <a href="/blog" class="link py-2">blog</a>
+      <a href="/notes" class="link py-2">notes</a>
+      <a href="/tools" class="link py-2">tools</a>
+      <a href="/recommendations" class="link py-2">recommendations</a>
+      <a href="/freelance" class="btn-primary text-center">hire me</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  body.light header {
+    background-color: rgba(250, 248, 243, 0.8) !important;
+    border-color: rgba(62, 39, 35, 0.1) !important;
+  }
+  
+  body.light #mobile-menu {
+    background-color: #faf8f3 !important;
+    border-color: rgba(62, 39, 35, 0.1) !important;
+  }
+</style>
+
+<script>
+  // Mobile menu toggle
+  const button = document.getElementById('mobile-menu-button');
+  const menu = document.getElementById('mobile-menu');
+  
+  button?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+  
+  // Close menu when clicking a link
+  menu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      menu?.classList.add('hidden');
+    });
+  });
+</script>

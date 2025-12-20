@@ -1,1 +1,207 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+@import 'tailwindcss';
+
+@theme {
+  /* Dark mode colors */
+  --color-dark-bg: #000000;
+  --color-dark-text: #ffffff;
+  --color-dark-muted: #808080;
+
+  /* Light mode colors - warm cream */
+  --color-light-bg: #faf8f3;
+  --color-light-text: #3e2723;
+  --color-light-muted: #8d6e63;
+
+  /* Font families */
+  --font-handwritten: 'Homemade Apple', cursive;
+  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+
+  /* Animations */
+  --animate-fade-in: fadeIn 0.6s ease-out forwards;
+  --animate-slide-up: slideUp 0.6s ease-out forwards;
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Base styles */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-dark-bg);
+  color: var(--color-dark-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light mode */
+body.light {
+  background-color: var(--color-light-bg);
+  color: var(--color-light-text);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background-color: var(--color-dark-text);
+  color: var(--color-dark-bg);
+}
+
+body.light ::selection {
+  background-color: var(--color-light-text);
+  color: var(--color-light-bg);
+}
+
+/* Heading handwritten style */
+.heading-handwritten {
+  font-family: var(--font-handwritten);
+}
+
+/* Link styles */
+.link {
+  color: var(--color-dark-text);
+  transition: opacity 0.2s;
+  text-decoration: none;
+}
+
+.link:hover {
+  opacity: 0.6;
+}
+
+body.light .link {
+  color: var(--color-light-text);
+}
+
+/* Muted text */
+.text-muted {
+  color: var(--color-dark-muted);
+}
+
+body.light .text-muted {
+  color: var(--color-light-muted);
+}
+
+/* Button styles */
+.btn-primary {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--color-dark-text);
+  color: var(--color-dark-bg);
+  font-weight: 500;
+  border-radius: 0.5rem;
+  transition: opacity 0.2s, transform 0.1s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  opacity: 0.8;
+}
+
+.btn-primary:active {
+  transform: scale(0.95);
+}
+
+body.light .btn-primary {
+  background-color: var(--color-light-text);
+  color: var(--color-light-bg);
+}
+
+.btn-secondary {
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--color-dark-text);
+  color: var(--color-dark-text);
+  background-color: transparent;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-dark-text);
+  color: var(--color-dark-bg);
+}
+
+.btn-secondary:active {
+  transform: scale(0.95);
+}
+
+body.light .btn-secondary {
+  border-color: var(--color-light-text);
+  color: var(--color-light-text);
+}
+
+body.light .btn-secondary:hover {
+  background-color: var(--color-light-text);
+  color: var(--color-light-bg);
+}
+
+/* Fade-in animation for content */
+.animate-on-scroll {
+  opacity: 0;
+  animation: var(--animate-fade-in);
+}
+
+/* Stagger animations for children */
+.stagger-children > * {
+  opacity: 0;
+  animation: var(--animate-slide-up);
+}
+
+.stagger-children > *:nth-child(1) {
+  animation-delay: 0.1s;
+}
+.stagger-children > *:nth-child(2) {
+  animation-delay: 0.2s;
+}
+.stagger-children > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+.stagger-children > *:nth-child(4) {
+  animation-delay: 0.4s;
+}
+.stagger-children > *:nth-child(5) {
+  animation-delay: 0.5s;
+}
+
+/* lowercase everything - because i love lowercase ^_^ */
+body {
+  text-transform: lowercase;
+}
+
+/* Keep certain elements normal case when needed - for the serious people :( */
+.normal-case {
+  text-transform: none;
+}

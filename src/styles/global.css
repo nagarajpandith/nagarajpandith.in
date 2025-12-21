@@ -1,12 +1,15 @@
+/* Import fonts */
 @import url('https://fonts.googleapis.com/css2?family=Homemade+Apple&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
 
+/* Tailwind v4 */
 @import 'tailwindcss';
 
+/* Theme configuration using CSS variables */
 @theme {
-  /* Dark mode colors */
+  /* Dark mode colors - with coffee warmth */
   --color-dark-bg: #000000;
-  --color-dark-text: #ffffff;
-  --color-dark-muted: #808080;
+  --color-dark-text: #d4c5b9;
+  --color-dark-muted: #8d7b6f;
 
   /* Light mode colors - warm cream */
   --color-light-bg: #faf8f3;
@@ -104,6 +107,11 @@ body.light .link {
   color: var(--color-light-text);
 }
 
+body.light .link:hover {
+  opacity: 1;
+  color: #000000;
+}
+
 /* Muted text */
 .text-muted {
   color: var(--color-dark-muted);
@@ -170,38 +178,17 @@ body.light .btn-secondary:hover {
 
 /* Fade-in animation for content */
 .animate-on-scroll {
-  opacity: 0;
   animation: var(--animate-fade-in);
 }
 
-/* Stagger animations for children */
-.stagger-children > * {
-  opacity: 0;
-  animation: var(--animate-slide-up);
-}
+/* Remove stagger-children class - it was causing visibility issues */
 
-.stagger-children > *:nth-child(1) {
-  animation-delay: 0.1s;
-}
-.stagger-children > *:nth-child(2) {
-  animation-delay: 0.2s;
-}
-.stagger-children > *:nth-child(3) {
-  animation-delay: 0.3s;
-}
-.stagger-children > *:nth-child(4) {
-  animation-delay: 0.4s;
-}
-.stagger-children > *:nth-child(5) {
-  animation-delay: 0.5s;
-}
-
-/* lowercase everything - because i love lowercase ^_^ */
+/* Lowercase everything */
 body {
   text-transform: lowercase;
 }
 
-/* Keep certain elements normal case when needed - for the serious people :( */
+/* Keep certain elements normal case when needed */
 .normal-case {
   text-transform: none;
 }

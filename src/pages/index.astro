@@ -1,9 +1,244 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Calculate age from DOB
+const birthDate = new Date('2002-12-06');
+const today = new Date();
+let age = today.getFullYear() - birthDate.getFullYear();
+const monthDiff = today.getMonth() - birthDate.getMonth();
+if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+  age--;
+}
+
+const projects = [
+  {
+    title: 'JabWeMeet',
+    description: 'multilingual live video conferencing built at 36hr national hackathon',
+    demo: 'https://jabwemeet.vercel.app/',
+    github: 'https://github.com/swasthikshetty10/hackoverflow',
+    image: '/headshot.jpg', // Replace with actual project image
+    tags: ['video conferencing', 'webrtc', 'multilingual']
+  },
+  {
+    title: "Incridea'23",
+    description: "event management & paperless system for nmamit's college fest",
+    demo: 'https://incridea.in',
+    github: 'https://github.com/incridea-nmamit/incridea-client/tree/2023',
+    image: '/headshot.jpg', // Replace with actual project image
+    tags: ['event management', 'full-stack', 'college fest']
+  },
+  {
+    title: 'Live-stream Studio Booking',
+    description: 'full-stack django app to book livestream studio and manage bookings',
+    demo: 'https://livestream.konkanischolarship.com/',
+    github: 'https://github.com/nagarajpandith/live-stream-studio-booking',
+    image: '/headshot.jpg', // Replace with actual project image
+    tags: ['django', 'booking system', 'full-stack']
+  }
+];
+
+const blogs = [
+  {
+    title: 'honest guide to campus placements in software engineering',
+    description: 'a practical roadmap for securing your dream job from campus placements',
+    date: 'aug 4, 2024',
+    views: '3312',
+    readTime: '12 min',
+    tags: ['campus placements', 'software engineering', 'career guide'],
+    slug: 'campus-placements-guide'
+  },
+  {
+    title: 'starting web development the right way in 2021',
+    description: 'a comprehensive guide to navigate the overwhelming world of web development resources and roadmaps',
+    date: 'sep 4, 2021',
+    views: '1114',
+    readTime: '12 min',
+    tags: ['webdev', 'roadmap', 'frontend'],
+    slug: 'web-dev-2021'
+  },
+  {
+    title: 'has anyone seen web3? — the complete roadmap',
+    description: "twitter went crazy when musk and dorsey mocked web3. here's what it actually is",
+    date: 'jan 8, 2022',
+    views: '38821',
+    readTime: '7 min',
+    tags: ['web3', 'blockchain', 'solidity'],
+    slug: 'web3-roadmap-2022'
+  }
+];
 ---
 
-<BaseLayout title="nagaraj pandith - portfolio">
-  <div class="container mx-auto px-4 py-20 max-w-6xl">
-    <h1 class="text-3xl font-bold">Hello World!</h1>
-  </div>
+<BaseLayout title="nagaraj pandith - full-stack developer">
+  <!-- Hero Section -->
+  <section class="container mx-auto px-4 py-14 max-w-4xl">
+    <div class="flex flex-col items-center text-center mb-12 animate-on-scroll">
+      <!-- Small Headshot -->
+      <div class="relative group mb-8">
+        <img 
+          src="/headshot.jpg" 
+          alt="nagaraj pandith"
+          class="rounded-full w-32 h-32 object-cover grayscale hover:grayscale-0 transition-all duration-500 shadow-lg"
+        />
+        <div class="absolute inset-0 rounded-full ring-1 ring-black/5"></div>
+      </div>
+
+      <!-- Name & Intro -->
+      <h1 class="heading-handwritten text-5xl md:text-6xl mb-6">
+        nagaraj pandith
+      </h1>
+      <p class="text-xl md:text-2xl opacity-90 mb-8 leading-relaxed max-w-3xl">
+        {age}-year-old full-stack developer from india who codes, captures, and occasionally writes. building scalable solutions by day, getting lost in crime thrillers by night.
+      </p>
+      <p class="text-lg opacity-70 mb-8 max-w-2xl">
+        obsessed with documentation, debugging, and making things work elegantly. currently at wipfli india, always open to interesting projects.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/freelance" class="btn-primary">
+          let's build something
+        </a>
+        <a href="/about" class="btn-secondary">
+          more about me
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Currently Section -->
+  <section class="container mx-auto px-4 py-16 max-w-6xl animate-on-scroll">
+    <div class="bg-opacity-5 rounded-2xl p-8 md:p-12" style="background-color: currentColor;">
+      <h2 class="text-sm uppercase tracking-wider opacity-50 mb-6">currently</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="font-medium mb-2">building (freelance)</h3>
+          <p class="text-sm opacity-70">
+            end-to-end ecommerce system with storefront and fully customizable dashboard
+          </p>
+        </div>
+        <div>
+          <h3 class="font-medium mb-2">building (side project)</h3>
+          <p class="text-sm opacity-70">
+            ar + llm app idea. still in planning phase. if things go downhill, at least i'll learn flutter & ar
+          </p>
+        </div>
+        <div>
+          <h3 class="font-medium mb-2">learning</h3>
+          <p class="text-sm opacity-70">
+            htmx, golang stack
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Work -->
+  <section class="container mx-auto px-4 py-16 max-w-6xl animate-on-scroll">
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-12">
+      <h2 class="heading-handwritten text-4xl md:text-5xl">featured work</h2>
+      <a href="/work" class="link text-sm">view all →</a>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      {projects.map((project) => (
+        <article class="group animate-on-scroll">
+          <a href={project.demo} target="_blank" rel="noopener noreferrer" class="block">
+            <div class="relative overflow-hidden rounded-xl mb-4 aspect-video bg-opacity-5" style="background-color: currentColor;">
+              <img 
+                src={project.image} 
+                alt={project.title}
+                class="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500"
+              />
+            </div>
+            <h3 class="font-medium text-lg mb-2 group-hover:opacity-60 transition-opacity">
+              {project.title}
+            </h3>
+            <p class="text-sm opacity-70 mb-3">
+              {project.description}
+            </p>
+            <div class="flex flex-wrap gap-2">
+              {project.tags.map(tag => (
+                <span class="text-xs opacity-50 bg-opacity-5 px-2 py-1 rounded" style="background-color: currentColor">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </a>
+          <div class="flex gap-3 mt-4 text-sm">
+            <a href={project.demo} target="_blank" rel="noopener noreferrer" class="link">
+              live demo →
+            </a>
+            <a href={project.github} target="_blank" rel="noopener noreferrer" class="link opacity-50 hover:opacity-100">
+              github →
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Latest Writings -->
+  <section class="container mx-auto px-4 py-16 max-w-6xl animate-on-scroll">
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-12">
+      <h2 class="heading-handwritten text-4xl md:text-5xl">latest writings</h2>
+      <a href="/blog" class="link text-sm">all posts →</a>
+    </div>
+
+    <div class="space-y-8">
+      {blogs.map((blog) => (
+        <article 
+          class="group border-b pb-8 last:border-b-0 animate-on-scroll"
+          style="border-color: rgba(255, 255, 255, 0.1);"
+        >
+          <a href={`/blog/${blog.slug}`} class="block">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-start gap-4 mb-3">
+              <h3 class="font-medium text-xl group-hover:opacity-60 transition-opacity flex-1">
+                {blog.title}
+              </h3>
+              <div class="flex items-center gap-4 text-sm opacity-50 shrink-0">
+                <span>{blog.views} views</span>
+                <span>•</span>
+                <span>{blog.readTime} read</span>
+              </div>
+            </div>
+            <p class="text-sm opacity-70 mb-4">
+              {blog.description}
+            </p>
+            <div class="flex flex-wrap items-center gap-3">
+              <span class="text-xs opacity-50">{blog.date}</span>
+              {blog.tags.map(tag => (
+                <span class="text-xs opacity-50 bg-opacity-5 px-2 py-1 rounded" style="background-color: currentColor">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </a>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="container mx-auto px-4 py-20 max-w-6xl animate-on-scroll">
+    <div class="text-center py-16 rounded-2xl bg-opacity-5" style="background-color: currentColor;">
+      <h2 class="heading-handwritten text-4xl md:text-6xl mb-6">
+        got a project in mind?
+      </h2>
+      <p class="text-lg opacity-70 mb-8 max-w-2xl mx-auto">
+        whether it's a startup idea, a college fest website, or just a chat over chocolate ice cream — i'm all ears.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/freelance" class="btn-primary text-lg px-8 py-4">
+          let's work together
+        </a>
+        <a href="mailto:your@email.com" class="btn-secondary text-lg px-8 py-4">
+          send me an email
+        </a>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
+
+<style>
+  body.light article {
+    border-color: rgba(62, 39, 35, 0.1) !important;
+  }
+</style>

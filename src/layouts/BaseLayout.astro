@@ -44,8 +44,8 @@ const {
   <Footer />
   
   <script>
-    // Theme toggle functionality
-    const theme = localStorage.getItem('theme') || 'dark';
+    // Theme toggle functionality - default to light mode
+    const theme = localStorage.getItem('theme') || 'light';
     document.body.classList.toggle('light', theme === 'light');
   </script>
 </body>

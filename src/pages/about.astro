@@ -160,7 +160,7 @@ const quirks = [
 
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
       {primaryTech.map((tech) => (
-        <div class="bg-opacity-5 rounded-lg p-4 text-center hover:bg-opacity-10 transition-all" style="background-color: currentColor;">
+        <div class="bg-subtle bg-subtle-hover rounded-lg p-4 text-center transition-all">
           <div class="text-3xl mb-2">{tech.icon}</div>
           <div class="text-sm font-medium">{tech.name}</div>
         </div>
@@ -184,7 +184,7 @@ const quirks = [
     
     <div class="grid sm:grid-cols-2 gap-6">
       {achievements.map((achievement) => (
-        <article class="bg-opacity-5 rounded-lg p-6 hover:bg-opacity-10 transition-all" style="background-color: currentColor;">
+        <article class="bg-subtle bg-subtle-hover rounded-lg p-6 transition-all">
           <div class="flex items-start justify-between mb-3">
             <h3 class="font-medium text-lg flex-1">{achievement.title}</h3>
             <span class="text-sm opacity-50 shrink-0 ml-4">{achievement.year}</span>
@@ -209,7 +209,7 @@ const quirks = [
             <h3 class="font-medium text-lg shrink-0">{work.role}</h3>
             <div class="flex flex-wrap gap-2">
               {work.events.map((event) => (
-                <span class="text-xs bg-opacity-5 px-3 py-1 rounded" style="background-color: currentColor;">
+                <span class="text-xs bg-subtle px-3 py-1 rounded">
                   {event}
                 </span>
               ))}
@@ -237,7 +237,7 @@ const quirks = [
         </p>
         <div class="grid sm:grid-cols-2 gap-4">
           {quirks.map((quirk) => (
-            <div class="flex items-start gap-3 bg-opacity-5 rounded-lg p-4" style="background-color: currentColor;">
+            <div class="flex items-start gap-3 bg-subtle rounded-lg p-4">
               <span class="text-2xl shrink-0">{quirk.emoji}</span>
               <p class="text-sm opacity-80 pt-1">{quirk.text}</p>
             </div>
@@ -249,7 +249,7 @@ const quirks = [
 
   <!-- CTA -->
   <section class="container mx-auto px-4 py-20 max-w-4xl animate-on-scroll">
-    <div class="text-center py-16 rounded-2xl bg-opacity-5" style="background-color: currentColor;">
+    <div class="text-center py-16 rounded-2xl bg-subtle">
       <h2 class="heading-handwritten text-3xl md:text-5xl mb-6">
         want to work together?
       </h2>

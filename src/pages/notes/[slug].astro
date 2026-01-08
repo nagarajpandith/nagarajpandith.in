@@ -31,7 +31,7 @@ const relatedNotes = allNotes
   <article class="container mx-auto px-4 py-12 max-w-3xl">
     <!-- Header -->
     <header class="mb-12 animate-on-scroll">
-      <div class="inline-block px-3 py-1 rounded-full text-xs mb-4 bg-opacity-10" style="background-color: currentColor;">
+      <div class="inline-block px-3 py-1 rounded-full text-xs mb-4 bg-subtle">
         {note.data.type === 'short' ? '⚡ flashcard' : '📚 deep dive'}
       </div>
       
@@ -59,8 +59,7 @@ const relatedNotes = allNotes
           {relatedNotes.map(related => (
             <a 
               href={`/notes/${related.slug}`}
-              class="block bg-opacity-5 hover:bg-opacity-10 rounded-xl p-4 transition-all group"
-              style="background-color: currentColor;"
+              class="block bg-subtle bg-subtle-hover rounded-xl p-4 transition-all group"
             >
               <h4 class="font-medium group-hover:opacity-60 transition-opacity">
                 {related.data.title}
@@ -158,7 +157,7 @@ const relatedNotes = allNotes
   }
 
   .prose-note :global(blockquote) {
-    border-left: 3px solid currentColor;
+    border-left: 3px solid rgba(212, 197, 185, 0.3);
     padding-left: 1.5rem;
     margin: 2rem 0;
     opacity: 0.7;

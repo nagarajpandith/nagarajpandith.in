@@ -190,3 +190,26 @@ body {
 .normal-case {
   text-transform: none;
 }
+
+/* Background utilities for proper contrast */
+.bg-subtle {
+  background-color: rgba(212, 197, 185, 0.05);
+}
+
+.bg-subtle-hover:hover {
+  background-color: rgba(212, 197, 185, 0.1);
+}
+
+body.light .bg-subtle {
+  background-color: rgba(62, 39, 35, 0.05);
+}
+
+body.light .bg-subtle-hover:hover {
+  background-color: rgba(62, 39, 35, 0.1);
+}
+
+/* Light mode border colors */
+body.light .prose-custom :global(blockquote),
+body.light .prose-note :global(blockquote) {
+  border-left-color: rgba(62, 39, 35, 0.3);
+}

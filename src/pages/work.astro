@@ -186,7 +186,7 @@ const allShots = [...horizontalShots, ...verticalShots];
       {projects.map((project, index) => (
         <article class="grid md:grid-cols-2 gap-8 items-start animate-on-scroll" data-index={index}>
           <!-- Project Image -->
-          <div class="relative group overflow-hidden rounded-xl aspect-video bg-opacity-5" style="background-color: currentColor;">
+          <div class="relative group overflow-hidden rounded-xl aspect-video bg-subtle">
             <a href={project.link} target="_blank" rel="noopener noreferrer">
               <img 
                 src={project.img} 
@@ -210,7 +210,7 @@ const allShots = [...horizontalShots, ...verticalShots];
             <!-- Tags -->
             <div class="flex flex-wrap gap-2">
               {project.tags.map(tag => (
-                <span class="text-xs bg-opacity-10 px-3 py-1 rounded" style="background-color: currentColor;">
+                <span class="text-xs bg-subtle px-3 py-1 rounded">
                   {tag}
                 </span>
               ))}
@@ -245,7 +245,7 @@ const allShots = [...horizontalShots, ...verticalShots];
   <section id="designs-section" class="container mx-auto px-4 py-16 max-w-6xl section-content hidden">
     <div class="grid md:grid-cols-2 gap-8">
       {designs.map((designId, index) => (
-        <div class="rounded-xl overflow-hidden bg-opacity-5 animate-on-scroll" style="background-color: currentColor;" data-index={index}>
+        <div class="rounded-xl overflow-hidden bg-subtle animate-on-scroll" data-index={index}>
           <iframe 
             src={`https://www.behance.net/embed/project/${designId}?ilo0=1`}
             height="316" 
@@ -302,7 +302,12 @@ const allShots = [...horizontalShots, ...verticalShots];
   }
 
   .filter-chip.active {
-    background-color: currentColor;
+    background-color: var(--color-dark-text);
+    color: var(--color-dark-bg);
+  }
+  
+  body.light .filter-chip.active {
+    background-color: var(--color-light-text);
     color: var(--color-light-bg);
   }
 

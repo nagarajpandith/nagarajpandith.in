@@ -50,12 +50,12 @@ function formatDate(dateString: string): string {
   <!-- Sign Form -->
   <section class="container mx-auto px-4 pb-12 max-w-2xl">
     <!-- Not signed in message -->
-    <div id="sign-in-prompt" class="hidden bg-opacity-5 rounded-2xl p-8 text-center animate-on-scroll" style="background-color: currentColor;">
+    <div id="sign-in-prompt" class="hidden bg-subtle rounded-2xl p-8 text-center animate-on-scroll">
       <p class="opacity-70 mb-4">sign in with google to leave a message</p>
     </div>
 
     <!-- Form (shown when signed in) -->
-    <form id="guestbook-form" class="hidden bg-opacity-5 rounded-2xl p-8 animate-on-scroll" style="background-color: currentColor;">
+    <form id="guestbook-form" class="hidden bg-subtle rounded-2xl p-8 animate-on-scroll">
       <div class="space-y-6">
         <!-- User info display -->
         <div id="user-info" class="flex items-center gap-3 mb-4">
@@ -77,8 +77,8 @@ function formatDate(dateString: string): string {
             maxlength="500"
             rows="4"
             placeholder="leave your thoughts here..."
-            class="w-full px-4 py-3 rounded-lg bg-opacity-5 border focus:outline-none focus:ring-2 focus:ring-opacity-50 transition-all resize-none"
-            style="background-color: currentColor; border-color: rgba(0, 0, 0, 0.1);"
+            class="w-full px-4 py-3 rounded-lg bg-subtle border focus:outline-none focus:ring-2 focus:ring-opacity-50 transition-all resize-none"
+            style="border-color: rgba(0, 0, 0, 0.1);"
           ></textarea>
           <p class="text-xs opacity-50 mt-2">
             <span id="char-count">0</span>/500 characters
@@ -118,14 +118,13 @@ function formatDate(dateString: string): string {
       ) : (
         guestbookEntries.map((entry) => (
           <article 
-            class="entry-card bg-opacity-5 rounded-xl p-6 hover:bg-opacity-10 transition-all animate-on-scroll"
-            style="background-color: currentColor;"
+            class="entry-card bg-subtle bg-subtle-hover rounded-xl p-6 transition-all animate-on-scroll"
             data-user-id={entry.user_id}
           >
             <div class="flex items-start justify-between mb-3">
               <div class="flex items-center gap-3">
                 <!-- Avatar (will be populated by script) -->
-                <div class="user-avatar w-10 h-10 rounded-full bg-opacity-20 flex items-center justify-center font-medium" style="background-color: currentColor;">
+                <div class="user-avatar w-10 h-10 rounded-full bg-subtle flex items-center justify-center font-medium">
                   ?
                 </div>
                 <div>
@@ -151,7 +150,7 @@ function formatDate(dateString: string): string {
   }
 
   textarea:focus {
-    ring-color: currentColor;
+    ring-color: rgba(212, 197, 185, 0.2);
   }
 </style>
 

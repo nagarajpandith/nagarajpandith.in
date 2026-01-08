@@ -105,7 +105,7 @@ const blogs = [
 
   <!-- Currently Section -->
   <section class="container mx-auto px-4 py-16 max-w-6xl animate-on-scroll">
-    <div class="bg-opacity-5 rounded-2xl p-8 md:p-12" style="background-color: currentColor;">
+    <div class="bg-subtle rounded-2xl p-8 md:p-12">
       <h2 class="text-sm uppercase tracking-wider opacity-50 mb-6">currently</h2>
       <div class="grid md:grid-cols-3 gap-8">
         <div>
@@ -141,7 +141,7 @@ const blogs = [
       {projects.map((project) => (
         <article class="group animate-on-scroll">
           <a href={project.demo} target="_blank" rel="noopener noreferrer" class="block">
-            <div class="relative overflow-hidden rounded-xl mb-4 aspect-video bg-opacity-5" style="background-color: currentColor;">
+            <div class="relative overflow-hidden rounded-xl mb-4 aspect-video bg-subtle">
               <img 
                 src={project.image} 
                 alt={project.title}
@@ -156,7 +156,7 @@ const blogs = [
             </p>
             <div class="flex flex-wrap gap-2">
               {project.tags.map(tag => (
-                <span class="text-xs opacity-50 bg-opacity-5 px-2 py-1 rounded" style="background-color: currentColor">
+                <span class="text-xs opacity-50 bg-subtle px-2 py-1 rounded">
                   {tag}
                 </span>
               ))}
@@ -205,7 +205,7 @@ const blogs = [
             <div class="flex flex-wrap items-center gap-3">
               <span class="text-xs opacity-50">{blog.date}</span>
               {blog.tags.map(tag => (
-                <span class="text-xs opacity-50 bg-opacity-5 px-2 py-1 rounded" style="background-color: currentColor">
+                <span class="text-xs opacity-50 bg-subtle px-2 py-1 rounded">
                   {tag}
                 </span>
               ))}
@@ -218,7 +218,7 @@ const blogs = [
 
   <!-- CTA Section -->
   <section class="container mx-auto px-4 py-20 max-w-6xl animate-on-scroll">
-    <div class="text-center py-16 rounded-2xl bg-opacity-5" style="background-color: currentColor;">
+    <div class="text-center py-16 rounded-2xl bg-subtle">
       <h2 class="heading-handwritten text-4xl md:text-6xl mb-6">
         got a project in mind?
       </h2>

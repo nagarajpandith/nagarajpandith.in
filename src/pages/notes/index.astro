@@ -26,11 +26,11 @@ const longNotes = allNotes.filter(n => n.data.type === 'long').sort((a, b) =>
   <!-- Stats -->
   <section class="container mx-auto px-4 pb-12 max-w-4xl animate-on-scroll">
     <div class="grid grid-cols-2 gap-6 max-w-md">
-      <div class="bg-opacity-5 rounded-xl p-6 text-center" style="background-color: currentColor;">
+      <div class="bg-subtle rounded-xl p-6 text-center">
         <div class="text-4xl font-medium mb-2">{shortNotes.length}</div>
         <div class="text-sm opacity-60">flashcards</div>
       </div>
-      <div class="bg-opacity-5 rounded-xl p-6 text-center" style="background-color: currentColor;">
+      <div class="bg-subtle rounded-xl p-6 text-center">
         <div class="text-4xl font-medium mb-2">{longNotes.length}</div>
         <div class="text-sm opacity-60">deep dives</div>
       </div>
@@ -45,8 +45,7 @@ const longNotes = allNotes.filter(n => n.data.type === 'long').sort((a, b) =>
       {longNotes.map((note) => (
         <a 
           href={`/notes/${note.slug}`}
-          class="block group bg-opacity-5 hover:bg-opacity-10 rounded-xl p-6 transition-all"
-          style="background-color: currentColor;"
+          class="block group bg-subtle bg-subtle-hover rounded-xl p-6 transition-all"
         >
           <div class="flex items-center justify-between">
             <div>
@@ -78,8 +77,7 @@ const longNotes = allNotes.filter(n => n.data.type === 'long').sort((a, b) =>
       {shortNotes.map((note) => (
         <a 
           href={`/notes/${note.slug}`}
-          class="block group bg-opacity-5 hover:bg-opacity-10 rounded-xl p-6 text-center transition-all hover:scale-105"
-          style="background-color: currentColor;"
+          class="block group bg-subtle bg-subtle-hover rounded-xl p-6 text-center transition-all hover:scale-105"
         >
           <h3 class="text-lg font-medium group-hover:opacity-60 transition-opacity">
             {note.data.title}
@@ -95,7 +93,7 @@ const longNotes = allNotes.filter(n => n.data.type === 'long').sort((a, b) =>
 
   <!-- CTA -->
   <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
-    <div class="text-center py-12 rounded-2xl bg-opacity-5" style="background-color: currentColor;">
+    <div class="text-center py-12 rounded-2xl bg-subtle">
       <p class="text-lg opacity-70 mb-6">
         these notes are living documents, constantly evolving as i learn
       </p>

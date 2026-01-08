@@ -1,0 +1,97 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { supabase } from '../../../utils/supabase';
+
+// Get only personal blogs
+const personalBlogs = await getCollection('blog', ({ data }) => data.isPersonal === true);
+
+// Sort by date
+const blogs = personalBlogs.sort((a, b) => 
+  new Date(b.data.publishedDate).getTime() - new Date(a.data.publishedDate).getTime()
+);
+
+// Fetch views
+const slugs = blogs.map(b => b.slug);
+const { data: viewsData } = await supabase
+  .from('blog_views')
+  .select('slug, views')
+  .in('slug', slugs);
+
+const viewsMap = new Map(viewsData?.map(v => [v.slug, v.views]) || []);
+
+function calculateReadingTime(content: string): number {
+  const wordsPerMinute = 200;
+  const words = content.trim().split(/\s+/).length;
+  return Math.ceil(words / wordsPerMinute);
+}
+---
+
+<BaseLayout title="personal blog - nagaraj pandith" description="personal stories, travels, and life beyond code">
+  <!-- Breadcrumb -->
+  <div class="container mx-auto px-4 pt-8 max-w-4xl">
+    <a href="/blog" class="link text-sm opacity-60 hover:opacity-100">
+      ← back to tech blog
+    </a>
+  </div>
+
+  <!-- Hero -->
+  <section class="container mx-auto px-4 py-12 max-w-4xl animate-on-scroll">
+    <h1 class="heading-handwritten text-5xl md:text-7xl mb-6">personal</h1>
+    <p class="text-xl opacity-80">
+      stories, travels, and life beyond code
+    </p>
+  </section>
+
+  <!-- Blog List -->
+  <section class="container mx-auto px-4 pb-20 max-w-4xl">
+    <div class="space-y-12">
+      {blogs.map((blog) => {
+        const readingTime = calculateReadingTime(blog.body);
+        const views = viewsMap.get(blog.slug) || 0;
+        const tags = blog.data.tags.split(',').map(t => t.trim());
+
+        return (
+          <article class="group animate-on-scroll">
+            <a href={`/blog/${blog.slug}`} class="grid md:grid-cols-3 gap-6">
+              <!-- Cover Image -->
+              <div class="relative overflow-hidden rounded-xl aspect-video md:aspect-square bg-opacity-5" style="background-color: currentColor;">
+                <img 
+                  src={blog.data.coverImage} 
+                  alt={blog.data.title}
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+
+              <!-- Content -->
+              <div class="md:col-span-2 space-y-3">
+                <h2 class="text-2xl md:text-3xl font-medium group-hover:opacity-60 transition-opacity">
+                  {blog.data.title}
+                </h2>
+                <p class="text-sm opacity-70 leading-relaxed">
+                  {blog.data.desc}
+                </p>
+
+                <!-- Meta -->
+                <div class="flex flex-wrap items-center gap-3 text-xs opacity-50">
+                  <span>{blog.data.publishedDate}</span>
+                  <span>•</span>
+                  <span>{readingTime} min read</span>
+                  <span>•</span>
+                  <span>{views} views</span>
+                </div>
+              </div>
+            </a>
+          </article>
+        );
+      })}
+    </div>
+
+    {blogs.length === 0 && (
+      <div class="text-center py-20">
+        <p class="text-xl opacity-60">no personal posts yet</p>
+        <p class="text-sm opacity-50 mt-2">check back soon!</p>
+      </div>
+    )}
+  </section>
+</BaseLayout>

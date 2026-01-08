@@ -1,0 +1,311 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AuthButton from '../components/AuthButton.astro';
+import { supabase } from '../utils/supabase';
+
+// Fetch approved guestbook entries with user info from auth.users
+const { data: entries, error } = await supabase
+  .from('guestbook')
+  .select('*')
+  .eq('is_approved', true)
+  .order('created_at', { ascending: false });
+
+const guestbookEntries = entries || [];
+
+// We'll fetch user info client-side for each entry
+
+// Format date nicely
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+  
+  if (diffInSeconds < 60) return 'just now';
+  if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} min ago`;
+  if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hr ago`;
+  if (diffInSeconds < 604800) return `${Math.floor(diffInSeconds / 86400)} days ago`;
+  
+  return date.toLocaleDateString('en-US', { 
+    month: 'short', 
+    day: 'numeric', 
+    year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined 
+  });
+}
+---
+
+<BaseLayout title="guestbook - nagaraj pandith" description="leave your mark, share your thoughts">
+  <!-- Hero -->
+  <section class="container mx-auto px-4 py-20 max-w-3xl animate-on-scroll">
+    <h1 class="heading-handwritten text-5xl md:text-7xl mb-6 text-center">guestbook</h1>
+    <p class="text-xl opacity-80 text-center max-w-2xl mx-auto mb-8">
+      leave a message, share a thought, or just say hi. all entries are manually reviewed before appearing here.
+    </p>
+    
+    <!-- Auth Button -->
+    <div class="flex justify-center">
+      <AuthButton />
+    </div>
+  </section>
+
+  <!-- Sign Form -->
+  <section class="container mx-auto px-4 pb-12 max-w-2xl">
+    <!-- Not signed in message -->
+    <div id="sign-in-prompt" class="hidden bg-opacity-5 rounded-2xl p-8 text-center animate-on-scroll" style="background-color: currentColor;">
+      <p class="opacity-70 mb-4">sign in with google to leave a message</p>
+    </div>
+
+    <!-- Form (shown when signed in) -->
+    <form id="guestbook-form" class="hidden bg-opacity-5 rounded-2xl p-8 animate-on-scroll" style="background-color: currentColor;">
+      <div class="space-y-6">
+        <!-- User info display -->
+        <div id="user-info" class="flex items-center gap-3 mb-4">
+          <img id="form-user-avatar" src="" alt="You" class="w-10 h-10 rounded-full" />
+          <div>
+            <p class="font-medium">signing as <span id="form-user-name"></span></p>
+          </div>
+        </div>
+
+        <!-- Message Input -->
+        <div>
+          <label for="message" class="block text-sm font-medium mb-2 opacity-70">
+            your message
+          </label>
+          <textarea 
+            id="message" 
+            name="message"
+            required
+            maxlength="500"
+            rows="4"
+            placeholder="leave your thoughts here..."
+            class="w-full px-4 py-3 rounded-lg bg-opacity-5 border focus:outline-none focus:ring-2 focus:ring-opacity-50 transition-all resize-none"
+            style="background-color: currentColor; border-color: rgba(0, 0, 0, 0.1);"
+          ></textarea>
+          <p class="text-xs opacity-50 mt-2">
+            <span id="char-count">0</span>/500 characters
+          </p>
+        </div>
+
+        <!-- Submit Button -->
+        <button 
+          type="submit"
+          id="submit-btn"
+          class="btn-primary w-full"
+        >
+          sign the guestbook
+        </button>
+
+        <!-- Status Message -->
+        <div id="status-message" class="hidden text-sm text-center"></div>
+      </div>
+    </form>
+  </section>
+
+  <!-- Entries Count -->
+  <section class="container mx-auto px-4 pb-8 max-w-2xl">
+    <p class="text-center text-sm opacity-50">
+      {guestbookEntries.length} {guestbookEntries.length === 1 ? 'entry' : 'entries'} in the guestbook
+    </p>
+  </section>
+
+  <!-- Entries List -->
+  <section class="container mx-auto px-4 pb-20 max-w-2xl">
+    <div class="space-y-6" id="entries-list">
+      {guestbookEntries.length === 0 ? (
+        <div class="text-center py-20 opacity-50">
+          <p class="text-lg mb-2">no entries yet</p>
+          <p class="text-sm">be the first to sign the guestbook!</p>
+        </div>
+      ) : (
+        guestbookEntries.map((entry) => (
+          <article 
+            class="entry-card bg-opacity-5 rounded-xl p-6 hover:bg-opacity-10 transition-all animate-on-scroll"
+            style="background-color: currentColor;"
+            data-user-id={entry.user_id}
+          >
+            <div class="flex items-start justify-between mb-3">
+              <div class="flex items-center gap-3">
+                <!-- Avatar (will be populated by script) -->
+                <div class="user-avatar w-10 h-10 rounded-full bg-opacity-20 flex items-center justify-center font-medium" style="background-color: currentColor;">
+                  ?
+                </div>
+                <div>
+                  <p class="user-name font-medium">loading...</p>
+                  <p class="text-xs opacity-50">{formatDate(entry.created_at)}</p>
+                </div>
+              </div>
+            </div>
+            <p class="opacity-80 leading-relaxed whitespace-pre-wrap">
+              {entry.message}
+            </p>
+          </article>
+        ))
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  body.light textarea {
+    background-color: rgba(62, 39, 35, 0.05) !important;
+    border-color: rgba(62, 39, 35, 0.1) !important;
+  }
+
+  textarea:focus {
+    ring-color: currentColor;
+  }
+</style>
+
+<script>
+  import { supabase } from '../utils/supabase';
+
+  const form = document.getElementById('guestbook-form') as HTMLFormElement;
+  const signInPrompt = document.getElementById('sign-in-prompt');
+  const messageInput = document.getElementById('message') as HTMLTextAreaElement;
+  const charCount = document.getElementById('char-count');
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+  const statusMessage = document.getElementById('status-message');
+  const formUserAvatar = document.getElementById('form-user-avatar') as HTMLImageElement;
+  const formUserName = document.getElementById('form-user-name');
+
+  // Check auth state and show/hide form
+  async function updateFormVisibility() {
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (user) {
+      form?.classList.remove('hidden');
+      signInPrompt?.classList.add('hidden');
+
+      // Update form user info
+      if (formUserAvatar) {
+        formUserAvatar.src = user.user_metadata.avatar_url || user.user_metadata.picture || '';
+      }
+      if (formUserName) {
+        formUserName.textContent = user.user_metadata.name || user.user_metadata.full_name || user.email || '';
+      }
+    } else {
+      form?.classList.add('hidden');
+      signInPrompt?.classList.remove('hidden');
+    }
+  }
+
+  // Load user info for existing entries
+  async function loadEntryUserInfo() {
+    const entries = document.querySelectorAll('.entry-card');
+    
+    for (const entry of entries) {
+      const userId = entry.getAttribute('data-user-id');
+      if (!userId) continue;
+
+      try {
+        // Fetch user from Supabase Admin API (public read access)
+        const { data, error } = await supabase
+          .rpc('get_user_metadata', { user_id: userId });
+
+        if (data) {
+          const avatar = entry.querySelector('.user-avatar');
+          const name = entry.querySelector('.user-name');
+
+          if (data.avatar_url || data.picture) {
+            const img = document.createElement('img');
+            img.src = data.avatar_url || data.picture;
+            img.alt = data.name || 'User';
+            img.className = 'w-10 h-10 rounded-full';
+            avatar?.replaceWith(img);
+          } else if (avatar) {
+            avatar.textContent = (data.name || data.email || '?').charAt(0).toUpperCase();
+          }
+
+          if (name) {
+            name.textContent = data.name || data.full_name || data.email || 'Anonymous';
+          }
+        }
+      } catch (error) {
+        console.error('Error loading user info:', error);
+      }
+    }
+  }
+
+  // Character counter
+  messageInput?.addEventListener('input', () => {
+    if (charCount) {
+      charCount.textContent = messageInput.value.length.toString();
+    }
+  });
+
+  // Form submission
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const message = messageInput.value.trim();
+
+    if (!message) {
+      showStatus('please write a message', 'error');
+      return;
+    }
+
+    // Get current user
+    const { data: { user } } = await supabase.auth.getUser();
+    
+    if (!user) {
+      showStatus('please sign in first', 'error');
+      return;
+    }
+
+    // Disable button
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'submitting...';
+
+    try {
+      const { error } = await supabase
+        .from('guestbook')
+        .insert([
+          { 
+            user_id: user.id,
+            message,
+            is_approved: false
+          }
+        ]);
+
+      if (error) throw error;
+
+      // Success
+      showStatus('thanks for signing! your message will appear after review 🎉', 'success');
+      form.reset();
+      if (charCount) charCount.textContent = '0';
+
+    } catch (error) {
+      console.error('Error:', error);
+      showStatus('oops! something went wrong. please try again.', 'error');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'sign the guestbook';
+    }
+  });
+
+  function showStatus(message: string, type: 'success' | 'error') {
+    if (!statusMessage) return;
+
+    statusMessage.textContent = message;
+    statusMessage.className = `text-sm text-center p-4 rounded-lg ${
+      type === 'success' 
+        ? 'bg-green-500/10 text-green-600' 
+        : 'bg-red-500/10 text-red-600'
+    }`;
+    statusMessage.classList.remove('hidden');
+
+    setTimeout(() => {
+      statusMessage.classList.add('hidden');
+    }, 5000);
+  }
+
+  // Initialize
+  updateFormVisibility();
+  loadEntryUserInfo();
+
+  // Listen for auth changes
+  supabase.auth.onAuthStateChange((event) => {
+    if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
+      updateFormVisibility();
+    }
+  });
+</script>

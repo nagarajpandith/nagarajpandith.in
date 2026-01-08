@@ -1,0 +1,238 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes');
+  return notes.map(note => ({
+    params: { slug: note.slug },
+    props: { note },
+  }));
+}
+
+const { note } = Astro.props;
+const { Content } = await note.render();
+
+const allNotes = await getCollection('notes');
+const relatedNotes = allNotes
+  .filter(n => n.slug !== note.slug && n.data.type === note.data.type)
+  .slice(0, 3);
+---
+
+<BaseLayout title={`${note.data.title} - notes`} description={`learning notes on ${note.data.title}`}>
+  <!-- Breadcrumb -->
+  <div class="container mx-auto px-4 pt-8 max-w-3xl">
+    <a href="/notes" class="link text-sm opacity-60 hover:opacity-100">
+      ← back to notes
+    </a>
+  </div>
+
+  <!-- Note Content -->
+  <article class="container mx-auto px-4 py-12 max-w-3xl">
+    <!-- Header -->
+    <header class="mb-12 animate-on-scroll">
+      <div class="inline-block px-3 py-1 rounded-full text-xs mb-4 bg-opacity-10" style="background-color: currentColor;">
+        {note.data.type === 'short' ? '⚡ flashcard' : '📚 deep dive'}
+      </div>
+      
+      <h1 class="heading-handwritten text-4xl md:text-6xl mb-4">
+        {note.data.title}
+      </h1>
+      
+      <p class="text-sm opacity-50">
+        last updated: {note.data.updatedAt}
+      </p>
+    </header>
+
+    <!-- Content -->
+    <div class={note.data.type === 'short' ? 'prose-flashcard' : 'prose-note'}>
+      <Content />
+    </div>
+
+    <!-- Related Notes -->
+    {relatedNotes.length > 0 && (
+      <div class="mt-20 pt-12 border-t" style="border-color: rgba(255, 255, 255, 0.1);">
+        <h3 class="text-sm opacity-50 mb-6">
+          {note.data.type === 'short' ? 'more flashcards' : 'more deep dives'}
+        </h3>
+        <div class="grid sm:grid-cols-3 gap-4">
+          {relatedNotes.map(related => (
+            <a 
+              href={`/notes/${related.slug}`}
+              class="block bg-opacity-5 hover:bg-opacity-10 rounded-xl p-4 transition-all group"
+              style="background-color: currentColor;"
+            >
+              <h4 class="font-medium group-hover:opacity-60 transition-opacity">
+                {related.data.title}
+              </h4>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+  </article>
+</BaseLayout>
+
+<style>
+  /* Flashcard styling - centered, card-like */
+  .prose-flashcard {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+    background-color: rgba(0, 0, 0, 0.02);
+    border-radius: 1rem;
+    line-height: 1.8;
+  }
+
+  body.light .prose-flashcard {
+    background-color: rgba(62, 39, 35, 0.02);
+  }
+
+  .prose-flashcard :global(p) {
+    font-size: 1.125rem;
+    margin-bottom: 1rem;
+    opacity: 0.9;
+  }
+
+  .prose-flashcard :global(strong) {
+    font-weight: 600;
+    opacity: 1;
+  }
+
+  .prose-flashcard :global(code) {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.9em;
+  }
+
+  body.light .prose-flashcard :global(code) {
+    background-color: rgba(62, 39, 35, 0.1);
+  }
+
+  /* Deep dive styling - full article layout */
+  .prose-note {
+    line-height: 1.8;
+  }
+
+  .prose-note :global(h2) {
+    font-family: var(--font-handwritten);
+    font-size: 2rem;
+    margin-top: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .prose-note :global(h3) {
+    font-family: var(--font-handwritten);
+    font-size: 1.5rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose-note :global(h4) {
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .prose-note :global(p) {
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+  }
+
+  .prose-note :global(ul),
+  .prose-note :global(ol) {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+  }
+
+  .prose-note :global(li) {
+    margin-bottom: 0.75rem;
+    opacity: 0.9;
+  }
+
+  .prose-note :global(li):has(input[type="checkbox"]) {
+    list-style: none;
+    margin-left: -2rem;
+  }
+
+  .prose-note :global(blockquote) {
+    border-left: 3px solid currentColor;
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    opacity: 0.7;
+    font-style: italic;
+  }
+
+  .prose-note :global(code) {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+  }
+
+  body.light .prose-note :global(code) {
+    background-color: rgba(62, 39, 35, 0.05);
+  }
+
+  .prose-note :global(pre) {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    overflow-x: auto;
+    margin: 2rem 0;
+    line-height: 1.6;
+  }
+
+  body.light .prose-note :global(pre) {
+    background-color: rgba(62, 39, 35, 0.05);
+  }
+
+  .prose-note :global(pre code) {
+    background-color: transparent;
+    padding: 0;
+    font-size: 0.875rem;
+  }
+
+  .prose-note :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+  }
+
+  .prose-note :global(th),
+  .prose-note :global(td) {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  body.light .prose-note :global(th),
+  body.light .prose-note :global(td) {
+    border-bottom-color: rgba(62, 39, 35, 0.1);
+  }
+
+  .prose-note :global(th) {
+    font-weight: 600;
+  }
+
+  .prose-note :global(img) {
+    border-radius: 0.75rem;
+    margin: 2rem 0;
+  }
+
+  .prose-note :global(hr) {
+    margin: 3rem 0;
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  body.light .prose-note :global(hr) {
+    border-top-color: rgba(62, 39, 35, 0.1);
+  }
+
+  body.light article .border-t {
+    border-color: rgba(62, 39, 35, 0.1) !important;
+  }
+</style>

@@ -1,0 +1,250 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { supabase } from '../../utils/supabase';
+
+// Get all tech blogs (not personal)
+const allBlogs = await getCollection('blog', ({ data }) => !data.isPersonal);
+
+// Sort by date (newest first)
+const blogs = allBlogs.sort((a, b) => 
+  new Date(b.data.publishedDate).getTime() - new Date(a.data.publishedDate).getTime()
+);
+
+// Get all unique tags
+const allTags = [...new Set(
+  blogs.flatMap(blog => 
+    blog.data.tags.split(',').map(tag => tag.trim())
+  )
+)].sort();
+
+// Fetch view counts
+const slugs = blogs.map(b => b.slug);
+const { data: viewsData } = await supabase
+  .from('blog_views')
+  .select('slug, views')
+  .in('slug', slugs);
+
+const viewsMap = new Map(viewsData?.map(v => [v.slug, v.views]) || []);
+
+// Calculate reading time
+function calculateReadingTime(content: string): number {
+  const wordsPerMinute = 200;
+  const words = content.trim().split(/\s+/).length;
+  return Math.ceil(words / wordsPerMinute);
+}
+---
+
+<BaseLayout title="blog - nagaraj pandith" description="thoughts on tech, development, and building things">
+  <!-- Hero with Search -->
+  <section class="container mx-auto px-4 py-20 max-w-4xl animate-on-scroll">
+    <div class="text-center mb-12">
+      <h1 class="heading-handwritten text-5xl md:text-7xl mb-6">blog</h1>
+      <p class="text-xl opacity-80 mb-8">
+        thoughts on tech, development, and building things
+      </p>
+      
+      <!-- Search Bar -->
+      <div class="relative max-w-2xl mx-auto mb-6">
+        <input 
+          type="text" 
+          id="search-input"
+          placeholder="search articles..."
+          class="w-full px-6 py-4 rounded-xl bg-opacity-5 border focus:outline-none focus:ring-2 focus:ring-opacity-50 transition-all"
+          style="background-color: currentColor; border-color: rgba(0, 0, 0, 0.1);"
+        />
+        <svg class="absolute right-6 top-1/2 transform -translate-y-1/2 w-5 h-5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+        </svg>
+      </div>
+
+      <!-- Personal Blog Hint -->
+      <p class="text-sm opacity-50">
+        psst... looking for 
+        <a href="/blog/personal" class="link opacity-70 hover:opacity-100">
+          personal stuff?
+        </a>
+      </p>
+    </div>
+
+    <!-- Filters & Sort -->
+    <div class="flex flex-col md:flex-row gap-4 mb-8">
+      <!-- Tag Filter -->
+      <select 
+        id="tag-filter"
+        class="px-4 py-2 rounded-lg bg-opacity-5 border cursor-pointer focus:outline-none"
+        style="background-color: currentColor; border-color: rgba(0, 0, 0, 0.1);"
+      >
+        <option value="">all topics</option>
+        {allTags.map(tag => (
+          <option value={tag}>{tag}</option>
+        ))}
+      </select>
+
+      <!-- Sort -->
+      <select 
+        id="sort-select"
+        class="px-4 py-2 rounded-lg bg-opacity-5 border cursor-pointer focus:outline-none"
+        style="background-color: currentColor; border-color: rgba(0, 0, 0, 0.1);"
+      >
+        <option value="latest">latest first</option>
+        <option value="popular">most viewed</option>
+        <option value="alphabetical">a → z</option>
+      </select>
+    </div>
+  </section>
+
+  <!-- Blog Grid -->
+  <section class="container mx-auto px-4 pb-20 max-w-6xl">
+    <div id="blog-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {blogs.map((blog) => {
+        const readingTime = calculateReadingTime(blog.body);
+        const views = viewsMap.get(blog.slug) || 0;
+        const tags = blog.data.tags.split(',').map(t => t.trim());
+
+        return (
+          <article 
+            class="blog-card group animate-on-scroll"
+            data-tags={tags.join(',')}
+            data-views={views}
+            data-title={blog.data.title.toLowerCase()}
+            data-date={new Date(blog.data.publishedDate).getTime()}
+          >
+            <a href={`/blog/${blog.slug}`} class="block">
+              <!-- Cover Image -->
+              <div class="relative overflow-hidden rounded-xl mb-4 aspect-video bg-opacity-5" style="background-color: currentColor;">
+                <img 
+                  src={blog.data.coverImage} 
+                  alt={blog.data.title}
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+              </div>
+
+              <!-- Content -->
+              <div class="space-y-3">
+                <h2 class="text-xl font-medium group-hover:opacity-60 transition-opacity">
+                  {blog.data.title}
+                </h2>
+                <p class="text-sm opacity-70 line-clamp-2">
+                  {blog.data.desc}
+                </p>
+
+                <!-- Meta -->
+                <div class="flex flex-wrap items-center gap-3 text-xs opacity-50">
+                  <span>{blog.data.publishedDate}</span>
+                  <span>•</span>
+                  <span>{readingTime} min read</span>
+                  <span>•</span>
+                  <span>{views} views</span>
+                </div>
+
+                <!-- Tags -->
+                <div class="flex flex-wrap gap-2">
+                  {tags.slice(0, 3).map(tag => (
+                    <span class="text-xs bg-opacity-5 px-2 py-1 rounded" style="background-color: currentColor;">
+                      {tag}
+                    </span>
+                  ))}
+                  {tags.length > 3 && (
+                    <span class="text-xs opacity-50">+{tags.length - 3}</span>
+                  )}
+                </div>
+              </div>
+            </a>
+          </article>
+        );
+      })}
+    </div>
+
+    <!-- No Results Message -->
+    <div id="no-results" class="hidden text-center py-20">
+      <p class="text-xl opacity-60">no articles found</p>
+      <p class="text-sm opacity-50 mt-2">try adjusting your filters</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  body.light #search-input,
+  body.light select {
+    background-color: rgba(62, 39, 35, 0.05) !important;
+    border-color: rgba(62, 39, 35, 0.1) !important;
+  }
+
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
+
+<script>
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+  const tagFilter = document.getElementById('tag-filter') as HTMLSelectElement;
+  const sortSelect = document.getElementById('sort-select') as HTMLSelectElement;
+  const blogGrid = document.getElementById('blog-grid');
+  const noResults = document.getElementById('no-results');
+  const blogCards = Array.from(document.querySelectorAll('.blog-card'));
+
+  function filterAndSort() {
+    const searchTerm = searchInput.value.toLowerCase();
+    const selectedTag = tagFilter.value.toLowerCase();
+    const sortBy = sortSelect.value;
+
+    // Filter
+    let visibleCards = blogCards.filter(card => {
+      const title = card.getAttribute('data-title') || '';
+      const tags = card.getAttribute('data-tags')?.toLowerCase() || '';
+      
+      const matchesSearch = title.includes(searchTerm);
+      const matchesTag = !selectedTag || tags.includes(selectedTag);
+      
+      return matchesSearch && matchesTag;
+    });
+
+    // Sort
+    if (sortBy === 'popular') {
+      visibleCards.sort((a, b) => {
+        const viewsA = parseInt(a.getAttribute('data-views') || '0');
+        const viewsB = parseInt(b.getAttribute('data-views') || '0');
+        return viewsB - viewsA;
+      });
+    } else if (sortBy === 'alphabetical') {
+      visibleCards.sort((a, b) => {
+        const titleA = a.getAttribute('data-title') || '';
+        const titleB = b.getAttribute('data-title') || '';
+        return titleA.localeCompare(titleB);
+      });
+    } else if (sortBy === 'latest') {
+      visibleCards.sort((a, b) => {
+        const dateA = parseInt(a.getAttribute('data-date') || '0');
+        const dateB = parseInt(b.getAttribute('data-date') || '0');
+        return dateB - dateA;
+      });
+    }
+
+    // Hide all cards
+    blogCards.forEach(card => {
+      (card as HTMLElement).style.display = 'none';
+    });
+
+    // Show filtered/sorted cards
+    if (visibleCards.length === 0) {
+      noResults?.classList.remove('hidden');
+      blogGrid?.classList.add('hidden');
+    } else {
+      noResults?.classList.add('hidden');
+      blogGrid?.classList.remove('hidden');
+      
+      visibleCards.forEach(card => {
+        (card as HTMLElement).style.display = 'block';
+        blogGrid?.appendChild(card);
+      });
+    }
+  }
+
+  searchInput?.addEventListener('input', filterAndSort);
+  tagFilter?.addEventListener('change', filterAndSort);
+  sortSelect?.addEventListener('change', filterAndSort);
+</script>

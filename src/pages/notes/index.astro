@@ -1,0 +1,107 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const allNotes = await getCollection('notes');
+
+// Separate by type
+const shortNotes = allNotes.filter(n => n.data.type === 'short').sort((a, b) => 
+  a.data.title.localeCompare(b.data.title)
+);
+
+const longNotes = allNotes.filter(n => n.data.type === 'long').sort((a, b) => 
+  new Date(b.data.updatedAt).getTime() - new Date(a.data.updatedAt).getTime()
+);
+---
+
+<BaseLayout title="notes - nagaraj pandith" description="learning notes, flashcards, and quick references">
+  <!-- Hero -->
+  <section class="container mx-auto px-4 py-20 max-w-4xl animate-on-scroll">
+    <h1 class="heading-handwritten text-5xl md:text-7xl mb-6">notes</h1>
+    <p class="text-xl opacity-80 max-w-2xl">
+      my digital garden. quick flashcards and detailed learning notes from what i've explored.
+    </p>
+  </section>
+
+  <!-- Stats -->
+  <section class="container mx-auto px-4 pb-12 max-w-4xl animate-on-scroll">
+    <div class="grid grid-cols-2 gap-6 max-w-md">
+      <div class="bg-opacity-5 rounded-xl p-6 text-center" style="background-color: currentColor;">
+        <div class="text-4xl font-medium mb-2">{shortNotes.length}</div>
+        <div class="text-sm opacity-60">flashcards</div>
+      </div>
+      <div class="bg-opacity-5 rounded-xl p-6 text-center" style="background-color: currentColor;">
+        <div class="text-4xl font-medium mb-2">{longNotes.length}</div>
+        <div class="text-sm opacity-60">deep dives</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Long Notes -->
+  <section class="container mx-auto px-4 py-12 max-w-4xl animate-on-scroll">
+    <h2 class="heading-handwritten text-3xl md:text-4xl mb-8">deep dives</h2>
+    
+    <div class="space-y-4">
+      {longNotes.map((note) => (
+        <a 
+          href={`/notes/${note.slug}`}
+          class="block group bg-opacity-5 hover:bg-opacity-10 rounded-xl p-6 transition-all"
+          style="background-color: currentColor;"
+        >
+          <div class="flex items-center justify-between">
+            <div>
+              <h3 class="text-xl font-medium group-hover:opacity-60 transition-opacity mb-2">
+                {note.data.title}
+              </h3>
+              <p class="text-sm opacity-50">
+                updated {note.data.updatedAt}
+              </p>
+            </div>
+            <svg class="w-5 h-5 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            </svg>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    {longNotes.length === 0 && (
+      <p class="text-center opacity-50 py-12">no deep dive notes yet</p>
+    )}
+  </section>
+
+  <!-- Short Notes / Flashcards -->
+  <section class="container mx-auto px-4 py-12 max-w-4xl animate-on-scroll">
+    <h2 class="heading-handwritten text-3xl md:text-4xl mb-8">flashcards</h2>
+    
+    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+      {shortNotes.map((note) => (
+        <a 
+          href={`/notes/${note.slug}`}
+          class="block group bg-opacity-5 hover:bg-opacity-10 rounded-xl p-6 text-center transition-all hover:scale-105"
+          style="background-color: currentColor;"
+        >
+          <h3 class="text-lg font-medium group-hover:opacity-60 transition-opacity">
+            {note.data.title}
+          </h3>
+        </a>
+      ))}
+    </div>
+
+    {shortNotes.length === 0 && (
+      <p class="text-center opacity-50 py-12">no flashcards yet</p>
+    )}
+  </section>
+
+  <!-- CTA -->
+  <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
+    <div class="text-center py-12 rounded-2xl bg-opacity-5" style="background-color: currentColor;">
+      <p class="text-lg opacity-70 mb-6">
+        these notes are living documents, constantly evolving as i learn
+      </p>
+      <p class="text-sm opacity-50">
+        spot an error? <a href="mailto:your@email.com" class="link">let me know</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,402 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { supabase } from '../utils/supabase';
+
+const projects = [
+  {
+    title: 'JabWeMeet',
+    img: '/static/png/jab-we-meet.png',
+    description:
+      'Built a multilingual video conferencing web app with real-time audio translation with spoken out audio and caption display. Generates meeting minutes in preferred language and allows users to access meeting transcriptions anytime.',
+    link: 'https://jabwemeet.vercel.app/',
+    github: 'swasthikshetty10/hackoverflow',
+    tags: [
+      'Next.js',
+      'Typescript',
+      'TailwindCSS',
+      'Pusher',
+      'Livekit',
+      'tRPC',
+      'MySQL',
+    ],
+  },
+  {
+    title: "Incridea'23",
+    img: '/static/png/incridea.png',
+    description:
+      "Developed full-stack typesafe website & paperless system for Incridea'23. Collaborated with the Tech team to create 7 intuitive dashboard panels & Event registration system. Implemented secure JWT user auth & verification system.",
+    link: 'http://incridea.in/',
+    github: 'incridea-23/incridea-client',
+    tags: [
+      'Next.js',
+      'Typescript',
+      'TailwindCSS',
+      'GraphQL',
+      'Framer Motion',
+      'Prisma',
+    ],
+  },
+  {
+    title: 'Live-stream Studio Booking',
+    img: '/static/png/live-stream.png',
+    description:
+      'Built a responsive full-stack booking system with automated notifications and admin hierarchies, deployed on Amazon EC2. Enables flexible filtering options, data export capabilities, and effectively prevents duplicate bookings.',
+    link: 'https://livestream.konkanischolarship.com/',
+    github: 'nagarajpandith/live-stream-studio-booking',
+    tags: ['Django', 'Bootstrap', 'SQLite', 'AWS EC2'],
+  },
+  {
+    title: 'Finite Loop Club - Website',
+    img: '/static/png/flc.png',
+    description:
+      'Community website with Beautiful UI, Integrated Payment gateway, Custom public user profiles, Digital Certificates & ID Cards, Admin Panel and more',
+    link: 'https://finiteloop.co.in/',
+    github: 'Finite-Loop-Club-NMAMIT/flc-website',
+    tags: [
+      'Next.js',
+      'tRPC',
+      'Typescript',
+      'React-Query',
+      'zod',
+      'Razorpay',
+      'Planetscale',
+    ],
+  },
+  {
+    title: 'Portfolio Website',
+    img: '/static/png/portfolio-img.png',
+    description:
+      'My Personal Website, Blog and Guestbook. Built with Next 14, Typescript, Vercel Postgres, MDX and more!',
+    link: 'https://nagarajpandith.in',
+    github: 'nagarajpandith/portfolio',
+    tags: ['Next.js', 'Typescript', 'MDX', 'Prisma', 'TailwindCSS'],
+  },
+  {
+    title: 'Aido',
+    img: '/static/png/aido.png',
+    description:
+      '3D multilingual chatbot with interactive gestures, contextual conversations, persistent chat history, and personalized medical and mental health support.',
+    link: 'https://aido-clone.vercel.app/',
+    github: 'nagarajpandith/aido',
+    tags: [
+      'Next.js',
+      'tRPC',
+      'Typescript',
+      'Google PaLM2',
+      'Cloud Run',
+      'Cloud SQL',
+      'Deepgram STT',
+      'ElevenLabs TTS',
+    ],
+  },
+  {
+    title: 'CAS',
+    img: '/static/png/cas.png',
+    description: 'Canteen Automation System (CAS) - DBMS Academic Mini Project',
+    link: 'https://cas.up.railway.app/',
+    github: 'nagarajpandith/cas',
+    tags: ['Django', 'TailwindCSS', 'PostgreSQL'],
+  },
+];
+
+const designs = [
+  '204036235',
+  '204035799',
+  '204035405',
+  '204035277',
+  '204035119',
+  '204035511',
+];
+
+// Fetch shots from Supabase storage
+let horizontalShots: string[] = [];
+let verticalShots: string[] = [];
+
+try {
+  const { data: horizontalFiles } = await supabase.storage
+    .from('shots')
+    .list('horizontal', { limit: 100 });
+  
+  const { data: verticalFiles } = await supabase.storage
+    .from('shots')
+    .list('vertical', { limit: 100 });
+
+  if (horizontalFiles) {
+    horizontalShots = horizontalFiles
+      .filter(file => !file.name.startsWith('.'))
+      .map(file => 
+        supabase.storage.from('shots').getPublicUrl(`horizontal/${file.name}`).data.publicUrl
+      );
+  }
+
+  if (verticalFiles) {
+    verticalShots = verticalFiles
+      .filter(file => !file.name.startsWith('.'))
+      .map(file => 
+        supabase.storage.from('shots').getPublicUrl(`vertical/${file.name}`).data.publicUrl
+      );
+  }
+} catch (error) {
+  console.error('Error fetching shots:', error);
+}
+
+const allShots = [...horizontalShots, ...verticalShots];
+---
+
+<BaseLayout title="work - nagaraj pandith" description="projects, designs, and photography by nagaraj pandith">
+  <!-- Hero -->
+  <section class="container mx-auto px-4 py-20 max-w-6xl animate-on-scroll">
+    <h1 class="heading-handwritten text-5xl md:text-7xl mb-6">my work</h1>
+    <p class="text-xl opacity-80 max-w-2xl">
+      a collection of projects i've built, designs i've crafted, and moments i've captured
+    </p>
+  </section>
+
+  <!-- Sticky Filter Bar -->
+  <div id="filter-bar" class="sticky top-16 z-40 backdrop-blur-md border-b transition-all" style="background-color: rgba(250, 248, 243, 0.8); border-color: rgba(62, 39, 35, 0.1);">
+    <div class="container mx-auto px-4 py-4 max-w-6xl">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <!-- Filter Chips -->
+        <div class="flex flex-wrap gap-3">
+          <button data-filter="projects" class="filter-chip active">
+            projects ({projects.length})
+          </button>
+          <button data-filter="designs" class="filter-chip">
+            designs ({designs.length})
+          </button>
+          <button data-filter="shots" class="filter-chip">
+            shots ({allShots.length})
+          </button>
+        </div>
+
+        <!-- Shuffle Button -->
+        <button id="shuffle-btn" class="text-sm opacity-60 hover:opacity-100 transition-opacity flex items-center gap-2">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+          </svg>
+          shuffle
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Projects Section -->
+  <section id="projects-section" class="container mx-auto px-4 py-16 max-w-6xl section-content">
+    <div class="space-y-16">
+      {projects.map((project, index) => (
+        <article class="grid md:grid-cols-2 gap-8 items-start animate-on-scroll" data-index={index}>
+          <!-- Project Image -->
+          <div class="relative group overflow-hidden rounded-xl aspect-video bg-opacity-5" style="background-color: currentColor;">
+            <a href={project.link} target="_blank" rel="noopener noreferrer">
+              <img 
+                src={project.img} 
+                alt={project.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
+              />
+            </a>
+          </div>
+
+          <!-- Project Details -->
+          <div class="space-y-4">
+            <div>
+              <h2 class="text-3xl font-medium mb-2 heading-handwritten">
+                {project.title}
+              </h2>
+              <p class="text-sm opacity-70 leading-relaxed">
+                {project.description}
+              </p>
+            </div>
+
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2">
+              {project.tags.map(tag => (
+                <span class="text-xs bg-opacity-10 px-3 py-1 rounded" style="background-color: currentColor;">
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <!-- Links -->
+            <div class="flex gap-4 pt-2">
+              <a 
+                href={project.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="btn-primary"
+              >
+                view live →
+              </a>
+              <a 
+                href={`https://github.com/${project.github}`}
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="btn-secondary"
+              >
+                github →
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Designs Section -->
+  <section id="designs-section" class="container mx-auto px-4 py-16 max-w-6xl section-content hidden">
+    <div class="grid md:grid-cols-2 gap-8">
+      {designs.map((designId, index) => (
+        <div class="rounded-xl overflow-hidden bg-opacity-5 animate-on-scroll" style="background-color: currentColor;" data-index={index}>
+          <iframe 
+            src={`https://www.behance.net/embed/project/${designId}?ilo0=1`}
+            height="316" 
+            allowfullscreen 
+            loading="lazy"
+            allow="clipboard-write" 
+            referrerpolicy="strict-origin-when-cross-origin"
+            class="w-full"
+          ></iframe>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Shots Section -->
+  <section id="shots-section" class="container mx-auto px-4 py-16 max-w-6xl section-content hidden">
+    <div class="columns-1 sm:columns-2 lg:columns-3 gap-4 space-y-4">
+      {allShots.map((shot, index) => (
+        <div class="break-inside-avoid animate-on-scroll" data-index={index}>
+          <img 
+            src={shot} 
+            alt="photography shot"
+            class="w-full rounded-lg hover:opacity-90 transition-opacity cursor-pointer"
+            loading="lazy"
+          />
+        </div>
+      ))}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  body.light #filter-bar {
+    background-color: rgba(250, 248, 243, 0.8) !important;
+    border-color: rgba(62, 39, 35, 0.1) !important;
+  }
+
+  body:not(.light) #filter-bar {
+    background-color: rgba(0, 0, 0, 0.8) !important;
+    border-color: rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .filter-chip {
+    padding: 0.5rem 1rem;
+    border-radius: 9999px;
+    font-size: 0.875rem;
+    transition: all 0.2s;
+    background-color: rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+  }
+
+  .filter-chip:hover {
+    opacity: 0.7;
+  }
+
+  .filter-chip.active {
+    background-color: currentColor;
+    color: var(--color-light-bg);
+  }
+
+  body:not(.light) .filter-chip {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  body:not(.light) .filter-chip.active {
+    color: var(--color-dark-bg);
+  }
+
+  /* Masonry layout for shots */
+  .columns-1 {
+    column-count: 1;
+  }
+  
+  @media (min-width: 640px) {
+    .columns-2 {
+      column-count: 2;
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    .columns-3 {
+      column-count: 3;
+    }
+  }
+</style>
+
+<script>
+  // Filter functionality
+  const filterChips = document.querySelectorAll('.filter-chip');
+  const sections = document.querySelectorAll('.section-content');
+  const shuffleBtn = document.getElementById('shuffle-btn');
+  
+  let currentFilter = 'projects';
+
+  filterChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const filter = chip.getAttribute('data-filter');
+      currentFilter = filter;
+      
+      // Update active state
+      filterChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      
+      // Show/hide sections
+      sections.forEach(section => {
+        if (section.id === `${filter}-section`) {
+          section.classList.remove('hidden');
+        } else {
+          section.classList.add('hidden');
+        }
+      });
+    });
+  });
+
+  // Shuffle functionality
+  shuffleBtn?.addEventListener('click', () => {
+    const activeSection = document.getElementById(`${currentFilter}-section`);
+    if (!activeSection) return;
+
+    const items = Array.from(activeSection.querySelectorAll('[data-index]'));
+    
+    // Shuffle array
+    for (let i = items.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = items[i];
+      items[i] = items[j];
+      items[j] = temp;
+    }
+
+    // Re-append in shuffled order
+    const container = items[0]?.parentElement;
+    if (container) {
+      items.forEach(item => {
+        container.appendChild(item);
+      });
+    }
+
+    // Visual feedback
+    shuffleBtn.style.transform = 'rotate(180deg)';
+    setTimeout(() => {
+      shuffleBtn.style.transform = 'rotate(0deg)';
+    }, 300);
+  });
+
+  // Sticky filter bar shadow on scroll
+  const filterBar = document.getElementById('filter-bar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+      filterBar?.classList.add('shadow-lg');
+    } else {
+      filterBar?.classList.remove('shadow-lg');
+    }
+  });
+</script>

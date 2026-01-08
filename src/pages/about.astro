@@ -1,0 +1,284 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const workExperience = [
+  {
+    company: 'Wipfli India LLP',
+    roles: [
+      { title: 'Engineer II', period: 'Oct 2024 - Present', duration: 'ongoing' },
+      { title: 'Engineer I', period: 'Jun 2024 - Oct 2024', duration: '5 months' },
+      { title: 'Engineer I - Trainee', period: 'Mar 2024 - May 2024', duration: '3 months' }
+    ],
+    description: 'working with microsoft tech stack, specializing in javascript. built pcf controls with react, azure logic apps, c# .net plugins, power platform apps, dataverse customizations, and d365 implementations. also exploring solution design and architecture.',
+    current: true
+  },
+  {
+    company: 'Forent Inc.',
+    roles: [
+      { title: 'Software Engineer Intern', period: 'Nov 2022 - Jan 2023', duration: '3 months' }
+    ],
+    description: 'migrated excamp project from html/bootstrap to next.js with typescript & sass. focused on performance optimization and user experience. followed agile development using jira.',
+    current: false
+  }
+];
+
+const primaryTech = [
+  { name: 'React', icon: '⚛️' },
+  { name: 'Next.js', icon: '▲' },
+  { name: 'TypeScript', icon: '📘' },
+  { name: 'Django', icon: '🐍' },
+  { name: 'Tailwind CSS', icon: '🎨' },
+  { name: 'PostgreSQL', icon: '🐘' },
+  { name: 'Git', icon: '🔀' },
+  { name: 'C# .NET', icon: '💜' }
+];
+
+const achievements = [
+  {
+    title: 'Winner - Hackoverflow 1.0',
+    description: '3-day national-level hackathon at pillai hoc, mumbai',
+    year: '2024'
+  },
+  {
+    title: 'Track Winner - Hackverse 4.0 (AI Track)',
+    description: '24hr national-level hackathon at nitk',
+    year: '2024'
+  },
+  {
+    title: 'Special Prize - NivHack',
+    description: 'most innovative approach at niveus solutions, mangalore',
+    year: '2023'
+  },
+  {
+    title: 'Winner - Web Ally',
+    description: '6hr website design contest at sjec mangalore',
+    year: '2023'
+  }
+];
+
+const communityWork = [
+  {
+    role: 'Judge',
+    events: ['HackXpo S03', 'Hackfest 2025'],
+    description: 'evaluated projects and provided feedback to student teams'
+  },
+  {
+    role: 'Mentor & Judge',
+    events: ['Innovex 2025'],
+    description: 'guided teams and judged final presentations'
+  },
+  {
+    role: 'Interviewer',
+    events: ['Wipfli Recruitment Drive'],
+    description: 'conducted technical interviews for engineering positions'
+  },
+  {
+    role: 'Workshop Conductor',
+    events: ['Git & GitHub Workshop (65+ students)', 'Open-source Contributions Workshop (70+ students)'],
+    description: 'empowered students with version control and collaboration skills'
+  },
+  {
+    role: 'Vice President - Coding Club',
+    events: ['Month-long Online Hackathon (20+ teams)'],
+    description: 'led core team in organizing college hackathon'
+  },
+  {
+    role: 'Skill Lab Trainer',
+    events: ['Web Development & Git Training for Freshers'],
+    description: 'trained incoming students in web fundamentals'
+  }
+];
+
+const quirks = [
+  { emoji: '🍦', text: 'bribery currency: chocolate ice cream' },
+  { emoji: '🍛', text: 'also accepts: chicken biryani' },
+  { emoji: '🧭', text: 'directionally challenged (GPS is my best friend)' },
+  { emoji: '🎮', text: 'terrible motor coordination in mini-games (makes friends laugh)' },
+  { emoji: '😺', text: 'cat lover (they understand my introvert energy)' },
+  { emoji: '🎬', text: 'crime thriller enthusiast' },
+  { emoji: '🏠', text: 'infj-t with weak social battery' },
+  { emoji: '📚', text: 'obsessive documenter (sometimes a control freak about it)' },
+  { emoji: '🍳', text: 'recently learned to cook (still learning)' },
+  { emoji: '💗', text: 'secretly loves pink & lavender (but keeping this site minimal)' }
+];
+---
+
+<BaseLayout title="about - nagaraj pandith" description="full-stack developer obsessed with clean code, documentation, and making things work elegantly">
+  <!-- Hero -->
+  <section class="container mx-auto px-4 py-20 max-w-4xl animate-on-scroll">
+    <h1 class="heading-handwritten text-5xl md:text-7xl mb-8">about me</h1>
+    <div class="text-lg md:text-xl opacity-90 leading-relaxed space-y-6">
+      <p>
+        hey there! i'm nagaraj pandith, but you might know me as <span class="opacity-60">hashclan</span> on the internet. i'm a full-stack developer from india who gets unreasonably excited about clean code and elegant solutions.
+      </p>
+      <p>
+        by day, i'm building things at wipfli india. by night, i'm either debugging something that definitely worked yesterday, getting lost in crime thrillers, or documenting every tiny detail of what i learned (sometimes to an obsessive degree).
+      </p>
+      <p>
+        i believe good software should be like good design — invisible when it works, obvious when it doesn't. my approach: user-centric design, heavy documentation, and debugging until it's perfect.
+      </p>
+    </div>
+  </section>
+
+  <!-- Work Experience Timeline -->
+  <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
+    <h2 class="heading-handwritten text-4xl md:text-5xl mb-12">the journey</h2>
+    
+    <div class="space-y-12">
+      {workExperience.map((job) => (
+        <article class="relative pl-8 border-l-2" style="border-color: rgba(255, 255, 255, 0.1);">
+          {job.current && (
+            <div class="absolute -left-2 top-0 w-3 h-3 rounded-full bg-current animate-pulse"></div>
+          )}
+          <div class="mb-4">
+            <h3 class="text-2xl font-medium mb-2">{job.company}</h3>
+            <div class="space-y-1 mb-3">
+              {job.roles.map((role) => (
+                <div class="flex flex-col sm:flex-row sm:items-center sm:gap-3 text-sm opacity-70">
+                  <span class="font-medium">{role.title}</span>
+                  <span class="hidden sm:inline opacity-50">•</span>
+                  <span>{role.period}</span>
+                  <span class="hidden sm:inline opacity-50">•</span>
+                  <span class="opacity-50">{role.duration}</span>
+                </div>
+              ))}
+            </div>
+            <p class="opacity-80 leading-relaxed">{job.description}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Tech Stack -->
+  <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
+    <h2 class="heading-handwritten text-4xl md:text-5xl mb-12">the craft</h2>
+    
+    <p class="text-lg opacity-80 mb-8">
+      i primarily work with modern javascript frameworks and python. here's what's in my toolkit:
+    </p>
+
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
+      {primaryTech.map((tech) => (
+        <div class="bg-opacity-5 rounded-lg p-4 text-center hover:bg-opacity-10 transition-all" style="background-color: currentColor;">
+          <div class="text-3xl mb-2">{tech.icon}</div>
+          <div class="text-sm font-medium">{tech.name}</div>
+        </div>
+      ))}
+    </div>
+
+    <p class="text-sm opacity-60">
+      currently learning: <span class="font-medium">htmx</span> and <span class="font-medium">golang</span>
+    </p>
+
+    <div class="mt-6">
+      <a href="/resume.pdf" target="_blank" class="link text-sm">
+        see full tech stack in resume →
+      </a>
+    </div>
+  </section>
+
+  <!-- Achievements -->
+  <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
+    <h2 class="heading-handwritten text-4xl md:text-5xl mb-12">the wins</h2>
+    
+    <div class="grid sm:grid-cols-2 gap-6">
+      {achievements.map((achievement) => (
+        <article class="bg-opacity-5 rounded-lg p-6 hover:bg-opacity-10 transition-all" style="background-color: currentColor;">
+          <div class="flex items-start justify-between mb-3">
+            <h3 class="font-medium text-lg flex-1">{achievement.title}</h3>
+            <span class="text-sm opacity-50 shrink-0 ml-4">{achievement.year}</span>
+          </div>
+          <p class="text-sm opacity-70">{achievement.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Community Involvement -->
+  <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
+    <div class="mb-12">
+      <h2 class="heading-handwritten text-4xl md:text-5xl mb-2">community involvement</h2>
+      <p class="text-lg opacity-60">giving back</p>
+    </div>
+    
+    <div class="space-y-6">
+      {communityWork.map((work) => (
+        <article class="border-b pb-6 last:border-b-0" style="border-color: rgba(255, 255, 255, 0.1);">
+          <div class="flex flex-col sm:flex-row sm:items-start gap-4 mb-3">
+            <h3 class="font-medium text-lg shrink-0">{work.role}</h3>
+            <div class="flex flex-wrap gap-2">
+              {work.events.map((event) => (
+                <span class="text-xs bg-opacity-5 px-3 py-1 rounded" style="background-color: currentColor;">
+                  {event}
+                </span>
+              ))}
+            </div>
+          </div>
+          <p class="text-sm opacity-70">{work.description}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Quirks (Hidden Easter Egg Section) -->
+  <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
+    <details class="group">
+      <summary class="cursor-pointer list-none">
+        <div class="flex items-center justify-between py-4 hover:opacity-70 transition-opacity">
+          <h2 class="heading-handwritten text-4xl md:text-5xl">the quirks</h2>
+          <span class="text-2xl transform group-open:rotate-180 transition-transform">↓</span>
+        </div>
+      </summary>
+      
+      <div class="pt-8 pb-4">
+        <p class="text-lg opacity-80 mb-8">
+          some things you should know before hiring me (or bribing me):
+        </p>
+        <div class="grid sm:grid-cols-2 gap-4">
+          {quirks.map((quirk) => (
+            <div class="flex items-start gap-3 bg-opacity-5 rounded-lg p-4" style="background-color: currentColor;">
+              <span class="text-2xl shrink-0">{quirk.emoji}</span>
+              <p class="text-sm opacity-80 pt-1">{quirk.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- CTA -->
+  <section class="container mx-auto px-4 py-20 max-w-4xl animate-on-scroll">
+    <div class="text-center py-16 rounded-2xl bg-opacity-5" style="background-color: currentColor;">
+      <h2 class="heading-handwritten text-3xl md:text-5xl mb-6">
+        want to work together?
+      </h2>
+      <p class="text-lg opacity-70 mb-8">
+        i'm always open to interesting projects and collaborations
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/freelance" class="btn-primary">
+          hire me
+        </a>
+        <a href="/work" class="btn-secondary">
+          see my work
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  body.light article {
+    border-color: rgba(62, 39, 35, 0.1) !important;
+  }
+  
+  body.light .border-l-2 {
+    border-color: rgba(62, 39, 35, 0.1) !important;
+  }
+
+  /* Collapsible quirks section */
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

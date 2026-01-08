@@ -1,0 +1,598 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import AuthButton from '../../components/AuthButton.astro';
+import { supabase } from '../../utils/supabase';
+
+export async function getStaticPaths() {
+  const blogs = await getCollection('blog');
+  return blogs.map(blog => ({
+    params: { slug: blog.slug },
+    props: { blog },
+  }));
+}
+
+const { blog } = Astro.props;
+const { Content, headings } = await blog.render();
+
+// Calculate reading time
+function calculateReadingTime(content: string): number {
+  const wordsPerMinute = 200;
+  const words = content.trim().split(/\s+/).length;
+  return Math.ceil(words / wordsPerMinute);
+}
+
+const readingTime = calculateReadingTime(blog.body);
+
+// Increment view count
+await supabase.rpc('increment_blog_view', { blog_slug: blog.slug }).catch(() => {
+  // If function doesn't exist, try upsert
+  supabase.from('blog_views').upsert({ 
+    slug: blog.slug, 
+    views: 1 
+  }, { 
+    onConflict: 'slug',
+    ignoreDuplicates: false 
+  });
+});
+
+// Get view count
+const { data: viewData } = await supabase
+  .from('blog_views')
+  .select('views')
+  .eq('slug', blog.slug)
+  .single();
+
+const views = viewData?.views || 0;
+
+// Get next blog if specified
+let nextBlog = null;
+if (blog.data.nextSlug) {
+  const allBlogs = await getCollection('blog');
+  nextBlog = allBlogs.find(b => b.slug === blog.data.nextSlug);
+}
+
+const tags = blog.data.tags.split(',').map(t => t.trim());
+const shareUrl = `https://nagarajpandith.in/blog/${blog.slug}`;
+const shareText = encodeURIComponent(blog.data.title);
+
+// Fetch approved comments for this blog
+const { data: comments } = await supabase
+  .from('blog_comments')
+  .select('*')
+  .eq('blog_slug', blog.slug)
+  .eq('is_approved', true)
+  .order('created_at', { ascending: true });
+
+const blogComments = comments || [];
+
+// Format date
+function formatDate(dateString: string): string {
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffInSeconds = Math.floor((now.getTime() - date.getTime()) / 1000);
+  
+  if (diffInSeconds < 60) return 'just now';
+  if (diffInSeconds < 3600) return `${Math.floor(diffInSeconds / 60)} min ago`;
+  if (diffInSeconds < 86400) return `${Math.floor(diffInSeconds / 3600)} hr ago`;
+  if (diffInSeconds < 604800) return `${Math.floor(diffInSeconds / 86400)} days ago`;
+  
+  return date.toLocaleDateString('en-US', { 
+    month: 'short', 
+    day: 'numeric', 
+    year: date.getFullYear() !== now.getFullYear() ? 'numeric' : undefined 
+  });
+}
+---
+
+<BaseLayout title={`${blog.data.title} - nagaraj pandith`} description={blog.data.desc}>
+  <!-- Breadcrumb -->
+  <div class="container mx-auto px-4 pt-8 max-w-4xl">
+    <a href={blog.data.isPersonal ? '/blog/personal' : '/blog'} class="link text-sm opacity-60 hover:opacity-100">
+      ← back to {blog.data.isPersonal ? 'personal' : 'blog'}
+    </a>
+  </div>
+
+  <!-- Article Header -->
+  <article class="container mx-auto px-4 py-12 max-w-4xl">
+    <header class="mb-12 animate-on-scroll">
+      <!-- Cover Image -->
+      <div class="relative overflow-hidden rounded-2xl aspect-video mb-8 bg-opacity-5" style="background-color: currentColor;">
+        <img 
+          src={blog.data.coverImage} 
+          alt={blog.data.title}
+          class="w-full h-full object-cover"
+        />
+      </div>
+
+      <!-- Title & Meta -->
+      <h1 class="heading-handwritten text-4xl md:text-6xl mb-6 text-center">
+        {blog.data.title}
+      </h1>
+      
+      <p class="text-xl opacity-80 text-center mb-8">
+        {blog.data.desc}
+      </p>
+
+      <div class="flex flex-wrap justify-center items-center gap-4 text-sm opacity-60 mb-6">
+        <span>{blog.data.publishedDate}</span>
+        <span>•</span>
+        <span>{readingTime} min read</span>
+        <span>•</span>
+        <span>{views} views</span>
+      </div>
+
+      <!-- Tags -->
+      <div class="flex flex-wrap justify-center gap-2 mb-8">
+        {tags.map(tag => (
+          <span class="text-xs bg-opacity-10 px-3 py-1 rounded" style="background-color: currentColor;">
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      <!-- Share Buttons -->
+      <div class="flex justify-center gap-4">
+        <a 
+          href={`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link text-sm flex items-center gap-2"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+          </svg>
+          share on x
+        </a>
+        <a 
+          href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link text-sm flex items-center gap-2"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+          </svg>
+          share on linkedin
+        </a>
+        <button 
+          id="copy-link"
+          class="link text-sm flex items-center gap-2"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path>
+          </svg>
+          copy link
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content with Floating TOC -->
+    <div class="relative">
+      <!-- Floating TOC (Desktop Only) -->
+      {headings.length > 0 && (
+        <aside class="hidden xl:block fixed top-32 right-8 w-64 max-h-[calc(100vh-200px)] overflow-y-auto">
+          <nav id="toc" class="bg-opacity-5 rounded-xl p-6 sticky top-32" style="background-color: currentColor;">
+            <h3 class="text-sm font-medium mb-4 opacity-60">table of contents</h3>
+            <ul class="space-y-2 text-sm">
+              {headings.map(heading => (
+                <li style={`padding-left: ${(heading.depth - 2) * 1}rem`}>
+                  <a 
+                    href={`#${heading.slug}`}
+                    class="toc-link link opacity-50 hover:opacity-100 transition-opacity block"
+                  >
+                    {heading.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </aside>
+      )}
+
+      <!-- Article Content -->
+      <div class="prose-custom max-w-2xl mx-auto">
+        <Content />
+      </div>
+    </div>
+
+    <!-- Next Article -->
+    {nextBlog && (
+      <div class="mt-20 pt-12 border-t" style="border-color: rgba(255, 255, 255, 0.1);">
+        <p class="text-sm opacity-50 mb-4">read next</p>
+        <a href={`/blog/${nextBlog.slug}`} class="group block">
+          <h3 class="text-2xl font-medium group-hover:opacity-60 transition-opacity mb-2">
+            {nextBlog.data.title}
+          </h3>
+          <p class="opacity-70">
+            {nextBlog.data.desc}
+          </p>
+        </a>
+      </div>
+    )}
+
+    <!-- Comments Section -->
+    <div class="mt-20 pt-12 border-t" style="border-color: rgba(255, 255, 255, 0.1);">
+      <div class="flex items-center justify-between mb-8">
+        <h3 class="heading-handwritten text-3xl">comments</h3>
+        <span class="text-sm opacity-50">{blogComments.length} {blogComments.length === 1 ? 'comment' : 'comments'}</span>
+      </div>
+
+      <!-- Auth prompt / Comment form -->
+      <div class="mb-12">
+        <!-- Sign in prompt (shown when not signed in) -->
+        <div id="comment-sign-in-prompt" class="hidden bg-opacity-5 rounded-xl p-8 text-center" style="background-color: currentColor;">
+          <p class="opacity-70 mb-4">sign in to leave a comment</p>
+          <AuthButton />
+        </div>
+
+        <!-- Comment form (shown when signed in) -->
+        <form id="comment-form" class="hidden bg-opacity-5 rounded-xl p-6" style="background-color: currentColor;">
+          <div class="space-y-4">
+            <!-- User info -->
+            <div class="flex items-center gap-3">
+              <img id="comment-user-avatar" src="" alt="You" class="w-8 h-8 rounded-full" />
+              <span id="comment-user-name" class="text-sm font-medium"></span>
+            </div>
+
+            <!-- Comment textarea -->
+            <textarea 
+              id="comment-text" 
+              name="comment"
+              required
+              maxlength="1000"
+              rows="4"
+              placeholder="share your thoughts..."
+              class="w-full px-4 py-3 rounded-lg bg-opacity-5 border focus:outline-none focus:ring-2 focus:ring-opacity-50 transition-all resize-none"
+              style="background-color: currentColor; border-color: rgba(0, 0, 0, 0.1);"
+            ></textarea>
+            <div class="flex justify-between items-center">
+              <p class="text-xs opacity-50">
+                <span id="comment-char-count">0</span>/1000 characters
+              </p>
+              <button 
+                type="submit"
+                id="comment-submit-btn"
+                class="btn-primary"
+              >
+                post comment
+              </button>
+            </div>
+
+            <!-- Status message -->
+            <div id="comment-status" class="hidden text-sm text-center"></div>
+          </div>
+        </form>
+      </div>
+
+      <!-- Comments list -->
+      {blogComments.length === 0 ? (
+        <div class="text-center py-12 opacity-50">
+          <p>no comments yet. be the first to share your thoughts!</p>
+        </div>
+      ) : (
+        <div class="space-y-6" id="comments-list">
+          {blogComments.map((comment) => (
+            <article 
+              class="comment-card bg-opacity-5 rounded-xl p-6 hover:bg-opacity-10 transition-all"
+              style="background-color: currentColor;"
+              data-user-id={comment.user_id}
+            >
+              <div class="flex items-start gap-4 mb-4">
+                <div class="comment-avatar w-10 h-10 rounded-full bg-opacity-20 flex items-center justify-center font-medium" style="background-color: currentColor;">
+                  ?
+                </div>
+                <div class="flex-1">
+                  <div class="flex items-center gap-3 mb-1">
+                    <span class="comment-name font-medium">loading...</span>
+                    <span class="text-xs opacity-50">{formatDate(comment.created_at)}</span>
+                  </div>
+                  <p class="opacity-80 leading-relaxed whitespace-pre-wrap">
+                    {comment.comment}
+                  </p>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      )}
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  /* Prose Styling */
+  .prose-custom {
+    line-height: 1.8;
+  }
+
+  .prose-custom :global(h1),
+  .prose-custom :global(h2),
+  .prose-custom :global(h3),
+  .prose-custom :global(h4) {
+    font-family: var(--font-handwritten);
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.3;
+  }
+
+  .prose-custom :global(h2) {
+    font-size: 2rem;
+  }
+
+  .prose-custom :global(h3) {
+    font-size: 1.5rem;
+  }
+
+  .prose-custom :global(p) {
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+  }
+
+  .prose-custom :global(a) {
+    text-decoration: underline;
+    opacity: 0.8;
+  }
+
+  .prose-custom :global(a:hover) {
+    opacity: 1;
+  }
+
+  .prose-custom :global(ul),
+  .prose-custom :global(ol) {
+    margin: 1.5rem 0;
+    padding-left: 2rem;
+  }
+
+  .prose-custom :global(li) {
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+  }
+
+  .prose-custom :global(blockquote) {
+    border-left: 3px solid currentColor;
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    opacity: 0.7;
+    font-style: italic;
+  }
+
+  .prose-custom :global(code) {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.875em;
+  }
+
+  body.light .prose-custom :global(code) {
+    background-color: rgba(62, 39, 35, 0.05);
+  }
+
+  .prose-custom :global(pre) {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    border-radius: 0.75rem;
+    overflow-x: auto;
+    margin: 2rem 0;
+  }
+
+  body.light .prose-custom :global(pre) {
+    background-color: rgba(62, 39, 35, 0.05);
+  }
+
+  .prose-custom :global(pre code) {
+    background-color: transparent;
+    padding: 0;
+  }
+
+  .prose-custom :global(img) {
+    border-radius: 0.75rem;
+    margin: 2rem 0;
+  }
+
+  body.light article .border-t {
+    border-color: rgba(62, 39, 35, 0.1) !important;
+  }
+
+  body.light textarea {
+    background-color: rgba(62, 39, 35, 0.05) !important;
+    border-color: rgba(62, 39, 35, 0.1) !important;
+  }
+
+  /* Active TOC link */
+  .toc-link.active {
+    opacity: 1 !important;
+    font-weight: 500;
+  }
+</style>
+
+<script define:vars={{ shareUrl, blogSlug: blog.slug }}>
+  import { supabase } from '../../utils/supabase';
+
+  // Copy link functionality
+  const copyBtn = document.getElementById('copy-link');
+  copyBtn?.addEventListener('click', async () => {
+    await navigator.clipboard.writeText(shareUrl);
+    const originalText = copyBtn.innerHTML;
+    copyBtn.innerHTML = '✓ copied!';
+    setTimeout(() => {
+      copyBtn.innerHTML = originalText;
+    }, 2000);
+  });
+
+  // TOC active state on scroll
+  const tocLinks = document.querySelectorAll('.toc-link');
+  const headings = Array.from(document.querySelectorAll('h2, h3, h4, h5, h6')).filter(h => h.id);
+
+  function updateActiveTOC() {
+    let current = '';
+    
+    headings.forEach(heading => {
+      const rect = heading.getBoundingClientRect();
+      if (rect.top < 200) {
+        current = heading.id;
+      }
+    });
+
+    tocLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === `#${current}`) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  if (headings.length > 0) {
+    window.addEventListener('scroll', updateActiveTOC);
+    updateActiveTOC();
+  }
+
+  // === COMMENTS FUNCTIONALITY ===
+  
+  const commentForm = document.getElementById('comment-form') as HTMLFormElement;
+  const commentSignInPrompt = document.getElementById('comment-sign-in-prompt');
+  const commentText = document.getElementById('comment-text') as HTMLTextAreaElement;
+  const commentCharCount = document.getElementById('comment-char-count');
+  const commentSubmitBtn = document.getElementById('comment-submit-btn') as HTMLButtonElement;
+  const commentStatus = document.getElementById('comment-status');
+  const commentUserAvatar = document.getElementById('comment-user-avatar') as HTMLImageElement;
+  const commentUserName = document.getElementById('comment-user-name');
+
+  // Check auth and show/hide form
+  async function updateCommentFormVisibility() {
+    const { data: { user } } = await supabase.auth.getUser();
+
+    if (user) {
+      commentForm?.classList.remove('hidden');
+      commentSignInPrompt?.classList.add('hidden');
+
+      // Update user info
+      if (commentUserAvatar) {
+        commentUserAvatar.src = user.user_metadata.avatar_url || user.user_metadata.picture || '';
+      }
+      if (commentUserName) {
+        commentUserName.textContent = user.user_metadata.name || user.user_metadata.full_name || user.email || '';
+      }
+    } else {
+      commentForm?.classList.add('hidden');
+      commentSignInPrompt?.classList.remove('hidden');
+    }
+  }
+
+  // Load user info for existing comments
+  async function loadCommentUserInfo() {
+    const comments = document.querySelectorAll('.comment-card');
+    
+    for (const comment of comments) {
+      const userId = comment.getAttribute('data-user-id');
+      if (!userId) continue;
+
+      try {
+        const { data } = await supabase.rpc('get_user_metadata', { user_id: userId });
+
+        if (data) {
+          const avatar = comment.querySelector('.comment-avatar');
+          const name = comment.querySelector('.comment-name');
+
+          if (data.avatar_url || data.picture) {
+            const img = document.createElement('img');
+            img.src = data.avatar_url || data.picture;
+            img.alt = data.name || 'User';
+            img.className = 'w-10 h-10 rounded-full';
+            avatar?.replaceWith(img);
+          } else if (avatar) {
+            avatar.textContent = (data.name || data.email || '?').charAt(0).toUpperCase();
+          }
+
+          if (name) {
+            name.textContent = data.name || data.full_name || data.email || 'Anonymous';
+          }
+        }
+      } catch (error) {
+        console.error('Error loading comment user info:', error);
+      }
+    }
+  }
+
+  // Character counter
+  commentText?.addEventListener('input', () => {
+    if (commentCharCount) {
+      commentCharCount.textContent = commentText.value.length.toString();
+    }
+  });
+
+  // Submit comment
+  commentForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const comment = commentText.value.trim();
+
+    if (!comment) {
+      showCommentStatus('please write a comment', 'error');
+      return;
+    }
+
+    const { data: { user } } = await supabase.auth.getUser();
+    
+    if (!user) {
+      showCommentStatus('please sign in first', 'error');
+      return;
+    }
+
+    commentSubmitBtn.disabled = true;
+    commentSubmitBtn.textContent = 'posting...';
+
+    try {
+      const { error } = await supabase
+        .from('blog_comments')
+        .insert([
+          { 
+            blog_slug: blogSlug,
+            user_id: user.id,
+            comment,
+            is_approved: false
+          }
+        ]);
+
+      if (error) throw error;
+
+      showCommentStatus('thanks for commenting! it will appear after review 🎉', 'success');
+      commentForm.reset();
+      if (commentCharCount) commentCharCount.textContent = '0';
+
+    } catch (error) {
+      console.error('Error:', error);
+      showCommentStatus('oops! something went wrong. please try again.', 'error');
+    } finally {
+      commentSubmitBtn.disabled = false;
+      commentSubmitBtn.textContent = 'post comment';
+    }
+  });
+
+  function showCommentStatus(message: string, type: 'success' | 'error') {
+    if (!commentStatus) return;
+
+    commentStatus.textContent = message;
+    commentStatus.className = `text-sm text-center p-4 rounded-lg ${
+      type === 'success' 
+        ? 'bg-green-500/10 text-green-600' 
+        : 'bg-red-500/10 text-red-600'
+    }`;
+    commentStatus.classList.remove('hidden');
+
+    setTimeout(() => {
+      commentStatus.classList.add('hidden');
+    }, 5000);
+  }
+
+  // Initialize
+  updateCommentFormVisibility();
+  loadCommentUserInfo();
+
+  // Listen for auth changes
+  supabase.auth.onAuthStateChange((event) => {
+    if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
+      updateCommentFormVisibility();
+    }
+  });
+</script>

@@ -1,0 +1,302 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const software = [
+  {
+    name: 'Notion',
+    desc: 'The most important thing that has kept my life together since 3 years',
+    url: 'https://www.notion.so/',
+    category: 'productivity'
+  },
+  {
+    name: 'Excalidraw',
+    desc: 'Super handy tool I use to jot down my ideas all the time',
+    url: 'https://excalidraw.com/',
+    category: 'design'
+  },
+  {
+    name: 'VS Code',
+    desc: 'The best one out there! I use it all the time.',
+    url: 'https://code.visualstudio.com/',
+    category: 'development'
+  },
+  {
+    name: "SynthWave'84",
+    desc: 'A Synthwave-inspired colour theme by Robb Owen',
+    url: 'https://marketplace.visualstudio.com/items?itemName=RobbOwen.synthwave-vscode',
+    category: 'development'
+  },
+  {
+    name: 'Figma',
+    desc: "The tool for all things I'd like to design",
+    url: 'https://www.figma.com/',
+    category: 'design'
+  },
+  {
+    name: 'Prettier',
+    desc: 'An opinionated code formatter.',
+    url: 'https://prettier.io/',
+    category: 'development'
+  },
+  {
+    name: 'Blackhole',
+    desc: 'Open source music app with Spotify charts & YouTube music',
+    url: 'https://sangwan5688.github.io/',
+    category: 'entertainment'
+  },
+  {
+    name: 'YouTube',
+    desc: 'The source of 90% of my Knowledge',
+    url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
+    category: 'learning'
+  },
+];
+
+const hardware = [
+  {
+    name: 'MacBook Pro 14"',
+    desc: 'M1 Pro, 16GB RAM - my daily driver for development',
+    url: '#',
+  },
+  {
+    name: 'Magic Keyboard',
+    desc: 'Wireless keyboard for that clean desk setup',
+    url: '#',
+  },
+  {
+    name: 'AirPods Pro',
+    desc: 'For those deep focus coding sessions with noise cancellation',
+    url: '#',
+  },
+  {
+    name: 'LG UltraWide Monitor',
+    desc: '34" screen real estate for multitasking',
+    url: '#',
+  },
+  {
+    name: 'Logitech MX Master 3',
+    desc: 'Ergonomic mouse with customizable buttons',
+    url: '#',
+  },
+  {
+    name: 'Blue Yeti Microphone',
+    desc: 'For crystal clear audio in meetings and recordings',
+    url: '#',
+  },
+];
+
+// Group software by category
+const categories = {
+  development: software.filter(s => s.category === 'development'),
+  design: software.filter(s => s.category === 'design'),
+  productivity: software.filter(s => s.category === 'productivity'),
+  learning: software.filter(s => s.category === 'learning'),
+  entertainment: software.filter(s => s.category === 'entertainment'),
+};
+---
+
+<BaseLayout title="tools - nagaraj pandith" description="software and hardware i use daily">
+  <!-- Hero -->
+  <section class="container mx-auto px-4 py-20 max-w-4xl animate-on-scroll">
+    <h1 class="heading-handwritten text-5xl md:text-7xl mb-6">tools</h1>
+    <p class="text-xl opacity-80 max-w-2xl">
+      the software and hardware that power my workflow and keep me productive (and occasionally entertained)
+    </p>
+  </section>
+
+  <!-- Software Section -->
+  <section class="container mx-auto px-4 py-12 max-w-5xl">
+    <div class="flex items-center gap-3 mb-12 animate-on-scroll">
+      <svg class="w-8 h-8 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+      </svg>
+      <h2 class="heading-handwritten text-4xl">software</h2>
+    </div>
+
+    <!-- Development Tools -->
+    {categories.development.length > 0 && (
+      <div class="mb-16 animate-on-scroll">
+        <h3 class="text-sm uppercase tracking-wider opacity-50 mb-6">development</h3>
+        <div class="grid md:grid-cols-2 gap-4">
+          {categories.development.map(tool => (
+            <a 
+              href={tool.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group block bg-opacity-5 hover:bg-opacity-10 rounded-xl p-6 transition-all"
+              style="background-color: currentColor;"
+            >
+              <div class="flex items-start justify-between mb-3">
+                <h4 class="font-medium text-lg group-hover:opacity-60 transition-opacity">
+                  {tool.name}
+                </h4>
+                <svg class="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </div>
+              <p class="text-sm opacity-70 leading-relaxed">
+                {tool.desc}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Design Tools -->
+    {categories.design.length > 0 && (
+      <div class="mb-16 animate-on-scroll">
+        <h3 class="text-sm uppercase tracking-wider opacity-50 mb-6">design</h3>
+        <div class="grid md:grid-cols-2 gap-4">
+          {categories.design.map(tool => (
+            <a 
+              href={tool.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group block bg-opacity-5 hover:bg-opacity-10 rounded-xl p-6 transition-all"
+              style="background-color: currentColor;"
+            >
+              <div class="flex items-start justify-between mb-3">
+                <h4 class="font-medium text-lg group-hover:opacity-60 transition-opacity">
+                  {tool.name}
+                </h4>
+                <svg class="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </div>
+              <p class="text-sm opacity-70 leading-relaxed">
+                {tool.desc}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Productivity Tools -->
+    {categories.productivity.length > 0 && (
+      <div class="mb-16 animate-on-scroll">
+        <h3 class="text-sm uppercase tracking-wider opacity-50 mb-6">productivity</h3>
+        <div class="grid md:grid-cols-2 gap-4">
+          {categories.productivity.map(tool => (
+            <a 
+              href={tool.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group block bg-opacity-5 hover:bg-opacity-10 rounded-xl p-6 transition-all"
+              style="background-color: currentColor;"
+            >
+              <div class="flex items-start justify-between mb-3">
+                <h4 class="font-medium text-lg group-hover:opacity-60 transition-opacity">
+                  {tool.name}
+                </h4>
+                <svg class="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                </svg>
+              </div>
+              <p class="text-sm opacity-70 leading-relaxed">
+                {tool.desc}
+              </p>
+            </a>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Learning & Entertainment -->
+    <div class="grid md:grid-cols-2 gap-8 animate-on-scroll">
+      {categories.learning.length > 0 && (
+        <div>
+          <h3 class="text-sm uppercase tracking-wider opacity-50 mb-6">learning</h3>
+          <div class="space-y-4">
+            {categories.learning.map(tool => (
+              <a 
+                href={tool.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group block bg-opacity-5 hover:bg-opacity-10 rounded-xl p-6 transition-all"
+                style="background-color: currentColor;"
+              >
+                <div class="flex items-start justify-between mb-3">
+                  <h4 class="font-medium text-lg group-hover:opacity-60 transition-opacity">
+                    {tool.name}
+                  </h4>
+                  <svg class="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                </div>
+                <p class="text-sm opacity-70 leading-relaxed">
+                  {tool.desc}
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {categories.entertainment.length > 0 && (
+        <div>
+          <h3 class="text-sm uppercase tracking-wider opacity-50 mb-6">entertainment</h3>
+          <div class="space-y-4">
+            {categories.entertainment.map(tool => (
+              <a 
+                href={tool.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="group block bg-opacity-5 hover:bg-opacity-10 rounded-xl p-6 transition-all"
+                style="background-color: currentColor;"
+              >
+                <div class="flex items-start justify-between mb-3">
+                  <h4 class="font-medium text-lg group-hover:opacity-60 transition-opacity">
+                    {tool.name}
+                  </h4>
+                  <svg class="w-4 h-4 opacity-50 group-hover:opacity-100 group-hover:-translate-y-1 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                  </svg>
+                </div>
+                <p class="text-sm opacity-70 leading-relaxed">
+                  {tool.desc}
+                </p>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Hardware Section -->
+  <section class="container mx-auto px-4 py-16 max-w-5xl">
+    <div class="flex items-center gap-3 mb-12 animate-on-scroll">
+      <svg class="w-8 h-8 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
+      </svg>
+      <h2 class="heading-handwritten text-4xl">hardware</h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {hardware.map(item => (
+        <div 
+          class="bg-opacity-5 hover:bg-opacity-10 rounded-xl p-6 transition-all animate-on-scroll"
+          style="background-color: currentColor;"
+        >
+          <h4 class="font-medium text-lg mb-3">
+            {item.name}
+          </h4>
+          <p class="text-sm opacity-70 leading-relaxed">
+            {item.desc}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Footer Note -->
+  <section class="container mx-auto px-4 py-12 max-w-4xl animate-on-scroll">
+    <div class="text-center py-12 rounded-2xl bg-opacity-5" style="background-color: currentColor;">
+      <p class="text-sm opacity-60">
+        this setup evolves constantly. tools come and go, but the workflow stays smooth.
+      </p>
+    </div>
+  </section>
+</BaseLayout>

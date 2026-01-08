@@ -1,0 +1,108 @@
+---
+// No server-side user check needed - we'll handle it client-side
+---
+
+<div id="auth-container">
+  <!-- Loading state -->
+  <div id="auth-loading" class="text-sm opacity-50">
+    loading...
+  </div>
+
+  <!-- Signed in state (hidden by default) -->
+  <div id="auth-signed-in" class="hidden flex items-center gap-4">
+    <div class="flex items-center gap-3">
+      <img 
+        id="user-avatar"
+        src=""
+        alt="User" 
+        class="w-8 h-8 rounded-full"
+      />
+      <span id="user-name" class="text-sm hidden sm:inline"></span>
+    </div>
+    <button 
+      id="sign-out-btn"
+      class="text-sm opacity-60 hover:opacity-100 transition-opacity"
+    >
+      sign out
+    </button>
+  </div>
+
+  <!-- Signed out state (hidden by default) -->
+  <button 
+    id="sign-in-btn"
+    class="hidden btn-secondary text-sm px-4 py-2"
+  >
+    sign in with google
+  </button>
+</div>
+
+<script>
+  import { supabase } from '../utils/supabase';
+
+  const authLoading = document.getElementById('auth-loading');
+  const authSignedIn = document.getElementById('auth-signed-in');
+  const signInBtn = document.getElementById('sign-in-btn');
+  const signOutBtn = document.getElementById('sign-out-btn');
+  const userAvatar = document.getElementById('user-avatar') as HTMLImageElement;
+  const userName = document.getElementById('user-name');
+
+  async function updateAuthUI() {
+    const { data: { user } } = await supabase.auth.getUser();
+
+    // Hide loading
+    authLoading?.classList.add('hidden');
+
+    if (user) {
+      // Show signed in state
+      authSignedIn?.classList.remove('hidden');
+      signInBtn?.classList.add('hidden');
+
+      // Update user info
+      if (userAvatar) {
+        userAvatar.src = user.user_metadata.avatar_url || user.user_metadata.picture || '';
+      }
+      if (userName) {
+        userName.textContent = user.user_metadata.name || user.user_metadata.full_name || user.email || '';
+      }
+    } else {
+      // Show signed out state
+      authSignedIn?.classList.add('hidden');
+      signInBtn?.classList.remove('hidden');
+    }
+  }
+
+  // Sign in with Google
+  signInBtn?.addEventListener('click', async () => {
+    const { error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: window.location.href,
+      }
+    });
+    
+    if (error) {
+      console.error('Sign in error:', error);
+      alert('Failed to sign in. Please try again.');
+    }
+  });
+
+  // Sign out
+  signOutBtn?.addEventListener('click', async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error('Sign out error:', error);
+    } else {
+      window.location.reload();
+    }
+  });
+
+  // Initialize
+  updateAuthUI();
+
+  // Listen for auth changes
+  supabase.auth.onAuthStateChange((event, session) => {
+    if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
+      updateAuthUI();
+    }
+  });
+</script>

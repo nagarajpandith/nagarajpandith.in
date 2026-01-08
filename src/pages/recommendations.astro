@@ -1,0 +1,378 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { supabase } from '../utils/supabase';
+
+const { data: movies } = await supabase
+  .from('recommendations')
+  .select('*')
+  .order('year', { ascending: false });
+
+const recommendations = movies || [];
+const allGenres = [...new Set(recommendations.flatMap(m => m.genres || []))].sort();
+
+const moods = [
+  { id: 'rainy', emoji: '🌧️', label: 'rainy afternoon', tags: ['rainy-day', 'learning-mode'] },
+  { id: 'rush', emoji: '⚡', label: 'adrenaline', tags: ['adrenaline-rush', 'edge-of-seat'] },
+  { id: 'mind', emoji: '🌀', label: 'mind blown', tags: ['mind-blown', 'future-vibes'] },
+  { id: 'feels', emoji: '🍷', label: 'deep feels', tags: ['emotional-damage', 'deep-feels'] },
+];
+
+const randomMovie = recommendations[Math.floor(Math.random() * recommendations.length)];
+
+const totalMovies = recommendations.filter(r => r.title_type?.toLowerCase().includes('movie')).length;
+const totalSeries = recommendations.filter(r => r.title_type?.toLowerCase().includes('series')).length;
+const avgRating = (recommendations.reduce((acc, m) => acc + (m.imdb_rating || 0), 0) / recommendations.length).toFixed(1);
+---
+
+<BaseLayout title="cinema - nagaraj pandith">
+  <div id="page-overlay" class="fixed inset-0 pointer-events-none z-0 transition-opacity duration-1000 opacity-20"></div>
+
+  <!-- Hero -->
+  <section class="relative min-h-[70vh] flex items-center justify-center pt-20 overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <div class="marquee-container opacity-10 select-none">
+        <div class="marquee-text font-black text-[15rem] whitespace-nowrap">
+          {recommendations.slice(0, 10).map(m => <span>{m.title} • </span>)}
+          {recommendations.slice(0, 10).map(m => <span>{m.title} • </span>)}
+        </div>
+      </div>
+    </div>
+
+    <div class="relative z-10 text-center px-4">
+      <span class="inline-block px-3 py-1 rounded-full border border-current text-xs mb-6 tracking-widest uppercase animate-pulse">now showing</span>
+      <h1 class="heading-handwritten text-7xl md:text-9xl mb-4">cinema</h1>
+      <div class="flex flex-wrap justify-center gap-8 mt-12">
+        <div class="text-left">
+          <p class="text-4xl font-light italic">{recommendations.length}</p>
+          <p class="text-[10px] uppercase tracking-[0.2em] opacity-50">handpicked titles</p>
+        </div>
+        <div class="w-px h-12 bg-current opacity-20 hidden md:block"></div>
+        <div class="text-left">
+          <p class="text-4xl font-light italic">{avgRating}</p>
+          <p class="text-[10px] uppercase tracking-[0.2em] opacity-50">average rating</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filters & Moods -->
+  <section class="container mx-auto px-4 py-20 relative z-10">
+    <div class="flex flex-col md:flex-row gap-6 items-center justify-between mb-20 bg-inverted backdrop-blur-xl p-8 rounded-3xl border border-white/10">
+      <!-- Mood Pills -->
+      <div class="flex gap-4 overflow-x-auto pb-2 no-scrollbar w-full md:w-auto">
+        {moods.map(mood => (
+          <button 
+            class="mood-pill px-6 py-3 rounded-full border border-white/20 hover:bg-inverted hover:text-current transition-all whitespace-nowrap text-sm"
+            data-tags={mood.tags.join(',')}
+          >
+            {mood.emoji} {mood.label}
+          </button>
+        ))}
+        <button 
+          id="clear-filters"
+          class="px-6 py-3 rounded-full border border-white/20 hover:bg-inverted hover:text-current transition-all whitespace-nowrap text-sm opacity-50 hover:opacity-100"
+        >
+          ✕ clear
+        </button>
+      </div>
+      
+      <!-- Random Button -->
+      <button id="spin-wheel" class="group relative px-8 py-4 btn-primary rounded-full font-bold overflow-hidden transition-transform active:scale-95 whitespace-nowrap">
+        <span class="relative z-10">surprise me 🎬</span>
+      </button>
+    </div>
+
+    <!-- Additional Filters -->
+    <div class="flex flex-wrap gap-4 mb-8 justify-center">
+      <select id="genre-filter" class="px-4 py-2 rounded-full bg-inverted border border-white/20 text-sm cursor-pointer">
+        <option value="">all genres</option>
+        {allGenres.map(genre => <option value={genre}>{genre}</option>)}
+      </select>
+      
+      <select id="rating-filter" class="px-4 py-2 rounded-full bg-inverted border border-white/20 text-sm cursor-pointer">
+        <option value="0">all ratings</option>
+        <option value="7">7+ ⭐</option>
+        <option value="8">8+ ⭐⭐</option>
+        <option value="9">9+ ⭐⭐⭐</option>
+      </select>
+
+      <span id="movie-count" class="px-4 py-2 text-sm opacity-50">
+        {recommendations.length} titles
+      </span>
+    </div>
+
+    <!-- Movies Grid -->
+    <div id="movies-grid" class="columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-6 space-y-6">
+      {recommendations.map((movie) => (
+        <article 
+          class="movie-card break-inside-avoid group relative cursor-pointer"
+          data-genres={JSON.stringify(movie.genres || [])}
+          data-mood-tags={JSON.stringify(movie.mood_tags || [])}
+          data-rating={movie.imdb_rating}
+          data-movie-data={JSON.stringify(movie)}
+          data-backdrop={movie.backdrop_url}
+        >
+          <div class="relative overflow-hidden rounded-xl transition-all duration-500 group-hover:shadow-[0_0_40px_rgba(255,255,255,0.1)] group-hover:-translate-y-2">
+            {movie.poster_url ? (
+              <img 
+                src={movie.poster_url} 
+                alt={movie.title}
+                class="w-full grayscale group-hover:grayscale-0 transition-all duration-700 ease-out"
+                loading="lazy"
+              />
+            ) : (
+              <div class="w-full aspect-[2/3] bg-inverted flex items-center justify-center p-4">
+                <p class="text-center text-sm">{movie.title}</p>
+              </div>
+            )}
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
+              <p class="text-xs uppercase tracking-widest text-yellow-500 mb-1">{movie.year}</p>
+              <h3 class="text-xl font-bold leading-tight">{movie.title}</h3>
+              <div class="flex gap-2 mt-3">
+                {movie.genres?.slice(0, 2).map(g => 
+                  <span class="text-[10px] px-2 py-0.5 border border-white/30 rounded-full">{g}</span>
+                )}
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- No Results -->
+    <div id="no-results" class="hidden text-center py-20">
+      <p class="text-xl opacity-60 mb-2">no movies found</p>
+      <p class="text-sm opacity-50">try adjusting your filters</p>
+    </div>
+  </section>
+
+  <!-- Spotlight Effect -->
+  <div id="spotlight" class="fixed w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none z-50 mix-blend-screen -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-300"></div>
+
+  <!-- Movie Dialog -->
+  <dialog id="movie-dialog" class="bg-transparent p-0 m-0 max-w-none max-h-none w-screen h-screen backdrop:bg-black/95 overflow-hidden">
+    <div class="flex items-center justify-center h-full p-4 md:p-20">
+      <button id="close-dialog" class="absolute top-10 right-10 text-white text-5xl font-thin hover:rotate-90 transition-transform z-[100]">&times;</button>
+      <div id="dialog-content" class="w-full max-w-6xl grid md:grid-cols-2 gap-12 items-center"></div>
+    </div>
+  </dialog>
+</BaseLayout>
+
+<style>
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  
+  .marquee-text {
+    animation: marquee 60s linear infinite;
+    display: inline-block;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .movie-card:hover {
+    z-index: 40;
+  }
+
+  .movie-card:nth-child(even) { transform: rotate(1deg); }
+  .movie-card:nth-child(odd) { transform: rotate(-1deg); }
+
+  .movie-card:hover {
+    transform: rotate(0deg) !important;
+  }
+
+  body.light #page-overlay {
+    opacity: 0.1;
+  }
+
+  select option {
+    background-color: var(--color-dark-bg);
+    color: var(--color-dark-text);
+  }
+
+  body.light select option {
+    background-color: var(--color-light-bg);
+    color: var(--color-light-text);
+  }
+</style>
+
+<script>
+  const moviesData = Array.from(document.querySelectorAll('.movie-card')).map(card => 
+    JSON.parse(card.getAttribute('data-movie-data') || '{}')
+  );
+
+  const spotlight = document.getElementById('spotlight');
+  const overlay = document.getElementById('page-overlay');
+  const dialog = document.getElementById('movie-dialog') as HTMLDialogElement;
+  const dialogContent = document.getElementById('dialog-content');
+  const closeDialog = document.getElementById('close-dialog');
+  const spinWheel = document.getElementById('spin-wheel');
+  const moodPills = document.querySelectorAll('.mood-pill');
+  const genreFilter = document.getElementById('genre-filter') as HTMLSelectElement;
+  const ratingFilter = document.getElementById('rating-filter') as HTMLSelectElement;
+  const movieCount = document.getElementById('movie-count');
+  const moviesGrid = document.getElementById('movies-grid');
+  const noResults = document.getElementById('no-results');
+  const clearFilters = document.getElementById('clear-filters');
+
+  let activeFilters = {
+    mood: [] as string[],
+    genre: '',
+    rating: 0
+  };
+
+  // Spotlight Effect
+  window.addEventListener('mousemove', (e) => {
+    if (spotlight) {
+      spotlight.style.opacity = '1';
+      spotlight.style.left = `${e.clientX}px`;
+      spotlight.style.top = `${e.clientY}px`;
+    }
+  });
+
+  // Dynamic Background on Hover
+  document.querySelectorAll('.movie-card').forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      const backdrop = card.getAttribute('data-backdrop');
+      if (backdrop && overlay) {
+        overlay.style.backgroundImage = `url(${backdrop})`;
+        overlay.style.backgroundSize = 'cover';
+        overlay.style.backgroundPosition = 'center';
+        overlay.style.opacity = '0.3';
+      }
+    });
+    
+    card.addEventListener('mouseleave', () => {
+      if (overlay) {
+        overlay.style.opacity = '0.1';
+      }
+    });
+
+    card.addEventListener('click', () => {
+      const data = JSON.parse(card.getAttribute('data-movie-data') || '{}');
+      showMovie(data);
+    });
+  });
+
+  // Mood Filter
+  moodPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      const tags = (pill.getAttribute('data-tags') || '').split(',');
+      activeFilters.mood = tags;
+      pill.classList.add('bg-inverted');
+      applyFilters();
+    });
+  });
+
+  // Clear Filters
+  clearFilters?.addEventListener('click', () => {
+    activeFilters = { mood: [], genre: '', rating: 0 };
+    if (genreFilter) genreFilter.value = '';
+    if (ratingFilter) ratingFilter.value = '0';
+    moodPills.forEach(pill => pill.classList.remove('bg-inverted'));
+    applyFilters();
+  });
+
+  // Genre & Rating Filters
+  genreFilter?.addEventListener('change', () => {
+    activeFilters.genre = genreFilter.value;
+    applyFilters();
+  });
+
+  ratingFilter?.addEventListener('change', () => {
+    activeFilters.rating = parseFloat(ratingFilter.value);
+    applyFilters();
+  });
+
+  // Apply Filters
+  function applyFilters() {
+    const cards = document.querySelectorAll('.movie-card');
+    let visible = 0;
+
+    cards.forEach(card => {
+      const genres = JSON.parse(card.getAttribute('data-genres') || '[]');
+      const moodTags = JSON.parse(card.getAttribute('data-mood-tags') || '[]');
+      const rating = parseFloat(card.getAttribute('data-rating') || '0');
+
+      const matchesMood = activeFilters.mood.length === 0 || 
+        activeFilters.mood.some(tag => moodTags.includes(tag));
+      const matchesGenre = !activeFilters.genre || genres.includes(activeFilters.genre);
+      const matchesRating = rating >= activeFilters.rating;
+
+      if (matchesMood && matchesGenre && matchesRating) {
+        (card as HTMLElement).style.display = 'block';
+        visible++;
+      } else {
+        (card as HTMLElement).style.display = 'none';
+      }
+    });
+
+    updateCount(visible);
+  }
+
+  // Update Count
+  function updateCount(count: number) {
+    if (movieCount) {
+      movieCount.textContent = `${count} title${count !== 1 ? 's' : ''}`;
+    }
+    
+    if (count === 0) {
+      noResults?.classList.remove('hidden');
+      moviesGrid?.classList.add('hidden');
+    } else {
+      noResults?.classList.add('hidden');
+      moviesGrid?.classList.remove('hidden');
+    }
+  }
+
+  // Random Movie
+  spinWheel?.addEventListener('click', () => {
+    const randomMovie = moviesData[Math.floor(Math.random() * moviesData.length)];
+    showMovie(randomMovie);
+  });
+
+  // Show Movie Modal
+  function showMovie(movie: any) {
+    const runtime = movie.runtime_mins 
+      ? `${Math.floor(movie.runtime_mins / 60)}h ${movie.runtime_mins % 60}m`
+      : 'N/A';
+
+    if (dialogContent) {
+      dialogContent.innerHTML = `
+        <div class="relative aspect-[2/3] rounded-2xl overflow-hidden shadow-2xl">
+          <img src="${movie.poster_url || ''}" class="w-full h-full object-cover" />
+        </div>
+        <div class="text-white space-y-8">
+          <div>
+            <h2 class="text-6xl md:text-8xl font-black tracking-tighter lowercase">${movie.title}</h2>
+            <p class="text-2xl opacity-50 italic mt-2">${movie.year} — ${movie.title_type}</p>
+          </div>
+          <div class="flex gap-4">
+            <span class="px-4 py-2 bg-yellow-500 text-black font-bold rounded-lg">⭐ ${movie.imdb_rating}</span>
+            <span class="px-4 py-2 border border-white/20 rounded-lg">${runtime}</span>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            ${movie.genres?.map((g: string) => 
+              `<span class="px-3 py-1 border border-white/20 rounded-full text-sm">${g}</span>`
+            ).join('') || ''}
+          </div>
+          <a href="${movie.imdb_url}" target="_blank" class="inline-block px-10 py-5 bg-white text-black font-black uppercase tracking-widest hover:bg-yellow-400 transition-colors rounded-lg">
+            view on imdb
+          </a>
+        </div>
+      `;
+    }
+    dialog?.showModal();
+  }
+
+  // Close Dialog
+  closeDialog?.addEventListener('click', () => dialog?.close());
+  
+  dialog?.addEventListener('click', (e) => {
+    if (e.target === dialog) {
+      dialog.close();
+    }
+  });
+</script>

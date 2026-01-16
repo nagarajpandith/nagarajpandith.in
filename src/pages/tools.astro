@@ -4,7 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const software = [
   {
     name: 'Notion',
-    desc: 'The most important thing that has kept my life together since 3 years',
+    desc: 'The most important thing that has kept my life together since 5+ years',
     url: 'https://www.notion.so/',
     category: 'productivity'
   },
@@ -18,6 +18,12 @@ const software = [
     name: 'VS Code',
     desc: 'The best one out there! I use it all the time.',
     url: 'https://code.visualstudio.com/',
+    category: 'development'
+  },
+  {
+    name: 'Google Antigravity',
+    desc: 'My recent favourite AI coding assistant',
+    url: 'https://antigravity.ai/',
     category: 'development'
   },
   {
@@ -39,9 +45,9 @@ const software = [
     category: 'development'
   },
   {
-    name: 'Blackhole',
-    desc: 'Open source music app with Spotify charts & YouTube music',
-    url: 'https://sangwan5688.github.io/',
+    name: 'Youtube Music',
+    desc: 'My go to music app',
+    url: 'https://music.youtube.com/',
     category: 'entertainment'
   },
   {
@@ -50,39 +56,18 @@ const software = [
     url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ',
     category: 'learning'
   },
-];
-
-const hardware = [
   {
-    name: 'MacBook Pro 14"',
-    desc: 'M1 Pro, 16GB RAM - my daily driver for development',
-    url: '#',
+    name: 'Brave Browser',
+    desc: 'My daily browser — fast, privacy-focused, and clutter-free for both dev work and research.',
+    url: 'https://brave.com/',
+    category: 'development'
   },
   {
-    name: 'Magic Keyboard',
-    desc: 'Wireless keyboard for that clean desk setup',
-    url: '#',
-  },
-  {
-    name: 'AirPods Pro',
-    desc: 'For those deep focus coding sessions with noise cancellation',
-    url: '#',
-  },
-  {
-    name: 'LG UltraWide Monitor',
-    desc: '34" screen real estate for multitasking',
-    url: '#',
-  },
-  {
-    name: 'Logitech MX Master 3',
-    desc: 'Ergonomic mouse with customizable buttons',
-    url: '#',
-  },
-  {
-    name: 'Blue Yeti Microphone',
-    desc: 'For crystal clear audio in meetings and recordings',
-    url: '#',
-  },
+    name: 'Claude Code',
+    desc: 'My go-to AI coding partner for refactoring, architectural thinking, and deep code reviews.',
+    url: 'https://claude.ai/',
+    category: 'development'
+  }
 ];
 
 // Group software by category
@@ -257,40 +242,6 @@ const categories = {
           </div>
         </div>
       )}
-    </div>
-  </section>
-
-  <!-- Hardware Section -->
-  <section class="container mx-auto px-4 py-16 max-w-5xl">
-    <div class="flex items-center gap-3 mb-12 animate-on-scroll">
-      <svg class="w-8 h-8 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path>
-      </svg>
-      <h2 class="heading-handwritten text-4xl">hardware</h2>
-    </div>
-
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {hardware.map(item => (
-        <div 
-          class="bg-subtle bg-subtle-hover rounded-xl p-6 transition-all animate-on-scroll"
-        >
-          <h4 class="font-medium text-lg mb-3">
-            {item.name}
-          </h4>
-          <p class="text-sm opacity-70 leading-relaxed">
-            {item.desc}
-          </p>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- Footer Note -->
-  <section class="container mx-auto px-4 py-12 max-w-4xl animate-on-scroll">
-    <div class="text-center py-12 rounded-2xl bg-subtle">
-      <p class="text-sm opacity-60">
-        this setup evolves constantly. tools come and go, but the workflow stays smooth.
-      </p>
     </div>
   </section>
 </BaseLayout>

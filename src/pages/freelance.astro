@@ -56,22 +56,18 @@ const idealClients = [
   {
     type: 'startups & indie founders',
     description: 'turning ideas into mvps quickly',
-    fit: 'you need to move fast and iterate',
   },
   {
     type: 'content creators & personal brands',
     description: 'building your online presence',
-    fit: 'you want a portfolio that reflects your personality',
   },
   {
     type: 'small businesses',
     description: 'establishing credibility online',
-    fit: 'you need a professional web presence',
   },
   {
     type: 'college fests / communities / events',
     description: 'event websites & registration systems',
-    fit: 'you need something reliable and scalable',
   },
 ];
 
@@ -95,24 +91,6 @@ const process = [
     step: '4',
     title: 'launch & support',
     description: 'smooth deployment, documentation, and post-launch support included.',
-  },
-];
-
-const testimonials = [
-  {
-    text: 'working with nagaraj was seamless. he understood our vision and delivered beyond expectations.',
-    author: 'startup founder',
-    project: 'saas landing page',
-  },
-  {
-    text: 'fast turnaround, clean code, and great communication. highly recommend!',
-    author: 'tech lead',
-    project: 'event management system',
-  },
-  {
-    text: 'the attention to detail and user experience was impressive. our users love the new design.',
-    author: 'product manager',
-    project: 'dashboard redesign',
   },
 ];
 ---
@@ -178,7 +156,6 @@ const testimonials = [
         <article class="bg-subtle bg-subtle-hover rounded-xl p-6 transition-all animate-on-scroll">
           <h3 class="font-medium text-lg mb-2">{client.type}</h3>
           <p class="text-sm opacity-70 mb-3">{client.description}</p>
-          <p class="text-xs opacity-50 italic">perfect if: {client.fit}</p>
         </article>
       ))}
     </div>
@@ -207,27 +184,6 @@ const testimonials = [
     </div>
   </section>
 
-  <!-- Testimonials -->
-  <section class="container mx-auto px-4 py-16 max-w-5xl">
-    <h2 class="heading-handwritten text-4xl md:text-5xl mb-12 text-center animate-on-scroll">
-      kind words
-    </h2>
-
-    <div class="grid md:grid-cols-3 gap-6">
-      {testimonials.map((testimonial) => (
-        <blockquote class="bg-subtle bg-subtle-hover rounded-xl p-6 transition-all animate-on-scroll">
-          <p class="opacity-80 mb-4 leading-relaxed">
-            "{testimonial.text}"
-          </p>
-          <footer class="text-sm">
-            <p class="font-medium">{testimonial.author}</p>
-            <p class="opacity-50">{testimonial.project}</p>
-          </footer>
-        </blockquote>
-      ))}
-    </div>
-  </section>
-
   <!-- Pricing Philosophy -->
   <section class="container mx-auto px-4 py-16 max-w-4xl">
     <div class="bg-subtle rounded-2xl p-8 md:p-12 text-center animate-on-scroll">
@@ -243,63 +199,6 @@ const testimonials = [
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="container mx-auto px-4 py-16 max-w-4xl">
-    <h2 class="heading-handwritten text-4xl md:text-5xl mb-12 text-center animate-on-scroll">
-      common questions
-    </h2>
-
-    <div class="space-y-6">
-      <details class="group bg-subtle bg-subtle-hover rounded-xl p-6 transition-all animate-on-scroll">
-        <summary class="cursor-pointer font-medium flex items-center justify-between">
-          how long does a typical project take?
-          <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-          </svg>
-        </summary>
-        <p class="mt-4 opacity-70 text-sm">
-          landing pages: 1-2 weeks • full websites: 3-6 weeks • web apps: 6-12 weeks. i'll give you a realistic timeline upfront.
-        </p>
-      </details>
-
-      <details class="group bg-subtle bg-subtle-hover rounded-xl p-6 transition-all animate-on-scroll">
-        <summary class="cursor-pointer font-medium flex items-center justify-between">
-          do you work with clients outside india?
-          <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-          </svg>
-        </summary>
-        <p class="mt-4 opacity-70 text-sm">
-          absolutely! i've worked with clients across different timezones. async communication works great for most projects.
-        </p>
-      </details>
-
-      <details class="group bg-subtle bg-subtle-hover rounded-xl p-6 transition-all animate-on-scroll">
-        <summary class="cursor-pointer font-medium flex items-center justify-between">
-          what if i need changes after launch?
-          <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-          </svg>
-        </summary>
-        <p class="mt-4 opacity-70 text-sm">
-          all projects include 2 weeks of post-launch support for bug fixes. for ongoing updates, we can discuss a monthly retainer or per-update pricing.
-        </p>
-      </details>
-
-      <details class="group bg-subtle bg-subtle-hover rounded-xl p-6 transition-all animate-on-scroll">
-        <summary class="cursor-pointer font-medium flex items-center justify-between">
-          do you offer payment plans?
-          <svg class="w-5 h-5 transform group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-          </svg>
-        </summary>
-        <p class="mt-4 opacity-70 text-sm">
-          yes! typically: 50% upfront to start, 50% on completion. for larger projects, we can split into milestones.
-        </p>
-      </details>
-    </div>
-  </section>
-
   <!-- Contact CTA -->
   <section id="contact" class="container mx-auto px-4 py-20 max-w-4xl">
     <div class="text-center py-16 rounded-2xl bg-subtle animate-on-scroll">
@@ -310,16 +209,15 @@ const testimonials = [
         let's chat about your project. no obligation, no pressure. just a friendly conversation about what you're building.
       </p>
       <div class="flex flex-wrap justify-center gap-4 mb-8">
-        <a href="mailto:your@email.com" class="btn-primary text-lg px-8 py-4">
+        <a href="mailto:nagaraj.pandith2002@gmail.com" class="btn-primary text-lg px-8 py-4">
           send me an email
         </a>
-        <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer" class="btn-secondary text-lg px-8 py-4">
-          dm on twitter
+        <a href="https://www.discord.com/users/hashclan#4890" target="_blank" rel="noopener noreferrer" class="btn-secondary text-lg px-8 py-4">
+          dm on discord
         </a>
       </div>
       <p class="text-sm opacity-50">
-        or just say hi. chocolate ice cream and chicken biryani are acceptable forms of payment 🍦
-      </p>
+        or just say hi.
     </div>
   </section>
 </BaseLayout>

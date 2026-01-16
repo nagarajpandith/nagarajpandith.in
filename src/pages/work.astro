@@ -37,6 +37,41 @@ const projects = [
     ],
   },
   {
+    title: "Hackfest'24",
+    img: '/projects/incridea.png',
+    description:
+      "Built the official web platform for Hackfest ’24, a national-level hackathon, featuring a retrofuturism-themed landing page, multi-step registrations, team management, and five robust role-based dashboards powering a fully paperless event.",
+    link: 'http://hackfest.dev/',
+    github: 'Finite-Loop-Club-NMAMIT/hackfest-website',
+    tags: [
+      'Next.js',
+      'Typescript',
+      'GSAP',
+      'TailwindCSS',
+      'tRPC',
+      'Cloudinary',
+      'react-query',
+      'Azure PostgreSQL',
+      'Prisma',
+    ],
+  },
+  {
+    title: "Adore by Amrutha",
+    img: '/projects/incridea.png',
+    description:
+      "in progress(WIP). a complete ecommerce storefront with a fully featured dashboard to manage products, inventory, finance and more to sell sarees. order management, user profiles, checkout, payment gateway integration, and more.",
+    link: 'http://adorebyamrutha.com',
+    github: 'not open source (client owns it)',
+    tags: [
+      'Next.js',
+      'Typescript',
+      'TailwindCSS',
+      'GraphQL',
+      'Framer Motion',
+      'Prisma',
+    ],
+  },
+  {
     title: 'Live-stream Studio Booking',
     img: '/projects/live-stream.png',
     description:
@@ -51,7 +86,7 @@ const projects = [
     description:
       'Community website with Beautiful UI, Integrated Payment gateway, Custom public user profiles, Digital Certificates & ID Cards, Admin Panel and more',
     link: 'https://finiteloop.co.in/',
-    github: 'Finite-Loop-Club-NMAMIT/flc-website',
+    github: 'Finite-Loop-Club-NMAMIT/flc-website-legacy',
     tags: [
       'Next.js',
       'tRPC',
@@ -88,6 +123,41 @@ const projects = [
       'Deepgram STT',
       'ElevenLabs TTS',
     ],
+  },
+];
+
+const miniprojects = [
+  {
+    title: 'stealth-bot',
+    img: '/projects/cas.png',
+    description: 'Developed a Discord bot for anonymous community conversations, featuring role-based moderation, dual-channel forwarding, and secure identity masking.',
+    link: 'https://github.com/Finite-Loop-Club-NMAMIT/stealth-bot',
+    github: 'Finite-Loop-Club-NMAMIT/stealth-bot',
+    tags: ['Discord.js', 'Node', 'Express'],
+  },
+  {
+    title: 'Campus Compass',
+    img: '/projects/cas.png',
+    description: 'An Android App for Indoor Navigation in College Blocks using 360-Degree Images',
+    link: 'https://github.com/nagarajpandith/campus-compass/releases/tag/v1.0.0',
+    github: 'nagarajpandith/campus-compass',
+    tags: ['Java', 'Android-Studio', '360-photo'],
+  },
+  {
+    title: 'AFRA',
+    img: '/projects/cas.png',
+    description: 'Attendance system with Face Recognition & Automation (AFRA) | AI Mini ProjectDeveloped an automated attendance system using face detection and recognition, featuring continuous model training, real-time face matching, and Google Sheets–based attendance logging.',
+    link: 'https://github.com/nagarajpandith/le-waks-menu',
+    github: 'nagarajpandith/afra-frontend',
+    tags: ['React', 'MongoDB', 'Express', 'Node'],
+  },
+  {
+    title: 'le-waks menu',
+    img: '/projects/cas.png',
+    description: 'Built a modern, responsive menu web app for a Saudi client, featuring dynamic data, dual-language (i18n) support, and smooth animations for a seamless user experience.',
+    link: 'lewaks.co',
+    github: 'nagarajpandith/le-waks-menu',
+    tags: ['Nextjs', 'TailwindCSS', 'Framer-Motion'],
   },
   {
     title: 'CAS',
@@ -239,6 +309,65 @@ const allShots = [...horizontalShots, ...verticalShots];
         </article>
       ))}
     </div>
+    <p class="my-5">Mini projects - small things i worked on maybe academic or simple side projects (collapse this)</p>
+    <div>
+      {miniprojects.map((project, index) => (
+        <article class="grid md:grid-cols-2 gap-8 items-start animate-on-scroll" data-index={index}>
+          <!-- Project Image -->
+          <div class="relative group overflow-hidden rounded-xl aspect-video bg-subtle">
+            <a href={project.link} target="_blank" rel="noopener noreferrer">
+              <img 
+                src={project.img} 
+                alt={project.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
+              />
+            </a>
+          </div>
+
+          <!-- Project Details -->
+          <div class="space-y-4">
+            <div>
+              <h2 class="text-3xl font-medium mb-2 heading-handwritten">
+                {project.title}
+              </h2>
+              <p class="text-sm opacity-70 leading-relaxed">
+                {project.description}
+              </p>
+            </div>
+
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2">
+              {project.tags.map(tag => (
+                <span class="text-xs bg-subtle px-3 py-1 rounded">
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <!-- Links -->
+            <div class="flex gap-4 pt-2">
+              <a 
+                href={project.link} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="btn-primary"
+              >
+                view live →
+              </a>
+              <a 
+                href={`https://github.com/${project.github}`}
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="btn-secondary"
+              >
+                github →
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+    more silly projects on my <a href="https://github.com/nagarajpandith" target="_blank" rel="noopener noreferrer" class="link">github</a>
   </section>
 
   <!-- Designs Section -->
@@ -348,6 +477,7 @@ const allShots = [...horizontalShots, ...verticalShots];
   filterChips.forEach(chip => {
     chip.addEventListener('click', () => {
       const filter = chip.getAttribute('data-filter');
+      if (!filter) return;
       currentFilter = filter;
       
       // Update active state

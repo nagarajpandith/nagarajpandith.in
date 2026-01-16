@@ -13,27 +13,24 @@ if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate()))
 const projects = [
   {
     title: 'JabWeMeet',
-    description: 'multilingual live video conferencing built at 36hr national hackathon',
+    description: 'multilingual live video conferencing built at 36hr national hackathon (because the world needs more ways to awkwardly stare at each other through screens)',
     demo: 'https://jabwemeet.vercel.app/',
     github: 'https://github.com/swasthikshetty10/hackoverflow',
-    image: '/headshot.jpg', // Replace with actual project image
-    tags: ['video conferencing', 'webrtc', 'multilingual']
+    image: '/projects/jab-we-meet.png',
   },
   {
     title: "Incridea'23",
-    description: "event management & paperless system for nmamit's college fest",
+    description: "a complete event management & paperless system for nmamit's college fest. ",
     demo: 'https://incridea.in',
     github: 'https://github.com/incridea-nmamit/incridea-client/tree/2023',
-    image: '/headshot.jpg', // Replace with actual project image
-    tags: ['event management', 'full-stack', 'college fest']
+    image: '/projects/incridea.png',
   },
   {
-    title: 'Live-stream Studio Booking',
-    description: 'full-stack django app to book livestream studio and manage bookings',
-    demo: 'https://livestream.konkanischolarship.com/',
-    github: 'https://github.com/nagarajpandith/live-stream-studio-booking',
-    image: '/headshot.jpg', // Replace with actual project image
-    tags: ['django', 'booking system', 'full-stack']
+    title: 'Aido',
+    description: 'A 3D multilingual chatbot that gestures while it talks. Finally, therapy that waves back.',
+    demo: 'https://aido-clone.vercel.app/',
+    github: 'https://github.com/nagarajpandith/aido',
+    image: '/projects/aido.png',
   }
 ];
 
@@ -87,10 +84,10 @@ const blogs = [
         nagaraj pandith
       </h1>
       <p class="text-xl md:text-2xl opacity-90 mb-8 leading-relaxed max-w-3xl">
-        {age}-year-old full-stack developer from india who codes, captures, and occasionally writes. building scalable solutions by day, getting lost in crime thrillers by night.
+        {age}-year-old full-stack developer from india who codes, creates, and occasionally writes. i get my dopamine by crafting innovative solutions and interesting side projects.
       </p>
       <p class="text-lg opacity-70 mb-8 max-w-2xl">
-        obsessed with documentation, debugging, and making things work elegantly. currently at wipfli india, always open to interesting projects.
+        obsessed with documentation, debugging, and focusing on little details that nobody would care for. always open to interesting projects.
       </p>
       <div class="flex flex-wrap justify-center gap-4">
         <a href="/freelance" class="btn-primary">
@@ -123,7 +120,7 @@ const blogs = [
         <div>
           <h3 class="font-medium mb-2">learning</h3>
           <p class="text-sm opacity-70">
-            htmx, golang stack
+            htmx, golang stack and exploring agentic ai
           </p>
         </div>
       </div>
@@ -154,13 +151,6 @@ const blogs = [
             <p class="text-sm opacity-70 mb-3">
               {project.description}
             </p>
-            <div class="flex flex-wrap gap-2">
-              {project.tags.map(tag => (
-                <span class="text-xs opacity-50 bg-subtle px-2 py-1 rounded">
-                  {tag}
-                </span>
-              ))}
-            </div>
           </a>
           <div class="flex gap-3 mt-4 text-sm">
             <a href={project.demo} target="_blank" rel="noopener noreferrer" class="link">

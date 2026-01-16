@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
 
 const workExperience = [
   {
@@ -9,7 +10,7 @@ const workExperience = [
       { title: 'Engineer I', period: 'Jun 2024 - Oct 2024', duration: '5 months' },
       { title: 'Engineer I - Trainee', period: 'Mar 2024 - May 2024', duration: '3 months' }
     ],
-    description: 'working with microsoft tech stack, specializing in javascript. built pcf controls with react, azure logic apps, c# .net plugins, power platform apps, dataverse customizations, and d365 implementations. also exploring solution design and architecture.',
+    description: 'wipfli is a top 20 consulting firm in US. i\'m working with microsoft tech stack, specializing in javascript. built pcf controls with react, azure logic apps, c# .net plugins, power platform apps, dataverse customizations, and d365 implementations. also exploring solution design and architecture.',
     current: true
   },
   {
@@ -36,23 +37,33 @@ const primaryTech = [
 const achievements = [
   {
     title: 'Winner - Hackoverflow 1.0',
-    description: '3-day national-level hackathon at pillai hoc, mumbai',
-    year: '2024'
+    description: '3-day national-level hackathon at pillai hoc, mumbai. this was my first ever offline hackathon and we built a multilingual video conferencing app using livekit & nextjs',
+    year: '18-03-2023',
+    link:'https://www.linkedin.com/feed/update/urn:li:activity:7043941054076637184/'
   },
   {
     title: 'Track Winner - Hackverse 4.0 (AI Track)',
     description: '24hr national-level hackathon at nitk',
-    year: '2024'
+    year: '16-04-2023',
+    link:'https://www.linkedin.com/feed/update/urn:li:activity:7060835169556955136/'
   },
   {
     title: 'Special Prize - NivHack',
     description: 'most innovative approach at niveus solutions, mangalore',
-    year: '2023'
+    year: '27-08-2023',
+    link:'https://www.linkedin.com/feed/update/urn:li:activity:7102829803791163392/'
   },
   {
     title: 'Winner - Web Ally',
     description: '6hr website design contest at sjec mangalore',
-    year: '2023'
+    year: '23-03-2023',
+    link:'https://www.linkedin.com/feed/update/urn:li:activity:7049752134799536128/'
+  },
+  {
+    title: 'Winner of \'Webbed\' and Runner-up in \'Web Piracy\'',
+    description: 'web contests & challenges during College fest Incridea-2022',
+    year: '04-02-2022',
+    link:'https://www.linkedin.com/feed/update/urn:li:activity:7049752134799536128/'
   }
 ];
 
@@ -60,46 +71,39 @@ const communityWork = [
   {
     role: 'Judge',
     events: ['HackXpo S03', 'Hackfest 2025'],
-    description: 'evaluated projects and provided feedback to student teams'
+    description: 'evaluated projects, provided feedback, scored the innovations, collaborated with other judges, asked valuable industry questions and selected winners'
   },
   {
     role: 'Mentor & Judge',
     events: ['Innovex 2025'],
-    description: 'guided teams and judged final presentations'
-  },
-  {
-    role: 'Interviewer',
-    events: ['Wipfli Recruitment Drive'],
-    description: 'conducted technical interviews for engineering positions'
+    description: 'guided teams on day 1, asked the right questions, guided them to a better route and judged final presentations on day2 collaborating with other industry judges'
   },
   {
     role: 'Workshop Conductor',
     events: ['Git & GitHub Workshop (65+ students)', 'Open-source Contributions Workshop (70+ students)'],
-    description: 'empowered students with version control and collaboration skills'
+    description: 'empowered students with version control and open source contribution and collaboration skills'
   },
   {
-    role: 'Vice President - Coding Club',
-    events: ['Month-long Online Hackathon (20+ teams)'],
-    description: 'led core team in organizing college hackathon'
+    role: 'President - Coding Club',
+    events: ['hackfest-2025', 'workshops', 'mini hackathons', 'dsa sprints'],
+    description: 'during my 2-3 years at this club, i led the team and organized various events and workshops for students. i started mini hackathons in the club to introduce freshers to building, started a discord server for the club, revamped the club website, maintained it as an open source project. my most favorite part here was conducting the first 3-day national level hackathon at my college. i found a bunch of passionate folks and each of them fave their 100 in this, the team was solid, so was the hackathon, 0 complaints, 100 participant satisfaction. i learnt a lot about leadership, teamwork, finance, event management, ground work and how to put together a successful event from scratch.'
   },
   {
     role: 'Skill Lab Trainer',
     events: ['Web Development & Git Training for Freshers'],
-    description: 'trained incoming students in web fundamentals'
+    description: 'trained incoming students in web fundamentals & version control system'
   }
 ];
 
 const quirks = [
-  { emoji: '🍦', text: 'bribery currency: chocolate ice cream' },
-  { emoji: '🍛', text: 'also accepts: chicken biryani' },
-  { emoji: '🧭', text: 'directionally challenged (GPS is my best friend)' },
-  { emoji: '🎮', text: 'terrible motor coordination in mini-games (makes friends laugh)' },
-  { emoji: '😺', text: 'cat lover (they understand my introvert energy)' },
-  { emoji: '🎬', text: 'crime thriller enthusiast' },
+  { emoji: '🍦', text: 'i love chocolate ice cream and eat a whole tub in one sitting sometimes' },
+  { emoji: '🍛', text: 'i cook chicken biryani really well' },
+  { emoji: '😺', text: 'i obsess over cats and cat videos' },
+  { emoji: '🎬', text: 'i watch a lot of crime thrillers, murder mysteries' },
   { emoji: '🏠', text: 'infj-t with weak social battery' },
-  { emoji: '📚', text: 'obsessive documenter (sometimes a control freak about it)' },
-  { emoji: '🍳', text: 'recently learned to cook (still learning)' },
-  { emoji: '💗', text: 'secretly loves pink & lavender (but keeping this site minimal)' }
+  { emoji: '📚', text: 'obsessive documenter (i write everything down - my daily tasks, my thoughts, everything)' },
+  { emoji: '🍳', text: 'i learnt to cook in 2025 and i\'m proud of it' },
+  { emoji: '💗', text: 'i\'m a sucker for pink & lavender colors' }
 ];
 ---
 
@@ -107,16 +111,25 @@ const quirks = [
   <!-- Hero -->
   <section class="container mx-auto px-4 py-20 max-w-4xl animate-on-scroll">
     <h1 class="heading-handwritten text-5xl md:text-7xl mb-8">about me</h1>
+    <Image src="/headshot.jpg" alt="about" width="300" height="300" class="rounded-lg mb-6" />
     <div class="text-lg md:text-xl opacity-90 leading-relaxed space-y-6">
       <p>
-        hey there! i'm nagaraj pandith, but you might know me as <span class="opacity-60">hashclan</span> on the internet. i'm a full-stack developer from india who gets unreasonably excited about clean code and elegant solutions.
+        hey there! i'm nagaraj pandith, but you might know me as <span class="opacity-60">hashclan</span> on the internet. i'm a full-stack developer from india. I build things for the web. Sometimes they're useful, sometimes they're fun, hopefully they're both. My toolkit includes typescript, next.js and whatever else gets the job done without overengineering it..
       </p>
       <p>
-        by day, i'm building things at wipfli india. by night, i'm either debugging something that definitely worked yesterday, getting lost in crime thrillers, or documenting every tiny detail of what i learned (sometimes to an obsessive degree).
+        by day, i'm building things at wipfli india. by night, i'm either debugging something that definitely worked yesterday, getting lost in crime thrillers, or get lost in thoughts like 'are we living in a simulation?'.
       </p>
       <p>
-        i believe good software should be like good design — invisible when it works, obvious when it doesn't. my approach: user-centric design, heavy documentation, and debugging until it's perfect.
+my approach: user-centric design, heavy documentation, and debugging until it's perfect.
       </p>
+      <p>
+      when im not coding, i'm looping through my “Liked Songs” playlist, scrolling through cat videos ig
+      apart from tech, you can chat w me about cooking, fragnances, food, movies, shows, life, even philosophy sometimes
+      if you get close to me, i'll tell you the best biryanis or the best chocolate icecreams in town to try
+      </p>
+      <p>my story: I fell in love with technology & computers (probably when i was 10 or 11 when i got my hands on office computer at my mum's workplace haha) and that passion never left my mind, it just felt very interesting and also explains why i ended becoming a homebody haha! but i do like going out and travel with my friends <3 </p>
+      <p>i was kind of tech savvy growing up whenever i got hands on any device. straight from trying our custom ROMs on a phone which was slower than a calculator, or trying to obssess over cybersecurity and install kali linux on a hella slow laptop. i have more to share but all those experiences were fun and i think most of you might relate with this growing up</p>
+      <p>in my uni days, i stopped focusing on curriculum and focused on learning nice tech i was interesetd in, mostly full stack. i later made some nice dev friends who shared a mutual interest and we started participating in hackathons, coding contests, building software for uni, working on freelance projects. in the last year i got into wipfli as a software engineer and i have come all the way till here and i'm grateful for that journey</p>
     </div>
   </section>
 
@@ -155,7 +168,7 @@ const quirks = [
     <h2 class="heading-handwritten text-4xl md:text-5xl mb-12">the craft</h2>
     
     <p class="text-lg opacity-80 mb-8">
-      i primarily work with modern javascript frameworks and python. here's what's in my toolkit:
+      i primarily work with modern javascript frameworks. here's what's in my toolkit:
     </p>
 
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
@@ -169,6 +182,10 @@ const quirks = [
 
     <p class="text-sm opacity-60">
       currently learning: <span class="font-medium">htmx</span> and <span class="font-medium">golang</span>
+    </p>
+
+    <p class="text-sm opacity-60">
+    Tech stack isn't my concern, I'm flexible with whatever the project needs, though I prefer modern frameworks and tools. I'm always open for new opportunities to learn and grow.
     </p>
 
     <div class="mt-6">
@@ -190,6 +207,9 @@ const quirks = [
             <span class="text-sm opacity-50 shrink-0 ml-4">{achievement.year}</span>
           </div>
           <p class="text-sm opacity-70">{achievement.description}</p>
+          <a href={achievement.link} target="_blank" class="link text-sm">
+            view post →
+          </a>
         </article>
       ))}
     </div>

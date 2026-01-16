@@ -6,11 +6,24 @@ const currentYear = new Date().getFullYear();
   <div class="container mx-auto px-4 py-12 max-w-6xl">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <!-- About Section -->
-      <div>
-        <h3 class="heading-handwritten mb-4" style="font-size: 1.25rem;">nagaraj pandith</h3>
-        <p class="text-sm opacity-70 mb-4">
-          crafting digital experiences that don't make users ragequit.
-        </p>
+      <div class="space-y-6">
+        <div>
+          <h3 class="heading-handwritten mb-4" style="font-size: 1.25rem;">nagaraj pandith</h3>
+          <p class="text-sm opacity-70">
+            crafting digital experiences that don't make users ragequit.
+          </p>
+        </div>
+
+        <!-- Guestbook CTA -->
+        <div class="bg-subtle rounded-xl p-5 border border-dashed" style="border-color: rgba(150, 150, 150, 0.2);">
+          <p class="heading-handwritten text-xl mb-2">hi there!</p>
+          <p class="text-sm opacity-80 mb-3 leading-relaxed">
+            thanks for visiting my site. sign my guestbook and let me know what you think (or just say hi!)
+          </p>
+          <a href="/guestbook" class="inline-flex items-center gap-1 text-xs font-medium border-b border-current hover:opacity-60 transition-opacity pb-0.5">
+            sign guestbook →
+          </a>
+        </div>
       </div>
       
       <!-- Quick Links -->

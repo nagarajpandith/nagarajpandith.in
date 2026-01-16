@@ -105,6 +105,15 @@ const quirks = [
   { emoji: '🍳', text: 'i learnt to cook in 2025 and i\'m proud of it' },
   { emoji: '💗', text: 'i\'m a sucker for pink & lavender colors' }
 ];
+
+const recommendations = [
+  {
+    author: "Kohei Tsukazaki",
+    role: "CEO & PM at Forent Inc.",
+    date: "February 9, 2023",
+    text: "I had the privilege of working with Nagaraj at forent as CEO and PM. In that time, I was consistently impressed by his technical skills and ability to deliver high-quality software solutions. Nagaraj has a strong understanding of React. He consistently demonstrates his ability to understand complex requirements and translate them into effective and efficient code. I highly recommend Nagaraj for any software engineering role. He has the skills, knowledge, and attitude to excel in any project and make a significant impact in any organization. His contributions to our team were invaluable, and I have no doubt he will continue to thrive in future endeavors."
+  }
+];
 ---
 
 <BaseLayout title="about - nagaraj pandith" description="full-stack developer obsessed with clean code, documentation, and making things work elegantly">
@@ -238,6 +247,44 @@ my approach: user-centric design, heavy documentation, and debugging until it's 
           <p class="text-sm opacity-70">{work.description}</p>
         </article>
       ))}
+    </div>
+  </section>
+
+  <!-- Recommendations -->
+  <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
+    <div class="mb-12">
+      <h2 class="heading-handwritten text-4xl md:text-5xl mb-2">kind words</h2>
+      <p class="text-lg opacity-60">people i've fooled into thinking i'm good (jk, they actually liked my work)</p>
+    </div>
+
+    <div class="space-y-6">
+      {recommendations.map((rec) => (
+        <article class="bg-subtle rounded-xl p-8 relative">
+           <svg class="absolute top-6 left-6 w-8 h-8 opacity-10" fill="currentColor" viewBox="0 0 24 24">
+             <path d="M14.017 21L14.017 18C14.017 16.095 15.656 16.353 17.514 15.625C19.387 14.896 20.015 13.91 20.015 12.015V7.015H14.017V12.015H17.015C17.015 13.295 15.82 14.135 14.017 14.135V21H14.017ZM8.017 21L8.017 18C8.017 16.095 9.656 16.353 11.514 15.625C13.387 14.896 14.015 13.91 14.015 12.015V7.015H8.017V12.015H11.015C11.015 13.295 9.82 14.135 8.017 14.135V21H8.017ZM4.017 21L4.017 14.015C4.017 8.495 8.496 4.015 14.017 4.015H20.015C21.12 4.015 22.015 4.91 22.015 6.015V12.015C22.015 13.12 21.12 14.015 20.015 14.015H18.015C18.015 15.12 17.12 16.015 16.015 16.015H15.015V17.015C15.015 18.12 14.12 19.015 13.015 19.015H12.015V21H4.017Z" fill="currentColor"></path>
+           </svg>
+           <p class="text-lg leading-relaxed opacity-80 mb-6 italic relative z-10 pl-8">
+             "{rec.text}"
+           </p>
+           <div class="flex items-center gap-4 pl-8">
+             <div>
+               <h4 class="font-medium">{rec.author}</h4>
+               <p class="text-sm opacity-60">{rec.role}</p>
+             </div>
+           </div>
+        </article>
+      ))}
+    </div>
+    
+    <div class="mt-8 text-center animate-on-scroll">
+       <a 
+        href="https://www.linkedin.com/in/nagaraj-pandith/" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 text-sm border-b border-current hover:opacity-60 transition-opacity pb-0.5"
+       >
+         stalk me (and maybe recommend me) on linkedin →
+       </a>
     </div>
   </section>
 

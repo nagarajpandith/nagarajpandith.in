@@ -5,7 +5,7 @@ import { supabase } from '../utils/supabase';
 const projects = [
   {
     title: 'JabWeMeet',
-    img: '/projects/jab-we-meet.png',
+    img: '/projects/jab-we-meet.jpg',
     description:
       'Built a multilingual video conferencing web app with real-time audio translation with spoken out audio and caption display. Generates meeting minutes in preferred language and allows users to access meeting transcriptions anytime.',
     link: 'https://jabwemeet.vercel.app/',
@@ -22,7 +22,7 @@ const projects = [
   },
   {
     title: "Incridea'23",
-    img: '/projects/incridea.png',
+    img: '/projects/incridea.jpg',
     description:
       "Developed full-stack typesafe website & paperless system for Incridea'23. Collaborated with the Tech team to create 7 intuitive dashboard panels & Event registration system. Implemented secure JWT user auth & verification system.",
     link: 'http://incridea.in/',
@@ -38,7 +38,7 @@ const projects = [
   },
   {
     title: "Hackfest'24",
-    img: '/projects/incridea.png',
+    img: '/projects/hackfest.jpg',
     description:
       "Built the official web platform for Hackfest ’24, a national-level hackathon, featuring a retrofuturism-themed landing page, multi-step registrations, team management, and five robust role-based dashboards powering a fully paperless event.",
     link: 'http://hackfest.dev/',
@@ -57,7 +57,7 @@ const projects = [
   },
   {
     title: "Adore by Amrutha",
-    img: '/projects/incridea.png',
+    img: '/projects/aba.jpg',
     description:
       "in progress(WIP). a complete ecommerce storefront with a fully featured dashboard to manage products, inventory, finance and more to sell sarees. order management, user profiles, checkout, payment gateway integration, and more.",
     link: 'http://adorebyamrutha.com',
@@ -73,7 +73,7 @@ const projects = [
   },
   {
     title: 'Live-stream Studio Booking',
-    img: '/projects/live-stream.png',
+    img: '/projects/live-stream.jpg',
     description:
       'Built a responsive full-stack booking system with automated notifications and admin hierarchies, deployed on Amazon EC2. Enables flexible filtering options, data export capabilities, and effectively prevents duplicate bookings.',
     link: 'https://livestream.konkanischolarship.com/',
@@ -82,7 +82,7 @@ const projects = [
   },
   {
     title: 'Finite Loop Club - Website',
-    img: '/projects/flc.png',
+    img: '/projects/flc.jpg',
     description:
       'Community website with Beautiful UI, Integrated Payment gateway, Custom public user profiles, Digital Certificates & ID Cards, Admin Panel and more',
     link: 'https://finiteloop.co.in/',
@@ -99,7 +99,7 @@ const projects = [
   },
   {
     title: 'Portfolio Website',
-    img: '/projects/portfolio-img.png',
+    img: '/projects/portfolio-img.jpg',
     description:
       'My Personal Website, Blog and Guestbook. Built with Next 14, Typescript, Vercel Postgres, MDX and more!',
     link: 'https://nagarajpandith.in',
@@ -108,7 +108,7 @@ const projects = [
   },
   {
     title: 'Aido',
-    img: '/projects/aido.png',
+    img: '/projects/aido.jpg',
     description:
       '3D multilingual chatbot with interactive gestures, contextual conversations, persistent chat history, and personalized medical and mental health support.',
     link: 'https://aido-clone.vercel.app/',
@@ -129,7 +129,6 @@ const projects = [
 const miniprojects = [
   {
     title: 'stealth-bot',
-    img: '/projects/cas.png',
     description: 'Developed a Discord bot for anonymous community conversations, featuring role-based moderation, dual-channel forwarding, and secure identity masking.',
     link: 'https://github.com/Finite-Loop-Club-NMAMIT/stealth-bot',
     github: 'Finite-Loop-Club-NMAMIT/stealth-bot',
@@ -137,23 +136,20 @@ const miniprojects = [
   },
   {
     title: 'Campus Compass',
-    img: '/projects/cas.png',
-    description: 'An Android App for Indoor Navigation in College Blocks using 360-Degree Images',
+    description: 'Developed an Android app for indoor campus navigation that guides users through college blocks using 360-degree images, shortest-path routing, and Wi-Fi–based floor detection.',
     link: 'https://github.com/nagarajpandith/campus-compass/releases/tag/v1.0.0',
     github: 'nagarajpandith/campus-compass',
     tags: ['Java', 'Android-Studio', '360-photo'],
   },
   {
     title: 'AFRA',
-    img: '/projects/cas.png',
-    description: 'Attendance system with Face Recognition & Automation (AFRA) | AI Mini ProjectDeveloped an automated attendance system using face detection and recognition, featuring continuous model training, real-time face matching, and Google Sheets–based attendance logging.',
+    description: 'Developed an automated attendance system using face detection and recognition, featuring continuous model training, real-time face matching, and Google Sheets–based attendance logging.',
     link: 'https://github.com/nagarajpandith/le-waks-menu',
     github: 'nagarajpandith/afra-frontend',
     tags: ['React', 'MongoDB', 'Express', 'Node'],
   },
   {
     title: 'le-waks menu',
-    img: '/projects/cas.png',
     description: 'Built a modern, responsive menu web app for a Saudi client, featuring dynamic data, dual-language (i18n) support, and smooth animations for a seamless user experience.',
     link: 'lewaks.co',
     github: 'nagarajpandith/le-waks-menu',
@@ -161,8 +157,7 @@ const miniprojects = [
   },
   {
     title: 'CAS',
-    img: '/projects/cas.png',
-    description: 'Canteen Automation System (CAS) - DBMS Academic Mini Project',
+    description: 'Built a web-based canteen management system that automates menu handling, order processing, and bill generation with a secure, role-based workflow.',
     link: 'https://cas.up.railway.app/',
     github: 'nagarajpandith/cas',
     tags: ['Django', 'TailwindCSS', 'PostgreSQL'],
@@ -309,65 +304,53 @@ const allShots = [...horizontalShots, ...verticalShots];
         </article>
       ))}
     </div>
-    <p class="my-5">Mini projects - small things i worked on maybe academic or simple side projects (collapse this)</p>
-    <div>
-      {miniprojects.map((project, index) => (
-        <article class="grid md:grid-cols-2 gap-8 items-start animate-on-scroll" data-index={index}>
-          <!-- Project Image -->
-          <div class="relative group overflow-hidden rounded-xl aspect-video bg-subtle">
-            <a href={project.link} target="_blank" rel="noopener noreferrer">
-              <img 
-                src={project.img} 
-                alt={project.title}
-                class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
-              />
-            </a>
-          </div>
+    <!-- Mini Projects Divider -->
+    <div class="mt-24 mb-12 border-t border-dashed border-current/20 pt-12">
+      <div class="flex items-end justify-between gap-4 mb-8">
+        <div>
+           <h2 class="heading-handwritten text-3xl opacity-90 mb-1">mini projects</h2>
+           <p class="opacity-60 text-sm">academic experiments, side quests, and more.</p>
+        </div>
+        <a href="https://github.com/nagarajpandith" target="_blank" rel="noopener noreferrer" class="text-sm opacity-50 hover:opacity-100 transition-opacity">
+          view all on github →
+        </a>
+      </div>
 
-          <!-- Project Details -->
-          <div class="space-y-4">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {miniprojects.map((project, index) => (
+          <article class="bg-subtle rounded-xl p-6 flex flex-col justify-between border border-transparent hover:border-current/10 transition-all animate-on-scroll" data-index={index}>
             <div>
-              <h2 class="text-3xl font-medium mb-2 heading-handwritten">
-                {project.title}
-              </h2>
-              <p class="text-sm opacity-70 leading-relaxed">
+              <div class="flex items-start justify-between mb-3">
+                <h3 class="text-lg font-medium tracking-tight">{project.title}</h3>
+                <div class="flex gap-3">
+                   {project.link && (
+                     <a href={project.link} target="_blank" rel="noopener noreferrer" class="opacity-40 hover:opacity-100 transition-opacity px-1 py-1" aria-label="Visit Link">
+                       <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                     </a>
+                   )}
+                   {project.github && (
+                     <a href={`https://github.com/${project.github}`} target="_blank" rel="noopener noreferrer" class="opacity-40 hover:opacity-100 transition-opacity px-1 py-1" aria-label="GitHub">
+                       <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                     </a>
+                   )}
+                </div>
+              </div>
+              <p class="text-sm opacity-70 mb-4 leading-relaxed font-light">
                 {project.description}
               </p>
             </div>
-
-            <!-- Tags -->
-            <div class="flex flex-wrap gap-2">
+            
+            <div class="flex flex-wrap gap-2 mt-auto pt-4 border-t border-dashed border-current/10">
               {project.tags.map(tag => (
-                <span class="text-xs bg-subtle px-3 py-1 rounded">
+                <span class="text-[10px] opacity-50 px-2 py-1 bg-current/5 rounded-md">
                   {tag}
                 </span>
               ))}
             </div>
-
-            <!-- Links -->
-            <div class="flex gap-4 pt-2">
-              <a 
-                href={project.link} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="btn-primary"
-              >
-                view live →
-              </a>
-              <a 
-                href={`https://github.com/${project.github}`}
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="btn-secondary"
-              >
-                github →
-              </a>
-            </div>
-          </div>
-        </article>
-      ))}
+          </article>
+        ))}
+      </div>
     </div>
-    more silly projects on my <a href="https://github.com/nagarajpandith" target="_blank" rel="noopener noreferrer" class="link">github</a>
   </section>
 
   <!-- Designs Section -->

@@ -1,36 +1,27 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-// Calculate age from DOB
-const birthDate = new Date('2002-12-06');
-const today = new Date();
-let age = today.getFullYear() - birthDate.getFullYear();
-const monthDiff = today.getMonth() - birthDate.getMonth();
-if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
-  age--;
-}
-
 const projects = [
   {
     title: 'JabWeMeet',
     description: 'multilingual live video conferencing built at 36hr national hackathon (because the world needs more ways to awkwardly stare at each other through screens)',
     demo: 'https://jabwemeet.vercel.app/',
     github: 'https://github.com/swasthikshetty10/hackoverflow',
-    image: '/projects/jab-we-meet.png',
+    image: '/projects/jab-we-meet.jpg',
   },
   {
     title: "Incridea'23",
     description: "a complete event management & paperless system for nmamit's college fest. ",
     demo: 'https://incridea.in',
     github: 'https://github.com/incridea-nmamit/incridea-client/tree/2023',
-    image: '/projects/incridea.png',
+    image: '/projects/incridea.jpg',
   },
   {
     title: 'Aido',
     description: 'A 3D multilingual chatbot that gestures while it talks. Finally, therapy that waves back.',
     demo: 'https://aido-clone.vercel.app/',
     github: 'https://github.com/nagarajpandith/aido',
-    image: '/projects/aido.png',
+    image: '/projects/aido.jpg',
   }
 ];
 
@@ -42,7 +33,7 @@ const blogs = [
     views: '3312',
     readTime: '12 min',
     tags: ['campus placements', 'software engineering', 'career guide'],
-    slug: 'campus-placements-guide'
+    slug: 'placement-guide'
   },
   {
     title: 'starting web development the right way in 2021',
@@ -51,7 +42,7 @@ const blogs = [
     views: '1114',
     readTime: '12 min',
     tags: ['webdev', 'roadmap', 'frontend'],
-    slug: 'web-dev-2021'
+    slug: 'web-dev-roadmap'
   },
   {
     title: 'has anyone seen web3? — the complete roadmap',
@@ -60,36 +51,32 @@ const blogs = [
     views: '38821',
     readTime: '7 min',
     tags: ['web3', 'blockchain', 'solidity'],
-    slug: 'web3-roadmap-2022'
+    slug: 'web3-roadmap'
   }
 ];
 ---
 
 <BaseLayout title="nagaraj pandith - full-stack developer">
   <!-- Hero Section -->
-  <section class="container mx-auto px-4 py-20 md:py-32 max-w-4xl">
-    <div class="flex flex-col items-center text-center mb-12 animate-on-scroll">
-      <!-- Small Headshot -->
-      <div class="relative group mb-8">
-        <img 
-          src="/headshot.jpg" 
-          alt="nagaraj pandith"
-          class="rounded-full w-32 h-32 object-cover grayscale hover:grayscale-0 transition-all duration-500 shadow-lg"
-        />
-        <div class="absolute inset-0 rounded-full ring-1 ring-black/5"></div>
-      </div>
-
-      <!-- Name & Intro -->
-      <h1 class="heading-handwritten text-5xl md:text-6xl mb-6">
+  <section class="container mx-auto px-4 py-24 md:py-32 max-w-4xl text-center">
+    <div class="animate-on-scroll space-y-8">
+      <h1 class="heading-handwritten text-6xl md:text-7xl mb-2">
         nagaraj pandith
       </h1>
-      <p class="text-xl md:text-2xl opacity-90 mb-8 leading-relaxed max-w-3xl">
-        {age}-year-old full-stack developer from india who codes, creates, and occasionally writes. i get my dopamine by crafting innovative solutions and interesting side projects.
-      </p>
-      <p class="text-lg opacity-70 mb-8 max-w-2xl">
-        obsessed with documentation, debugging, and focusing on little details that nobody would care for. always open to interesting projects.
-      </p>
-      <div class="flex flex-wrap justify-center gap-4">
+      
+      <div class="text-xl md:text-2xl opacity-90 leading-relaxed max-w-3xl mx-auto space-y-6 font-light">
+        <p>
+          Full-stack developer who codes, creates, and occasionally writes. <br class="hidden md:block" />
+          I get my dopamine from crafting innovative solutions and shipping thoughtful side projects.
+        </p>
+        
+        <p class="opacity-70 text-lg">
+          Obsessed with documentation, debugging, and details most people overlook. <br class="hidden md:block" />
+          Always open to interesting problems.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-4 pt-4">
         <a href="/freelance" class="btn-primary">
           let's build something
         </a>

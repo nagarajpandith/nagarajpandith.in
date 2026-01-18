@@ -108,60 +108,68 @@ const quirks = [
 
 const talks = [
   {
-    title: 'Git & GitHub Skill Development Course',
-    link: 'https://www.canva.com/design/DAF6N1kEOK0/Tyzzl9YZ2dM-oIHz7WAslQ/view',
-    description: 'A comprehensive course for absolute beginners covering version control concepts, Git vs GitHub, commits, branching, PRs, and open source contributions.',
-    type: 'Course',
-    audience: 'Beginners'
-  },
-  {
     title: 'Inside the Mind of ChatGPT',
     link: 'https://www.canva.com/design/DAGko2trUnA/5CX2O2jVxzkQaIxowH-dIw/view',
     description: 'Demystifying LLMs and GPTs. Explored neural networks through human brain analogy, training processes, temperature, and the future of "vibe coding".',
     type: 'Talk',
-    audience: 'General Tech'
+    audience: 'General Tech',
+    image: '/talks/gpt.jpg'
+  },
+    {
+    title: 'Git & GitHub: Beginner to Advanced',
+    link: 'https://www.canva.com/design/DAF5q7j1Ftg/z2VgSkKYFDED3hiYx6DSig/view',
+    description: 'Deep dive into advanced Git concepts: forking, issues, CLI mastery, remotes, and open source contribution workflows.',
+    type: 'Workshop',
+    audience: 'Developers',
+    image: '/talks/gitgithubbtoa.jpg'
+  },
+  {
+    title: 'Writing Efficient Code Using STL',
+    link: 'https://www.canva.com/design/DAEzPtUEH4w/F6sTVv9uiPCYA0LITrvhlQ/view',
+    description: 'Introduction to C++ Standard Template Library. Covered why STL matters, containers, iterators, algorithms, sequential/ordered/unordered containers, headers, pair, vector, map, set, stack, queue, and ordered vs unordered & multiset/multimap with hands-on coding.',
+    type: 'Workshop',
+    audience: 'C++ Learners / Competitive Programmers',
+    image: '/talks/stl.jpg'
   },
   {
     title: 'Demystifying Hackathons',
     link: 'https://www.canva.com/design/DAF5q4Ym7UM/a8IXtRcLHiju5_r7IjdCVg/view',
     description: 'A guide to winning your first hackathon. Covered team formation, idea generation, finding events, and announced FLC Hackfest.',
     type: 'Session',
-    audience: 'Students'
-  },
-  {
-    title: 'Our Journey: From Hobby Coders to Hackathon Winners',
-    link: 'https://www.canva.com/design/DAF5qzUlzAg/NUzYbv_s2B6Uj5kfct0Lmg/view',
-    description: 'Shared our personal experience winning the Mumbai Hackathon. discussed challenges, team dynamics, and pro tips for competitive coding.',
-    type: 'Talk',
-    audience: 'Students'
-  },
-  {
-    title: 'Git & GitHub: Beginner to Advanced',
-    link: 'https://www.canva.com/design/DAF5q7j1Ftg/z2VgSkKYFDED3hiYx6DSig/view',
-    description: 'Deep dive into advanced Git concepts: forking, issues, CLI mastery, remotes, and open source contribution workflows.',
-    type: 'Workshop',
-    audience: 'Developers'
+    audience: 'Students',
+    image: '/talks/demystify.jpg'
   },
   {
     title: 'Kickstart Open Source with Hacktoberfest',
     link: 'https://www.canva.com/design/DAF5q4ha188/WS4XA8pdJnug9xO9UyjERQ/view',
     description: 'Introduction to open source philosophy and Hacktoberfest. Guided students through their first PRs and finding the right projects.',
     type: 'Workshop',
-    audience: 'Open Source Aspirants'
+    audience: 'Open Source Aspirants',
+    image: '/talks/kickstart.jpg'
   },
   {
     title: 'Virtualization with Hyper-V',
     link: 'https://www.canva.com/design/DAGBXmaLZHw/N-Gqx2BtziNeRosVSQp9_w/view',
     description: 'Technical deep dive into Hypervisors, VMs, Hyper-V storage types, virtual networking, checkpoints, and integration services.',
     type: 'Technical Session',
-    audience: 'SysAdmins / Devs'
+    audience: 'SysAdmins / Devs',
+    image: '/talks/hyperv.jpg'
   },
   {
     title: 'Azure Network Watcher',
     link: 'https://www.canva.com/design/DAGCq37XqAo/_yOErThrfO0YXE2DEJMdmA/view',
     description: 'Explored network monitoring and diagnostic tools in Azure. covered when and how to use Network Watcher for cloud infrastructure.',
     type: 'Technical Session',
-    audience: 'Cloud Engineers'
+    audience: 'Cloud Engineers',
+    image: '/talks/nwwatcher.jpg'
+  },
+  {
+    title: 'Git & GitHub Skill Development Course',
+    link: 'https://www.canva.com/design/DAF6N1kEOK0/Tyzzl9YZ2dM-oIHz7WAslQ/view',
+    description: 'A comprehensive course for absolute beginners covering version control concepts, Git vs GitHub, commits, branching, PRs, and open source contributions.',
+    type: 'Course',
+    audience: 'Beginners',
+    image: '/talks/gitgithubsdc.jpg'
   }
 ];
 
@@ -369,13 +377,15 @@ const recommendations = [
         >
           <div class="aspect-video relative overflow-hidden bg-white/5">
              <Image 
-               src="/headshot.jpg" 
+               src={talk.image} 
                alt={talk.title}
                width={400}
                height={225}
-               class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity blur-sm group-hover:blur-none"
+               class="w-full h-full object-cover transition-all duration-500 md:group-hover:blur-sm md:group-hover:opacity-60"
              />
-             <div class="absolute inset-0 flex items-center justify-center">
+             
+             <!-- Desktop Only Hover Button -->
+             <div class="hidden md:flex absolute inset-0 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div class="bg-black/50 backdrop-blur-md px-4 py-2 rounded-full text-white text-sm font-medium border border-white/20 group-hover:scale-110 transition-transform">
                   view slides →
                 </div>
@@ -383,7 +393,7 @@ const recommendations = [
              
              <!-- Badges -->
              <div class="absolute top-3 left-3 flex gap-2">
-               <span class="bg-black/60 text-white text-[10px] uppercase tracking-wider px-2 py-1 rounded backdrop-blur-md">
+               <span class="bg-black/60 text-white text-[10px] uppercase tracking-wider px-2 py-1 rounded backdrop-blur-md border border-white/10">
                  {talk.type}
                </span>
              </div>
@@ -393,9 +403,15 @@ const recommendations = [
             <h3 class="text-xl font-medium mb-3 group-hover:text-primary transition-colors">
               {talk.title}
             </h3>
-            <p class="text-sm opacity-70 leading-relaxed mb-4">
+            <p class="text-sm opacity-70 leading-relaxed mb-6 font-light">
               {talk.description}
             </p>
+            
+            <!-- Mobile Only Indicator -->
+            <div class="md:hidden flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] opacity-40 group-hover:opacity-100 group-hover:text-primary transition-all">
+               <span>View Slides</span>
+               <svg class="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </div>
           </div>
         </a>
       ))}

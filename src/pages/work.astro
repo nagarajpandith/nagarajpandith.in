@@ -4,6 +4,25 @@ import { supabase } from '../utils/supabase';
 
 const projects = [
   {
+    title: "Hackfest'24",
+    img: '/projects/hackfest.jpg',
+    description:
+      "Built the official web platform for Hackfest ’24, a national-level hackathon, featuring a retrofuturism-themed landing page, multi-step registrations, team management, and five robust role-based dashboards powering a fully paperless event.",
+    link: 'http://hackfest.dev/',
+    github: 'Finite-Loop-Club-NMAMIT/hackfest-website',
+    tags: [
+      'Next.js',
+      'Typescript',
+      'GSAP',
+      'TailwindCSS',
+      'tRPC',
+      'Cloudinary',
+      'react-query',
+      'Azure PostgreSQL',
+      'Prisma',
+    ],
+  },
+  {
     title: 'JabWeMeet',
     img: '/projects/jab-we-meet.jpg',
     description:
@@ -37,26 +56,7 @@ const projects = [
     ],
   },
   {
-    title: "Hackfest'24",
-    img: '/projects/hackfest.jpg',
-    description:
-      "Built the official web platform for Hackfest ’24, a national-level hackathon, featuring a retrofuturism-themed landing page, multi-step registrations, team management, and five robust role-based dashboards powering a fully paperless event.",
-    link: 'http://hackfest.dev/',
-    github: 'Finite-Loop-Club-NMAMIT/hackfest-website',
-    tags: [
-      'Next.js',
-      'Typescript',
-      'GSAP',
-      'TailwindCSS',
-      'tRPC',
-      'Cloudinary',
-      'react-query',
-      'Azure PostgreSQL',
-      'Prisma',
-    ],
-  },
-  {
-    title: "Adore by Amrutha",
+    title: "aba",
     img: '/projects/aba.jpg',
     description:
       "in progress(WIP). a complete ecommerce storefront with a fully featured dashboard to manage products, inventory, finance and more to sell sarees. order management, user profiles, checkout, payment gateway integration, and more.",
@@ -69,6 +69,24 @@ const projects = [
       'GraphQL',
       'Framer Motion',
       'Prisma',
+    ],
+  },
+    {
+    title: 'Aido',
+    img: '/projects/aido.jpg',
+    description:
+      '3D multilingual chatbot with interactive gestures, contextual conversations, persistent chat history, and personalized medical and mental health support.',
+    link: 'https://aido-clone.vercel.app/',
+    github: 'nagarajpandith/aido',
+    tags: [
+      'Next.js',
+      'tRPC',
+      'Typescript',
+      'Google PaLM2',
+      'Cloud Run',
+      'Cloud SQL',
+      'Deepgram STT',
+      'ElevenLabs TTS',
     ],
   },
   {
@@ -106,24 +124,6 @@ const projects = [
     github: 'nagarajpandith/portfolio',
     tags: ['Next.js', 'Typescript', 'MDX', 'Prisma', 'TailwindCSS'],
   },
-  {
-    title: 'Aido',
-    img: '/projects/aido.jpg',
-    description:
-      '3D multilingual chatbot with interactive gestures, contextual conversations, persistent chat history, and personalized medical and mental health support.',
-    link: 'https://aido-clone.vercel.app/',
-    github: 'nagarajpandith/aido',
-    tags: [
-      'Next.js',
-      'tRPC',
-      'Typescript',
-      'Google PaLM2',
-      'Cloud Run',
-      'Cloud SQL',
-      'Deepgram STT',
-      'ElevenLabs TTS',
-    ],
-  },
 ];
 
 const miniprojects = [
@@ -133,6 +133,13 @@ const miniprojects = [
     link: 'https://github.com/Finite-Loop-Club-NMAMIT/stealth-bot',
     github: 'Finite-Loop-Club-NMAMIT/stealth-bot',
     tags: ['Discord.js', 'Node', 'Express'],
+  },
+  {
+    title: 'le-waks menu',
+    description: 'Built a modern, responsive menu web app for a Saudi client, featuring dynamic data, dual-language (i18n) support, and smooth animations for a seamless user experience.',
+    link: 'lewaks.co',
+    github: 'nagarajpandith/le-waks-menu',
+    tags: ['Nextjs', 'TailwindCSS', 'Framer-Motion'],
   },
   {
     title: 'Campus Compass',
@@ -147,13 +154,6 @@ const miniprojects = [
     link: 'https://github.com/nagarajpandith/le-waks-menu',
     github: 'nagarajpandith/afra-frontend',
     tags: ['React', 'MongoDB', 'Express', 'Node'],
-  },
-  {
-    title: 'le-waks menu',
-    description: 'Built a modern, responsive menu web app for a Saudi client, featuring dynamic data, dual-language (i18n) support, and smooth animations for a seamless user experience.',
-    link: 'lewaks.co',
-    github: 'nagarajpandith/le-waks-menu',
-    tags: ['Nextjs', 'TailwindCSS', 'Framer-Motion'],
   },
   {
     title: 'CAS',
@@ -247,58 +247,59 @@ const allShots = [...horizontalShots, ...verticalShots];
 
   <!-- Projects Section -->
   <section id="projects-section" class="container mx-auto px-4 py-16 max-w-6xl section-content">
-    <div class="space-y-16">
+    <div class="grid md:grid-cols-2 gap-8">
       {projects.map((project, index) => (
-        <article class="grid md:grid-cols-2 gap-8 items-start animate-on-scroll" data-index={index}>
+        <article class="bg-subtle rounded-2xl p-6 flex flex-col gap-6 hover:border-current/10 border border-transparent transition-all animate-on-scroll group" data-index={index}>
           <!-- Project Image -->
-          <div class="relative group overflow-hidden rounded-xl aspect-video bg-subtle">
-            <a href={project.link} target="_blank" rel="noopener noreferrer">
+          <div class="relative overflow-hidden rounded-xl aspect-video bg-white/5 border border-current/5">
+            <a href={project.link} target="_blank" rel="noopener noreferrer" class="block h-full w-full">
               <img 
                 src={project.img} 
                 alt={project.title}
-                class="w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
               />
             </a>
           </div>
 
           <!-- Project Details -->
-          <div class="space-y-4">
-            <div>
-              <h2 class="text-3xl font-medium mb-2 heading-handwritten">
+          <div class="flex-1 flex flex-col">
+            <div class="flex items-start justify-between mb-4">
+              <h2 class="text-2xl font-medium heading-handwritten">
                 {project.title}
               </h2>
-              <p class="text-sm opacity-70 leading-relaxed">
-                {project.description}
-              </p>
+              <div class="flex gap-2">
+                <a 
+                  href={project.link} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label="View Live"
+                  class="p-2 rounded-lg hover:bg-current/5 opacity-50 hover:opacity-100 transition-all"
+                >
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                </a>
+                <a 
+                  href={`https://github.com/${project.github}`}
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  aria-label="GitHub Repository"
+                  class="p-2 rounded-lg hover:bg-current/5 opacity-50 hover:opacity-100 transition-all"
+                >
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+              </div>
             </div>
 
+            <p class="text-sm opacity-70 leading-relaxed mb-6 font-light">
+              {project.description}
+            </p>
+
             <!-- Tags -->
-            <div class="flex flex-wrap gap-2">
+            <div class="flex flex-wrap gap-2 mt-auto pt-6 border-t border-dashed border-current/10">
               {project.tags.map(tag => (
-                <span class="text-xs bg-subtle px-3 py-1 rounded">
+                <span class="text-[10px] uppercase tracking-wider opacity-60 px-2 py-1 bg-current/5 rounded-md">
                   {tag}
                 </span>
               ))}
-            </div>
-
-            <!-- Links -->
-            <div class="flex gap-4 pt-2">
-              <a 
-                href={project.link} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="btn-primary"
-              >
-                view live →
-              </a>
-              <a 
-                href={`https://github.com/${project.github}`}
-                target="_blank" 
-                rel="noopener noreferrer"
-                class="btn-secondary"
-              >
-                github →
-              </a>
             </div>
           </div>
         </article>

@@ -4,7 +4,7 @@ import { Image } from 'astro:assets';
 
 const workExperience = [
   {
-    company: 'Wipfli India LLP',
+    company: 'Wipfli India',
     roles: [
       { title: 'Engineer II', period: 'Oct 2024 - Present', duration: 'ongoing' },
       { title: 'Engineer I', period: 'Jun 2024 - Oct 2024', duration: '5 months' },
@@ -24,14 +24,14 @@ const workExperience = [
 ];
 
 const primaryTech = [
-  { name: 'React', icon: '⚛️' },
-  { name: 'Next.js', icon: '▲' },
-  { name: 'TypeScript', icon: '📘' },
-  { name: 'Django', icon: '🐍' },
-  { name: 'Tailwind CSS', icon: '🎨' },
-  { name: 'PostgreSQL', icon: '🐘' },
-  { name: 'Git', icon: '🔀' },
-  { name: 'C# .NET', icon: '💜' }
+  { name: 'React' },
+  { name: 'Next.js' },
+  { name: 'TypeScript' },
+  { name: 'Django' },
+  { name: 'Tailwind CSS' },
+  { name: 'PostgreSQL' },
+  { name: 'Git' },
+  { name: 'C# .NET' }
 ];
 
 const achievements = [
@@ -39,31 +39,36 @@ const achievements = [
     title: 'Winner - Hackoverflow 1.0',
     description: 'A 3-day national-level hackathon at Pillai HOC, Mumbai. This was my first offline hackathon, where we built a multilingual video conferencing app using LiveKit & Next.js.',
     year: '18-03-2023',
-    link:'https://www.linkedin.com/feed/update/urn:li:activity:7043941054076637184/'
+    link:'https://www.linkedin.com/feed/update/urn:li:activity:7043941054076637184/',
+    image: '/wins/hackoverflow.jpeg'
   },
   {
     title: 'Track Winner - Hackverse 4.0 (AI Track)',
     description: 'A 24-hour national-level hackathon at NITK Surathkal.',
     year: '16-04-2023',
-    link:'https://www.linkedin.com/feed/update/urn:li:activity:7060835169556955136/'
+    link:'https://www.linkedin.com/feed/update/urn:li:activity:7060835169556955136/',
+    image: '/wins/hackverse.jpeg'
   },
   {
     title: 'Special Prize - NivHack',
     description: 'Awarded "Most Innovative Approach" at Niveus Solutions, Mangalore.',
     year: '27-08-2023',
-    link:'https://www.linkedin.com/feed/update/urn:li:activity:7102829803791163392/'
+    link:'https://www.linkedin.com/feed/update/urn:li:activity:7102829803791163392/',
+    image: '/wins/niveus.jpeg'
   },
   {
     title: 'Winner - Web Ally',
     description: 'A 6-hour website design contest held at SJEC Mangalore.',
     year: '23-03-2023',
-    link:'https://www.linkedin.com/feed/update/urn:li:activity:7049752134799536128/'
+    link:'https://www.linkedin.com/feed/update/urn:li:activity:7049752134799536128/',
+    image: '/wins/tiara.jpeg'
   },
   {
     title: 'Winner - Webbed',
     description: 'Secured 1st place in "Webbed" and Runner-up in "Web Piracy" during Incridea 2022.',
     year: '04-02-2022',
-    link:'https://www.linkedin.com/feed/update/urn:li:activity:7049752134799536128/'
+    link:'https://www.linkedin.com/feed/update/urn:li:activity:7049752134799536128/',
+    image: '/wins/incridea.jpeg'
   }
 ];
 
@@ -71,39 +76,38 @@ const communityWork = [
   {
     role: 'Judge',
     events: ['HackXpo S03', 'Hackfest 2025'],
-    description: 'Evaluated student projects, provided technical feedback, and collaborated with industry experts to select winners based on innovation and execution.'
+    description: 'Evaluated student projects, provided technical feedback, and collaborated with industry experts to select winners based on innovation and execution.',
+    image: '/community/hackfest.jpg'
   },
   {
     role: 'Mentor & Judge',
     events: ['Innovex 2025'],
-    description: 'Mentored teams during the initial rounds, helping them refine their ideas, and judged final presentations alongside other industry professionals.'
+    description: 'Mentored teams during the initial rounds, helping them refine their ideas, and judged final presentations alongside other industry professionals.',
+    image: '/community/innovex.jpg'
   },
   {
     role: 'Workshop Conductor',
     events: ['Git & GitHub Workshop', 'Open-source Workshop'],
-    description: 'Empowered over 130 students with foundational skills in version control, command-line usage, and open-source collaboration.'
+    description: 'Empowered over 130 students with foundational skills in version control, command-line usage, and open-source collaboration.',
+    image: '/community/workshop.webp'
   },
   {
     role: 'President - Coding Club',
     events: ['Hackfest 2025', 'Workshops', 'Mini Hackathons', 'DSA Sprints'],
-    description: 'Led the club for over two years, organizing workshops and sprints. I introduced mini-hackathons to get freshers building early, launched a community Discord, and open-sourced the club website. My highlight was organizing the college\'s first 3-day national-level hackathon-managing a passionate team to deliver a flawless event with 100% participant satisfaction. This role taught me invaluable lessons in leadership, finance, and event management.'
-  },
-  {
-    role: 'Skill Lab Trainer',
-    events: ['Web Development & Git Training'],
-    description: 'Trained incoming students in web development fundamentals and version control systems.'
+    description: 'Led the club for over two years, organizing workshops and sprints. I introduced mini-hackathons to get freshers building early, launched a community Discord, and open-sourced the club website. My highlight was organizing the college\'s first 3-day national-level hackathon-managing a passionate team to deliver a flawless event with 100% participant satisfaction.',
+    image: '/community/president.webp'
   }
 ];
 
 const quirks = [
-  { emoji: '🍦', text: 'i love chocolate ice cream and eat a whole tub in one sitting sometimes' },
-  { emoji: '🍛', text: 'i cook chicken biryani really well' },
-  { emoji: '😺', text: 'i obsess over cats and cat videos' },
-  { emoji: '🎬', text: 'i watch a lot of crime thrillers, murder mysteries' },
-  { emoji: '🏠', text: 'infj-t with weak social battery' },
-  { emoji: '📚', text: 'obsessive documenter (i write everything down - my daily tasks, my thoughts, everything)' },
-  { emoji: '🍳', text: 'i learnt to cook in 2025 and i\'m proud of it' },
-  { emoji: '💗', text: 'i\'m a sucker for pink & lavender colors' }
+  { text: 'i love chocolate ice cream and eat a whole tub in one sitting sometimes' },
+  { text: 'i cook chicken biryani really well' },
+  { text: 'i obsess over cats and cat videos' },
+  { text: 'i watch a lot of crime thrillers, murder mysteries' },
+  { text: 'infj-t with weak social battery' },
+  { text: 'obsessive documenter (i write everything down - my daily tasks, my thoughts, everything)' },
+  { text: 'i learnt to cook in 2025 and i\'m proud of it' },
+  { text: 'i\'m a sucker for pink & lavender colors' }
 ];
 
 const talks = [
@@ -148,6 +152,14 @@ const talks = [
     image: '/talks/kickstart.jpg'
   },
   {
+    title: 'Git & GitHub Skill Development Course',
+    link: 'https://www.canva.com/design/DAF6N1kEOK0/Tyzzl9YZ2dM-oIHz7WAslQ/view',
+    description: 'A comprehensive course for absolute beginners covering version control concepts, Git vs GitHub, commits, branching, PRs, and open source contributions.',
+    type: 'Course',
+    audience: 'Beginners',
+    image: '/talks/gitgithubsdc.jpg'
+  },
+  {
     title: 'Virtualization with Hyper-V',
     link: 'https://www.canva.com/design/DAGBXmaLZHw/N-Gqx2BtziNeRosVSQp9_w/view',
     description: 'Technical deep dive into Hypervisors, VMs, Hyper-V storage types, virtual networking, checkpoints, and integration services.',
@@ -162,14 +174,6 @@ const talks = [
     type: 'Technical Session',
     audience: 'Cloud Engineers',
     image: '/talks/nwwatcher.jpg'
-  },
-  {
-    title: 'Git & GitHub Skill Development Course',
-    link: 'https://www.canva.com/design/DAF6N1kEOK0/Tyzzl9YZ2dM-oIHz7WAslQ/view',
-    description: 'A comprehensive course for absolute beginners covering version control concepts, Git vs GitHub, commits, branching, PRs, and open source contributions.',
-    type: 'Course',
-    audience: 'Beginners',
-    image: '/talks/gitgithubsdc.jpg'
   }
 ];
 
@@ -241,7 +245,7 @@ const recommendations = [
            </p>
            <ul class="list-disc pl-5 opacity-80 mb-4 space-y-1">
              <li>participated in hackathons and coding contests</li>
-             <li>built software for our university</li>
+             <li>built software for events at our university/club</li>
              <li>worked on freelance projects</li>
            </ul>
            <p>
@@ -293,7 +297,6 @@ const recommendations = [
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
       {primaryTech.map((tech) => (
         <div class="bg-subtle bg-subtle-hover rounded-lg p-4 text-center transition-all">
-          <div class="text-3xl mb-2">{tech.icon}</div>
           <div class="text-sm font-medium">{tech.name}</div>
         </div>
       ))}
@@ -320,41 +323,80 @@ const recommendations = [
     
     <div class="grid sm:grid-cols-2 gap-6">
       {achievements.map((achievement) => (
-        <article class="bg-subtle bg-subtle-hover rounded-lg p-6 transition-all">
-          <div class="flex items-start justify-between mb-3">
-            <h3 class="font-medium text-lg flex-1">{achievement.title}</h3>
-            <span class="text-sm opacity-50 shrink-0 ml-4">{achievement.year}</span>
+        <a 
+          href={achievement.link} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          class="group block bg-subtle bg-subtle-hover rounded-xl overflow-hidden transition-all hover:scale-[1.02] hover:shadow-lg"
+        >
+          <div class="aspect-[16/10] relative overflow-hidden bg-white/5">
+            <Image 
+              src={achievement.image} 
+              alt={achievement.title}
+              width={400}
+              height={250}
+              class="w-full h-full object-cover transition-all duration-500 md:group-hover:scale-105"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            
+            <!-- Year Badge -->
+            <div class="absolute top-3 right-3">
+              <span class="bg-black/60 text-white text-[10px] uppercase tracking-wider px-2 py-1 rounded backdrop-blur-md border border-white/10">
+                {achievement.year}
+              </span>
+            </div>
+            
+            <!-- Title Overlay -->
+            <div class="absolute bottom-0 left-0 right-0 p-4">
+              <h3 class="font-medium text-base md:text-lg text-white leading-tight drop-shadow-lg">
+                {achievement.title}
+              </h3>
+            </div>
           </div>
-          <p class="text-sm opacity-70">{achievement.description}</p>
-          <a href={achievement.link} target="_blank" class="link text-sm">
-            view post →
-          </a>
-        </article>
+          
+          <div class="p-4">
+            <p class="text-sm opacity-70 leading-relaxed mb-3">{achievement.description}</p>
+            <div class="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] opacity-40 group-hover:opacity-100 group-hover:text-primary transition-all">
+              <span>View Post</span>
+              <svg class="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </div>
+          </div>
+        </a>
       ))}
     </div>
   </section>
 
-  <!-- Community Involvement -->
   <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
     <div class="mb-12">
       <h2 class="heading-handwritten text-4xl md:text-5xl mb-2">community involvement</h2>
       <p class="text-lg opacity-60">giving back</p>
     </div>
     
-    <div class="space-y-6">
+    <div class="space-y-12">
       {communityWork.map((work) => (
-        <article class="border-b pb-6 last:border-b-0" style="border-color: rgba(255, 255, 255, 0.1);">
-          <div class="flex flex-col sm:flex-row sm:items-start gap-4 mb-3">
-            <h3 class="font-medium text-lg shrink-0">{work.role}</h3>
+        <article class="group grid md:grid-cols-5 gap-8 items-center border-b border-current/10 pb-12 last:border-0 last:pb-0">
+          <div class="md:col-span-2 aspect-[4/3] rounded-xl overflow-hidden bg-subtle">
+             <Image 
+               src={work.image} 
+               alt={work.role}
+               width={400}
+               height={300}
+               class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 hover:scale-105"
+             />
+          </div>
+          <div class="md:col-span-3 space-y-4">
             <div class="flex flex-wrap gap-2">
               {work.events.map((event) => (
-                <span class="text-xs bg-subtle px-3 py-1 rounded">
+                <span class="text-[10px] uppercase tracking-widest bg-subtle px-2 py-0.5 rounded opacity-60">
                   {event}
                 </span>
               ))}
             </div>
+            <h3 class="text-2xl font-medium">{work.role}</h3>
+            <p class="text-sm opacity-70 leading-relaxed font-light">
+              {work.description}
+            </p>
           </div>
-          <p class="text-sm opacity-70">{work.description}</p>
         </article>
       ))}
     </div>
@@ -521,7 +563,6 @@ const recommendations = [
         <div class="grid sm:grid-cols-2 gap-4">
           {quirks.map((quirk) => (
             <div class="flex items-start gap-3 bg-subtle rounded-lg p-4">
-              <span class="text-2xl shrink-0">{quirk.emoji}</span>
               <p class="text-sm opacity-80 pt-1">{quirk.text}</p>
             </div>
           ))}

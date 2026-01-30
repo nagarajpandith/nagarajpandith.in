@@ -24,3 +24,5 @@ pnpm-debug.log*
 .idea/
 
 .vscode/
+.agent
+skills

@@ -195,73 +195,94 @@ const recommendations = [
 ---
 
 <BaseLayout title="about - nagaraj pandith" description="full-stack developer obsessed with clean code, documentation, and making things work elegantly">
-  <!-- Hero -->
-  <section class="container mx-auto px-4 py-20 max-w-4xl animate-on-scroll">
-    <h1 class="heading-handwritten text-5xl md:text-7xl mb-8">about me</h1>
-    <Image src="/headshot2.jpg" alt="about" width="300" height="300" class="rounded-lg mb-6" />
-    <div class="text-lg opacity-90 leading-relaxed space-y-8">
-      <p>
-        Hey, I'm <span class="font-medium">Nagaraj Pandith</span>... but you might know me as <span class="opacity-60 italic">hashclan</span> on the internet.
-      </p>
-      
-      <p>
-        I'm a full-stack developer from India who builds things for the web. <br>
-        Sometimes they're useful, sometimes they're fun - hopefully, they're both.
-      </p>
-      
-      <p>
-        My everyday toolkit includes TypeScript, Next.js, and whatever else gets the job done without unnecessary overengineering.
-      </p>
+  
+  <div class="space-y-24 pb-24">
+    
+    <!-- Hero Section -->
+    <section class="container mx-auto px-4 pt-24 max-w-5xl animate-on-scroll">
+      <div class="grid md:grid-cols-2 gap-12 items-center">
+        <div class="order-2 md:order-1 space-y-6">
+          <div class="space-y-2">
+            <h1 class="text-4xl md:text-6xl font-bold tracking-tight">It's me, Nagaraj.</h1>
+            <!-- <p class="text-xl text-primary font-medium">Developer. Community Builder. Storyteller.</p> -->
+          </div>
+          
+          <div class="space-y-4 text-lg opacity-80 leading-relaxed max-w-lg">
+            <p>
+              I'm a full-stack developer from India who builds things for the web. 
+              My everyday toolkit includes TypeScript, Next.js, and whatever else gets the job done without unnecessary overengineering.
+            </p>
+            <p>
+              Currently building meaningful software at <span class="text-primary">Wipfli</span> and obsessing over clean code.
+            </p>
+          </div>
 
-      <div class="space-y-4">
-        <h3 class="text-2xl font-handwritten">Life outside code</h3>
-        <p>When I'm not coding, you'll probably find me:</p>
-        <ul class="list-disc pl-5 opacity-80 space-y-1">
-          <li>looping my "Liked Songs" playlist,</li>
-          <li>doom-scrolling cat videos on Instagram, or</li>
-          <li>getting lost in crime thrillers</li>
-          <li>watching endless amount of youtube videos</li>
-        </ul>
-        <p>
-          You can chat with me about cooking, fragrances, food, movies, shows, life, and - if you get close enough - philosophy. I'll also gladly tell you where to find the best biryanis or the best chocolate ice creams in town.
-        </p>
-      </div>
-
-      <div class="bg-subtle/50 rounded-xl space-y-6">
-        <h3 class="text-2xl font-handwritten mb-4">My story (the long version)</h3>
+          <div class="pt-4 flex gap-4">
+             <a href="/resume.pdf" target="_blank" class="px-6 py-2 bg-primary text-background rounded-full font-medium hover:opacity-90 transition-opacity">
+               Download Resume
+             </a>
+             <a href="#journey" class="px-6 py-2 border border-current rounded-full font-medium hover:bg-subtle transition-colors">
+               My Journey
+             </a>
+          </div>
+        </div>
         
-        <p>
-          I fell in love with computers pretty early - probably around 10 or 11, when I got access to an office computer at my mom's workplace. That curiosity never left; it just evolved… and also explains why I became a bit of a homebody.
-        </p>
-        
-        <p>
-          Growing up, I was always the "tech-savvy" kid. From flashing custom ROMs on phones slower than calculators, to obsessing over cybersecurity and installing Kali Linux on painfully slow laptops - I experimented with whatever I could get my hands on. It was messy, frustrating, and honestly, a lot of fun. I'm sure many of you can relate.
-        </p>
-
-        <div class="border-t border-dashed border-current/10 pt-6 mt-6">
-           <h4 class="text-lg font-medium mb-2">University & beyond</h4>
-           <p class="mb-4">
-             During my university days, I slowly stopped optimizing for grades and started optimizing for learning - especially in full-stack development. I met like-minded developer friends, and together we:
-           </p>
-           <ul class="list-disc pl-5 opacity-80 mb-4 space-y-1">
-             <li>participated in hackathons and coding contests</li>
-             <li>built software for events at our university/club</li>
-             <li>worked on freelance projects</li>
-           </ul>
-           <p>
-             That journey eventually led me to Wipfli, where I joined as a Software Engineer in my final year. Looking back, I've come a long way - and I'm genuinely grateful for every part of that journey.
-           </p>
+        <div class="order-1 md:order-2 flex justify-center md:justify-end">
+          <div class="relative w-64 h-64 md:w-80 md:h-80 rotate-3 transition-transform hover:rotate-0 duration-500">
+            <div class="absolute inset-0 border-2 border-primary rounded-2xl transform translate-x-4 translate-y-4"></div>
+            <Image 
+              src="/headshot2.jpg" 
+              alt="Nagaraj Pandith" 
+              width={400} 
+              height={400} 
+              class="relative w-full h-full object-cover rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 shadow-xl bg-subtle" 
+            />
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- Bio & Context -->
+    <section class="container mx-auto px-4 max-w-4xl animate-on-scroll">
+      <div class="grid md:grid-cols-2 gap-12">
+         <!-- Column 1 -->
+         <div class="space-y-6">
+            <h2 class="text-2xl font-bold heading-handwritten">Life outside code</h2>
+            <div class="prose prose-invert opacity-80">
+              <p>When I'm not coding, you'll probably find me:</p>
+              <ul class="list-none space-y-2 pl-0">
+                <li class="flex items-center gap-2"><span>🎵</span> looping my "Liked Songs" playlist</li>
+                <li class="flex items-center gap-2"><span>🐈</span> doom-scrolling cat videos</li>
+                <li class="flex items-center gap-2"><span>🕵️</span> getting lost in crime thrillers</li>
+                <li class="flex items-center gap-2"><span>📺</span> watching endless youtube essays</li>
+              </ul>
+              <p class="pt-4">
+                You can chat with me about cooking, fragrances, food, movies, shows, life, and - if you get close enough - philosophy. I'll also gladly tell you where to find the best biryanis or the best chocolate ice creams in town.
+              </p>
+            </div>
+         </div>
+
+         <!-- Column 2 -->
+         <div class="space-y-6">
+            <h2 class="text-2xl font-bold heading-handwritten">My story</h2>
+            <div class="prose prose-invert opacity-80">
+              <p>
+                I fell in love with computers around age 10, playing on an office computer at my mom's workplace. That curiosity evolved into flashing custom ROMs on slow phones and installing Kali Linux on even slower laptops.
+              </p>
+              <p>
+                In university, I stopped optimizing for grades and started optimizing for learning. I found my tribe, built software for events, hacked at hackathons, and never looked back. That messy, frustrating, fun journey led me to where I am today.
+              </p>
+            </div>
+         </div>
+      </div>
+    </section>
 
   <!-- Work Experience Timeline -->
   <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
     <h2 class="heading-handwritten text-4xl md:text-5xl mb-12">the journey</h2>
-    
+      
     <div class="space-y-12">
-      {workExperience.map((job) => (
+        {workExperience.map((job) => (
         <article class="relative pl-8 border-l-2" style="border-color: rgba(255, 255, 255, 0.1);">
           {job.current && (
             <div class="absolute -left-2 top-0 w-3 h-3 rounded-full bg-current animate-pulse"></div>
@@ -282,9 +303,9 @@ const recommendations = [
             <p class="opacity-80 leading-relaxed">{job.description}</p>
           </div>
         </article>
-      ))}
-    </div>
-  </section>
+        ))}
+      </div>
+    </section>
 
   <!-- Tech Stack -->
   <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
@@ -292,15 +313,15 @@ const recommendations = [
     
     <p class="text-lg opacity-80 mb-8">
       i primarily work with modern javascript frameworks. here's what's in my toolkit:
-    </p>
-
+          </p>
+          
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-      {primaryTech.map((tech) => (
+            {primaryTech.map((tech) => (
         <div class="bg-subtle bg-subtle-hover rounded-lg p-4 text-center transition-all">
           <div class="text-sm font-medium">{tech.name}</div>
-        </div>
-      ))}
-    </div>
+               </div>
+            ))}
+          </div>
 
     <p class="text-sm opacity-60">
       currently learning: <span class="font-medium">htmx</span> and <span class="font-medium">golang</span>
@@ -314,29 +335,29 @@ const recommendations = [
       <a href="/resume.pdf" target="_blank" class="link text-sm">
         see full tech stack in resume →
       </a>
-    </div>
-  </section>
+       </div>
+    </section>
 
   <!-- Achievements -->
   <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
     <h2 class="heading-handwritten text-4xl md:text-5xl mb-12">the wins</h2>
-    
+
     <div class="grid sm:grid-cols-2 gap-6">
       {achievements.map((achievement) => (
-        <a 
+            <a 
           href={achievement.link} 
-          target="_blank" 
+              target="_blank"
           rel="noopener noreferrer"
           class="group block bg-subtle bg-subtle-hover rounded-xl overflow-hidden transition-all hover:scale-[1.02] hover:shadow-lg"
-        >
+            >
           <div class="aspect-[16/10] relative overflow-hidden bg-white/5">
-            <Image 
+                <Image 
               src={achievement.image} 
               alt={achievement.title}
               width={400}
               height={250}
               class="w-full h-full object-cover transition-all duration-500 md:group-hover:scale-105"
-            />
+                />
             <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
             
             <!-- Year Badge -->
@@ -344,14 +365,14 @@ const recommendations = [
               <span class="bg-black/60 text-white text-[10px] uppercase tracking-wider px-2 py-1 rounded backdrop-blur-md border border-white/10">
                 {achievement.year}
               </span>
-            </div>
-            
+              </div>
+              
             <!-- Title Overlay -->
             <div class="absolute bottom-0 left-0 right-0 p-4">
               <h3 class="font-medium text-base md:text-lg text-white leading-tight drop-shadow-lg">
                 {achievement.title}
               </h3>
-            </div>
+                </div>
           </div>
           
           <div class="p-4">
@@ -360,47 +381,47 @@ const recommendations = [
               <span>View Post</span>
               <svg class="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
             </div>
-          </div>
-        </a>
-      ))}
-    </div>
-  </section>
+              </div>
+            </a>
+          ))}
+       </div>
+    </section>
 
   <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
     <div class="mb-12">
       <h2 class="heading-handwritten text-4xl md:text-5xl mb-2">community involvement</h2>
       <p class="text-lg opacity-60">giving back</p>
-    </div>
-    
+       </div>
+
     <div class="space-y-12">
       {communityWork.map((work) => (
         <article class="group grid md:grid-cols-5 gap-8 items-center border-b border-current/10 pb-12 last:border-0 last:pb-0">
           <div class="md:col-span-2 aspect-[4/3] rounded-xl overflow-hidden bg-subtle">
-             <Image 
-               src={work.image} 
-               alt={work.role}
+                   <Image 
+                     src={work.image} 
+                     alt={work.role} 
                width={400}
                height={300}
                class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 hover:scale-105"
-             />
-          </div>
+                   />
+                </div>
           <div class="md:col-span-3 space-y-4">
-            <div class="flex flex-wrap gap-2">
+                   <div class="flex flex-wrap gap-2">
               {work.events.map((event) => (
                 <span class="text-[10px] uppercase tracking-widest bg-subtle px-2 py-0.5 rounded opacity-60">
                   {event}
                 </span>
-              ))}
-            </div>
+                      ))}
+                   </div>
             <h3 class="text-2xl font-medium">{work.role}</h3>
             <p class="text-sm opacity-70 leading-relaxed font-light">
-              {work.description}
-            </p>
-          </div>
+                      {work.description}
+                   </p>
+                </div>
         </article>
-      ))}
-    </div>
-  </section>
+          ))}
+       </div>
+    </section>
 
   <!-- Talks & Workshops -->
   <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
@@ -440,8 +461,8 @@ const recommendations = [
                </span>
              </div>
           </div>
-          
-          <div class="p-6">
+
+                  <div class="p-6">
             <h3 class="text-xl font-medium mb-3 group-hover:text-primary transition-colors">
               {talk.title}
             </h3>
@@ -454,10 +475,10 @@ const recommendations = [
                <span>View Slides</span>
                <svg class="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
             </div>
+                  </div>
+               </a>
+             ))}
           </div>
-        </a>
-      ))}
-    </div>
   </section>
 
   <!-- Recommendations -->
@@ -495,8 +516,8 @@ const recommendations = [
        >
          stalk me (and maybe recommend me) on linkedin →
        </a>
-    </div>
-  </section>
+       </div>
+    </section>
 
   <!-- Travel Log -->
   <section class="container mx-auto px-4 py-8 max-w-4xl animate-on-scroll">
@@ -525,14 +546,14 @@ const recommendations = [
             <p class="text-[10px] opacity-50 uppercase tracking-wide truncate">
               {trip.place.split(',')[1] || trip.date.split(' ')[0]}
             </p>
-          </div>
-
+             </div>
+             
           <!-- Decorative Line -->
           <div class="absolute bottom-4 right-4 text-4xl opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all select-none">
             ✈
-          </div>
-        </div>
-      ))}
+                      </div>
+                   </div>
+                ))}
 
       <!-- "Next" Placeholder -->
       <a 
@@ -540,11 +561,11 @@ const recommendations = [
       >
         <div class="w-8 h-8 rounded-full bg-current/5 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
           <span class="text-lg opacity-50">+</span>
-        </div>
+          </div>
         <span class="text-xs font-medium">next adventure?</span>
       </a>
-    </div>
-  </section>
+       </div>
+    </section>
 
   <!-- Quirks (Hidden Easter Egg Section) -->
   <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
@@ -553,7 +574,7 @@ const recommendations = [
         <div class="flex items-center justify-between py-4 hover:opacity-70 transition-opacity">
           <h2 class="heading-handwritten text-4xl md:text-5xl">the quirks</h2>
           <span class="text-2xl transform group-open:rotate-180 transition-transform">↓</span>
-        </div>
+                 </div>
       </summary>
       
       <div class="pt-8 pb-4">
@@ -564,19 +585,19 @@ const recommendations = [
           {quirks.map((quirk) => (
             <div class="flex items-start gap-3 bg-subtle rounded-lg p-4">
               <p class="text-sm opacity-80 pt-1">{quirk.text}</p>
-            </div>
-          ))}
-        </div>
-      </div>
+               </div>
+             ))}
+          </div>
+       </div>
     </details>
-  </section>
-
+    </section>
+    
   <!-- CTA -->
   <section class="container mx-auto px-4 py-20 max-w-4xl animate-on-scroll">
     <div class="text-center py-16 rounded-2xl bg-subtle">
       <h2 class="heading-handwritten text-3xl md:text-5xl mb-6">
         want to work together?
-      </h2>
+       </h2>
       <p class="text-lg opacity-70 mb-8">
         i'm always open to interesting projects and collaborations
       </p>
@@ -587,7 +608,7 @@ const recommendations = [
         <a href="/work" class="btn-secondary">
           see my work
         </a>
-      </div>
+       </div>
     </div>
   </section>
 </BaseLayout>

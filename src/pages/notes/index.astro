@@ -16,48 +16,56 @@ const longNotes = allNotes.filter(n => n.data.type === 'long').sort((a, b) =>
 
 <BaseLayout title="notes - nagaraj pandith" description="learning notes, flashcards, and quick references">
   <!-- Hero -->
-  <section class="container mx-auto px-4 py-20 max-w-4xl animate-on-scroll">
-    <h1 class="heading-handwritten text-5xl md:text-7xl mb-6">notes</h1>
-    <p class="text-xl opacity-80 max-w-2xl">
-      my digital garden. quick flashcards and detailed learning notes from what i've explored.
-    </p>
+  <section class="container mx-auto px-4 pt-48 pb-32 max-w-5xl animate-on-scroll">
+    <div class="space-y-6">
+      <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold">garden</h2>
+      <h1 class="heading-handwritten text-6xl md:text-8xl opacity-80 italic">the notes.</h1>
+      <p class="text-xl opacity-60 max-w-2xl font-light leading-relaxed italic">
+        a digital garden of quick flashcards and detailed deep dives from my learning adventures.
+      </p>
+    </div>
   </section>
 
   <!-- Stats -->
-  <section class="container mx-auto px-4 pb-12 max-w-4xl animate-on-scroll">
-    <div class="grid grid-cols-2 gap-6 max-w-md">
-      <div class="bg-subtle rounded-xl p-6 text-center">
-        <div class="text-4xl font-medium mb-2">{shortNotes.length}</div>
-        <div class="text-sm opacity-60">flashcards</div>
+  <section class="container mx-auto px-4 pb-32 max-w-5xl animate-on-scroll border-t border-white/5 pt-12">
+    <div class="grid grid-cols-2 gap-12 max-w-md">
+      <div class="space-y-1">
+        <div class="text-4xl font-light opacity-90">{shortNotes.length}</div>
+        <div class="text-[10px] uppercase tracking-widest opacity-30 font-medium">flashcards</div>
       </div>
-      <div class="bg-subtle rounded-xl p-6 text-center">
-        <div class="text-4xl font-medium mb-2">{longNotes.length}</div>
-        <div class="text-sm opacity-60">deep dives</div>
+      <div class="space-y-1">
+        <div class="text-4xl font-light opacity-90">{longNotes.length}</div>
+        <div class="text-[10px] uppercase tracking-widest opacity-30 font-medium">deep dives</div>
       </div>
     </div>
   </section>
 
-  <!-- Long Notes -->
-  <section class="container mx-auto px-4 py-12 max-w-4xl animate-on-scroll">
-    <h2 class="heading-handwritten text-3xl md:text-4xl mb-8">deep dives</h2>
+  <!-- Deep Dives -->
+  <section class="container mx-auto px-4 py-32 max-w-5xl animate-on-scroll border-t border-white/5">
+    <div class="flex flex-col md:flex-row gap-16 mb-24">
+      <div class="md:w-1/4">
+        <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold mb-6">learning</h2>
+        <h3 class="heading-handwritten text-4xl md:text-5xl opacity-80">deep dives</h3>
+      </div>
+    </div>
     
-    <div class="space-y-4">
+    <div class="grid md:grid-cols-2 gap-x-20 gap-y-12">
       {longNotes.map((note) => (
         <a 
           href={`/notes/${note.slug}`}
-          class="block group bg-subtle bg-subtle-hover rounded-xl p-6 transition-all"
+          class="group block py-8 border-b border-white/5 last:border-0 md:last:border-b"
         >
           <div class="flex items-center justify-between">
             <div>
-              <h3 class="text-xl font-medium group-hover:opacity-60 transition-opacity mb-2">
+              <span class="text-[10px] uppercase tracking-widest opacity-30 font-medium mb-3 block">
+                updated {note.data.updatedAt.split('-').reverse().join('.')}
+              </span>
+              <h3 class="text-2xl font-light opacity-90 group-hover:opacity-60 transition-opacity">
                 {note.data.title}
               </h3>
-              <p class="text-sm opacity-50">
-                updated {note.data.updatedAt}
-              </p>
             </div>
-            <svg class="w-5 h-5 opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+            <svg class="w-5 h-5 opacity-0 group-hover:opacity-20 group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
             </svg>
           </div>
         </a>
@@ -65,21 +73,26 @@ const longNotes = allNotes.filter(n => n.data.type === 'long').sort((a, b) =>
     </div>
 
     {longNotes.length === 0 && (
-      <p class="text-center opacity-50 py-12">no deep dive notes yet</p>
+      <p class="text-center opacity-30 font-light italic py-12">no deep dives yet.</p>
     )}
   </section>
 
-  <!-- Short Notes / Flashcards -->
-  <section class="container mx-auto px-4 py-12 max-w-4xl animate-on-scroll">
-    <h2 class="heading-handwritten text-3xl md:text-4xl mb-8">flashcards</h2>
+  <!-- Flashcards -->
+  <section class="container mx-auto px-4 py-32 max-w-5xl animate-on-scroll border-t border-white/5">
+    <div class="flex flex-col md:flex-row gap-16 mb-24">
+      <div class="md:w-1/4">
+        <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold mb-6">quick bits</h2>
+        <h3 class="heading-handwritten text-4xl md:text-5xl opacity-80">flashcards</h3>
+      </div>
+    </div>
     
-    <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+    <div class="grid sm:grid-cols-2 md:grid-cols-4 gap-x-12 gap-y-12">
       {shortNotes.map((note) => (
         <a 
           href={`/notes/${note.slug}`}
-          class="block group bg-subtle bg-subtle-hover rounded-xl p-6 text-center transition-all hover:scale-105"
+          class="group block p-8 bg-subtle hover:bg-transparent border border-transparent hover:border-white/10 transition-all duration-500"
         >
-          <h3 class="text-lg font-medium group-hover:opacity-60 transition-opacity">
+          <h3 class="text-lg font-light opacity-90 group-hover:opacity-60 transition-opacity text-center">
             {note.data.title}
           </h3>
         </a>
@@ -87,19 +100,29 @@ const longNotes = allNotes.filter(n => n.data.type === 'long').sort((a, b) =>
     </div>
 
     {shortNotes.length === 0 && (
-      <p class="text-center opacity-50 py-12">no flashcards yet</p>
+      <p class="text-center opacity-30 font-light italic py-12">no flashcards yet.</p>
     )}
   </section>
 
   <!-- CTA -->
-  <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
-    <div class="text-center py-12 rounded-2xl bg-subtle">
-      <p class="text-lg opacity-70 mb-6">
-        these notes are living documents, constantly evolving as i learn
-      </p>
-      <p class="text-sm opacity-50">
-        spot an error? <a href="mailto:nagaraj.pandith2002@gmail.com" class="link">let me know</a>
-      </p>
+  <section class="container mx-auto px-4 py-48 max-w-5xl animate-on-scroll border-t border-white/5">
+    <div class="grid md:grid-cols-2 gap-20 items-center">
+      <div>
+        <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold mb-8">contribute</h2>
+        <h3 class="heading-handwritten text-5xl md:text-6xl opacity-80 leading-tight italic">
+          spotted an <br /> error?
+        </h3>
+      </div>
+      <div class="space-y-12">
+        <p class="text-xl opacity-50 font-light leading-relaxed italic">
+          these notes are living documents, evolving as i learn. if you see something wrong, help me fix it.
+        </p>
+        <div>
+          <a href="mailto:nagaraj.pandith2002@gmail.com" class="link text-2xl border-b-2 border-current pb-1">
+            let me know
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>

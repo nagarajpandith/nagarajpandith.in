@@ -196,46 +196,45 @@ const recommendations = [
 
 <BaseLayout title="about - nagaraj pandith" description="full-stack developer obsessed with clean code, documentation, and making things work elegantly">
   
-  <div class="space-y-24 pb-24">
+  <div class="space-y-32 pb-32">
     
     <!-- Hero Section -->
-    <section class="container mx-auto px-4 pt-24 max-w-5xl animate-on-scroll">
-      <div class="grid md:grid-cols-2 gap-12 items-center">
-        <div class="order-2 md:order-1 space-y-6">
-          <div class="space-y-2">
-            <h1 class="text-4xl md:text-6xl font-bold tracking-tight">It's me, Nagaraj.</h1>
-            <!-- <p class="text-xl text-primary font-medium">Developer. Community Builder. Storyteller.</p> -->
+    <section class="container mx-auto px-4 pt-32 max-w-5xl animate-on-scroll">
+      <div class="grid md:grid-cols-2 gap-20 items-center">
+        <div class="order-2 md:order-1 space-y-12">
+          <div class="space-y-4">
+            <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold">about me</h2>
+            <h1 class="heading-handwritten text-5xl md:text-7xl opacity-80 italic">it's me, nagaraj.</h1>
           </div>
           
-          <div class="space-y-4 text-lg opacity-80 leading-relaxed max-w-lg">
+          <div class="text-xl opacity-90 leading-relaxed max-w-lg space-y-8 font-light">
             <p>
-              I'm a full-stack developer from India who builds things for the web. 
-              My everyday toolkit includes TypeScript, Next.js, and whatever else gets the job done without unnecessary overengineering.
+              i'm a full-stack developer from india who builds things for the web. 
+              my everyday toolkit includes typescript, next.js, and whatever else gets the job done without unnecessary overengineering.
             </p>
             <p>
-              Currently building meaningful software at <span class="text-primary">Wipfli</span> and obsessing over clean code.
+              currently building meaningful software at <span class="border-b border-current pb-0.5">wipfli</span> and obsessing over clean code.
             </p>
           </div>
 
-          <div class="pt-4 flex gap-4">
-             <a href="/resume.pdf" target="_blank" class="px-6 py-2 bg-primary text-background rounded-full font-medium hover:opacity-90 transition-opacity">
-               Download Resume
+          <div class="flex flex-wrap gap-8 items-center pt-4">
+             <a href="/resume.pdf" target="_blank" class="link text-lg border-b border-current pb-1">
+               download resume
              </a>
-             <a href="#journey" class="px-6 py-2 border border-current rounded-full font-medium hover:bg-subtle transition-colors">
-               My Journey
+             <a href="#journey" class="link text-lg opacity-60 hover:opacity-100 transition-opacity">
+               my journey
              </a>
           </div>
         </div>
         
         <div class="order-1 md:order-2 flex justify-center md:justify-end">
-          <div class="relative w-64 h-64 md:w-80 md:h-80 rotate-3 transition-transform hover:rotate-0 duration-500">
-            <div class="absolute inset-0 border-2 border-primary rounded-2xl transform translate-x-4 translate-y-4"></div>
+          <div class="relative w-64 h-64 md:w-96 md:h-96">
             <Image 
               src="/headshot2.jpg" 
               alt="Nagaraj Pandith" 
-              width={400} 
-              height={400} 
-              class="relative w-full h-full object-cover rounded-2xl grayscale hover:grayscale-0 transition-all duration-500 shadow-xl bg-subtle" 
+              width={500} 
+              height={500} 
+              class="w-full h-full object-cover grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700 ease-out bg-subtle" 
             />
           </div>
         </div>
@@ -243,34 +242,34 @@ const recommendations = [
     </section>
 
     <!-- Bio & Context -->
-    <section class="container mx-auto px-4 max-w-4xl animate-on-scroll">
-      <div class="grid md:grid-cols-2 gap-12">
-         <!-- Column 1 -->
-         <div class="space-y-6">
-            <h2 class="text-2xl font-bold heading-handwritten">Life outside code</h2>
-            <div class="prose prose-invert opacity-80">
-              <p>When I'm not coding, you'll probably find me:</p>
-              <ul class="list-none space-y-2 pl-0">
-                <li class="flex items-center gap-2"><span>🎵</span> looping my "Liked Songs" playlist</li>
-                <li class="flex items-center gap-2"><span>🐈</span> doom-scrolling cat videos</li>
-                <li class="flex items-center gap-2"><span>🕵️</span> getting lost in crime thrillers</li>
-                <li class="flex items-center gap-2"><span>📺</span> watching endless youtube essays</li>
-              </ul>
-              <p class="pt-4">
-                You can chat with me about cooking, fragrances, food, movies, shows, life, and - if you get close enough - philosophy. I'll also gladly tell you where to find the best biryanis or the best chocolate ice creams in town.
+    <section class="container mx-auto px-4 max-w-5xl animate-on-scroll border-t border-white/5 pt-32">
+      <div class="grid md:grid-cols-5 gap-16">
+         <!-- Story -->
+         <div class="md:col-span-3 space-y-8">
+            <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold mb-6">my story</h2>
+            <div class="text-xl font-light opacity-90 leading-relaxed space-y-8 italic">
+              <p>
+                i fell in love with computers around age 10, playing on an office computer at my mom's workplace. that curiosity evolved into flashing custom roms on slow phones and playing around with kali linux on even slower laptops.
+              </p>
+              <p>
+                in university, i stopped optimizing for grades and started optimizing for learning. i found my tribe, built software for events, built amazing things at hackathons with sleepless nights, and never looked back. 
               </p>
             </div>
          </div>
 
-         <!-- Column 2 -->
-         <div class="space-y-6">
-            <h2 class="text-2xl font-bold heading-handwritten">My story</h2>
-            <div class="prose prose-invert opacity-80">
-              <p>
-                I fell in love with computers around age 10, playing on an office computer at my mom's workplace. That curiosity evolved into flashing custom ROMs on slow phones and installing Kali Linux on even slower laptops.
-              </p>
-              <p>
-                In university, I stopped optimizing for grades and started optimizing for learning. I found my tribe, built software for events, hacked at hackathons, and never looked back. That messy, frustrating, fun journey led me to where I am today.
+         <!-- Life Outside Code -->
+         <div class="md:col-span-2 space-y-8">
+            <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold mb-6">life outside code</h2>
+            <div class="space-y-6 text-base opacity-60 font-light leading-relaxed">
+              <p>when i'm not coding, you'll probably find me:</p>
+              <ul class="space-y-4">
+                <li class="flex items-start gap-4"><span class="opacity-30">01.</span> looping my "liked songs" playlist</li>
+                <li class="flex items-start gap-4"><span class="opacity-30">02.</span> doom-scrolling cat videos</li>
+                <li class="flex items-start gap-4"><span class="opacity-30">03.</span> getting lost in crime thrillers</li>
+                <li class="flex items-start gap-4"><span class="opacity-30">04.</span> watching endless youtube essays</li>
+              </ul>
+              <p class="pt-6">
+                you can chat with me about cooking, fragrances, food, movies, shows, life, and - if you get close enough - philosophy. i'll also gladly tell you where to find the best biryanis or chocolate ice creams in town.
               </p>
             </div>
          </div>
@@ -278,337 +277,317 @@ const recommendations = [
     </section>
 
   <!-- Work Experience Timeline -->
-  <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
-    <h2 class="heading-handwritten text-4xl md:text-5xl mb-12">the journey</h2>
+  <section id="journey" class="container mx-auto px-4 py-32 max-w-5xl animate-on-scroll border-t border-white/5">
+    <div class="flex flex-col md:flex-row gap-16">
+      <div class="md:w-1/4">
+        <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold mb-6">the journey</h2>
+        <h3 class="heading-handwritten text-4xl md:text-5xl opacity-80">experience</h3>
+      </div>
       
-    <div class="space-y-12">
-        {workExperience.map((job) => (
-        <article class="relative pl-8 border-l-2" style="border-color: rgba(255, 255, 255, 0.1);">
-          {job.current && (
-            <div class="absolute -left-2 top-0 w-3 h-3 rounded-full bg-current animate-pulse"></div>
-          )}
-          <div class="mb-4">
-            <h3 class="text-2xl font-medium mb-2">{job.company}</h3>
-            <div class="space-y-1 mb-3">
+      <div class="md:w-3/4 space-y-24">
+          {workExperience.map((job) => (
+          <article class="group">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-4 mb-6">
+              <h3 class="text-2xl font-light opacity-90 group-hover:opacity-60 transition-opacity">
+                {job.company}
+              </h3>
+              {job.current && (
+                <span class="text-[10px] uppercase tracking-widest opacity-30 border border-current/20 px-2 py-0.5 rounded-full">present</span>
+              )}
+            </div>
+            
+            <div class="space-y-4 mb-8">
               {job.roles.map((role) => (
-                <div class="flex flex-col sm:flex-row sm:items-center sm:gap-3 text-sm opacity-70">
-                  <span class="font-medium">{role.title}</span>
-                  <span class="hidden sm:inline opacity-50">•</span>
-                  <span>{role.period}</span>
-                  <span class="hidden sm:inline opacity-50">•</span>
-                  <span class="opacity-50">{role.duration}</span>
+                <div class="flex flex-col sm:flex-row sm:items-center sm:gap-4 text-sm font-light">
+                  <span class="opacity-80">{role.title}</span>
+                  <span class="hidden sm:inline w-1 h-1 rounded-full bg-current opacity-20"></span>
+                  <span class="opacity-50">{role.period}</span>
+                  <span class="hidden sm:inline w-1 h-1 rounded-full bg-current opacity-20"></span>
+                  <span class="opacity-30">{role.duration}</span>
                 </div>
               ))}
             </div>
-            <p class="opacity-80 leading-relaxed">{job.description}</p>
-          </div>
-        </article>
-        ))}
+            
+            <p class="text-base opacity-50 leading-relaxed font-light max-w-2xl">
+              {job.description}
+            </p>
+          </article>
+          ))}
       </div>
-    </section>
+    </div>
+  </section>
 
   <!-- Tech Stack -->
-  <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
-    <h2 class="heading-handwritten text-4xl md:text-5xl mb-12">the craft</h2>
-    
-    <p class="text-lg opacity-80 mb-8">
-      i primarily work with modern javascript frameworks. here's what's in my toolkit:
-          </p>
-          
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 mb-8">
-            {primaryTech.map((tech) => (
-        <div class="bg-subtle bg-subtle-hover rounded-lg p-4 text-center transition-all">
-          <div class="text-sm font-medium">{tech.name}</div>
-               </div>
-            ))}
+  <section class="container mx-auto px-4 py-32 max-w-5xl animate-on-scroll border-t border-white/5">
+    <div class="grid md:grid-cols-5 gap-16">
+      <div class="md:col-span-1">
+        <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold mb-6">the craft</h2>
+        <h3 class="heading-handwritten text-4xl md:text-5xl opacity-80">toolkit</h3>
+      </div>
+      
+      <div class="md:col-span-4 space-y-16">
+        <div class="flex flex-wrap gap-x-12 gap-y-6">
+          {primaryTech.map((tech) => (
+            <div class="group flex items-center gap-3">
+              <span class="text-lg font-light opacity-40 group-hover:opacity-90 transition-opacity">{tech.name}</span>
+            </div>
+          ))}
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12 pt-8">
+          <div class="space-y-4">
+            <h4 class="text-xs uppercase tracking-widest opacity-30 font-medium">currently learning</h4>
+            <p class="text-lg font-light opacity-60 italic">
+              htmx, golang stack and exploring agentic ai
+            </p>
           </div>
+          <div class="space-y-4">
+            <h4 class="text-xs uppercase tracking-widest opacity-30 font-medium">philosophy</h4>
+            <p class="text-sm font-light opacity-50 leading-relaxed">
+              tech stack isn't my concern. i'm language agnostic and flexible with whatever the project needs, though i prefer modern frameworks and tools.
+            </p>
+          </div>
+        </div>
 
-    <p class="text-sm opacity-60">
-      currently learning: <span class="font-medium">htmx</span> and <span class="font-medium">golang</span>
-    </p>
-
-    <p class="text-sm opacity-60">
-    Tech stack isn't my concern, I'm flexible with whatever the project needs, though I prefer modern frameworks and tools. I'm always open for new opportunities to learn and grow.
-    </p>
-
-    <div class="mt-6">
-      <a href="/resume.pdf" target="_blank" class="link text-sm">
-        see full tech stack in resume →
-      </a>
-       </div>
-    </section>
+        <div class="pt-8">
+          <a href="/resume.pdf" target="_blank" class="link text-sm opacity-50 hover:opacity-100 transition-opacity border-b border-transparent hover:border-current pb-1">
+            see full tech stack in resume →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- Achievements -->
-  <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
-    <h2 class="heading-handwritten text-4xl md:text-5xl mb-12">the wins</h2>
-
-    <div class="grid sm:grid-cols-2 gap-6">
-      {achievements.map((achievement) => (
-            <a 
-          href={achievement.link} 
-              target="_blank"
-          rel="noopener noreferrer"
-          class="group block bg-subtle bg-subtle-hover rounded-xl overflow-hidden transition-all hover:scale-[1.02] hover:shadow-lg"
-            >
-          <div class="aspect-[16/10] relative overflow-hidden bg-white/5">
-                <Image 
-              src={achievement.image} 
-              alt={achievement.title}
-              width={400}
-              height={250}
-              class="w-full h-full object-cover transition-all duration-500 md:group-hover:scale-105"
-                />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
-            
-            <!-- Year Badge -->
-            <div class="absolute top-3 right-3">
-              <span class="bg-black/60 text-white text-[10px] uppercase tracking-wider px-2 py-1 rounded backdrop-blur-md border border-white/10">
-                {achievement.year}
-              </span>
-              </div>
-              
-            <!-- Title Overlay -->
-            <div class="absolute bottom-0 left-0 right-0 p-4">
-              <h3 class="font-medium text-base md:text-lg text-white leading-tight drop-shadow-lg">
-                {achievement.title}
-              </h3>
-                </div>
-          </div>
-          
-          <div class="p-4">
-            <p class="text-sm opacity-70 leading-relaxed mb-3">{achievement.description}</p>
-            <div class="flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] opacity-40 group-hover:opacity-100 group-hover:text-primary transition-all">
-              <span>View Post</span>
-              <svg class="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-            </div>
-              </div>
-            </a>
-          ))}
-       </div>
-    </section>
-
-  <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
-    <div class="mb-12">
-      <h2 class="heading-handwritten text-4xl md:text-5xl mb-2">community involvement</h2>
-      <p class="text-lg opacity-60">giving back</p>
-       </div>
-
-    <div class="space-y-12">
-      {communityWork.map((work) => (
-        <article class="group grid md:grid-cols-5 gap-8 items-center border-b border-current/10 pb-12 last:border-0 last:pb-0">
-          <div class="md:col-span-2 aspect-[4/3] rounded-xl overflow-hidden bg-subtle">
-                   <Image 
-                     src={work.image} 
-                     alt={work.role} 
-               width={400}
-               height={300}
-               class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500 hover:scale-105"
-                   />
-                </div>
-          <div class="md:col-span-3 space-y-4">
-                   <div class="flex flex-wrap gap-2">
-              {work.events.map((event) => (
-                <span class="text-[10px] uppercase tracking-widest bg-subtle px-2 py-0.5 rounded opacity-60">
-                  {event}
-                </span>
-                      ))}
-                   </div>
-            <h3 class="text-2xl font-medium">{work.role}</h3>
-            <p class="text-sm opacity-70 leading-relaxed font-light">
-                      {work.description}
-                   </p>
-                </div>
-        </article>
-          ))}
-       </div>
-    </section>
-
-  <!-- Talks & Workshops -->
-  <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
-    <div class="mb-12">
-      <h2 class="heading-handwritten text-4xl md:text-5xl mb-2">talks & workshops</h2>
-      <p class="text-lg opacity-60">sharing what i learn</p>
+  <section class="container mx-auto px-4 py-32 max-w-5xl animate-on-scroll border-t border-white/5">
+    <div class="flex flex-col md:flex-row gap-16 mb-20">
+      <div class="md:w-1/4">
+        <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold mb-6">the wins</h2>
+        <h3 class="heading-handwritten text-4xl md:text-5xl opacity-80">milestones</h3>
+      </div>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-8">
-      {talks.map((talk) => (
-        <a 
-          href={talk.link}
-          target="_blank"
-          rel="noopener noreferrer" 
-          class="group block bg-subtle bg-subtle-hover rounded-xl overflow-hidden transition-all hover:scale-[1.02]"
-        >
-          <div class="aspect-video relative overflow-hidden bg-white/5">
-             <Image 
-               src={talk.image} 
-               alt={talk.title}
-               width={400}
-               height={225}
-               class="w-full h-full object-cover transition-all duration-500 md:group-hover:blur-sm md:group-hover:opacity-60"
-             />
-             
-             <!-- Desktop Only Hover Button -->
-             <div class="hidden md:flex absolute inset-0 items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <div class="bg-black/50 backdrop-blur-md px-4 py-2 rounded-full text-white text-sm font-medium border border-white/20 group-hover:scale-110 transition-transform">
-                  view slides →
-                </div>
-             </div>
-             
-             <!-- Badges -->
-             <div class="absolute top-3 left-3 flex gap-2">
-               <span class="bg-black/60 text-white text-[10px] uppercase tracking-wider px-2 py-1 rounded backdrop-blur-md border border-white/10">
-                 {talk.type}
-               </span>
-             </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-12">
+      {achievements.map((achievement) => (
+        <article class="group animate-on-scroll flex flex-col">
+          <a href={achievement.link} target="_blank" rel="noopener noreferrer" class="block mb-6">
+            <div class="relative overflow-hidden aspect-video bg-subtle">
+              <Image 
+                src={achievement.image} 
+                alt={achievement.title}
+                width={500}
+                height={300}
+                class="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
+              />
+            </div>
+          </a>
+          <div class="flex flex-col flex-1">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-[10px] uppercase tracking-widest opacity-30 font-medium">
+                {achievement.year.split('-').reverse().join('.')}
+              </span>
+            </div>
+            <h3 class="text-lg font-medium tracking-tight mb-3">
+              {achievement.title}
+            </h3>
+            <p class="text-sm opacity-50 leading-relaxed font-light mb-4">
+              {achievement.description}
+            </p>
+            <a href={achievement.link} target="_blank" rel="noopener noreferrer" class="link text-xs border-b border-current inline-block self-start opacity-0 group-hover:opacity-100 transition-opacity">
+              view details
+            </a>
           </div>
+        </article>
+      ))}
+    </div>
+  </section>
 
-                  <div class="p-6">
-            <h3 class="text-xl font-medium mb-3 group-hover:text-primary transition-colors">
+  <!-- Community Involvement -->
+  <section class="container mx-auto px-4 py-32 max-w-5xl animate-on-scroll border-t border-white/5">
+    <div class="flex flex-col md:flex-row gap-16 mb-24">
+      <div class="md:w-1/4">
+        <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold mb-6">community</h2>
+        <h3 class="heading-handwritten text-4xl md:text-5xl opacity-80">giving back</h3>
+      </div>
+    </div>
+
+    <div class="space-y-32">
+      {communityWork.map((work) => (
+        <article class="group grid md:grid-cols-2 gap-16 items-center">
+          <div class="aspect-[4/3] overflow-hidden bg-subtle order-2 md:order-1">
+             <Image 
+               src={work.image} 
+               alt={work.role} 
+               width={600}
+               height={450}
+               class="w-full h-full object-cover grayscale opacity-50 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 ease-out"
+             />
+          </div>
+          <div class="space-y-8 order-1 md:order-2">
+            <div class="flex flex-wrap gap-4">
+              {work.events.map((event) => (
+                <span class="text-[10px] uppercase tracking-widest opacity-30 font-medium">{event}</span>
+              ))}
+            </div>
+            <h3 class="text-3xl font-light opacity-90">{work.role}</h3>
+            <p class="text-lg opacity-50 leading-relaxed font-light italic">
+              {work.description}
+            </p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <!-- Talks & Workshops -->
+  <section class="container mx-auto px-4 py-32 max-w-5xl animate-on-scroll border-t border-white/5">
+    <div class="flex flex-col md:flex-row gap-16 mb-24">
+      <div class="md:w-1/4">
+        <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold mb-6">talks</h2>
+        <h3 class="heading-handwritten text-4xl md:text-5xl opacity-80">sharing</h3>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-x-16 gap-y-24">
+      {talks.map((talk) => (
+        <article class="group">
+          <a href={talk.link} target="_blank" rel="noopener noreferrer" class="block mb-8">
+            <div class="relative overflow-hidden aspect-video bg-subtle">
+               <Image 
+                 src={talk.image} 
+                 alt={talk.title}
+                 width={600}
+                 height={337}
+                 class="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 ease-out"
+               />
+            </div>
+          </a>
+          <div class="space-y-4">
+            <div class="flex items-center gap-4">
+              <span class="text-[10px] uppercase tracking-[0.2em] opacity-30 font-medium">{talk.type}</span>
+              <span class="w-1 h-1 rounded-full bg-current opacity-10"></span>
+              <span class="text-[10px] uppercase tracking-[0.2em] opacity-30 font-medium">{talk.audience}</span>
+            </div>
+            <h3 class="text-2xl font-light opacity-90 group-hover:opacity-60 transition-opacity">
               {talk.title}
             </h3>
-            <p class="text-sm opacity-70 leading-relaxed mb-6 font-light">
+            <p class="text-base opacity-50 leading-relaxed font-light line-clamp-2 italic">
               {talk.description}
             </p>
-            
-            <!-- Mobile Only Indicator -->
-            <div class="md:hidden flex items-center gap-2 text-[10px] font-mono uppercase tracking-[0.2em] opacity-40 group-hover:opacity-100 group-hover:text-primary transition-all">
-               <span>View Slides</span>
-               <svg class="w-3 h-3 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-            </div>
-                  </div>
-               </a>
-             ))}
+            <a href={talk.link} target="_blank" rel="noopener noreferrer" class="link text-sm border-b border-current inline-block pt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+              view slides →
+            </a>
           </div>
+        </article>
+      ))}
+    </div>
   </section>
 
   <!-- Recommendations -->
-  <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
-    <div class="mb-12">
-      <h2 class="heading-handwritten text-4xl md:text-5xl mb-2">kind words</h2>
-      <p class="text-lg opacity-60">people i've fooled into thinking i'm good (jk, they actually liked my work)</p>
+  <section class="container mx-auto px-4 py-32 max-w-5xl animate-on-scroll border-t border-white/5">
+    <div class="flex flex-col md:flex-row gap-16 mb-24">
+      <div class="md:w-1/4">
+        <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold mb-6">kind words</h2>
+        <h3 class="heading-handwritten text-4xl md:text-5xl opacity-80">recognition</h3>
+      </div>
     </div>
 
-    <div class="space-y-6">
+    <div class="space-y-24">
       {recommendations.map((rec) => (
-        <article class="bg-subtle rounded-xl p-8 relative">
-           <svg class="absolute top-6 left-6 w-8 h-8 opacity-10" fill="currentColor" viewBox="0 0 24 24">
-             <path d="M14.017 21L14.017 18C14.017 16.095 15.656 16.353 17.514 15.625C19.387 14.896 20.015 13.91 20.015 12.015V7.015H14.017V12.015H17.015C17.015 13.295 15.82 14.135 14.017 14.135V21H14.017ZM8.017 21L8.017 18C8.017 16.095 9.656 16.353 11.514 15.625C13.387 14.896 14.015 13.91 14.015 12.015V7.015H8.017V12.015H11.015C11.015 13.295 9.82 14.135 8.017 14.135V21H8.017ZM4.017 21L4.017 14.015C4.017 8.495 8.496 4.015 14.017 4.015H20.015C21.12 4.015 22.015 4.91 22.015 6.015V12.015C22.015 13.12 21.12 14.015 20.015 14.015H18.015C18.015 15.12 17.12 16.015 16.015 16.015H15.015V17.015C15.015 18.12 14.12 19.015 13.015 19.015H12.015V21H4.017Z" fill="currentColor"></path>
-           </svg>
-           <p class="text-lg leading-relaxed opacity-80 mb-6 italic relative z-10 pl-8">
+        <article class="max-w-3xl">
+           <p class="text-2xl md:text-3xl leading-relaxed opacity-90 mb-12 font-light italic">
              "{rec.text}"
            </p>
-           <div class="flex items-center gap-4 pl-8">
+           <div class="flex items-center gap-6">
+             <div class="w-12 h-px bg-current opacity-20"></div>
              <div>
-               <h4 class="font-medium">{rec.author}</h4>
-               <p class="text-sm opacity-60">{rec.role}</p>
+               <h4 class="text-lg font-medium opacity-90">{rec.author}</h4>
+               <p class="text-sm opacity-40 uppercase tracking-widest">{rec.role}</p>
              </div>
            </div>
         </article>
       ))}
     </div>
     
-    <div class="mt-8 text-center animate-on-scroll">
+    <div class="mt-24 pt-12 border-t border-white/5">
        <a 
         href="https://www.linkedin.com/in/nagaraj-pandith/" 
         target="_blank" 
         rel="noopener noreferrer"
-        class="inline-flex items-center gap-2 text-sm border-b border-current hover:opacity-60 transition-opacity pb-0.5"
+        class="link text-sm opacity-50 hover:opacity-100 transition-opacity border-b border-transparent hover:border-current pb-1"
        >
          stalk me (and maybe recommend me) on linkedin →
        </a>
-       </div>
-    </section>
+    </div>
+  </section>
 
   <!-- Travel Log -->
-  <section class="container mx-auto px-4 py-8 max-w-4xl animate-on-scroll">
-    <div class="flex items-center gap-4 mb-8">
-      <h2 class="heading-handwritten text-3xl md:text-4xl opacity-90">travel log</h2>
-      <div class="h-px bg-current opacity-10 flex-1"></div>
-      <span class="text-xs opacity-40 uppercase tracking-widest hidden sm:inline-block">pixels & places</span>
+  <section class="container mx-auto px-4 py-32 max-w-5xl animate-on-scroll border-t border-white/5">
+    <div class="flex flex-col md:flex-row gap-16 mb-24">
+      <div class="md:w-1/4">
+        <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold mb-6">travel log</h2>
+        <h3 class="heading-handwritten text-4xl md:text-5xl opacity-80">places</h3>
+      </div>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12">
       {travels.map((trip) => (
-        <div class="group relative aspect-[1.4] bg-subtle rounded-xl p-5 flex flex-col justify-between hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
-          <!-- Top -->
-          <div class="flex justify-between items-start">
-            <span class="text-[10px] font-mono opacity-40 uppercase tracking-widest bg-current/5 px-1.5 py-0.5 rounded">
-              {trip.date.split(' ')[1]}
-            </span>
-            <span class="text-xs opacity-30 group-hover:opacity-100 transition-opacity">↗</span>
-          </div>
+        <div class="group py-8 border-b border-white/5 last:border-0 md:border-0">
+          <span class="text-[10px] uppercase tracking-[0.2em] opacity-30 font-medium mb-4 block">{trip.date}</span>
+          <h3 class="text-xl font-light opacity-90 group-hover:opacity-60 transition-opacity mb-2">
+            {trip.place.split(',')[0]}
+          </h3>
+          <p class="text-xs opacity-40 uppercase tracking-widest">
+            {trip.place.split(',')[1] || ''}
+          </p>
+        </div>
+      ))}
+    </div>
+  </section>
 
-          <!-- Content -->
-          <div>
-            <h3 class="font-medium text-lg leading-tight mb-0.5 group-hover:text-primary transition-colors">
-              {trip.place.split(',')[0]}
-            </h3>
-            <p class="text-[10px] opacity-50 uppercase tracking-wide truncate">
-              {trip.place.split(',')[1] || trip.date.split(' ')[0]}
-            </p>
-             </div>
-             
-          <!-- Decorative Line -->
-          <div class="absolute bottom-4 right-4 text-4xl opacity-5 group-hover:opacity-10 group-hover:scale-110 transition-all select-none">
-            ✈
-                      </div>
-                   </div>
-                ))}
-
-      <!-- "Next" Placeholder -->
-      <a 
-        class="aspect-[1.4] border-2 border-dashed border-current/10 rounded-xl flex flex-col items-center justify-center text-center opacity-40 hover:opacity-100 hover:border-current/30 hover:bg-subtle/50 transition-all group"
-      >
-        <div class="w-8 h-8 rounded-full bg-current/5 flex items-center justify-center mb-2 group-hover:scale-110 transition-transform">
-          <span class="text-lg opacity-50">+</span>
-          </div>
-        <span class="text-xs font-medium">next adventure?</span>
-      </a>
-       </div>
-    </section>
-
-  <!-- Quirks (Hidden Easter Egg Section) -->
-  <section class="container mx-auto px-4 py-16 max-w-4xl animate-on-scroll">
-    <details class="group">
-      <summary class="cursor-pointer list-none">
-        <div class="flex items-center justify-between py-4 hover:opacity-70 transition-opacity">
-          <h2 class="heading-handwritten text-4xl md:text-5xl">the quirks</h2>
-          <span class="text-2xl transform group-open:rotate-180 transition-transform">↓</span>
-                 </div>
-      </summary>
+  <!-- Quirks -->
+  <section class="container mx-auto px-4 py-32 max-w-5xl animate-on-scroll border-t border-white/5">
+    <div class="flex flex-col md:flex-row gap-16">
+      <div class="md:w-1/4">
+        <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold mb-6">the quirks</h2>
+        <h3 class="heading-handwritten text-4xl md:text-5xl opacity-80">oddities</h3>
+      </div>
       
-      <div class="pt-8 pb-4">
-        <p class="text-lg opacity-80 mb-8">
-          some things you should know before hiring me (or bribing me):
-        </p>
-        <div class="grid sm:grid-cols-2 gap-4">
-          {quirks.map((quirk) => (
-            <div class="flex items-start gap-3 bg-subtle rounded-lg p-4">
-              <p class="text-sm opacity-80 pt-1">{quirk.text}</p>
-               </div>
-             ))}
-          </div>
-       </div>
-    </details>
-    </section>
+      <div class="md:w-3/4">
+        <div class="grid sm:grid-cols-2 gap-x-16 gap-y-12">
+          {quirks.map((quirk, index) => (
+            <div class="flex gap-6">
+              <span class="text-[10px] font-mono opacity-20 pt-1 tracking-tighter">{(index + 1).toString().padStart(2, '0')}</span>
+              <p class="text-base opacity-60 font-light leading-relaxed italic">{quirk.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
     
   <!-- CTA -->
-  <section class="container mx-auto px-4 py-20 max-w-4xl animate-on-scroll">
-    <div class="text-center py-16 rounded-2xl bg-subtle">
-      <h2 class="heading-handwritten text-3xl md:text-5xl mb-6">
-        want to work together?
-       </h2>
-      <p class="text-lg opacity-70 mb-8">
-        i'm always open to interesting projects and collaborations
-      </p>
-      <div class="flex flex-wrap justify-center gap-4">
-        <a href="/freelance" class="btn-primary">
-          hire me
-        </a>
-        <a href="/work" class="btn-secondary">
-          see my work
-        </a>
-       </div>
+  <section class="container mx-auto px-4 py-48 max-w-5xl animate-on-scroll border-t border-white/5">
+    <div class="grid md:grid-cols-2 gap-20 items-center">
+      <div>
+        <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold mb-8">next steps</h2>
+        <h3 class="heading-handwritten text-5xl md:text-6xl opacity-80 leading-tight italic">
+          want to work <br /> together?
+        </h3>
+      </div>
+      <div class="space-y-12">
+        <p class="text-xl opacity-50 font-light leading-relaxed">
+          i'm always open to interesting projects, startup ideas, or just a chat over biryani.
+        </p>
+        <div class="flex flex-wrap gap-12 items-center">
+          <a href="/freelance" class="link text-2xl border-b-2 border-current pb-1">
+            hire me
+          </a>
+          <a href="/work" class="link text-2xl opacity-60 hover:opacity-100 transition-opacity">
+            see my work
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 </BaseLayout>

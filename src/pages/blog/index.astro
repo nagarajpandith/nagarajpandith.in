@@ -36,67 +36,69 @@ function calculateReadingTime(content: string): number {
 ---
 
 <BaseLayout title="blog - nagaraj pandith" description="thoughts on tech, development, and building things">
-  <!-- Hero with Search -->
-  <section class="container mx-auto px-4 py-20 max-w-4xl animate-on-scroll">
-    <div class="text-center mb-12">
-      <h1 class="heading-handwritten text-5xl md:text-7xl mb-6">blog</h1>
-      <p class="text-xl opacity-80 mb-8">
-        thoughts on tech, development, and building things
-      </p>
-      
-      <!-- Search Bar -->
-      <div class="relative max-w-2xl mx-auto mb-6">
-        <input 
-          type="text" 
-          id="search-input"
-          placeholder="search articles..."
-          class="w-full px-6 py-4 rounded-xl bg-subtle border focus:outline-none focus:ring-2 focus:ring-opacity-50 transition-all"
-          style="border-color: rgba(0, 0, 0, 0.1);"
-        />
-        <svg class="absolute right-6 top-1/2 transform -translate-y-1/2 w-5 h-5 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-        </svg>
+  <!-- Hero -->
+  <section class="container mx-auto px-4 pt-48 pb-32 max-w-5xl animate-on-scroll">
+    <div class="space-y-12">
+      <div class="space-y-6">
+        <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold">writing</h2>
+        <h1 class="heading-handwritten text-6xl md:text-8xl opacity-80 italic">the journal.</h1>
+        <p class="text-xl opacity-60 max-w-2xl font-light leading-relaxed italic">
+          thoughts on tech, development, and the art of building things.
+        </p>
+      </div>
+
+      <!-- Search & Filters -->
+      <div class="flex flex-col md:flex-row gap-12 pt-12 border-t border-white/5">
+        <!-- Search -->
+        <div class="flex-1 relative group">
+          <input 
+            type="text" 
+            id="search-input"
+            placeholder="search topics..."
+            class="w-full bg-transparent border-b border-white/10 py-4 focus:outline-none focus:border-current transition-colors text-xl font-light placeholder:opacity-20"
+          />
+          <svg class="absolute right-0 top-1/2 -translate-y-1/2 w-5 h-5 opacity-20 group-focus-within:opacity-100 transition-opacity" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+          </svg>
+        </div>
+
+        <div class="flex gap-12">
+          <!-- Tag Filter -->
+          <div class="space-y-2">
+            <label class="text-[10px] uppercase tracking-widest opacity-30 font-medium">topic</label>
+            <select id="tag-filter" class="block w-full bg-transparent border-none p-0 focus:ring-0 text-sm font-light cursor-pointer">
+              <option value="">all</option>
+              {allTags.map(tag => (
+                <option value={tag}>{tag}</option>
+              ))}
+            </select>
+          </div>
+
+          <!-- Sort -->
+          <div class="space-y-2">
+            <label class="text-[10px] uppercase tracking-widest opacity-30 font-medium">order</label>
+            <select id="sort-select" class="block w-full bg-transparent border-none p-0 focus:ring-0 text-sm font-light cursor-pointer">
+              <option value="latest">latest</option>
+              <option value="popular">popular</option>
+              <option value="alphabetical">a-z</option>
+            </select>
+          </div>
+        </div>
       </div>
 
       <!-- Personal Blog Hint -->
-      <p class="text-sm opacity-50">
+      <p class="text-[10px] uppercase tracking-widest opacity-20 font-medium">
         psst... looking for 
-        <a href="/blog/personal" class="link opacity-70 hover:opacity-100">
+        <a href="/blog/personal" class="link border-b border-current pb-0.5">
           personal stuff?
         </a>
       </p>
     </div>
-
-    <!-- Filters & Sort -->
-    <div class="flex flex-col md:flex-row gap-4 mb-8">
-      <!-- Tag Filter -->
-      <select 
-        id="tag-filter"
-        class="px-4 py-2 rounded-lg bg-subtle border cursor-pointer focus:outline-none"
-        style="border-color: rgba(0, 0, 0, 0.1);"
-      >
-        <option value="">all topics</option>
-        {allTags.map(tag => (
-          <option value={tag}>{tag}</option>
-        ))}
-      </select>
-
-      <!-- Sort -->
-      <select 
-        id="sort-select"
-        class="px-4 py-2 rounded-lg bg-subtle border cursor-pointer focus:outline-none"
-        style="border-color: rgba(0, 0, 0, 0.1);"
-      >
-        <option value="latest">latest first</option>
-        <option value="popular">most viewed</option>
-        <option value="alphabetical">a → z</option>
-      </select>
-    </div>
   </section>
 
-  <!-- Blog Grid -->
-  <section class="container mx-auto px-4 pb-20 max-w-6xl">
-    <div id="blog-grid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+  <!-- Blog List -->
+  <section class="container mx-auto px-4 pb-48 max-w-5xl">
+    <div id="blog-grid" class="grid md:grid-cols-2 gap-x-20 gap-y-32">
       {blogs.map((blog) => {
         const readingTime = calculateReadingTime(blog.body);
         const views = viewsMap.get(blog.slug) || 0;
@@ -104,71 +106,71 @@ function calculateReadingTime(content: string): number {
 
         return (
           <article 
-            class="blog-card group animate-on-scroll"
+            class="blog-card group animate-on-scroll flex flex-col"
             data-tags={tags.join(',')}
             data-views={views}
             data-title={blog.data.title.toLowerCase()}
             data-date={new Date(blog.data.publishedDate).getTime()}
           >
-            <a href={`/blog/${blog.slug}`} class="block">
+            <a href={`/blog/${blog.slug}`} class="block mb-8">
               <!-- Cover Image -->
-              <div class="relative overflow-hidden rounded-xl mb-4 aspect-video bg-subtle">
+              <div class="relative overflow-hidden aspect-video bg-subtle">
                 <img 
                   src={blog.data.coverImage} 
                   alt={blog.data.title}
-                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  class="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
                 />
               </div>
-
-              <!-- Content -->
-              <div class="space-y-3">
-                <h2 class="text-xl font-medium group-hover:opacity-60 transition-opacity">
-                  {blog.data.title}
-                </h2>
-                <p class="text-sm opacity-70 line-clamp-2">
-                  {blog.data.desc}
-                </p>
-
-                <!-- Meta -->
-                <div class="flex flex-wrap items-center gap-3 text-xs opacity-50">
-                  <span>{blog.data.publishedDate}</span>
-                  <span>•</span>
-                  <span>{readingTime} min read</span>
-                  <span>•</span>
-                  <span>{views} views</span>
-                </div>
-
-                <!-- Tags -->
-                <div class="flex flex-wrap gap-2">
-                  {tags.slice(0, 3).map(tag => (
-                    <span class="text-xs bg-subtle px-2 py-1 rounded">
-                      {tag}
-                    </span>
-                  ))}
-                  {tags.length > 3 && (
-                    <span class="text-xs opacity-50">+{tags.length - 3}</span>
-                  )}
-                </div>
-              </div>
             </a>
+
+            <!-- Content -->
+            <div class="flex-1 flex flex-col">
+              <div class="flex items-center gap-4 mb-4">
+                <span class="text-[10px] uppercase tracking-widest opacity-30 font-medium">
+                   {new Date(blog.data.publishedDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }).toLowerCase()}
+                </span>
+                <span class="w-1 h-px bg-current opacity-10"></span>
+                <span class="text-[10px] uppercase tracking-widest opacity-30 font-medium">{readingTime} min</span>
+              </div>
+
+              <h2 class="text-2xl font-light tracking-tight opacity-90 mb-4 group-hover:opacity-60 transition-opacity">
+                {blog.data.title}
+              </h2>
+              
+              <p class="text-sm opacity-50 leading-relaxed font-light italic line-clamp-2 mb-8">
+                {blog.data.desc}
+              </p>
+
+              <!-- Tags -->
+              <div class="flex flex-wrap gap-x-4 gap-y-2 mt-auto">
+                {tags.slice(0, 3).map(tag => (
+                  <span class="text-[10px] uppercase tracking-widest opacity-20 font-medium">
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            </div>
           </article>
         );
       })}
     </div>
 
-    <!-- No Results Message -->
-    <div id="no-results" class="hidden text-center py-20">
-      <p class="text-xl opacity-60">no articles found</p>
-      <p class="text-sm opacity-50 mt-2">try adjusting your filters</p>
+    <!-- No Results -->
+    <div id="no-results" class="hidden text-center py-48">
+      <p class="text-xl font-light opacity-30 italic">no articles found.</p>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  body.light #search-input,
-  body.light select {
-    background-color: rgba(62, 39, 35, 0.05) !important;
-    border-color: rgba(62, 39, 35, 0.1) !important;
+  #tag-filter, #sort-select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right center;
+    background-size: 1rem;
+    padding-right: 1.5rem;
   }
 
   .line-clamp-2 {

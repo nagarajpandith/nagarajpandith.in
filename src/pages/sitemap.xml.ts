@@ -20,7 +20,6 @@ export async function GET(context: APIContext) {
     { url: '/notes', changefreq: 'weekly', priority: 0.8 },
     { url: '/tools', changefreq: 'monthly', priority: 0.6 },
     { url: '/recommendations', changefreq: 'weekly', priority: 0.7 },
-    { url: '/freelance', changefreq: 'monthly', priority: 0.8 },
     { url: '/guestbook', changefreq: 'daily', priority: 0.5 },
   ];
 

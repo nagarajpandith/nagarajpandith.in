@@ -39,12 +39,12 @@ const {
 
   <script>
     import Lenis from 'lenis'
-    import { animate, inView } from 'motion'
+    import { animate, inView, stagger } from 'motion'
 
-    // Initialize Lenis for smooth scrolling
+    // --- Core Initialization ---
     const lenis = new Lenis({
-      lerp: 0.1, // Smoothness (0-1)
-      wheelMultiplier: 1.2, // Scroll speed
+      lerp: 0.1,
+      wheelMultiplier: 1.2,
       smoothWheel: true,
     })
 
@@ -52,40 +52,73 @@ const {
       lenis.raf(time)
       requestAnimationFrame(raf)
     }
-
     requestAnimationFrame(raf)
 
-    // Text Reveal Animation
-    inView('.reveal-text', (element) => {
-      animate(
-        element,
-        { 
-          opacity: [0, 1],
-          y: [20, 0],
-          filter: ['blur(8px)', 'blur(0px)']
-        },
-        { duration: 0.8, ease: [0.17, 0.55, 0.55, 1] }
-      );
-      
-      // Returning a cleanup function makes the animation replayable
-      return () => {
-        animate(element, { opacity: 0, y: 20, filter: 'blur(8px)' }, { duration: 0 });
-      };
+    // --- Split Text Utility ---
+    function splitTextContent() {
+      const elements = document.querySelectorAll('.split-text');
+      elements.forEach(el => {
+        const text = el.textContent || '';
+        el.innerHTML = '';
+        [...text].forEach(char => {
+          const span = document.createElement('span');
+          span.textContent = char === ' ' ? '\u00A0' : char;
+          span.style.display = 'inline-block';
+          span.classList.add('char');
+          el.appendChild(span);
+        });
+      });
+    }
+
+    // --- Interaction States ---
+    function setupInteractions() {
+      // 1. Text Reveals
+      inView('.reveal-text', (element) => {
+        animate(element, { 
+          opacity: [0, 1], y: [20, 0], filter: ['blur(8px)', 'blur(0px)']
+        }, { duration: 0.8, ease: [0.17, 0.55, 0.55, 1] });
+        return () => animate(element, { opacity: 0, y: 20, filter: 'blur(8px)' }, { duration: 0 });
+      });
+
+      // 2. Character Reveals (Hero)
+      inView('.split-text', (element) => {
+        const chars = element.querySelectorAll('.char');
+        animate(chars, { 
+          opacity: [0, 1], y: [20, 0], filter: ['blur(4px)', 'blur(0px)']
+        }, { delay: stagger(0.04), duration: 0.6, ease: [0.2, 0.65, 0.3, 0.9] });
+      });
+
+      // 3. Magnetic Effects
+      document.querySelectorAll('.magnetic').forEach(el => {
+        const element = el as HTMLElement;
+        element.addEventListener('mousemove', (e: MouseEvent) => {
+          const { left, top, width, height } = element.getBoundingClientRect();
+          const centerX = left + width / 2, centerY = top + height / 2;
+          animate(element, { x: (e.clientX - centerX) * 0.3, y: (e.clientY - centerY) * 0.3 }, { duration: 0 });
+        });
+        element.addEventListener('mouseleave', () => {
+          animate(element, { x: 0, y: 0 }, { duration: 0.5, ease: [0.17, 0.67, 0.83, 0.67] });
+        });
+      });
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      splitTextContent();
+      setupInteractions();
     });
 
-    // Theme initialization
-    const theme = (() => {
-      if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-        return localStorage.getItem('theme');
-      }
-      return 'dark';
-    })();
-    
-    if (theme === 'light') {
-      document.body.classList.add('light');
-    } else {
-      document.body.classList.remove('light');
-    }
+    // Theme Support
+    const getTheme = () => localStorage.getItem('theme') || 'dark';
+    const applyTheme = (t: string) => document.body.classList.toggle('light', t === 'light');
+    applyTheme(getTheme());
+
+    // Astro View Transitions Support
+    document.addEventListener('astro:after-swap', () => {
+      applyTheme(getTheme());
+      splitTextContent();
+      setupInteractions();
+    });
   </script>
 </head>
 <body>
@@ -113,9 +146,12 @@ const {
   </main>
   
   <Footer />
-  
 
   <style is:global>
+    .magnetic {
+      display: inline-block;
+      transition: transform 0.1s linear;
+    }
     /* Animation Utilities */
     .reveal-text {
       opacity: 0;
@@ -160,7 +196,7 @@ const {
     }
 
     .light .grain-overlay {
-      opacity: 0.5;
+      opacity: 0.35;
       mix-blend-mode: multiply; /* Crucial for visibility on light themes */
     }
   </style>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
 
 const projects = [
   {
@@ -60,7 +61,7 @@ const blogs = [
   <!-- Hero Section -->
   <section class="container md:pt-32 pt-24 pb-24 md:pb-32 max-w-5xl">
     <div class="space-y-12">
-      <h1 class="reveal-text font-serif text-6xl md:text-8xl lg:text-9xl mb-8 tracking-tighter text-[var(--color-text-primary)] leading-[0.9]">
+      <h1 class="split-text font-serif text-6xl md:text-8xl lg:text-9xl mb-8 tracking-tighter text-[var(--color-text-primary)] leading-[0.9]">
         nagaraj <br class="md:hidden" /> pandith.
       </h1>
       
@@ -76,7 +77,7 @@ const blogs = [
       </div>
 
       <div class="reveal-text flex flex-wrap gap-8 pt-8 items-center">
-        <a href="/work" class="btn-primary">
+        <a href="/work" class="magnetic btn-primary">
           See my projects
         </a>
         <a href="/about" class="link text-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">
@@ -129,11 +130,13 @@ const blogs = [
       {projects.map((project) => (
         <article class="group reveal-text flex flex-col">
           <a href={project.demo} target="_blank" rel="noopener noreferrer" class="block mb-6">
-            <div class="relative overflow-hidden aspect-video bg-[var(--color-bg-secondary)] rounded-sm border border-[var(--color-border)]">
-              <img 
+            <div class="relative aspect-video overflow-hidden rounded-sm group mb-8">
+              <Image 
                 src={project.image} 
                 alt={project.title}
-                class="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
+                width={1200}
+                height={675}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
               />
             </div>
           </a>
@@ -215,7 +218,7 @@ const blogs = [
           whether it's a startup idea, a college fest website, or just a chat over chocolate ice cream — i'm all ears.
         </p>
         <div class="reveal-text flex flex-wrap gap-12 items-center">
-          <a href="https://www.discord.com/users/hashclan#4890" target="_blank" rel="noopener noreferrer" class="link text-xl border-b-2 border-current pb-1 hover:text-[var(--color-accent)] transition-colors">
+          <a href="https://www.discord.com/users/hashclan#4890" target="_blank" rel="noopener noreferrer" class="magnetic link text-xl border-b-2 border-current pb-1 hover:text-[var(--color-accent)] transition-colors">
             let's work together
           </a>
           <a href="mailto:nagaraj.pandith2002@gmail.com" class="link text-xl text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-opacity">

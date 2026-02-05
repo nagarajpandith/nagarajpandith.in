@@ -204,9 +204,9 @@ const recommendations = [
         <div class="order-2 md:order-1 space-y-12">
           <div class="space-y-4">
             <h2 class="reveal-text text-label">about me</h2>
-            <h1 class="reveal-text font-serif text-6xl md:text-8xl lg:text-9xl mb-8 tracking-tighter text-[var(--color-text-primary)] leading-[0.9]">
-              it's me, <br /> nagaraj.
-            </h1>
+            <h1 class="split-text font-serif text-6xl md:text-8xl lg:text-9xl tracking-tight leading-[0.9] text-[var(--color-text-primary)]">
+         about <br /> me
+       </h1>
           </div>
           
           <div class="reveal-text text-xl leading-relaxed max-w-lg space-y-8 font-light text-[var(--color-text-muted)]">
@@ -220,7 +220,7 @@ const recommendations = [
           </div>
 
           <div class="reveal-text flex flex-wrap gap-8 items-center pt-4">
-             <a href="/resume.pdf" target="_blank" class="btn-primary">
+             <a href="/resume.pdf" target="_blank" class="magnetic btn-primary">
                download resume
              </a>
              <a href="#journey" class="link text-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-opacity">
@@ -231,13 +231,16 @@ const recommendations = [
         
         <div class="order-1 md:order-2 flex justify-center md:justify-end">
           <div class="relative w-64 h-64 md:w-96 md:h-96">
-            <Image 
-              src="/headshot2.jpg" 
-              alt="Nagaraj Pandith" 
-              width={500} 
-              height={500} 
-              class="w-full h-full object-cover grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700 ease-out border border-[var(--color-border)] rounded-sm" 
-            />
+            <div class="relative w-full h-full overflow-hidden bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-sm grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700 ease-out">
+           <Image 
+             src="/me.jpg" 
+             alt="nagaraj pandith" 
+             width={800} 
+             height={800} 
+             class="w-full h-full object-cover" 
+           />
+           <div class="absolute inset-0 bg-[var(--color-accent)]/5 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity"></div>
+         </div>
           </div>
         </div>
       </div>
@@ -582,7 +585,7 @@ const recommendations = [
           i'm always open to interesting projects, startup ideas, or just a chat over biryani.
         </p>
         <div class="reveal-text flex flex-wrap gap-12 items-center">
-          <a href="mailto:nagaraj.pandith2002@gmail.com" class="link text-2xl border-b-2 border-current pb-1 hover:text-[var(--color-accent)] transition-colors">
+          <a href="mailto:nagaraj.pandith2002@gmail.com" class="magnetic link text-2xl border-b-2 border-current pb-1 hover:text-[var(--color-accent)] transition-colors">
             hire me
           </a>
           <a href="/work" class="link text-2xl text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-opacity">

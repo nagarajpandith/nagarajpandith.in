@@ -36,17 +36,36 @@ const {
   <meta name="twitter:description" content={description}>
   
   <title>{title}</title>
+
+  <script is:inline>
+    // Theme initialization - immediate execution to prevent flash
+    const theme = (() => {
+      if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+        return localStorage.getItem('theme');
+      }
+      return 'dark'; // Default
+    })();
+    
+    if (theme === 'light') {
+      document.body.classList.add('light');
+    } else {
+      document.body.classList.remove('light');
+    }
+  </script>
 </head>
 <body>
   <Header />
   
   <!-- Content Grid Background -->
   <div class="fixed inset-0 pointer-events-none z-0 flex justify-center">
-    <div class="w-full h-full max-w-[var(--spacing-container)] px-6 grid grid-cols-4 border-x border-dashed border-[rgba(244,244,243,0.05)]">
-      <div class="border-r border-dashed border-[rgba(244,244,243,0.05)] h-full"></div>
-      <div class="border-r border-dashed border-[rgba(244,244,243,0.05)] h-full"></div>
-      <div class="border-r border-dashed border-[rgba(244,244,243,0.05)] h-full"></div>
-      <!-- Last col doesn't need border-r as container has border-x -->
+    <div class="w-full h-full max-w-[var(--spacing-container)] px-2">
+      <!-- Border-x at px-2 provides ample breathing room outside the px-6 content padding -->
+      <div class="h-full w-full grid grid-cols-1 md:grid-cols-4 border-x border-dashed border-[var(--color-grid)]">
+        <div class="hidden md:block border-r border-dashed border-[var(--color-grid)] h-full"></div>
+        <div class="hidden md:block border-r border-dashed border-[var(--color-grid)] h-full"></div>
+        <div class="hidden md:block border-r border-dashed border-[var(--color-grid)] h-full"></div>
+        <div class="hidden md:block h-full"></div>
+      </div>
     </div>
   </div>
 

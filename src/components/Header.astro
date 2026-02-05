@@ -1,8 +1,10 @@
 ---
+import ThemeToggle from './ThemeToggle.astro';
 ---
 
-<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 pointer-events-none">
-  <div class="pointer-events-auto backdrop-blur-md border-b" style="background-color: rgba(15, 15, 14, 0.8); border-color: var(--color-border);">
+<header class="fixed top-0 left-0 right-0 z-[120] transition-all duration-300 pointer-events-none">
+  <!-- Top Bar: Always above menu -->
+  <div class="pointer-events-auto backdrop-blur-md border-b bg-[var(--color-bg-primary)]/80 border-[var(--color-border)] relative z-[130]">
     <nav class="container flex items-center justify-between h-16 md:h-20">
       <!-- Logo / Name -->
       <a href="/" class="text-xl md:text-2xl font-serif tracking-tight hover:opacity-70 transition-opacity">
@@ -15,53 +17,107 @@
         <a href="/blog" class="link">writing</a>
         <a href="/notes" class="link">notes</a>
         <a href="/about" class="link">about</a>
-        <a href="/recs" class="link">recs</a>
+        <a href="/recommendations" class="link">recs</a>
         
         <div class="w-px h-4 bg-[var(--color-border)] mx-2"></div>
-        
-        <a href="/resume.pdf" target="_blank" class="text-[var(--color-accent)] hover:opacity-80 transition-opacity">
-          resume
-        </a>
+         
+        <div class="flex items-center gap-6">
+          <a href="/resume.pdf" target="_blank" class="text-[var(--color-accent)] hover:opacity-80 transition-opacity">
+            resume
+          </a>
+          <ThemeToggle />
+        </div>
       </div>
       
-      <!-- Mobile Menu Button -->
+      <!-- Mobile Controls -->
       <div class="flex items-center gap-4 md:hidden">
+        <ThemeToggle />
         <button 
           id="mobile-menu-button"
           class="focus:outline-none p-2 -mr-2 text-[var(--color-text-primary)]"
           aria-label="Toggle menu"
         >
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+          <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
           </svg>
         </button>
       </div>
     </nav>
   </div>
   
-  <!-- Mobile Navigation -->
+  <!-- Mobile Navigation - Full Page Editorial -->
   <div 
     id="mobile-menu" 
-    class="hidden md:hidden pointer-events-auto border-b"
-    style="background-color: var(--color-bg-primary); border-color: var(--color-border);"
+    class="fixed inset-0 z-[110] pointer-events-none bg-[var(--color-bg-primary)] opacity-0 translate-x-full transition-all duration-300 md:hidden flex flex-col justify-center"
   >
-    <div class="container py-8 flex flex-col gap-6 text-lg">
-      <a href="/work" class="link">work</a>
-      <a href="/blog" class="link">writing</a>
-      <a href="/notes" class="link">notes</a>
-      <a href="/about" class="link">about</a>
-      <a href="mailto:nagaraj.pandith2002@gmail.com" class="link">contact</a>
-      <a href="/resume.pdf" target="_blank" class="text-[var(--color-accent)]">resume</a>
+    <div class="container h-full flex flex-col justify-center py-20">
+      <div class="space-y-6">
+        <a href="/work" class="mobile-nav-link block text-5xl font-serif italic">work</a>
+        <a href="/blog" class="mobile-nav-link block text-5xl font-serif italic">writing</a>
+        <a href="/notes" class="mobile-nav-link block text-5xl font-serif italic">notes</a>
+        <a href="/about" class="mobile-nav-link block text-5xl font-serif italic">about</a>
+        <a href="/recommendations" class="mobile-nav-link block text-5xl font-serif italic">recs</a>
+      </div>
+      
+      <div class="mt-16 pt-8 border-t border-[var(--color-border)] flex items-center justify-between">
+        <a href="/resume.pdf" target="_blank" class="text-xl font-medium text-[var(--color-accent)]">resume</a>
+        <div class="flex gap-6 text-[var(--color-text-muted)]">
+          <a href="https://github.com/nagarajpandith" target="_blank" class="text-xs uppercase tracking-widest">gh</a>
+          <a href="https://linkedin.com/in/nagaraj-pandith" target="_blank" class="text-xs uppercase tracking-widest">li</a>
+        </div>
+      </div>
     </div>
   </div>
 </header>
 
 <script>
-  const button = document.getElementById('mobile-menu-button');
-  const menu = document.getElementById('mobile-menu');
-  
-  button?.addEventListener('click', () => {
-    menu?.classList.toggle('hidden');
-    // Change icon or animate if desired
-  });
+  function setupHeader() {
+    const button = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+    const openIcon = document.getElementById('menu-icon-open');
+    const closeIcon = document.getElementById('menu-icon-close');
+    const navLinks = document.querySelectorAll('.mobile-nav-link');
+    
+    let isOpen = false;
+
+    function setMenuState(state: boolean) {
+      isOpen = state;
+      const menu = document.getElementById('mobile-menu');
+      if (isOpen) {
+        menu?.classList.remove('opacity-0', 'pointer-events-none', 'translate-x-full');
+        menu?.classList.add('pointer-events-auto');
+        openIcon?.classList.add('hidden');
+        closeIcon?.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+      } else {
+        menu?.classList.add('opacity-0', 'pointer-events-none', 'translate-x-full');
+        menu?.classList.remove('pointer-events-auto');
+        openIcon?.classList.remove('hidden');
+        closeIcon?.classList.add('hidden');
+        document.body.style.overflow = '';
+      }
+    }
+
+    button?.addEventListener('click', () => setMenuState(!isOpen));
+    
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => setMenuState(false));
+    });
+  }
+
+  setupHeader();
+  document.addEventListener('astro:after-swap', setupHeader);
 </script>
+
+<style>
+  .mobile-nav-link {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .mobile-nav-link:hover {
+    transform: translateX(10px);
+    opacity: 0.7;
+  }
+</style>

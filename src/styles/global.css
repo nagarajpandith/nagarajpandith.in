@@ -5,20 +5,32 @@
 @import "tailwindcss";
 
 @theme {
-  /* Modern Editorial Palette */
-  --color-bg-primary: #0F0F0E;   /* Neutral deepest charcoal */
-  --color-bg-secondary: #161615; /* Subtle elevation */
-  --color-text-primary: #F4F4F3; /* Refined bone white */
-  --color-text-muted: #848480;   /* Muted stony grey */
-  --color-border: rgba(244, 244, 243, 0.08);
-  --color-accent: #D1D1CB;       /* Antique silver/bone */
-
-  /* Fonts */
+  /* High-Level Tokens */
+  --spacing-container: 1280px;
   --font-serif: 'Cormorant Garamond', serif;
   --font-sans: 'Space Grotesk', sans-serif;
+}
 
-  /* Spacing */
-  --spacing-container: 1280px; /* Slightly wider for editorial feel */
+:root {
+  /* Obsidian Dark (Default) */
+  --color-bg-primary: #0F0F0E;
+  --color-bg-secondary: #161615;
+  --color-text-primary: #F4F4F3;
+  --color-text-muted: #848480;
+  --color-border: rgba(244, 244, 243, 0.08);
+  --color-accent: #D1D1CB;
+  --color-grid: rgba(244, 244, 243, 0.12); /* Increased from 0.05 */
+}
+
+body.light {
+  /* Coffee Light (Paper) */
+  --color-bg-primary: #FCFAF7;
+  --color-bg-secondary: #F5F1EB;
+  --color-text-primary: #1A1714;
+  --color-text-muted: #6B5E54;
+  --color-border: rgba(26, 23, 20, 0.12);
+  --color-accent: #8B5E3C;
+  --color-grid: rgba(139, 94, 60, 0.15);
 }
 
 /* Base Reset & Typography */
@@ -30,7 +42,8 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden; /* Prevent horizontal scroll from absolute elements */
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Container Constraint */

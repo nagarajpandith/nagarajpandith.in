@@ -1,82 +1,67 @@
 ---
-import ThemeToggle from './ThemeToggle.astro';
-import AuthButton from './AuthButton.astro';
 ---
 
-<header class="sticky top-0 z-50 backdrop-blur-md border-b" style="background-color: rgba(0, 0, 0, 0.8); border-color: rgba(255, 255, 255, 0.1);">
-  <nav class="container mx-auto px-4 py-4 flex items-center justify-between max-w-6xl">
-    <!-- Logo / Name -->
-    <a href="/" class="heading-handwritten no-underline hover:opacity-80 transition-opacity" style="font-size: 1.5rem;">
-      np
-    </a>
-    
-    <!-- Desktop Navigation -->
-    <div class="hidden md:flex items-center gap-8">
-      <a href="/about" class="link">about</a>
-      <a href="/work" class="link">work</a>
-      <a href="/blog" class="link">blog</a>
-      <a href="/notes" class="link">notes</a>
-      <a href="/recommendations" class="link">recs</a>
-      <ThemeToggle />
-    </div>
-    
-    <!-- Mobile Menu Button -->
-    <div class="flex items-center gap-4 md:hidden">
-      <ThemeToggle />
-      <button 
-        id="mobile-menu-button"
-        class="focus:outline-none"
-        aria-label="Toggle menu"
-      >
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
-    </div>
-  </nav>
+<header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 pointer-events-none">
+  <div class="pointer-events-auto backdrop-blur-md border-b" style="background-color: rgba(11, 20, 20, 0.85); border-color: var(--color-border);">
+    <nav class="container flex items-center justify-between h-16 md:h-20">
+      <!-- Logo / Name -->
+      <a href="/" class="text-xl md:text-2xl font-serif tracking-tight hover:opacity-70 transition-opacity">
+        np.
+      </a>
+      
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-8 text-sm font-medium">
+        <a href="/work" class="link">work</a>
+        <a href="/blog" class="link">writing</a>
+        <a href="/notes" class="link">notes</a>
+        <a href="/about" class="link">about</a>
+        <a href="mailto:nagaraj.pandith2002@gmail.com" class="link">contact</a>
+        
+        <div class="w-px h-4 bg-[var(--color-border)] mx-2"></div>
+        
+        <a href="/resume.pdf" target="_blank" class="text-[var(--color-accent)] hover:opacity-80 transition-opacity">
+          resume
+        </a>
+      </div>
+      
+      <!-- Mobile Menu Button -->
+      <div class="flex items-center gap-4 md:hidden">
+        <button 
+          id="mobile-menu-button"
+          class="focus:outline-none p-2 -mr-2 text-[var(--color-text-primary)]"
+          aria-label="Toggle menu"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </div>
   
   <!-- Mobile Navigation -->
   <div 
     id="mobile-menu" 
-    class="hidden md:hidden border-t"
-    style="border-color: rgba(255, 255, 255, 0.1); background-color: #000000;"
+    class="hidden md:hidden pointer-events-auto border-b"
+    style="background-color: var(--color-bg-primary); border-color: var(--color-border);"
   >
-    <div class="container mx-auto px-4 py-4 flex flex-col gap-4">
-      <a href="/about" class="link py-2">about</a>
-      <a href="/work" class="link py-2">work</a>
-      <a href="/blog" class="link py-2">blog</a>
-      <a href="/notes" class="link py-2">notes</a>
-      <a href="/tools" class="link py-2">tools</a>
-      <a href="/recommendations" class="link py-2">recommendations</a>
+    <div class="container py-8 flex flex-col gap-6 text-lg">
+      <a href="/work" class="link">work</a>
+      <a href="/blog" class="link">writing</a>
+      <a href="/notes" class="link">notes</a>
+      <a href="/about" class="link">about</a>
+      <a href="mailto:nagaraj.pandith2002@gmail.com" class="link">contact</a>
+      <a href="/resume.pdf" target="_blank" class="text-[var(--color-accent)]">resume</a>
     </div>
   </div>
 </header>
 
-<style>
-  body.light header {
-    background-color: rgba(250, 248, 243, 0.8) !important;
-    border-color: rgba(62, 39, 35, 0.1) !important;
-  }
-  
-  body.light #mobile-menu {
-    background-color: #faf8f3 !important;
-    border-color: rgba(62, 39, 35, 0.1) !important;
-  }
-</style>
-
 <script>
-  // Mobile menu toggle
   const button = document.getElementById('mobile-menu-button');
   const menu = document.getElementById('mobile-menu');
   
   button?.addEventListener('click', () => {
     menu?.classList.toggle('hidden');
-  });
-  
-  // Close menu when clicking a link
-  menu?.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      menu?.classList.add('hidden');
-    });
+    // Change icon or animate if desired
   });
 </script>

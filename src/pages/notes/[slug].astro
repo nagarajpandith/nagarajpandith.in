@@ -35,7 +35,7 @@ const relatedNotes = allNotes
         {note.data.type === 'short' ? '⚡ flashcard' : '📚 deep dive'}
       </div>
       
-      <h1 class="heading-handwritten text-4xl md:text-6xl mb-4">
+      <h1 class="font-serif text-4xl md:text-6xl mb-4">
         {note.data.title}
       </h1>
       
@@ -115,14 +115,14 @@ const relatedNotes = allNotes
   }
 
   .prose-note :global(h2) {
-    font-family: var(--font-handwritten);
+    font-family: var(--font-serif);
     font-size: 2rem;
     margin-top: 3rem;
     margin-bottom: 1.5rem;
   }
 
   .prose-note :global(h3) {
-    font-family: var(--font-handwritten);
+    font-family: var(--font-serif);
     font-size: 1.5rem;
     margin-top: 2.5rem;
     margin-bottom: 1rem;

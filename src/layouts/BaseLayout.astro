@@ -40,16 +40,22 @@ const {
 <body>
   <Header />
   
-  <main class="min-h-screen">
+  <!-- Content Grid Background -->
+  <div class="fixed inset-0 pointer-events-none z-0 flex justify-center">
+    <div class="w-full h-full max-w-[var(--spacing-container)] px-6 grid grid-cols-4 border-x border-dashed border-[var(--color-border)]">
+      <div class="border-r border-dashed border-[var(--color-border)] h-full"></div>
+      <div class="border-r border-dashed border-[var(--color-border)] h-full"></div>
+      <div class="border-r border-dashed border-[var(--color-border)] h-full"></div>
+      <!-- Last col doesn't need border-r as container has border-x -->
+    </div>
+  </div>
+
+  <main class="min-h-screen relative z-10">
     <slot />
   </main>
   
   <Footer />
   
-  <script>
-    // Theme toggle functionality - default to light mode
-    const theme = localStorage.getItem('theme') || 'light';
-    document.body.classList.toggle('light', theme === 'light');
-  </script>
+
 </body>
 </html>

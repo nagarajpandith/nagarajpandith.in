@@ -58,29 +58,29 @@ const blogs = [
 
 <BaseLayout title="nagaraj pandith - full-stack developer">
   <!-- Hero Section -->
-  <section class="container mx-auto px-4 py-32 md:py-48 max-w-4xl">
+  <section class="container md:pt-32 pt-24 pb-24 md:pb-32 max-w-5xl">
     <div class="animate-on-scroll space-y-12">
-      <h1 class="heading-handwritten text-5xl md:text-6xl mb-4 opacity-80">
-        nagaraj pandith
+      <h1 class="font-serif text-5xl md:text-7xl mb-6 tracking-tight text-[var(--color-text-primary)]">
+        nagaraj pandith.
       </h1>
       
-      <div class="text-xl md:text-2xl opacity-90 leading-relaxed max-w-3xl space-y-8 font-light italic">
+      <div class="text-xl md:text-2xl leading-relaxed max-w-3xl space-y-8 font-light text-[var(--color-text-muted)]">
         <p>
           full-stack developer who codes, creates, and occasionally writes. <br class="hidden md:block" />
           i get my dopamine from crafting innovative solutions and shipping thoughtful side projects.
         </p>
         
-        <p class="opacity-60 text-lg not-italic">
+        <p class="text-lg">
           obsessed with documentation, debugging, and details most people overlook. <br class="hidden md:block" />
           always open to interesting problems.
         </p>
       </div>
 
       <div class="flex flex-wrap gap-8 pt-8 items-center">
-        <a href="/work" class="link text-lg border-b border-current pb-1">
+        <a href="/work" class="btn-primary">
           let's build something
         </a>
-        <a href="/about" class="link text-lg opacity-60 hover:opacity-100 transition-opacity">
+        <a href="/about" class="link text-lg text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-colors">
           more about me
         </a>
       </div>
@@ -88,27 +88,27 @@ const blogs = [
   </section>
 
   <!-- Currently Section -->
-  <section class="container mx-auto px-4 py-24 max-w-6xl animate-on-scroll border-t border-white/5 pt-24">
+  <section class="container py-24 border-t border-[var(--color-border)]">
     <div class="grid md:grid-cols-4 gap-12">
       <div class="md:col-span-1">
-        <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold mb-6">currently</h2>
+        <h2 class="text-label mb-6">currently</h2>
       </div>
       <div class="md:col-span-3 grid md:grid-cols-3 gap-12">
         <div>
-          <h3 class="text-sm font-medium mb-3 opacity-90 tracking-wide">building (freelance)</h3>
-          <p class="text-sm opacity-50 leading-relaxed">
+          <h3 class="font-medium mb-3 text-[var(--color-text-primary)] tracking-wide">building (freelance)</h3>
+          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
             end-to-end ecommerce system with storefront and fully customizable dashboard
           </p>
         </div>
         <div>
-          <h3 class="text-sm font-medium mb-3 opacity-90 tracking-wide">building (side project)</h3>
-          <p class="text-sm opacity-50 leading-relaxed">
+          <h3 class="font-medium mb-3 text-[var(--color-text-primary)] tracking-wide">building (side project)</h3>
+          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
             ar + llm app idea. still in planning phase. if things go downhill, at least i'll learn flutter & ar
           </p>
         </div>
         <div>
-          <h3 class="text-sm font-medium mb-3 opacity-90 tracking-wide">learning</h3>
-          <p class="text-sm opacity-50 leading-relaxed">
+          <h3 class="font-medium mb-3 text-[var(--color-text-primary)] tracking-wide">learning</h3>
+          <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
             htmx, golang stack and exploring agentic ai
           </p>
         </div>
@@ -117,38 +117,38 @@ const blogs = [
   </section>
 
   <!-- Featured Work -->
-  <section class="container mx-auto px-4 py-24 max-w-6xl animate-on-scroll border-t border-white/5">
+  <section class="container py-24 border-t border-[var(--color-border)]">
     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-20">
       <div>
-        <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold mb-4">selected works</h2>
-        <h3 class="heading-handwritten text-4xl md:text-5xl opacity-80">featured work</h3>
+        <h2 class="text-label mb-4">selected works</h2>
+        <h3 class="font-serif text-4xl md:text-5xl text-[var(--color-text-primary)]">featured work</h3>
       </div>
-      <a href="/work" class="link text-sm opacity-50 hover:opacity-100 transition-opacity pb-1 border-b border-transparent hover:border-current">view all work →</a>
+      <a href="/work" class="link text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] pb-1 border-b border-transparent hover:border-current">view all work →</a>
     </div>
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-16">
       {projects.map((project) => (
         <article class="group animate-on-scroll flex flex-col">
           <a href={project.demo} target="_blank" rel="noopener noreferrer" class="block mb-6">
-            <div class="relative overflow-hidden aspect-video bg-subtle rounded-sm">
+            <div class="relative overflow-hidden aspect-video bg-[var(--color-bg-secondary)] rounded-sm border border-[var(--color-border)]">
               <img 
                 src={project.image} 
                 alt={project.title}
-                class="w-full h-full object-cover grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
+                class="w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 ease-out"
               />
             </div>
           </a>
           <div class="flex flex-col flex-1">
             <div class="flex items-center justify-between mb-3">
-              <h3 class="font-medium text-lg tracking-tight">
+              <h3 class="font-serif text-xl tracking-tight text-[var(--color-text-primary)]">
                 {project.title}
               </h3>
               <div class="flex gap-4 text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <a href={project.demo} target="_blank" rel="noopener noreferrer" class="link border-b border-current">demo</a>
-                <a href={project.github} target="_blank" rel="noopener noreferrer" class="link border-b border-current opacity-60">code</a>
+                <a href={project.github} target="_blank" rel="noopener noreferrer" class="link border-b border-current text-[var(--color-text-muted)]">code</a>
               </div>
             </div>
-            <p class="text-sm opacity-50 leading-relaxed font-light">
+            <p class="text-sm text-[var(--color-text-muted)] leading-relaxed font-light">
               {project.description}
             </p>
           </div>
@@ -158,39 +158,39 @@ const blogs = [
   </section>
 
   <!-- Latest Writings -->
-  <section class="container mx-auto px-4 py-24 max-w-6xl animate-on-scroll border-t border-white/5">
+  <section class="container py-24 border-t border-[var(--color-border)]">
     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-20">
       <div>
-        <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold mb-4">thoughts</h2>
-        <h3 class="heading-handwritten text-4xl md:text-5xl opacity-80">latest writings</h3>
+        <h2 class="text-label mb-4">thoughts</h2>
+        <h3 class="font-serif text-4xl md:text-5xl text-[var(--color-text-primary)]">latest writings</h3>
       </div>
-      <a href="/blog" class="link text-sm opacity-50 hover:opacity-100 transition-opacity pb-1 border-b border-transparent hover:border-current">all posts →</a>
+      <a href="/blog" class="link text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] pb-1 border-b border-transparent hover:border-current">all posts →</a>
     </div>
 
     <div class="space-y-12">
       {blogs.map((blog) => (
         <article class="group animate-on-scroll">
-          <a href={`/blog/${blog.slug}`} class="grid md:grid-cols-4 gap-4 md:gap-12 items-start py-4">
-            <div class="md:col-span-1">
-              <span class="text-xs opacity-30 tracking-widest uppercase">{blog.date}</span>
+          <a href={`/blog/${blog.slug}`} class="grid md:grid-cols-4 gap-4 md:gap-12 items-start py-4 group-hover:bg-[var(--color-bg-secondary)] transition-colors rounded-lg -mx-4 px-4">
+            <div class="md:col-span-1 pt-1">
+              <span class="text-xs text-[var(--color-text-muted)] tracking-widest uppercase">{blog.date}</span>
             </div>
             <div class="md:col-span-3">
-              <div class="flex flex-col md:flex-row md:justify-between md:items-baseline gap-2 mb-4">
-                <h3 class="text-xl md:text-2xl font-light group-hover:opacity-60 transition-opacity">
+              <div class="flex flex-col md:flex-row md:justify-between md:items-baseline gap-2 mb-2">
+                <h3 class="text-xl md:text-2xl font-serif text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
                   {blog.title}
                 </h3>
-                <div class="flex items-center gap-3 text-[10px] uppercase tracking-[0.2em] opacity-30 shrink-0">
+                <div class="flex items-center gap-3 text-[10px] uppercase tracking-[0.2em] text-[var(--color-text-muted)] opacity-60 shrink-0">
                   <span>{blog.views} views</span>
                   <span class="w-1 h-1 rounded-full bg-current"></span>
                   <span>{blog.readTime} read</span>
                 </div>
               </div>
-              <p class="text-sm md:text-base opacity-50 font-light leading-relaxed max-w-2xl mb-6">
+              <p class="text-sm md:text-base text-[var(--color-text-muted)] opacity-80 font-light leading-relaxed max-w-2xl mb-4">
                 {blog.description}
               </p>
               <div class="flex flex-wrap items-center gap-4">
                 {blog.tags.map(tag => (
-                  <span class="text-[10px] uppercase tracking-widest opacity-40 px-2 py-0.5 border border-white/10 rounded-full group-hover:border-white/20 transition-colors">
+                  <span class="text-[10px] uppercase tracking-widest text-[var(--color-text-muted)] opacity-60 px-2 py-0.5 border border-[var(--color-border)] rounded-full">
                     {tag}
                   </span>
                 ))}
@@ -203,23 +203,23 @@ const blogs = [
   </section>
 
   <!-- CTA Section -->
-  <section class="container mx-auto px-4 py-32 max-w-6xl animate-on-scroll border-t border-white/5">
+  <section class="container py-32 border-t border-[var(--color-border)]">
     <div class="grid md:grid-cols-2 gap-12 items-center">
       <div>
-        <h2 class="text-xs uppercase tracking-[0.2em] opacity-40 font-semibold mb-6">get in touch</h2>
-        <h3 class="heading-handwritten text-4xl md:text-5xl opacity-80 mb-8 leading-tight">
+        <h2 class="text-label mb-6">get in touch</h2>
+        <h3 class="font-serif text-4xl md:text-5xl text-[var(--color-text-primary)] mb-8 leading-tight">
           got a project <br /> in mind?
         </h3>
       </div>
       <div>
-        <p class="text-xl opacity-50 mb-12 font-light leading-relaxed">
+        <p class="text-xl text-[var(--color-text-muted)] mb-12 font-light leading-relaxed">
           whether it's a startup idea, a college fest website, or just a chat over chocolate ice cream — i'm all ears.
         </p>
         <div class="flex flex-wrap gap-12 items-center">
-          <a href="https://www.discord.com/users/hashclan#4890" target="_blank" rel="noopener noreferrer" class="link text-xl border-b-2 border-current pb-1">
+          <a href="https://www.discord.com/users/hashclan#4890" target="_blank" rel="noopener noreferrer" class="link text-xl border-b-2 border-current pb-1 hover:text-[var(--color-accent)] transition-colors">
             let's work together
           </a>
-          <a href="mailto:nagaraj.pandith2002@gmail.com" class="link text-xl opacity-60 hover:opacity-100 transition-opacity">
+          <a href="mailto:nagaraj.pandith2002@gmail.com" class="link text-xl text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-opacity">
             send an email
           </a>
         </div>
@@ -227,9 +227,3 @@ const blogs = [
     </div>
   </section>
 </BaseLayout>
-
-<style>
-  body.light article {
-    border-color: rgba(62, 39, 35, 0.1) !important;
-  }
-</style>

@@ -1,54 +1,24 @@
-/* Local Fonts */
-@font-face {
-  font-family: 'Sagittaire Display';
-  src: url('/fonts/Sagittaire-Display.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'PolySans';
-  src: url('/fonts/PolySans-Neutral.otf') format('opentype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'PolySans';
-  src: url('/fonts/PolySans-NeutralItalic.otf') format('opentype');
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'PolySans';
-  src: url('/fonts/PolySans-Median.otf') format('opentype');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
+/* Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
 /* Tailwind v4 */
 @import "tailwindcss";
 
 @theme {
-  /* Colors */
-  --color-bg-primary: #0B1414;
-  --color-bg-secondary: #0F1C1B;
-  --color-text-primary: #E6ECEB;
-  --color-text-muted: #9FB1AE;
-  --color-border: rgba(255, 255, 255, 0.1);
-  --color-accent: #F28C28;
+  /* Modern Editorial Palette */
+  --color-bg-primary: #0F0F0E;   /* Neutral deepest charcoal */
+  --color-bg-secondary: #161615; /* Subtle elevation */
+  --color-text-primary: #F4F4F3; /* Refined bone white */
+  --color-text-muted: #848480;   /* Muted stony grey */
+  --color-border: rgba(244, 244, 243, 0.08);
+  --color-accent: #D1D1CB;       /* Antique silver/bone */
 
   /* Fonts */
-  --font-serif: 'Sagittaire Display', serif;
-  --font-sans: 'PolySans', sans-serif;
+  --font-serif: 'Cormorant Garamond', serif;
+  --font-sans: 'Space Grotesk', sans-serif;
 
   /* Spacing */
-  --spacing-container: 1200px;
+  --spacing-container: 1280px; /* Slightly wider for editorial feel */
 }
 
 /* Base Reset & Typography */
@@ -81,12 +51,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: clamp(3rem, 6vw, 5rem);
-  letter-spacing: -0.02em;
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  letter-spacing: -0.04em;
+  font-weight: 300;
 }
 
 h2 {
-  font-size: clamp(2rem, 4vw, 3rem);
+  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  letter-spacing: -0.02em;
+  font-weight: 300;
 }
 
 h3 {
@@ -119,19 +92,24 @@ a:hover {
 
 /* Buttons */
 .btn-primary {
-  background-color: var(--color-accent);
-  color: #000;
-  padding: 0.75rem 1.75rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  border-radius: 9999px; /* Pill shape */
-  transition: transform 0.2s, opacity 0.2s;
+  background-color: var(--color-text-primary);
+  color: var(--color-bg-primary);
+  padding: 0.85rem 2.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 2px; /* Sharper editorial corners */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-block;
+  border: 1px solid transparent;
 }
 
 .btn-primary:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
+  background-color: transparent;
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
+  transform: translateY(-2px);
 }
 
 /* Utility Defaults */

@@ -59,12 +59,12 @@ const blogs = [
 <BaseLayout title="nagaraj pandith - full-stack developer">
   <!-- Hero Section -->
   <section class="container md:pt-32 pt-24 pb-24 md:pb-32 max-w-5xl">
-    <div class="animate-on-scroll space-y-12">
-      <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl mb-8 tracking-tighter text-[var(--color-text-primary)] leading-[0.9]">
+    <div class="space-y-12">
+      <h1 class="reveal-text font-serif text-6xl md:text-8xl lg:text-9xl mb-8 tracking-tighter text-[var(--color-text-primary)] leading-[0.9]">
         nagaraj <br class="md:hidden" /> pandith.
       </h1>
       
-      <div class="text-xl md:text-2xl leading-relaxed max-w-2xl space-y-8 font-light text-[var(--color-text-muted)] italic">
+      <div class="reveal-text text-xl md:text-2xl leading-relaxed max-w-2xl space-y-8 font-light text-[var(--color-text-muted)] italic">
         <p>
           full-stack developer crafting meaningful software & <br class="hidden md:block" />
           thoughtful digital experiences.
@@ -89,23 +89,23 @@ const blogs = [
   <!-- Currently Section -->
   <section class="container py-24 border-t border-[var(--color-border)]">
     <div class="grid md:grid-cols-4 gap-12">
-      <div class="md:col-span-1">
+      <div class="md:col-span-1 reveal-text">
         <h2 class="text-label mb-6">currently</h2>
       </div>
       <div class="md:col-span-3 grid md:grid-cols-3 gap-12">
-        <div>
+        <div class="reveal-text">
           <h3 class="font-medium mb-3 text-[var(--color-text-primary)] tracking-wide">building (freelance)</h3>
           <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
             end-to-end ecommerce system with storefront and fully customizable dashboard
           </p>
         </div>
-        <div>
+        <div class="reveal-text">
           <h3 class="font-medium mb-3 text-[var(--color-text-primary)] tracking-wide">building (side project)</h3>
           <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
             ar + llm app idea. still in planning phase. if things go downhill, at least i'll learn flutter & ar
           </p>
         </div>
-        <div>
+        <div class="reveal-text">
           <h3 class="font-medium mb-3 text-[var(--color-text-primary)] tracking-wide">learning</h3>
           <p class="text-sm text-[var(--color-text-muted)] leading-relaxed">
             htmx, golang stack and exploring agentic ai
@@ -118,7 +118,7 @@ const blogs = [
   <!-- Featured Work -->
   <section class="container py-24 border-t border-[var(--color-border)]">
     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-20">
-      <div>
+      <div class="reveal-text">
         <h2 class="text-label mb-4">selected works</h2>
         <h3 class="font-serif text-4xl md:text-5xl text-[var(--color-text-primary)]">featured work</h3>
       </div>
@@ -127,7 +127,7 @@ const blogs = [
 
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-16">
       {projects.map((project) => (
-        <article class="group animate-on-scroll flex flex-col">
+        <article class="group reveal-text flex flex-col">
           <a href={project.demo} target="_blank" rel="noopener noreferrer" class="block mb-6">
             <div class="relative overflow-hidden aspect-video bg-[var(--color-bg-secondary)] rounded-sm border border-[var(--color-border)]">
               <img 
@@ -159,7 +159,7 @@ const blogs = [
   <!-- Latest Writings -->
   <section class="container py-24 border-t border-[var(--color-border)]">
     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end gap-4 mb-20">
-      <div>
+      <div class="reveal-text">
         <h2 class="text-label mb-4">thoughts</h2>
         <h3 class="font-serif text-4xl md:text-5xl text-[var(--color-text-primary)]">latest writings</h3>
       </div>
@@ -168,7 +168,7 @@ const blogs = [
 
     <div class="space-y-12">
       {blogs.map((blog) => (
-        <article class="group animate-on-scroll">
+        <article class="group reveal-text">
           <a href={`/blog/${blog.slug}`} class="grid md:grid-cols-4 gap-4 md:gap-12 items-start py-4 group-hover:bg-[var(--color-bg-secondary)] transition-colors rounded-lg -mx-4 px-4">
             <div class="md:col-span-1 pt-1">
               <span class="text-xs text-[var(--color-text-muted)] tracking-widest uppercase">{blog.date}</span>
@@ -205,8 +205,8 @@ const blogs = [
   <section id="contact" class="container py-32 border-t border-[var(--color-border)]">
     <div class="grid md:grid-cols-2 gap-12 items-center">
       <div>
-        <h2 class="text-label mb-6">get in touch</h2>
-        <h3 class="font-serif text-4xl md:text-5xl text-[var(--color-text-primary)] mb-8 leading-tight">
+        <h2 class="reveal-text text-label mb-6">get in touch</h2>
+        <h3 class="reveal-text font-serif text-4xl md:text-5xl text-[var(--color-text-primary)] mb-8 leading-tight">
           got a project <br /> in mind?
         </h3>
       </div>

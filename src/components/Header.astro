@@ -55,14 +55,14 @@ import ThemeToggle from './ThemeToggle.astro';
   >
     <div class="container h-full flex flex-col justify-center py-20">
       <div class="space-y-6">
-        <a href="/work" class="mobile-nav-link block text-5xl font-serif italic">work</a>
-        <a href="/blog" class="mobile-nav-link block text-5xl font-serif italic">writing</a>
-        <a href="/notes" class="mobile-nav-link block text-5xl font-serif italic">notes</a>
-        <a href="/about" class="mobile-nav-link block text-5xl font-serif italic">about</a>
-        <a href="/recommendations" class="mobile-nav-link block text-5xl font-serif italic">recs</a>
+        <a href="/work" class="mobile-nav-link stagger-link block text-5xl font-serif italic">work</a>
+        <a href="/blog" class="mobile-nav-link stagger-link block text-5xl font-serif italic">writing</a>
+        <a href="/notes" class="mobile-nav-link stagger-link block text-5xl font-serif italic">notes</a>
+        <a href="/about" class="mobile-nav-link stagger-link block text-5xl font-serif italic">about</a>
+        <a href="/recommendations" class="mobile-nav-link stagger-link block text-5xl font-serif italic">recs</a>
       </div>
       
-      <div class="mt-16 pt-8 border-t border-[var(--color-border)] flex items-center justify-between">
+      <div class="mt-16 pt-8 border-t border-[var(--color-border)] flex items-center justify-between stagger-link">
         <a href="/resume.pdf" target="_blank" class="text-xl font-medium text-[var(--color-accent)]">resume</a>
         <div class="flex gap-6 text-[var(--color-text-muted)]">
           <a href="https://github.com/nagarajpandith" target="_blank" class="text-xs uppercase tracking-widest">gh</a>
@@ -74,6 +74,8 @@ import ThemeToggle from './ThemeToggle.astro';
 </header>
 
 <script>
+  import { animate, stagger } from 'motion';
+
   function setupHeader() {
     const button = document.getElementById('mobile-menu-button');
     const menu = document.getElementById('mobile-menu');
@@ -86,22 +88,39 @@ import ThemeToggle from './ThemeToggle.astro';
     function setMenuState(state: boolean) {
       isOpen = state;
       const menu = document.getElementById('mobile-menu');
+      
       if (isOpen) {
+        // Open Sequence
         menu?.classList.remove('opacity-0', 'pointer-events-none', 'translate-x-full');
         menu?.classList.add('pointer-events-auto');
         openIcon?.classList.add('hidden');
         closeIcon?.classList.remove('hidden');
         document.body.style.overflow = 'hidden';
+
+        // Stagger Animation
+        animate(
+          '.stagger-link', 
+          { opacity: 1, y: 0 }, 
+          { delay: stagger(0.1), duration: 0.6, ease: [0.16, 1, 0.3, 1] }
+        );
+
       } else {
+        // Close Sequence
         menu?.classList.add('opacity-0', 'pointer-events-none', 'translate-x-full');
         menu?.classList.remove('pointer-events-auto');
         openIcon?.classList.remove('hidden');
         closeIcon?.classList.add('hidden');
         document.body.style.overflow = '';
+
+        // Reset Stagger Links (Instant)
+        animate('.stagger-link', { opacity: 0, y: 20 }, { duration: 0 });
       }
     }
 
-    button?.addEventListener('click', () => setMenuState(!isOpen));
+    button?.addEventListener('click', (e) => {
+      e.stopPropagation();
+      setMenuState(!isOpen);
+    });
     
     navLinks.forEach(link => {
       link.addEventListener('click', () => setMenuState(false));

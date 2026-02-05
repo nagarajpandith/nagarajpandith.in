@@ -203,13 +203,13 @@ const recommendations = [
       <div class="grid md:grid-cols-2 gap-20 items-center">
         <div class="order-2 md:order-1 space-y-12">
           <div class="space-y-4">
-            <h2 class="text-label">about me</h2>
-            <h1 class="font-serif text-6xl md:text-8xl lg:text-9xl mb-8 tracking-tighter text-[var(--color-text-primary)] leading-[0.9]">
+            <h2 class="reveal-text text-label">about me</h2>
+            <h1 class="reveal-text font-serif text-6xl md:text-8xl lg:text-9xl mb-8 tracking-tighter text-[var(--color-text-primary)] leading-[0.9]">
               it's me, <br /> nagaraj.
             </h1>
           </div>
           
-          <div class="text-xl leading-relaxed max-w-lg space-y-8 font-light text-[var(--color-text-muted)]">
+          <div class="reveal-text text-xl leading-relaxed max-w-lg space-y-8 font-light text-[var(--color-text-muted)]">
             <p>
               i'm a full-stack developer from india who builds things for the web. 
               my everyday toolkit includes typescript, next.js, and whatever else gets the job done without unnecessary overengineering.
@@ -248,8 +248,8 @@ const recommendations = [
       <div class="grid md:grid-cols-5 gap-16">
          <!-- Story -->
          <div class="md:col-span-3 space-y-8">
-            <h2 class="text-label mb-6">my story</h2>
-            <div class="text-2xl md:text-3xl font-serif text-[var(--color-text-primary)] leading-tight space-y-12 italic opacity-90">
+            <h2 class="reveal-text text-label mb-6">my story</h2>
+            <div class="reveal-text text-2xl md:text-3xl font-serif text-[var(--color-text-primary)] leading-tight space-y-12 italic opacity-90">
               <p>
                 i fell in love with computers around age 10, playing on an office computer at my mom's workplace. that curiosity evolved into flashing custom roms on slow phones and playing around with kali linux on even slower laptops.
               </p>
@@ -288,7 +288,7 @@ const recommendations = [
       
       <div class="md:w-3/4 space-y-24">
           {workExperience.map((job) => (
-          <article class="group">
+          <article class="reveal-text group">
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline gap-4 mb-6">
               <h3 class="text-2xl font-light text-[var(--color-text-primary)] group-hover:text-[var(--color-accent)] transition-colors">
                 {job.company}
@@ -371,7 +371,7 @@ const recommendations = [
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-12">
       {achievements.map((achievement) => (
-        <article class="group animate-on-scroll flex flex-col">
+        <article class="reveal-text group animate-on-scroll flex flex-col">
           <a href={achievement.link} target="_blank" rel="noopener noreferrer" class="block mb-6">
             <div class="relative overflow-hidden aspect-video bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-sm">
               <Image 
@@ -415,7 +415,7 @@ const recommendations = [
 
     <div class="space-y-32">
       {communityWork.map((work) => (
-        <article class="group grid md:grid-cols-2 gap-16 items-center">
+        <article class="reveal-text group grid md:grid-cols-2 gap-16 items-center">
           <div class="aspect-[4/3] overflow-hidden bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-sm order-2 md:order-1">
              <Image 
                src={work.image} 

@@ -37,13 +37,70 @@ const {
   
   <title>{title}</title>
 
-  <script is:inline>
-    // Theme initialization - immediate execution to prevent flash
+  <script>
+    import Lenis from 'lenis'
+    import { animate, inView } from 'motion'
+
+    // Initialize Lenis for smooth scrolling
+    const lenis = new Lenis({
+      lerp: 0.1, // Smoothness (0-1)
+      wheelMultiplier: 1.2, // Scroll speed
+      smoothWheel: true,
+    })
+
+    function raf(time: number) {
+      lenis.raf(time)
+      requestAnimationFrame(raf)
+    }
+
+    requestAnimationFrame(raf)
+
+    // Text Reveal Animation
+    const reveal = () => {
+      inView('.reveal-text:not(.is-visible)', (element) => {
+        element.classList.add('is-visible');
+        animate(
+          element,
+          { 
+            opacity: [0, 1],
+            y: [20, 0],
+            filter: ['blur(8px)', 'blur(0px)']
+          },
+          { duration: 0.8, ease: [0.17, 0.55, 0.55, 1] }
+        );
+      });
+    };
+
+    reveal();
+
+    // Re-run reveal check on Lenis scroll to ensure inView keeps tracking
+    lenis.on('scroll', reveal);
+
+    // Initial check for elements already in view
+    setTimeout(() => {
+      document.querySelectorAll('.reveal-text:not(.is-visible)').forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight) {
+          el.dispatchEvent(new Event('mouseenter')); // Sometimes helps trigger observers
+          // Manual reveal if still hidden after a bit
+          setTimeout(() => {
+            if (!el.classList.contains('is-visible')) {
+              el.classList.add('is-visible');
+              (el as HTMLElement).style.opacity = '1';
+              (el as HTMLElement).style.transform = 'none';
+              (el as HTMLElement).style.filter = 'none';
+            }
+          }, 500);
+        }
+      });
+    }, 100);
+
+    // Theme initialization
     const theme = (() => {
       if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
         return localStorage.getItem('theme');
       }
-      return 'dark'; // Default
+      return 'dark';
     })();
     
     if (theme === 'light') {
@@ -76,5 +133,40 @@ const {
   <Footer />
   
 
+  <style is:global>
+    /* Animation Utilities */
+    .reveal-text {
+      opacity: 0;
+      transform: translateY(20px);
+      filter: blur(8px);
+      will-change: opacity, transform, filter;
+    }
+
+    .stagger-link {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    /* Lenis Smooth Scroll */
+    html.lenis, html.lenis body {
+      height: auto;
+    }
+
+    .lenis.lenis-smooth {
+      scroll-behavior: auto !important;
+    }
+
+    .lenis.lenis-smooth [data-lenis-prevent] {
+      overscroll-behavior: contain;
+    }
+
+    .lenis.lenis-stopped {
+      overflow: hidden;
+    }
+
+    .lenis.lenis-scrolling iframe {
+      pointer-events: none;
+    }
+  </style>
 </body>
 </html>

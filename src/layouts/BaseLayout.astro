@@ -56,44 +56,22 @@ const {
     requestAnimationFrame(raf)
 
     // Text Reveal Animation
-    const reveal = () => {
-      inView('.reveal-text:not(.is-visible)', (element) => {
-        element.classList.add('is-visible');
-        animate(
-          element,
-          { 
-            opacity: [0, 1],
-            y: [20, 0],
-            filter: ['blur(8px)', 'blur(0px)']
-          },
-          { duration: 0.8, ease: [0.17, 0.55, 0.55, 1] }
-        );
-      });
-    };
-
-    reveal();
-
-    // Re-run reveal check on Lenis scroll to ensure inView keeps tracking
-    lenis.on('scroll', reveal);
-
-    // Initial check for elements already in view
-    setTimeout(() => {
-      document.querySelectorAll('.reveal-text:not(.is-visible)').forEach(el => {
-        const rect = el.getBoundingClientRect();
-        if (rect.top < window.innerHeight) {
-          el.dispatchEvent(new Event('mouseenter')); // Sometimes helps trigger observers
-          // Manual reveal if still hidden after a bit
-          setTimeout(() => {
-            if (!el.classList.contains('is-visible')) {
-              el.classList.add('is-visible');
-              (el as HTMLElement).style.opacity = '1';
-              (el as HTMLElement).style.transform = 'none';
-              (el as HTMLElement).style.filter = 'none';
-            }
-          }, 500);
-        }
-      });
-    }, 100);
+    inView('.reveal-text', (element) => {
+      animate(
+        element,
+        { 
+          opacity: [0, 1],
+          y: [20, 0],
+          filter: ['blur(8px)', 'blur(0px)']
+        },
+        { duration: 0.8, ease: [0.17, 0.55, 0.55, 1] }
+      );
+      
+      // Returning a cleanup function makes the animation replayable
+      return () => {
+        animate(element, { opacity: 0, y: 20, filter: 'blur(8px)' }, { duration: 0 });
+      };
+    });
 
     // Theme initialization
     const theme = (() => {
@@ -111,6 +89,10 @@ const {
   </script>
 </head>
 <body>
+  <div class="grain-overlay"></div>
+  <!-- Top Gradient Guard: Content fades out as it scrolls up -->
+  <div class="fixed top-0 left-0 right-0 h-32 md:h-48 z-[115] pointer-events-none bg-gradient-to-b from-[var(--color-bg-primary)] via-[var(--color-bg-primary)]/80 to-transparent"></div>
+
   <Header />
   
   <!-- Content Grid Background -->
@@ -167,6 +149,21 @@ const {
     .lenis.lenis-scrolling iframe {
       pointer-events: none;
     }
+    /* Soft Static Texture (Paper Feel) */
+    .grain-overlay {
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+      opacity: 0.16;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    .light .grain-overlay {
+      opacity: 0.5;
+      mix-blend-mode: multiply; /* Crucial for visibility on light themes */
+    }
   </style>
+
 </body>
 </html>

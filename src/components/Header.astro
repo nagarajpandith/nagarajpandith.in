@@ -4,7 +4,7 @@ import ThemeToggle from './ThemeToggle.astro';
 
 <header class="fixed top-0 left-0 right-0 z-[120] transition-all duration-300 pointer-events-none">
   <!-- Top Bar: Always above menu -->
-  <div class="pointer-events-auto backdrop-blur-md border-b bg-[var(--color-bg-primary)]/80 border-[var(--color-border)] relative z-[130]">
+  <div class="pointer-events-auto border-b bg-transparent border-[var(--color-border)] relative z-[130]">
     <nav class="container flex items-center justify-between h-16 md:h-20">
       <!-- Logo / Name -->
       <a href="/" class="text-xl md:text-2xl font-serif tracking-tight hover:opacity-70 transition-opacity">
@@ -77,13 +77,30 @@ import ThemeToggle from './ThemeToggle.astro';
   import { animate, stagger } from 'motion';
 
   function setupHeader() {
+    const header = document.querySelector('header');
     const button = document.getElementById('mobile-menu-button');
     const menu = document.getElementById('mobile-menu');
     const openIcon = document.getElementById('menu-icon-open');
     const closeIcon = document.getElementById('menu-icon-close');
     const navLinks = document.querySelectorAll('.mobile-nav-link');
     
+    let lastScroll = 0;
     let isOpen = false;
+
+    // Smart Header Logic
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      if (isOpen) return; // Don't hide if menu is open
+
+      if (currentScroll > lastScroll && currentScroll > 100) {
+        // Scrolling down - hide
+        header?.classList.add('-translate-y-full');
+      } else {
+        // Scrolling up - show
+        header?.classList.remove('-translate-y-full');
+      }
+      lastScroll = currentScroll;
+    });
 
     function setMenuState(state: boolean) {
       isOpen = state;

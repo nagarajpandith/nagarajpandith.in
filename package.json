@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.15",
     "@supabase/supabase-js": "^2.89.0",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "5.17.1",
@@ -16,7 +17,9 @@
     "motion": "^12.33.0"
   },
   "devDependencies": {
+    "@astrojs/check": "^0.9.6",
     "@astrojs/tailwind": "^6.0.2",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "typescript": "^5.9.3"
   }
 }

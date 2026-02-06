@@ -19,7 +19,7 @@
   --color-text-muted: #848480;
   --color-border: rgba(244, 244, 243, 0.08);
   --color-accent: #D1D1CB;
-  --color-grid: rgba(244, 244, 243, 0.12); /* Increased from 0.05 */
+  --color-grid: rgba(244, 244, 243, 0.2); /* Increased for better visibility */
 }
 
 body.light {
@@ -51,9 +51,16 @@ body {
   max-width: var(--spacing-container);
   margin-left: auto;
   margin-right: auto;
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  position: relative; /* Context for absolute children */
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 }
 
 /* Typography Utilities */
@@ -64,13 +71,14 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  font-size: clamp(3.0rem, 15vw, 10rem); /* Reduced min-size from 4rem to 3.5rem to prevent breaks */
   letter-spacing: -0.04em;
+  line-height: 0.85;
   font-weight: 300;
 }
 
 h2 {
-  font-size: clamp(2.25rem, 5vw, 3.5rem);
+  font-size: clamp(2.5rem, 8vw, 5rem);
   letter-spacing: -0.02em;
   font-weight: 300;
 }
@@ -150,11 +158,35 @@ a:hover {
 }
 
 /* Compatibility Utilities */
-.bg-subtle {
-  background-color: var(--color-bg-secondary);
+/* Custom Dotted Lines */
+.grid-line-v {
+  background-image: linear-gradient(to bottom, var(--color-grid) 25%, transparent 25%);
+  background-size: 1px 10px; /* Specific gap: 2.5px dot, 7.5px gap */
+  width: 1px;
+  height: 100%;
 }
 
-.bg-subtle-hover:hover {
-  background-color: #1a2a29;
-  transition: background-color 0.2s ease;
+.grid-line-h {
+  background-image: linear-gradient(to right, var(--color-grid) 25%, transparent 25%);
+  background-size: 10px 1px;
+  height: 1px;
+  width: 100%;
+}
+
+.btn-secondary {
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+  padding: 0.85rem 2.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-bg-secondary);
+  border-color: var(--color-text-muted);
 }

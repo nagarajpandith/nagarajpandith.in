@@ -2,377 +2,567 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { supabase } from '../utils/supabase';
 
+// Fetch data
 const { data: movies } = await supabase
   .from('recommendations')
   .select('*')
   .order('year', { ascending: false });
 
 const recommendations = movies || [];
+
+// Extract unique genres for the filter list
 const allGenres = [...new Set(recommendations.flatMap(m => m.genres || []))].sort();
 
-const moods = [
-  { id: 'rainy', emoji: '🌧️', label: 'rainy afternoon', tags: ['rainy-day', 'learning-mode'] },
-  { id: 'rush', emoji: '⚡', label: 'adrenaline', tags: ['adrenaline-rush', 'edge-of-seat'] },
-  { id: 'mind', emoji: '🌀', label: 'mind blown', tags: ['mind-blown', 'future-vibes'] },
-  { id: 'feels', emoji: '🍷', label: 'deep feels', tags: ['emotional-damage', 'deep-feels'] },
-];
-
-const randomMovie = recommendations[Math.floor(Math.random() * recommendations.length)];
-
-const totalMovies = recommendations.filter(r => r.title_type?.toLowerCase().includes('movie')).length;
-const totalSeries = recommendations.filter(r => r.title_type?.toLowerCase().includes('series')).length;
+const totalMovies = recommendations.length;
 const avgRating = (recommendations.reduce((acc, m) => acc + (m.imdb_rating || 0), 0) / recommendations.length).toFixed(1);
+
+// Pick a random initial backdrop
+const initialBackdrop = recommendations.length > 0 
+  ? recommendations[Math.floor(Math.random() * recommendations.length)].backdrop_url 
+  : '';
 ---
 
-<BaseLayout title="cinema - nagaraj pandith">
-  <div id="page-overlay" class="fixed inset-0 pointer-events-none z-0 transition-opacity duration-1000 opacity-20"></div>
-
-  <!-- Hero -->
-  <section class="relative min-h-[70vh] flex items-center justify-center pt-20 overflow-hidden">
-    <div class="absolute inset-0 z-0">
-      <div class="marquee-container opacity-10 select-none">
-        <div class="marquee-text font-black text-[15rem] whitespace-nowrap">
-          {recommendations.slice(0, 10).map(m => <span>{m.title} • </span>)}
-          {recommendations.slice(0, 10).map(m => <span>{m.title} • </span>)}
-        </div>
+<BaseLayout title="Cinema - Nagaraj Pandith" description="A collection of films and series that have left a mark.">
+  
+  <!-- Backdrops (Double Buffer) -->
+  <div class="fixed inset-0 z-0 pointer-events-none select-none overflow-hidden">
+    <!-- Active Backdrop -->
+    <div id="bg-active" class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700 ease-in-out opacity-100" style={`background-image: url('${initialBackdrop}')`}></div>
+    <!-- Next Backdrop (Preloader) -->
+    <div id="bg-next" class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700 ease-in-out opacity-0"></div>
+    
+    <!-- Overlay -->
+    <div id="backdrop-overlay" class="absolute inset-0 bg-[var(--color-bg-primary)] transition-colors duration-500"></div>
+    
+    <!-- Local Grid Lines -->
+    <div class="absolute inset-0 w-full h-full max-w-[var(--spacing-container)] mx-auto px-2 z-[5] pointer-events-none">
+       <div class="h-full w-full grid grid-cols-1 md:grid-cols-4 border-x border-dashed border-[var(--color-grid)]">
+        <div class="hidden md:flex justify-end h-full"><div class="grid-line-v"></div></div>
+        <div class="hidden md:flex justify-end h-full"><div class="grid-line-v"></div></div>
+        <div class="hidden md:flex justify-end h-full"><div class="grid-line-v"></div></div>
+        <div class="hidden md:block h-full"></div>
       </div>
     </div>
+  </div>
 
-    <div class="relative z-10 text-center px-4">
-      <span class="inline-block px-3 py-1 rounded-full border border-current text-xs mb-6 tracking-widest uppercase animate-pulse">now showing</span>
-      <h1 class="font-serif text-7xl md:text-9xl mb-4">cinema</h1>
-      <div class="flex flex-wrap justify-center gap-8 mt-12">
-        <div class="text-left">
-          <p class="text-4xl font-light italic">{recommendations.length}</p>
-          <p class="text-[10px] uppercase tracking-[0.2em] opacity-50">handpicked titles</p>
-        </div>
-        <div class="w-px h-12 bg-current opacity-20 hidden md:block"></div>
-        <div class="text-left">
-          <p class="text-4xl font-light italic">{avgRating}</p>
-          <p class="text-[10px] uppercase tracking-[0.2em] opacity-50">average rating</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Filters & Moods -->
-  <section class="container mx-auto px-4 py-20 relative z-10">
-    <div class="flex flex-col md:flex-row gap-6 items-center justify-between mb-20 bg-inverted backdrop-blur-xl p-8 rounded-3xl border border-white/10">
-      <!-- Mood Pills -->
-      <div class="flex gap-4 overflow-x-auto pb-2 no-scrollbar w-full md:w-auto">
-        {moods.map(mood => (
-          <button 
-            class="mood-pill px-6 py-3 rounded-full border border-white/20 hover:bg-inverted hover:text-current transition-all whitespace-nowrap text-sm"
-            data-tags={mood.tags.join(',')}
-          >
-            {mood.emoji} {mood.label}
-          </button>
-        ))}
-        <button 
-          id="clear-filters"
-          class="px-6 py-3 rounded-full border border-white/20 hover:bg-inverted hover:text-current transition-all whitespace-nowrap text-sm opacity-50 hover:opacity-100"
-        >
-          ✕ clear
-        </button>
+  <!-- Content -->
+  <section class="container relative z-10 pt-24 pb-12">
+    
+    <!-- Header -->
+    <div class="max-w-4xl mb-24 min-h-[350px] flex flex-col justify-end" id="top-anchor">
+      <span class="text-label block mb-6 reveal-text">Curated Watchlist</span>
+      
+      <div class="relative min-h-[1.1em] mb-8 overflow-hidden"> 
+        <h1 class="text-6xl md:text-9xl font-serif leading-[0.85] split-text tracking-tighter m-0 p-0">
+          Cinema
+        </h1>
       </div>
       
-      <!-- Random Button -->
-      <button id="spin-wheel" class="group relative px-8 py-4 btn-primary rounded-full font-bold overflow-hidden transition-transform active:scale-95 whitespace-nowrap">
-        <span class="relative z-10">surprise me 🎬</span>
-      </button>
+      <div class="grid md:grid-cols-[2fr_1fr] gap-12 items-end">
+        <div class="min-h-[6rem] relative"> 
+          <p class="text-muted text-lg md:text-xl font-light leading-relaxed reveal-simple opacity-0" style="transition-delay: 0.1s;">
+            A personal collection of movies and series that have moved, inspired, or simply entertained me. 
+            Usually dark, often thoughtful, always worth your time.
+          </p>
+        </div>
+        
+        <div class="flex gap-12 reveal-simple opacity-0 border-t border-[var(--color-border)] pt-6 md:border-t-0 md:pt-0" style="transition-delay: 0.3s;">
+          <div>
+            <span class="block text-3xl font-serif">{totalMovies}</span>
+            <span class="text-label text-[10px] tracking-widest mt-1 block opacity-50">Titles</span>
+          </div>
+          <div>
+            <span class="block text-3xl font-serif">{avgRating}</span>
+            <span class="text-label text-[10px] tracking-widest mt-1 block opacity-50">Avg Rating</span>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- Additional Filters -->
-    <div class="flex flex-wrap gap-4 mb-8 justify-center">
-      <select id="genre-filter" class="px-4 py-2 rounded-full bg-inverted border border-white/20 text-sm cursor-pointer">
-        <option value="">all genres</option>
-        {allGenres.map(genre => <option value={genre}>{genre}</option>)}
-      </select>
-      
-      <select id="rating-filter" class="px-4 py-2 rounded-full bg-inverted border border-white/20 text-sm cursor-pointer">
-        <option value="0">all ratings</option>
-        <option value="7">7+ ⭐</option>
-        <option value="8">8+ ⭐⭐</option>
-        <option value="9">9+ ⭐⭐⭐</option>
-      </select>
+    <!-- Filter Bar (Static) -->
+    <div class="relative z-50 mb-12 reveal-simple opacity-0" style="transition-delay: 0.4s;">
+      <div class="flex flex-col md:flex-row gap-4 justify-between items-stretch md:items-end">
+         
+         <!-- Custom Searchable Select -->
+         <div class="relative w-full md:w-72 group" id="custom-select-container">
+            <button id="genre-trigger" class="w-full flex justify-between items-center border border-[var(--color-border)] bg-[var(--color-bg-primary)] px-5 py-4 text-xs uppercase tracking-widest hover:border-[var(--color-text-muted)] transition-colors text-left group-hover:border-[var(--color-text-muted)] cursor-pointer">
+              <span id="selected-genre-text">All Genres</span>
+              <svg width="10" height="6" viewBox="0 0 10 6" fill="none" class="opacity-50 transition-transform duration-300 group-hover:rotate-180">
+                <path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </button>
+            
+            <!-- Dropdown -->
+            <div id="genre-dropdown" class="absolute z-[60] top-full left-0 w-full mt-2 bg-[var(--color-bg-primary)] border border-[var(--color-border)] shadow-2xl opacity-0 invisible transform -translate-y-2 transition-all duration-200">
+              <div class="p-2 border-b border-[var(--color-border)]">
+                <input type="text" id="genre-search" placeholder="SEARCH GENRES..." class="w-full bg-[var(--color-bg-secondary)] px-3 py-2 text-xs uppercase tracking-wider focus:outline-none placeholder:opacity-40 text-[var(--color-text-primary)]" autocomplete="off" />
+              </div>
+              <ul id="genre-list" class="max-h-60 overflow-y-auto overscroll-contain py-2">
+                <li class="genre-option px-4 py-2 hover:bg-[var(--color-bg-secondary)] cursor-pointer text-xs uppercase tracking-wider transition-colors text-[var(--color-text-primary)]" data-value="">All Genres</li>
+                {allGenres.map(genre => (
+                  <li class="genre-option px-4 py-2 hover:bg-[var(--color-bg-secondary)] cursor-pointer text-xs uppercase tracking-wider transition-colors text-[var(--color-text-primary)]" data-value={genre}>{genre}</li>
+                ))}
+              </ul>
+            </div>
+         </div>
 
-      <span id="movie-count" class="px-4 py-2 text-sm opacity-50">
-        {recommendations.length} titles
-      </span>
+         <!-- Random Pick Button -->
+         <button id="random-pick" class="w-full md:w-auto border border-[var(--color-border)] px-8 py-4 text-xs uppercase tracking-widest hover:bg-[var(--color-text-primary)] hover:text-[var(--color-bg-primary)] transition-all duration-300 whitespace-nowrap bg-[var(--color-bg-primary)] cursor-pointer">
+            Surprise Me
+         </button>
+      </div>
     </div>
 
-    <!-- Movies Grid -->
-    <div id="movies-grid" class="columns-2 md:columns-3 lg:columns-4 xl:columns-5 gap-6 space-y-6">
+    <!-- Grid -->
+    <div id="movies-grid" class="relative z-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-x-6 gap-y-16">
       {recommendations.map((movie) => (
         <article 
-          class="movie-card break-inside-avoid group relative cursor-pointer"
+          class="movie-card group cursor-pointer"
           data-genres={JSON.stringify(movie.genres || [])}
-          data-mood-tags={JSON.stringify(movie.mood_tags || [])}
           data-rating={movie.imdb_rating}
-          data-movie-data={JSON.stringify(movie)}
+          data-id={movie.id}
           data-backdrop={movie.backdrop_url}
+          id={`movie-${movie.id}`}
         >
-          <div class="relative overflow-hidden rounded-xl transition-all duration-500 group-hover:shadow-[0_0_40px_rgba(255,255,255,0.1)] group-hover:-translate-y-2">
+          <div class="hidden movie-json" data-json={JSON.stringify(movie)}></div>
+
+          <div class="relative aspect-[2/3] overflow-hidden mb-6 bg-[var(--color-bg-secondary)]">
             {movie.poster_url ? (
               <img 
                 src={movie.poster_url} 
                 alt={movie.title}
-                class="w-full grayscale group-hover:grayscale-0 transition-all duration-700 ease-out"
+                class="w-full h-full object-cover transition-all duration-700 ease-out md:grayscale md:group-hover:grayscale-0"
                 loading="lazy"
               />
             ) : (
-              <div class="w-full aspect-[2/3] bg-inverted flex items-center justify-center p-4">
-                <p class="text-center text-sm">{movie.title}</p>
+              <div class="w-full h-full flex items-center justify-center p-4">
+                <span class="text-label opacity-50">{movie.title}</span>
               </div>
             )}
             
-            <div class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity p-6 flex flex-col justify-end">
-              <p class="text-xs uppercase tracking-widest text-yellow-500 mb-1">{movie.year}</p>
-              <h3 class="text-xl font-bold leading-tight">{movie.title}</h3>
-              <div class="flex gap-2 mt-3">
-                {movie.genres?.slice(0, 2).map(g => 
-                  <span class="text-[10px] px-2 py-0.5 border border-white/30 rounded-full">{g}</span>
-                )}
-              </div>
+            <!-- Minimal Overlay -->
+            <div class="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
+          </div>
+          
+          <div class="space-y-2">
+            <h3 class="text-sm md:text-base font-medium leading-tight group-hover:text-[var(--color-accent)] transition-colors">{movie.title}</h3>
+            <div class="flex items-center gap-3 text-[10px] text-[var(--color-text-muted)] tracking-widest uppercase">
+              <span>{movie.year}</span>
+              <span class="w-px h-2 bg-[var(--color-border)]"></span>
+              <span>{movie.imdb_rating}/10</span>
             </div>
           </div>
         </article>
       ))}
     </div>
 
-    <!-- No Results -->
-    <div id="no-results" class="hidden text-center py-20">
-      <p class="text-xl opacity-60 mb-2">no movies found</p>
-      <p class="text-sm opacity-50">try adjusting your filters</p>
+    <!-- No Results State -->
+    <div id="no-results" class="hidden py-32 text-center relative z-10">
+      <p class="font-serif text-3xl text-[var(--color-text-muted)] italic">No matches found.</p>
+      <button id="reset-filters" class="mt-6 text-xs tracking-widest uppercase border-b border-[var(--color-accent)] pb-1 hover:text-[var(--color-accent)] transition-colors">Reset Filter</button>
     </div>
+
   </section>
 
-  <!-- Spotlight Effect -->
-  <div id="spotlight" class="fixed w-64 h-64 bg-white/10 rounded-full blur-3xl pointer-events-none z-50 mix-blend-screen -translate-x-1/2 -translate-y-1/2 opacity-0 transition-opacity duration-300"></div>
+  <!-- Back To Top -->
+  <button id="back-to-top" class="fixed bottom-8 right-8 z-[90] p-4 rounded-full border border-[var(--color-border)] bg-[var(--color-bg-primary)] text-[var(--color-text-primary)] opacity-0 translate-y-4 transition-all duration-300 hover:scale-105 hover:border-[var(--color-text-muted)] disabled:pointer-events-none" aria-label="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+  </button>
 
-  <!-- Movie Dialog -->
-  <dialog id="movie-dialog" class="bg-transparent p-0 m-0 max-w-none max-h-none w-screen h-screen backdrop:bg-black/95 overflow-hidden">
-    <div class="flex items-center justify-center h-full p-4 md:p-20">
-      <button id="close-dialog" class="absolute top-10 right-10 text-white text-5xl font-thin hover:rotate-90 transition-transform z-[100]">&times;</button>
-      <div id="dialog-content" class="w-full max-w-6xl grid md:grid-cols-2 gap-12 items-center"></div>
+  <!-- Detail Dialog -->
+  <dialog id="movie-dialog" class="bg-transparent p-0 m-0 w-screen h-screen max-w-none max-h-none backdrop:bg-black/80 backdrop-blur-md outline-none border-none text-[var(--color-text-primary)] z-[100] fixed top-0 left-0">
+    
+    <div class="w-full h-full flex items-center justify-center md:p-12 cursor-pointer" id="dialog-wrapper">
+      
+      <div class="relative w-full h-full md:h-auto md:max-w-6xl md:max-h-[85vh] bg-[var(--color-bg-primary)] border border-[var(--color-border)] shadow-2xl flex flex-col md:flex-row overflow-hidden cursor-default transition-all duration-500 opacity-0 translate-y-4 rounded-none md:rounded-sm" id="dialog-card">
+        
+        <!-- Close Button -->
+        <button id="close-dialog" class="absolute top-4 right-4 z-50 p-2 text-[var(--color-text-primary)] opacity-70 hover:opacity-100 transition-opacity bg-[var(--color-bg-primary)]/80 rounded-full md:hover:bg-[var(--color-bg-primary)] md:border md:border-transparent md:hover:border-[var(--color-border)] cursor-pointer">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+
+        <!-- Image Side (Desktop Only) -->
+        <div class="hidden md:block w-5/12 h-full bg-[var(--color-bg-secondary)] relative overflow-hidden group">
+           <img id="modal-poster" src="" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105" alt="" />
+           <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-primary)] via-transparent to-transparent opacity-50"></div>
+        </div>
+
+        <!-- Mobile Header Image -->
+        <div class="md:hidden relative w-full h-[45vh] flex-shrink-0">
+           <img id="modal-poster-mobile" src="" class="w-full h-full object-cover" alt="" />
+           <div class="absolute inset-0 bg-gradient-to-t from-[var(--color-bg-primary)] via-transparent to-transparent"></div>
+        </div>
+
+        <!-- Content Side -->
+        <div class="w-full md:w-7/12 flex flex-col h-full overflow-y-auto bg-[var(--color-bg-primary)] p-6 md:p-16 relative -mt-12 md:mt-0 z-10">
+          
+          <div class="flex-grow">
+             <!-- Desktop Header -->
+             <div class="hidden md:block">
+               <div class="flex items-center gap-4 mb-6 text-xs tracking-widest uppercase text-[var(--color-text-muted)]">
+                  <span id="modal-year"></span>
+                  <span class="w-px h-3 bg-[var(--color-border)]"></span>
+                  <span id="modal-type"></span>
+                  <span class="w-px h-3 bg-[var(--color-border)]"></span>
+                  <span id="modal-runtime"></span>
+               </div>
+               <h2 id="modal-title" class="text-6xl font-serif mb-8 leading-[0.9] tracking-tight text-[var(--color-text-primary)]"></h2>
+             </div>
+
+             <!-- Mobile Header Information -->
+             <div class="md:hidden mb-6">
+                <h2 id="modal-title-mobile" class="text-4xl font-serif leading-[0.9] tracking-tight text-[var(--color-text-primary)] mb-3"></h2>
+                <div class="flex flex-wrap items-center gap-3 text-xs tracking-widest uppercase text-[var(--color-text-muted)]">
+                   <span id="modal-year-mobile"></span>
+                   <span class="w-px h-3 bg-[var(--color-border)]"></span>
+                   <span id="modal-runtime-mobile"></span>
+                   <span class="w-px h-3 bg-[var(--color-border)]"></span>
+                   <span id="modal-rating-mobile" class="font-bold text-[var(--color-text-primary)]"></span>
+                </div>
+             </div>
+             
+             <div class="space-y-4">
+               <div>
+                  <h4 class="text-[10px] uppercase tracking-widest text-[var(--color-text-muted)] mb-3 md:mb-3">Genres</h4>
+                  <div id="modal-genres" class="flex flex-wrap gap-2 text-[var(--color-text-primary)]"></div>
+               </div>
+             </div>
+          </div>
+  
+          <!-- Actions -->
+          <div class="pt-8 mt-8 border-t border-[var(--color-border)] flex flex-wrap gap-4 md:gap-8 items-center justify-between pb-safe">
+              <div class="hidden md:block">
+                 <span class="block text-[10px] uppercase tracking-widest text-[var(--color-text-muted)] mb-1">IMDb Rating</span>
+                 <div class="flex items-baseline gap-1">
+                   <span id="modal-rating" class="text-4xl font-serif text-[var(--color-text-primary)]"></span>
+                   <span class="text-xl font-serif text-[var(--color-text-muted)]">/ 10</span>
+                 </div>
+              </div>
+
+              <!-- High Contrast Button -->
+              <!-- Using explicit styles to force visibility -->
+              <a id="modal-imdb-link" href="#" target="_blank" class="w-full md:w-auto text-center px-8 py-4 text-xs uppercase tracking-widest font-bold transition-all cursor-pointer hover:opacity-80" style="background-color: var(--color-text-primary); color: var(--color-bg-primary);">
+                View on IMDb
+              </a>
+          </div>
+        </div>
+      </div>
     </div>
   </dialog>
+
 </BaseLayout>
 
 <style>
-  .no-scrollbar::-webkit-scrollbar { display: none; }
+  /* Fix Footer Visibility: Force footer to be higher z-index in global scope */
+  :global(footer) {
+    position: relative;
+    z-index: 20;
+  }
+
+  /* Adjust Overlay Opacity by Theme */
+  #backdrop-overlay {
+    opacity: 0.85; 
+  }
   
-  .marquee-text {
-    animation: marquee 60s linear infinite;
-    display: inline-block;
+  :global(body.light) #backdrop-overlay {
+    opacity: 0.65;
   }
 
-  @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+  .reveal-simple {
+    animation: fadeIn 1s ease-out forwards;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
-  .movie-card:hover {
-    z-index: 40;
+  #genre-dropdown ::-webkit-scrollbar {
+    width: 4px;
+  }
+  #genre-dropdown ::-webkit-scrollbar-track {
+    background: var(--color-bg-secondary);
+  }
+  #genre-dropdown ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 2px;
+  }
+  #genre-dropdown ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-muted);
   }
 
-  .movie-card:nth-child(even) { transform: rotate(1deg); }
-  .movie-card:nth-child(odd) { transform: rotate(-1deg); }
-
-  .movie-card:hover {
-    transform: rotate(0deg) !important;
+  .movie-card {
+    contain: content;
   }
 
-  body.light #page-overlay {
-    opacity: 0.1;
-  }
-
-  select option {
-    background-color: var(--color-dark-bg);
-    color: var(--color-dark-text);
-  }
-
-  body.light select option {
-    background-color: var(--color-light-bg);
-    color: var(--color-light-text);
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 20px);
   }
 </style>
 
 <script>
-  const moviesData = Array.from(document.querySelectorAll('.movie-card')).map(card => 
-    JSON.parse(card.getAttribute('data-movie-data') || '{}')
-  );
-
-  const spotlight = document.getElementById('spotlight');
-  const overlay = document.getElementById('page-overlay');
-  const dialog = document.getElementById('movie-dialog') as HTMLDialogElement;
-  const dialogContent = document.getElementById('dialog-content');
-  const closeDialog = document.getElementById('close-dialog');
-  const spinWheel = document.getElementById('spin-wheel');
-  const moodPills = document.querySelectorAll('.mood-pill');
-  const genreFilter = document.getElementById('genre-filter') as HTMLSelectElement;
-  const ratingFilter = document.getElementById('rating-filter') as HTMLSelectElement;
-  const movieCount = document.getElementById('movie-count');
+  // --- DOM Elements ---
+  const bgActive = document.getElementById('bg-active');
+  const bgNext = document.getElementById('bg-next');
+  
+  const movieCards = document.querySelectorAll('.movie-card');
+  const customSelectContainer = document.getElementById('custom-select-container');
+  const genreTrigger = document.getElementById('genre-trigger');
+  const genreDropdown = document.getElementById('genre-dropdown');
+  const genreList = document.getElementById('genre-list');
+  const genreSearch = document.getElementById('genre-search') as HTMLInputElement;
+  const selectedGenreText = document.getElementById('selected-genre-text');
   const moviesGrid = document.getElementById('movies-grid');
   const noResults = document.getElementById('no-results');
-  const clearFilters = document.getElementById('clear-filters');
+  const resetBtn = document.getElementById('reset-filters');
+  const randomPickBtn = document.getElementById('random-pick');
+  const backToTopBtn = document.getElementById('back-to-top');
+  
+  // Dialog Elements
+  const dialog = document.getElementById('movie-dialog') as HTMLDialogElement;
+  const dialogWrapper = document.getElementById('dialog-wrapper');
+  const dialogCard = document.getElementById('dialog-card');
+  const closeDialogBtn = document.getElementById('close-dialog');
+  const modalPoster = document.getElementById('modal-poster') as HTMLImageElement;
+  const modalPosterMobile = document.getElementById('modal-poster-mobile') as HTMLImageElement;
+  const modalTitle = document.getElementById('modal-title');
+  const modalTitleMobile = document.getElementById('modal-title-mobile');
+  const modalYear = document.getElementById('modal-year');
+  const modalYearMobile = document.getElementById('modal-year-mobile');
+  const modalType = document.getElementById('modal-type');
+  const modalRuntime = document.getElementById('modal-runtime');
+  const modalRuntimeMobile = document.getElementById('modal-runtime-mobile');
+  const modalGenres = document.getElementById('modal-genres');
+  const modalRating = document.getElementById('modal-rating');
+  const modalRatingMobile = document.getElementById('modal-rating-mobile');
+  const modalImdbLink = document.getElementById('modal-imdb-link') as HTMLAnchorElement;
 
-  let activeFilters = {
-    mood: [] as string[],
-    genre: '',
-    rating: 0
-  };
+  let activeGenre = '';
+  let currentBackdropUrl = bgActive ? bgActive.style.backgroundImage.slice(5, -2) : '';
 
-  // Spotlight Effect
-  window.addEventListener('mousemove', (e) => {
-    if (spotlight) {
-      spotlight.style.opacity = '1';
-      spotlight.style.left = `${e.clientX}px`;
-      spotlight.style.top = `${e.clientY}px`;
-    }
-  });
-
-  // Dynamic Background on Hover
-  document.querySelectorAll('.movie-card').forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      const backdrop = card.getAttribute('data-backdrop');
-      if (backdrop && overlay) {
-        overlay.style.backgroundImage = `url(${backdrop})`;
-        overlay.style.backgroundSize = 'cover';
-        overlay.style.backgroundPosition = 'center';
-        overlay.style.opacity = '0.3';
-      }
-    });
-    
-    card.addEventListener('mouseleave', () => {
-      if (overlay) {
-        overlay.style.opacity = '0.1';
-      }
-    });
-
-    card.addEventListener('click', () => {
-      const data = JSON.parse(card.getAttribute('data-movie-data') || '{}');
-      showMovie(data);
-    });
-  });
-
-  // Mood Filter
-  moodPills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      const tags = (pill.getAttribute('data-tags') || '').split(',');
-      activeFilters.mood = tags;
-      pill.classList.add('bg-inverted');
-      applyFilters();
-    });
-  });
-
-  // Clear Filters
-  clearFilters?.addEventListener('click', () => {
-    activeFilters = { mood: [], genre: '', rating: 0 };
-    if (genreFilter) genreFilter.value = '';
-    if (ratingFilter) ratingFilter.value = '0';
-    moodPills.forEach(pill => pill.classList.remove('bg-inverted'));
-    applyFilters();
-  });
-
-  // Genre & Rating Filters
-  genreFilter?.addEventListener('change', () => {
-    activeFilters.genre = genreFilter.value;
-    applyFilters();
-  });
-
-  ratingFilter?.addEventListener('change', () => {
-    activeFilters.rating = parseFloat(ratingFilter.value);
-    applyFilters();
-  });
-
-  // Apply Filters
-  function applyFilters() {
-    const cards = document.querySelectorAll('.movie-card');
-    let visible = 0;
-
-    cards.forEach(card => {
-      const genres = JSON.parse(card.getAttribute('data-genres') || '[]');
-      const moodTags = JSON.parse(card.getAttribute('data-mood-tags') || '[]');
-      const rating = parseFloat(card.getAttribute('data-rating') || '0');
-
-      const matchesMood = activeFilters.mood.length === 0 || 
-        activeFilters.mood.some(tag => moodTags.includes(tag));
-      const matchesGenre = !activeFilters.genre || genres.includes(activeFilters.genre);
-      const matchesRating = rating >= activeFilters.rating;
-
-      if (matchesMood && matchesGenre && matchesRating) {
-        (card as HTMLElement).style.display = 'block';
-        visible++;
-      } else {
-        (card as HTMLElement).style.display = 'none';
-      }
-    });
-
-    updateCount(visible);
-  }
-
-  // Update Count
-  function updateCount(count: number) {
-    if (movieCount) {
-      movieCount.textContent = `${count} title${count !== 1 ? 's' : ''}`;
-    }
-    
-    if (count === 0) {
-      noResults?.classList.remove('hidden');
-      moviesGrid?.classList.add('hidden');
+  // --- Core: Back to Top ---
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) {
+      backToTopBtn?.classList.remove('opacity-0', 'translate-y-4');
+      backToTopBtn?.removeAttribute('disabled');
     } else {
-      noResults?.classList.add('hidden');
-      moviesGrid?.classList.remove('hidden');
+      backToTopBtn?.classList.add('opacity-0', 'translate-y-4');
+      backToTopBtn?.setAttribute('disabled', 'true');
+    }
+  });
+
+  backToTopBtn?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // --- Core: Smart Backdrop Transitions ---
+  function updateBackdrop(url: string) {
+    if (!url || !bgActive || !bgNext) return;
+    if (currentBackdropUrl === url) return;
+
+    bgNext.style.backgroundImage = `url('${url}')`;
+    bgNext.style.opacity = '1';
+    
+    setTimeout(() => {
+      bgActive.style.backgroundImage = `url('${url}')`;
+      bgNext.style.opacity = '0'; 
+      currentBackdropUrl = url;
+    }, 700); 
+  }
+
+  movieCards.forEach(card => {
+    card.addEventListener('mouseenter', () => {
+      const backdropUrl = card.getAttribute('data-backdrop');
+      if (backdropUrl) {
+        updateBackdrop(backdropUrl);
+      }
+    });
+  });
+
+  // --- Core: Custom Select ---
+  function toggleDropdown() {
+    const isHidden = genreDropdown?.classList.contains('invisible');
+    if (isHidden) {
+      genreDropdown?.classList.remove('invisible', 'opacity-0', '-translate-y-2');
+      genreDropdown?.classList.add('opacity-100', 'translate-y-0');
+      genreSearch?.focus();
+    } else {
+      closeDropdown();
     }
   }
 
-  // Random Movie
-  spinWheel?.addEventListener('click', () => {
-    const randomMovie = moviesData[Math.floor(Math.random() * moviesData.length)];
-    showMovie(randomMovie);
+  function closeDropdown() {
+    genreDropdown?.classList.add('invisible', 'opacity-0', '-translate-y-2');
+    genreDropdown?.classList.remove('opacity-100', 'translate-y-0');
+    setTimeout(() => {
+      if (genreSearch) genreSearch.value = '';
+      genreList?.querySelectorAll('li').forEach(li => li.style.display = 'block');
+    }, 200);
+  }
+
+  genreTrigger?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleDropdown();
   });
 
-  // Show Movie Modal
-  function showMovie(movie: any) {
+  document.addEventListener('click', (e) => {
+    if (!customSelectContainer?.contains(e.target as Node)) {
+      closeDropdown();
+    }
+  });
+
+  genreSearch?.addEventListener('input', (e) => {
+    const term = (e.target as HTMLInputElement).value.toLowerCase();
+    const items = genreList?.querySelectorAll('li');
+    items?.forEach(item => {
+      const text = item.textContent?.toLowerCase() || '';
+      item.style.display = text.includes(term) ? 'block' : 'none';
+    });
+  });
+
+  genreList?.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (target.tagName === 'LI') {
+      const value = target.getAttribute('data-value') || '';
+      activeGenre = value;
+      if (selectedGenreText) selectedGenreText.textContent = value || 'All Genres';
+      closeDropdown();
+      applyFilters();
+    }
+  });
+
+  function applyFilters() {
+    let visibleCount = 0;
+    movieCards.forEach(card => {
+      const el = card as HTMLElement;
+      const genres = JSON.parse(el.dataset.genres || '[]');
+      const matches = !activeGenre || genres.includes(activeGenre);
+      if (matches) {
+        el.style.display = 'block';
+        visibleCount++;
+      } else {
+        el.style.display = 'none';
+      }
+    });
+
+    if (visibleCount === 0) {
+      moviesGrid?.classList.add('hidden');
+      noResults?.classList.remove('hidden');
+    } else {
+      moviesGrid?.classList.remove('hidden');
+      noResults?.classList.add('hidden');
+    }
+  }
+
+  resetBtn?.addEventListener('click', () => {
+    activeGenre = '';
+    if (selectedGenreText) selectedGenreText.textContent = 'All Genres';
+    closeDropdown();
+    applyFilters();
+  });
+
+  // --- Core: Random Pick & Modal ---
+  randomPickBtn?.addEventListener('click', (e) => {
+    e.stopPropagation(); 
+    const visibleCards = Array.from(document.querySelectorAll('.movie-card')).filter(c => (c as HTMLElement).style.display !== 'none');
+    
+    if (visibleCards.length > 0) {
+      const randomCard = visibleCards[Math.floor(Math.random() * visibleCards.length)];
+      const dataDiv = randomCard.querySelector('.movie-json');
+      if (dataDiv) {
+        try {
+           const data = JSON.parse(dataDiv.getAttribute('data-json') || '{}');
+           openModal(data);
+        } catch (err) {
+           console.error('Error parsing JSON', err);
+        }
+      }
+    }
+  });
+
+  function openModal(movie: any) {
+    if (!dialog) return;
+
+    // Desktop Fields
+    if (modalPoster) modalPoster.src = movie.poster_url || '';
+    if (modalTitle) modalTitle.textContent = movie.title || 'Untitled';
+    if (modalYear) modalYear.textContent = movie.year || 'N/A';
+    
+    const type = movie.title_type === 'movie' ? 'Feature Film' : 'Series';
+    if (modalType) modalType.textContent = type;
+
     const runtime = movie.runtime_mins 
       ? `${Math.floor(movie.runtime_mins / 60)}h ${movie.runtime_mins % 60}m`
-      : 'N/A';
+      : '';
+    if (modalRuntime) modalRuntime.textContent = runtime;
 
-    if (dialogContent) {
-      dialogContent.innerHTML = `
-        <div class="relative aspect-[2/3] rounded-2xl overflow-hidden shadow-2xl">
-          <img src="${movie.poster_url || ''}" class="w-full h-full object-cover" />
-        </div>
-        <div class="text-white space-y-8">
-          <div>
-            <h2 class="text-6xl md:text-8xl font-black tracking-tighter lowercase">${movie.title}</h2>
-            <p class="text-2xl opacity-50 italic mt-2">${movie.year} — ${movie.title_type}</p>
-          </div>
-          <div class="flex gap-4">
-            <span class="px-4 py-2 bg-yellow-500 text-black font-bold rounded-lg">⭐ ${movie.imdb_rating}</span>
-            <span class="px-4 py-2 border border-white/20 rounded-lg">${runtime}</span>
-          </div>
-          <div class="flex flex-wrap gap-2">
-            ${movie.genres?.map((g: string) => 
-              `<span class="px-3 py-1 border border-white/20 rounded-full text-sm">${g}</span>`
-            ).join('') || ''}
-          </div>
-          <a href="${movie.imdb_url}" target="_blank" class="inline-block px-10 py-5 bg-white text-black font-black uppercase tracking-widest hover:bg-yellow-400 transition-colors rounded-lg">
-            view on imdb
-          </a>
-        </div>
-      `;
+    if (modalRating) modalRating.textContent = movie.imdb_rating || '—';
+
+    // Mobile Fields
+    if (modalPosterMobile) modalPosterMobile.src = movie.poster_url || '';
+    if (modalTitleMobile) modalTitleMobile.textContent = movie.title || 'Untitled';
+    if (modalYearMobile) modalYearMobile.textContent = movie.year || 'N/A';
+    if (modalRatingMobile) modalRatingMobile.textContent = movie.imdb_rating ? `${movie.imdb_rating}/10` : '—';
+    if (modalRuntimeMobile) modalRuntimeMobile.textContent = runtime || '';
+
+    if (modalGenres) {
+      modalGenres.innerHTML = (movie.genres || []).map((g: string) => 
+        `<span class="px-3 py-1 border border-[var(--color-border)] text-[10px] uppercase tracking-wider">${g}</span>`
+      ).join('');
     }
-    dialog?.showModal();
+
+    // Modal Link
+    if (modalImdbLink) modalImdbLink.href = movie.imdb_url || '#';
+
+    dialog.showModal();
+    document.body.style.overflow = 'hidden';
+
+    setTimeout(() => {
+      dialogCard?.classList.remove('opacity-0', 'translate-y-4');
+    }, 10);
   }
 
-  // Close Dialog
-  closeDialog?.addEventListener('click', () => dialog?.close());
-  
-  dialog?.addEventListener('click', (e) => {
-    if (e.target === dialog) {
-      dialog.close();
+  moviesGrid?.addEventListener('click', (e) => {
+    const card = (e.target as HTMLElement).closest('.movie-card');
+    if (card) {
+      const dataDiv = card.querySelector('.movie-json');
+      if (dataDiv) {
+        try {
+          const raw = dataDiv.getAttribute('data-json') || '{}';
+          const data = JSON.parse(raw);
+          openModal(data);
+        } catch(err) {
+          console.error('Error parsing JSON', err);
+        }
+      }
     }
+  });
+
+  function closeDialog() {
+    dialogCard?.classList.add('opacity-0', 'translate-y-4');
+    setTimeout(() => {
+      dialog?.close();
+      document.body.style.overflow = '';
+    }, 300);
+  }
+
+  closeDialogBtn?.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closeDialog();
+  });
+
+  dialogWrapper?.addEventListener('click', (e) => {
+     if (e.target === dialogWrapper) {
+       closeDialog();
+     }
+  });
+  
+  dialogCard?.addEventListener('click', (e) => {
+    e.stopPropagation();
   });
 </script>

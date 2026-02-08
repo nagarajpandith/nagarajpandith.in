@@ -184,14 +184,6 @@ const travels = [
   { place: 'Ooty-Coonoor, Tamil Nadu', date: 'Dec 2025' }
 ];
 
-const recommendations = [
-  {
-    author: "Kohei Tsukazaki",
-    role: "CEO & PM at Forent Inc.",
-    date: "February 9, 2023",
-    text: "I had the privilege of working with Nagaraj at forent as CEO and PM. In that time, I was consistently impressed by his technical skills and ability to deliver high-quality software solutions. Nagaraj has a strong understanding of React. He consistently demonstrates his ability to understand complex requirements and translate them into effective and efficient code. I highly recommend Nagaraj for any software engineering role. He has the skills, knowledge, and attitude to excel in any project and make a significant impact in any organization. His contributions to our team were invaluable, and I have no doubt he will continue to thrive in future endeavors."
-  }
-];
 ---
 
 <BaseLayout title="about - nagaraj pandith" description="full-stack developer obsessed with clean code, documentation, and making things work elegantly">
@@ -233,7 +225,7 @@ const recommendations = [
           <div class="relative w-64 h-64 md:w-96 md:h-96">
             <div class="relative w-full h-full overflow-hidden bg-[var(--color-bg-secondary)] border border-[var(--color-border)] rounded-sm grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-700 ease-out">
            <Image 
-             src="/me.jpg" 
+             src="/headshot2.jpg" 
              alt="nagaraj pandith" 
              width={800} 
              height={800} 
@@ -488,43 +480,6 @@ const recommendations = [
     </div>
   </section>
 
-  <!-- Recommendations -->
-  <section class="container mb-32 border-t border-[var(--color-border)] pt-32">
-    <div class="flex flex-col md:flex-row gap-16 mb-24">
-      <div class="md:w-1/4">
-        <h2 class="text-label mb-6">kind words</h2>
-        <h3 class="font-serif text-4xl md:text-5xl text-[var(--color-text-primary)]">recognition</h3>
-      </div>
-    </div>
-
-    <div class="space-y-24">
-      {recommendations.map((rec) => (
-        <article class="max-w-3xl">
-           <p class="text-2xl md:text-3xl leading-relaxed text-[var(--color-text-muted)] mb-12 font-light italic">
-             "{rec.text}"
-           </p>
-           <div class="flex items-center gap-6">
-             <div class="w-12 h-px bg-[var(--color-text-muted)] opacity-20"></div>
-             <div>
-               <h4 class="text-lg font-medium text-[var(--color-text-primary)]">{rec.author}</h4>
-               <p class="text-sm text-[var(--color-text-muted)] opacity-50 uppercase tracking-widest">{rec.role}</p>
-             </div>
-           </div>
-        </article>
-      ))}
-    </div>
-    
-    <div class="mt-24 pt-12 border-t border-[var(--color-border)]">
-       <a 
-        href="https://www.linkedin.com/in/nagaraj-pandith/" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        class="link text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text-primary)] transition-opacity border-b border-transparent hover:border-current pb-1"
-       >
-         stalk me (and maybe recommend me) on linkedin →
-       </a>
-    </div>
-  </section>
 
   <!-- Travel Log -->
   <section class="container mb-32 border-t border-[var(--color-border)] pt-32">

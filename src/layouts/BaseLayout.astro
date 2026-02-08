@@ -74,14 +74,21 @@ const {
     function setupInteractions() {
       // 1. Text Reveals
       inView('.reveal-text', (element) => {
+        const el = element as HTMLElement;
+        el.style.visibility = 'visible';
         animate(element, { 
           opacity: [0, 1], y: [20, 0], filter: ['blur(8px)', 'blur(0px)']
         }, { duration: 0.8, ease: [0.17, 0.55, 0.55, 1] });
-        return () => animate(element, { opacity: 0, y: 20, filter: 'blur(8px)' }, { duration: 0 });
+        return () => {
+          animate(element, { opacity: 0, y: 20, filter: 'blur(8px)' }, { duration: 0 });
+          el.style.visibility = 'hidden';
+        };
       });
 
       // 2. Character Reveals (Hero)
       inView('.split-text', (element) => {
+        const el = element as HTMLElement;
+        el.style.visibility = 'visible';
         const chars = element.querySelectorAll('.char');
         animate(chars, { 
           opacity: [0, 1], y: [20, 0], filter: ['blur(4px)', 'blur(0px)']
@@ -163,7 +170,12 @@ const {
       opacity: 0;
       transform: translateY(20px);
       filter: blur(8px);
+      visibility: hidden;
       will-change: opacity, transform, filter;
+    }
+
+    .split-text {
+      visibility: hidden;
     }
 
     .stagger-link {

@@ -19,7 +19,7 @@
   --color-text-muted: #848480;
   --color-border: rgba(244, 244, 243, 0.08);
   --color-accent: #D1D1CB;
-  --color-grid: rgba(244, 244, 243, 0.2); /* Increased for better visibility */
+  --color-grid: rgba(244, 244, 243, 0.15);
 }
 
 body.light {
@@ -30,7 +30,7 @@ body.light {
   --color-text-muted: #6B5E54;
   --color-border: rgba(26, 23, 20, 0.12);
   --color-accent: #8B5E3C;
-  --color-grid: rgba(139, 94, 60, 0.15);
+  --color-grid: rgba(139, 94, 60, 0.35);
 }
 
 /* Base Reset & Typography */
@@ -160,15 +160,15 @@ a:hover {
 /* Compatibility Utilities */
 /* Custom Dotted Lines */
 .grid-line-v {
-  background-image: linear-gradient(to bottom, var(--color-grid) 25%, transparent 25%);
-  background-size: 1px 10px; /* Specific gap: 2.5px dot, 7.5px gap */
+  background-image: linear-gradient(to bottom, var(--color-grid) 50%, transparent 50%);
+  background-size: 1px 24px; /* 12px dash, 12px gap */
   width: 1px;
   height: 100%;
 }
 
 .grid-line-h {
-  background-image: linear-gradient(to right, var(--color-grid) 25%, transparent 25%);
-  background-size: 10px 1px;
+  background-image: linear-gradient(to right, var(--color-grid) 50%, transparent 50%);
+  background-size: 24px 1px;
   height: 1px;
   width: 100%;
 }

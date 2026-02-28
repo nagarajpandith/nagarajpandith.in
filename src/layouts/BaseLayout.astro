@@ -126,11 +126,12 @@ const {
   <div class="fixed inset-0 pointer-events-none z-0 flex justify-center">
     <div class="w-full h-full max-w-[var(--spacing-container)] px-2">
       <!-- Border-x at px-2 provides ample breathing room outside the px-6 content padding -->
-      <div class="h-full w-full grid grid-cols-1 md:grid-cols-4 border-x border-dashed border-[var(--color-grid)]">
-        <div class="hidden md:flex justify-end h-full">
+      <!-- Changed from 1 col to 3 cols on mobile for a tighter editorial grid -->
+      <div class="h-full w-full grid grid-cols-3 md:grid-cols-4 border-x border-dashed border-[var(--color-grid)]">
+        <div class="flex justify-end h-full opacity-40 md:opacity-100">
           <div class="grid-line-v"></div>
         </div>
-        <div class="hidden md:flex justify-end h-full">
+        <div class="flex justify-end h-full opacity-40 md:opacity-100">
           <div class="grid-line-v"></div>
         </div>
         <div class="hidden md:flex justify-end h-full">

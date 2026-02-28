@@ -34,11 +34,12 @@ const initialBackdrop = recommendations.length > 0
     <!-- Overlay -->
     <div id="backdrop-overlay" class="absolute inset-0 bg-[var(--color-bg-primary)] transition-colors duration-500"></div>
     
-    <!-- Local Grid Lines -->
-    <div class="absolute inset-0 w-full h-full max-w-[var(--spacing-container)] mx-auto px-2 z-[5] pointer-events-none">
-       <div class="h-full w-full grid grid-cols-1 md:grid-cols-4 border-x border-dashed border-[var(--color-grid)]">
-        <div class="hidden md:flex justify-end h-full"><div class="grid-line-v"></div></div>
-        <div class="hidden md:flex justify-end h-full"><div class="grid-line-v"></div></div>
+    <!-- Local Grid Lines (Separate from Backdrops to cover full height) -->
+  <div class="absolute inset-0 pointer-events-none z-[5] flex justify-center">
+    <div class="w-full h-full max-w-[var(--spacing-container)] mx-auto px-2">
+       <div class="h-full w-full grid grid-cols-3 md:grid-cols-4 border-x border-dashed border-[var(--color-grid)]">
+        <div class="flex justify-end h-full opacity-30 md:opacity-100"><div class="grid-line-v"></div></div>
+        <div class="flex justify-end h-full opacity-30 md:opacity-100"><div class="grid-line-v"></div></div>
         <div class="hidden md:flex justify-end h-full"><div class="grid-line-v"></div></div>
         <div class="hidden md:block h-full"></div>
       </div>

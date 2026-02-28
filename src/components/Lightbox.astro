@@ -1,0 +1,143 @@
+---
+interface Props {
+  id?: string;
+}
+
+const { id = "lightbox" } = Astro.props;
+---
+
+<div 
+  id={id} 
+  class="fixed inset-0 z-[200] hidden bg-[var(--color-bg-primary)]/95 backdrop-blur-xl opacity-0 transition-all duration-500 flex items-center justify-center p-4 md:p-12 overflow-hidden touch-none"
+>
+  <!-- Close Button -->
+  <button id={`${id}-close`} class="absolute top-6 right-6 z-[210] p-4 text-[var(--color-text-primary)] opacity-40 hover:opacity-100 transition-opacity" aria-label="Close lightbox">
+    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
+    </svg>
+  </button>
+
+  <!-- Navigation -->
+  <button id={`${id}-prev`} class="absolute left-6 top-1/2 -translate-y-1/2 z-[210] p-6 text-[var(--color-text-primary)] opacity-20 hover:opacity-100 transition-opacity hidden md:block" aria-label="Previous image">
+    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"></path>
+    </svg>
+  </button>
+  <button id={`${id}-next`} class="absolute right-6 top-1/2 -translate-y-1/2 z-[210] p-6 text-[var(--color-text-primary)] opacity-20 hover:opacity-100 transition-opacity hidden md:block" aria-label="Next image">
+    <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path>
+    </svg>
+  </button>
+
+  <!-- Content -->
+  <div id={`${id}-content`} class="relative w-full h-full flex items-center justify-center">
+    <img id={`${id}-image`} src="" alt="" class="max-w-full max-h-full object-contain shadow-2xl transition-transform duration-500 ease-out" />
+    
+    <!-- Counter -->
+    <div id={`${id}-counter`} class="absolute bottom-6 left-1/2 -translate-x-1/2 font-serif italic text-lg opacity-40 tracking-widest lowercase">
+      <span id={`${id}-current`}>1</span> / <span id={`${id}-total`}>0</span>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ id }}>
+  // Pass the ID to the client-side logic
+  window.initLightbox = function(triggerSelector, gridSelector) {
+    const lightbox = document.getElementById(id);
+    const lbImage = document.getElementById(`${id}-image`);
+    const lbClose = document.getElementById(`${id}-close`);
+    const lbNext = document.getElementById(`${id}-next`);
+    const lbPrev = document.getElementById(`${id}-prev`);
+    const lbCounter = document.getElementById(`${id}-current`);
+    const lbTotal = document.getElementById(`${id}-total`);
+    
+    let currentShotIndex = 0;
+    let shots = [];
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    function updateShotsList() {
+      const shotImgs = document.querySelectorAll(`${gridSelector} img[data-shot-url]`);
+      shots = Array.from(shotImgs).map(img => img.getAttribute('data-shot-url') || '');
+      if (lbTotal) lbTotal.textContent = shots.length.toString();
+    }
+
+    function openLightbox(index) {
+      updateShotsList();
+      currentShotIndex = index;
+      if (!lightbox || !lbImage) return;
+
+      lbImage.src = shots[currentShotIndex];
+      if (lbCounter) lbCounter.textContent = (currentShotIndex + 1).toString();
+      
+      lightbox.classList.remove('hidden');
+      lightbox.offsetHeight; // Force reflow
+      lightbox.classList.add('opacity-100');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      if (!lightbox) return;
+      lightbox.classList.remove('opacity-100');
+      setTimeout(() => {
+        lightbox.classList.add('hidden');
+        document.body.style.overflow = '';
+      }, 500);
+    }
+
+    function navigateLightbox(direction) {
+      if (shots.length === 0) return;
+      currentShotIndex = (currentShotIndex + direction + shots.length) % shots.length;
+      if (lbImage) {
+        lbImage.style.transform = 'scale(0.95)';
+        lbImage.style.opacity = '0';
+        
+        setTimeout(() => {
+          lbImage.src = shots[currentShotIndex];
+          if (lbCounter) lbCounter.textContent = (currentShotIndex + 1).toString();
+          lbImage.style.transform = 'scale(1)';
+          lbImage.style.opacity = '1';
+        }, 200);
+      }
+    }
+
+    // Delegation for triggers
+    document.addEventListener('click', (e) => {
+      const target = e.target;
+      const trigger = target.closest(triggerSelector);
+      if (trigger) {
+        updateShotsList();
+        const img = trigger.querySelector('img[data-shot-url]') || trigger;
+        const url = img.getAttribute('data-shot-url');
+        const index = shots.indexOf(url || '');
+        if (index !== -1) openLightbox(index);
+      }
+    });
+
+    lbClose?.addEventListener('click', closeLightbox);
+    lbNext?.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(1); });
+    lbPrev?.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(-1); });
+
+    lightbox?.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target.id === `${id}-content`) closeLightbox();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (!lightbox || lightbox.classList.contains('hidden')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') navigateLightbox(1);
+      if (e.key === 'ArrowLeft') navigateLightbox(-1);
+    });
+
+    lightbox?.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    lightbox?.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      const swipeThreshold = 50;
+      if (touchEndX < touchStartX - swipeThreshold) navigateLightbox(1);
+      if (touchEndX > touchStartX + swipeThreshold) navigateLightbox(-1);
+    }, { passive: true });
+  }
+</script>

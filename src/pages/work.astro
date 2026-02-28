@@ -357,19 +357,52 @@ const allShots = [...horizontalShots, ...verticalShots];
 
   <!-- Shots Section -->
   <section id="shots-section" class="container mx-auto px-4 py-24 max-w-5xl section-content hidden">
-    <div class="columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8">
+    <div id="shots-grid" class="columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8">
       {allShots.map((shot, index) => (
-        <div class="break-inside-avoid animate-on-scroll group" data-index={index}>
+        <div class="break-inside-avoid animate-on-scroll group shot-item" data-index={index}>
           <img 
             src={shot} 
             alt="photography shot"
-            class="w-full grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 ease-out cursor-crosshair"
+            class="w-full transition-all duration-700 ease-out cursor-zoom-in hover:scale-[1.02]"
             loading="lazy"
+            data-shot-url={shot}
           />
         </div>
       ))}
     </div>
   </section>
+
+  <!-- Lightbox Gallery -->
+  <div id="lightbox" class="fixed inset-0 z-[200] hidden bg-[var(--color-bg-primary)]/95 backdrop-blur-xl opacity-0 transition-all duration-500 flex items-center justify-center p-4 md:p-12 overflow-hidden touch-none">
+    <!-- Close Button -->
+    <button id="lightbox-close" class="absolute top-6 right-6 z-[210] p-4 text-[var(--color-text-primary)] opacity-40 hover:opacity-100 transition-opacity">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
+      </svg>
+    </button>
+
+    <!-- Navigation -->
+    <button id="lightbox-prev" class="absolute left-6 top-1/2 -translate-y-1/2 z-[210] p-6 text-[var(--color-text-primary)] opacity-20 hover:opacity-100 transition-opacity hidden md:block">
+      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+    <button id="lightbox-next" class="absolute right-6 top-1/2 -translate-y-1/2 z-[210] p-6 text-[var(--color-text-primary)] opacity-20 hover:opacity-100 transition-opacity hidden md:block">
+      <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+
+    <!-- Content -->
+    <div id="lightbox-content" class="relative w-full h-full flex items-center justify-center">
+      <img id="lightbox-image" src="" alt="" class="max-w-full max-h-full object-contain shadow-2xl transition-transform duration-500 ease-out" />
+      
+      <!-- Counter -->
+      <div id="lightbox-counter" class="absolute bottom-6 left-1/2 -translate-x-1/2 font-serif italic text-lg opacity-40 tracking-widest lowercase">
+        <span id="current-shot">1</span> / <span id="total-shots">0</span>
+      </div>
+    </div>
+  </div>
 </BaseLayout>
 
 <style>
@@ -479,4 +512,112 @@ const allShots = [...horizontalShots, ...verticalShots];
       shuffleBtn.style.transform = 'rotate(0deg)';
     }, 300);
   });
+
+  // Lightbox Implementation
+  const lightbox = document.getElementById('lightbox');
+  const lbImage = document.getElementById('lightbox-image') as HTMLImageElement;
+  const lbClose = document.getElementById('lightbox-close');
+  const lbNext = document.getElementById('lightbox-next');
+  const lbPrev = document.getElementById('lightbox-prev');
+  const lbCounter = document.getElementById('current-shot');
+  const lbTotal = document.getElementById('total-shots');
+  
+  let currentShotIndex = 0;
+  let shots: string[] = [];
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  function updateShotsList() {
+    const shotImgs = document.querySelectorAll('#shots-grid img[data-shot-url]');
+    shots = Array.from(shotImgs).map(img => img.getAttribute('data-shot-url') || '');
+    if (lbTotal) lbTotal.textContent = shots.length.toString();
+  }
+
+  function openLightbox(index: number) {
+    updateShotsList();
+    currentShotIndex = index;
+    if (!lightbox || !lbImage) return;
+
+    lbImage.src = shots[currentShotIndex];
+    if (lbCounter) lbCounter.textContent = (currentShotIndex + 1).toString();
+    
+    lightbox.classList.remove('hidden');
+    // Force reflow
+    lightbox.offsetHeight;
+    lightbox.classList.add('opacity-100');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.classList.remove('opacity-100');
+    setTimeout(() => {
+      lightbox.classList.add('hidden');
+      document.body.style.overflow = '';
+    }, 500);
+  }
+
+  function navigateLightbox(direction: number) {
+    currentShotIndex = (currentShotIndex + direction + shots.length) % shots.length;
+    if (lbImage) {
+      lbImage.style.transform = 'scale(0.95)';
+      lbImage.style.opacity = '0';
+      
+      setTimeout(() => {
+        lbImage.src = shots[currentShotIndex];
+        if (lbCounter) lbCounter.textContent = (currentShotIndex + 1).toString();
+        lbImage.style.transform = 'scale(1)';
+        lbImage.style.opacity = '1';
+      }, 200);
+    }
+  }
+
+  // Event Listeners
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const shotItem = target.closest('.shot-item');
+    if (shotItem) {
+      updateShotsList();
+      const img = shotItem.querySelector('img[data-shot-url]');
+      const url = img?.getAttribute('data-shot-url');
+      const index = shots.indexOf(url || '');
+      if (index !== -1) openLightbox(index);
+    }
+  });
+
+  lbClose?.addEventListener('click', closeLightbox);
+  lbNext?.addEventListener('click', () => navigateLightbox(1));
+  lbPrev?.addEventListener('click', () => navigateLightbox(-1));
+
+  // Overlay click to close
+  lightbox?.addEventListener('click', (e) => {
+    if (e.target === lightbox || e.target === document.getElementById('lightbox-content')) {
+      closeLightbox();
+    }
+  });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (!lightbox || lightbox.classList.contains('hidden')) return;
+    
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') navigateLightbox(1);
+    if (e.key === 'ArrowLeft') navigateLightbox(-1);
+  });
+
+  // Swipe Support
+  lightbox?.addEventListener('touchstart', (e: any) => {
+    touchStartX = e.changedTouches[0].screenX;
+  }, { passive: true });
+
+  lightbox?.addEventListener('touchend', (e: any) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleGesture();
+  }, { passive: true });
+
+  function handleGesture() {
+    const swipeThreshold = 50;
+    if (touchEndX < touchStartX - swipeThreshold) navigateLightbox(1);
+    if (touchEndX > touchStartX + swipeThreshold) navigateLightbox(-1);
+  }
 </script>

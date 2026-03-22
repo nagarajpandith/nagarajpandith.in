@@ -153,8 +153,8 @@ a:hover {
 }
 
 ::selection {
-  background: rgba(242, 140, 40, 0.3);
-  color: #fff;
+  background: var(--color-text-primary);
+  color: var(--color-bg-primary);
 }
 
 /* Compatibility Utilities */

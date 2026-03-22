@@ -8,7 +8,7 @@ const { id = "lightbox" } = Astro.props;
 
 <div 
   id={id} 
-  class="fixed inset-0 z-[200] hidden bg-[var(--color-bg-primary)]/95 backdrop-blur-xl opacity-0 transition-all duration-500 flex items-center justify-center p-4 md:p-12 overflow-hidden touch-none"
+  class="fixed inset-0 z-[10000] hidden bg-[var(--color-bg-primary)]/95 backdrop-blur-xl opacity-0 transition-all duration-500 flex items-center justify-center p-4 md:p-12 overflow-hidden touch-none"
 >
   <!-- Close Button -->
   <button id={`${id}-close`} class="absolute top-6 right-6 z-[210] p-4 text-[var(--color-text-primary)] opacity-40 hover:opacity-100 transition-opacity" aria-label="Close lightbox">
@@ -50,6 +50,7 @@ const { id = "lightbox" } = Astro.props;
     const lbPrev = document.getElementById(`${id}-prev`);
     const lbCounter = document.getElementById(`${id}-current`);
     const lbTotal = document.getElementById(`${id}-total`);
+    const parentMain = document.querySelector('main');
     
     let currentShotIndex = 0;
     let shots = [];
@@ -70,6 +71,9 @@ const { id = "lightbox" } = Astro.props;
       lbImage.src = shots[currentShotIndex];
       if (lbCounter) lbCounter.textContent = (currentShotIndex + 1).toString();
       
+      // Elevate parent stacking context to clear BaseLayout gradients/guards
+      if (parentMain) parentMain.style.zIndex = '1000';
+
       lightbox.classList.remove('hidden');
       lightbox.offsetHeight; // Force reflow
       lightbox.classList.add('opacity-100');
@@ -82,6 +86,7 @@ const { id = "lightbox" } = Astro.props;
       setTimeout(() => {
         lightbox.classList.add('hidden');
         document.body.style.overflow = '';
+        if (parentMain) parentMain.style.zIndex = '';
       }, 500);
     }
 
